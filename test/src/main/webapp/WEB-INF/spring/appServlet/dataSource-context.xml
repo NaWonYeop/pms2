@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:property-placeholder location="classpath:db.properties" />
+
+	<!-- DBCP -->
+	<bean class="org.apache.commons.dbcp2.BasicDataSource"
+		id="dataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	  <!-- Mybatis define -->
+   <!-- classpath: 경로 src/main/resources로 연결 -->
+   <!-- classpath*: 경로 src/main/java -->
+
+  <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"/>
+      <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+      <property name="mapperLocations" value="classpath*:co/test/prj/**/service/*-map.xml"/>
+      													<!-- 수동수정 -->
+   </bean>	
+	  
+   <bean class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg ref="sqlSessionFactoryBean"/>
+   </bean>
+   
+   <mybatis-spring:scan base-package="co.test.prj"/>
+</beans>

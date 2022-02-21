@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="my.layout" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="My WebSite"/>
+		<put-attribute name="menu" value=""/>
+		<put-attribute name="body" value=""/>
+	</definition>
+	
+	<definition name="*/*" extends="my.layout">
+		<!-- */* => {1}/{2} -->
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+</tiles-definitions>
