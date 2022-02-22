@@ -33,7 +33,7 @@ public class UserController {
 			session.setAttribute("user_pwd", user.getUser_pwd());
 
 		} else {
-			return "loginForm";
+			return "user/loginForm";
 
 		}
 		return "redirect:main";
