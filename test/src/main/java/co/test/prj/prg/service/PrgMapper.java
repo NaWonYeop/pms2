@@ -3,13 +3,17 @@ package co.test.prj.prg.service;
 import java.util.List;
 
 public interface PrgMapper {
-	List<PrgVO> selectListAll(); // 전체 리스트조회
+	List<PrgVO> midCtgSelectList(); // 중분류조회
 
-	PrgVO selectList(PrgVO vo); // 단건 조회
+	List<PrgVO> smlCtgSelectList(PrgVO prg); // 소분류조회
 
-	int listInsert(PrgVO vo); // 소분류 입력
+	PrgVO selectList(PrgVO prg); // 단건조회
 
-	int listUpdate(PrgVO vo); // 소분류 수정
+	int midCtgInsert(); // 중분류 입력
 
-	int listDelete(PrgVO vo); // 소분류 삭제
+	int smlCtgInsert(PrgVO prg); // 소분류 입력
+
+	int ctgUpdate(PrgVO prg); // 수정기능
+
+	int ctgDelete(PrgVO prg);	// 삭제기능
 }

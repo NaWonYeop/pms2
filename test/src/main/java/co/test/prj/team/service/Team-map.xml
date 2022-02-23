@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.team.service.TeamMapper">
+
+	<select id="teamSelectList"
+		resultType="co.test.prj.team.service.TeamVO">
+		SELECT * FROM TEAM ORDER BY USER_ID DESC
+	</select>
+
+	<select id="teamSelect"
+		resultType="co.test.prj.team.service.TeamVO"
+		parameterType="co.test.prj.team.service.TeamVO">
+		SELECT * FROM TEAM
+		WHERE user_id = #{user_id}
+	</select>
+
+	<insert id="teamInsert"
+		parameterType="co.test.prj.team.service.TeamVO">
+		<!-- <selectKey keyProperty="prg_id" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(PRG_ID) + 1, 1) AS ID FROM PROGRESS
+		</selectKey> -->
+		INSERT INTO TEAM(USER_ID, PRJ_ID, TM_POS, TM_SAL,
+		TM_DEPT)
+		VALUES (#{user_id}, #{prj_id}, #{tm_pos}, #{tm_sal},
+		#{tm_dept})
+	</insert>
+	
+	<update id="teamUpdate" parameterType="co.test.prj.team.service.TeamVO">
+		UPDATE TEAM
+		<set>
+			<if test="tm_pos != null"> TM_POS = #{tm_pos},</if>
+			<if test="tm_pos != null"> TM_SAL = #{tm_sal},</if>
+			<if test="tm_pos != null"> TM_DEPT = #{tm_dept},</if>
+		</set>
+		WHERE user_id = #{user_id} AND prj_id = #{prj_id}
+	</update>
+	
+	<delete id="teamDelete" parameterType="co.test.prj.team.service.TeamVO">
+		DELETE FROM TEAM
+		WHERE user_id = #{user_id} AND prj_id = #{prj_id}
+	</delete>
+	
+</mapper>

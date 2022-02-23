@@ -6,7 +6,7 @@
 	<select id="midCtgSelectList"
 		resultType="co.test.prj.prg.service.PrgVO">
 		SELECT * FROM PROGRESS
-		WHERE prg_clsfc = null
+		WHERE prg_clsfc is null
 	</select>
 
 	<!-- 소분류 조회 -->
@@ -20,7 +20,7 @@
 	<select id="selectList"
 		resultType="co.test.prj.prg.service.PrgVO">
 		SELECT * FROM PROGRESS
-		WHERE prj_id = #{prj_id}
+		WHERE prg_id = #{prg_id}
 	</select>
 
 	<!-- 중분류 입력 -->
@@ -30,7 +30,7 @@
 			order="BEFORE">
 			SELECT NVL(MAX(PRG_ID) + 1, 1) AS ID FROM PROGRESS
 		</selectKey>
-		INSERT INTO PROGRESS (USER_ID, PRJ_ID, PRG_ID, PRG_TTL, PRG_ED,
+		INSERT INTO PROGRESS (PRG_ID, USER_ID, PRJ_ID, PRG_TTL, PRG_ED,
 		PRG_CMP_PROP, PRG_DEPT)
 		VALUES (#{user_id}, #{prj_id}, #{prg_id},
 		#{prg_ttl}, #{prg_ed}, #{prg_cmp_prop}, #{prg_dept})
@@ -50,6 +50,7 @@
 		#{prg_dept})
 	</insert>
 
+	<!-- 내용수정 -->
 	<update id="ctgUpdate"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		UPDATE PROGRESS
@@ -64,6 +65,11 @@
 		</set>
 		WHERE prg_id = #{prg_id} AND prj_id = #{prj_id}
 	</update>
+
+	<delete id="ctgDelete" parameterType="co.test.prj.prg.service.PrgVO">
+		DELETE FROM PROGRESS
+		WHERE prg_id = #{prg_id} AND 
+	</delete>
 
 
 </mapper>
