@@ -41,7 +41,10 @@
                                     <a class="nav-link" href="contact.html">Contact</a>
                                 </li>
                                 <li class="d-none d-lg-block">
-                                    <a class="btn_1" href="#">Get a Quote</a>
+                                    <a class="btn_1" href="loginForm">Sign in</a>
+                                </li>
+                                 <li class="d-none d-lg-block">
+                                    <a class="btn_1" href="registerForm">Sing up</a>
                                 </li>
                             </ul>
                         </div>
