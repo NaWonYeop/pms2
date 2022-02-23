@@ -2,6 +2,7 @@ package co.test.prj.user.service;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -20,4 +21,6 @@ public interface UserMapper {
 	List<UserVO> userSearch(@Param("key") String key, @Param("data") String data);
 
 	UserVO userOne(String user_email);
+	
+	
 }

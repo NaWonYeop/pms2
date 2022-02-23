@@ -1,11 +1,14 @@
 package co.test.prj.user.web;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.test.prj.user.service.UserService;
@@ -38,15 +41,22 @@ public class UserController {
 		}
 		return "redirect:main";
 	}
+
 	@RequestMapping("/registerForm")
 	public String registerForm() {
 		return "user/registerForm";
 	}
+
 	@PostMapping("IsIdCheck")
 	@ResponseBody
 	public boolean IsIdCheck(String user_email) {
 		System.out.println(user_email);
 		return userDao.isIdCheck(user_email);
+	}
+	
+	@RequestMapping(value = "/find_pw")
+	public String find_pw() throws Exception{
+		return "/user/find_pw";
 	}
 
 }
