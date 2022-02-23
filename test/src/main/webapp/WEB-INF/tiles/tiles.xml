@@ -14,4 +14,25 @@
 		<!-- */* => {1}/{2} -->
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
+	
+	
+	<definition name="pms.layout" template="/WEB-INF/tiles/pms/layout.jsp">
+      <put-attribute name="pmstitle" value="pms"/>
+      <put-attribute name="pmsheader" value="/WEB-INF/tiles/pms/header.jsp"/>
+      <put-attribute name="pmssetting" value="/WEB-INF/tiles/pms/setting.jsp"/>
+      <put-attribute name="pmslside" value="/WEB-INF/tiles/pms/lside.jsp"/>
+      <put-attribute name="pmsrside" value="/WEB-INF/tiles/pms/rside.jsp"/>
+      <put-attribute name="pmsbody" value=""/>
+      <put-attribute name="pmsfooter" value="/WEB-INF/tiles/pms/footer.jsp"/>
+   </definition>
+   
+   <definition name="pms/*/*" extends="pms.layout">
+		<!-- */* => {1}/{2} -->
+		<put-attribute name="pmsbody" value="/WEB-INF/views/pms/{1}/{2}.jsp"/>
+	</definition>
+
 </tiles-definitions>
+
+
+
+
