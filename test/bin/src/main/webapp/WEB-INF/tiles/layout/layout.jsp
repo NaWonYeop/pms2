@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="resources/main/css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="resources/main/css/style.css">
-	 <link rel="stylesheet" href="resources/main/css/nice-select.css">
+
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<property name="maxUploadSize" value="1073741824"/><!-- 대략 10MB -->
+		<property name="defaultEncoding" value="utf-8"/>
+	</bean>
+	
+	 <!-- 나중에 배포할때 빼야되는 부분 -->
+	<bean class="java.lang.String" id="saveDir">
+		<constructor-arg value="c://Temp//"/>
+	</bean>
+
+</beans>

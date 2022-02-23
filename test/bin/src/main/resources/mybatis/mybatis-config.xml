@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+ <configuration>
+<!-- 자바에서 NULL값 허용을 Mybatis가 처리해 줄 수 있도록 설정 -->
+ 	<settings>
+ 		 <setting name="jdbcTypeForNull" value="NULL"/>
+ 	</settings>
+ </configuration>
