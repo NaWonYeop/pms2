@@ -94,13 +94,11 @@
         
          <p id="check" class="check">${login_msg}</p><br/>
         <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="회원가입">
+        </div>
       </form>
 		</div>
-        <div class="links">
-            <a href="memberRegist">회원가입</a>
-        </div>
-	</div>
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+       
+
 	<script type="text/javascript">
 		function isIdCheck() {
 			if ($("#id").val() != '') {
