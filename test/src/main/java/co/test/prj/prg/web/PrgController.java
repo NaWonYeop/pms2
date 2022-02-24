@@ -8,19 +8,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.test.prj.prg.service.PrgService;
+import co.test.prj.user.service.UserVO;
 
 @Controller
 public class PrgController {
-	
+
 	@Autowired
 	private PrgService prgDao;
-	
+
 	@RequestMapping("/midCtgSelect")
 	public String midCtgSelectList(HttpSession session, Model model) {
-		
-		
+		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
+		if (loginUser != null) {
+			
+		}
+
 		return "member/memberLoginForm";
 	}
 }
-
-

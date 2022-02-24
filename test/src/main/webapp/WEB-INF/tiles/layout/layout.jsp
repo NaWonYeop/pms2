@@ -12,6 +12,8 @@
 <script src="resources/css/bootstrap.css"></script>
 <script src="resources/css/bootstrap.min.css"></script>
 <script src="resources/js/bootstrap.js"></script>
+<script src="resources/js/bootstrap.js"></script>
+<script src="resources/js/jquery-3.2.1.min.js"></script>
 
 <title><tiles:getAsString name="title" /></title>
 </head>
