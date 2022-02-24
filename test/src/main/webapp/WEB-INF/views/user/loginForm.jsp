@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
->>>>>>> refs/remotes/origin/0223-lsh
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,18 +72,7 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<header>
-		<h2>Login</h2>
-	</header>
 
-	<form action="login" method="POST">
-
-
-		<div class="input-box">
-			<input id="username" type="text" name="username" placeholder="아이디">
-			<label for="username">아이디</label>
 
 	<div class="card align-middle" style="width:25rem;">
 		<div class="card-title" style="margin-top:30px;">
@@ -157,18 +145,6 @@
 		}
 	</script>
 
-	<form action="login" method="post">
-		<div class="sign_group">
-			<input type="email" class="sign_input" placeholder="이메일" id="email"
-				name="email">
-		</div>
-		<div class="sign_group">
-			<input type="password" class="sign_input" placeholder="비밀번호" id="pw"
-				name="pw">
-		</div>
-		<button type="submit" class="sign_btn">로그인</button>
-		<span class="sign__text">계정이 없으신가요? <a href="registerForm">회원가입</a></span>
-	</form>
 
 </body>
 </html>
