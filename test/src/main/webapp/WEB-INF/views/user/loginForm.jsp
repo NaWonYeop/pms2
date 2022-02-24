@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+=======
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+>>>>>>> refs/remotes/origin/0223-lsh
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +81,7 @@ input[type=submit] {
 	content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 </head>
 <body>
+<<<<<<< HEAD
 	<header>
 		<h2>Login</h2>
 	</header>
@@ -139,5 +144,19 @@ input[type=submit] {
 			}
 		}
 	</script>
+
+	<form action="login" method="post">
+		<div class="sign_group">
+			<input type="email" class="sign_input" placeholder="이메일" id="email"
+				name="email">
+		</div>
+		<div class="sign_group">
+			<input type="password" class="sign_input" placeholder="비밀번호" id="pw"
+				name="pw">
+		</div>
+		<button type="submit" class="sign_btn">로그인</button>
+		<span class="sign__text">계정이 없으신가요? <a href="registerForm">회원가입</a></span>
+	</form>
+
 </body>
 </html>

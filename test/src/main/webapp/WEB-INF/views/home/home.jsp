@@ -122,6 +122,7 @@
 
                      <div class="blog_details">
                         <a class="d-inline-block" href="single-blog.html"> </a>
+                        <h3 class="right">80%</h3>
                         <div class="progress">
                            <div class="progress-bar color-3" role="progressbar"
                               style="width: 80%;background-color: #f09359" aria-valuenow="80" aria-valuemin="0"

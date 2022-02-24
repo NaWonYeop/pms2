@@ -9,6 +9,7 @@
 <meta name="description" content="Travelix Project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
  <link rel="icon" href="resources/main/img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/main/css/bootstrap.min.css">
@@ -27,6 +28,14 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="resources/main/css/style.css">
 	 <link rel="stylesheet" href="resources/main/css/nice-select.css">
+
+<script src="resources/css/bootstrap.css"></script>
+<script src="resources/css/bootstrap.min.css"></script>
+<script src="resources/js/bootstrap.js"></script>
+<script src="resources/js/bootstrap.js"></script>
+<script src="resources/js/jquery-3.2.1.min.js"></script>
+
+
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>
