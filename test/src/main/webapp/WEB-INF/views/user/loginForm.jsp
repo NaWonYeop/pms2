@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
->>>>>>> refs/remotes/origin/0223-lsh
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,6 +154,5 @@ input[type=submit] {
 		<button type="submit" class="sign_btn">로그인</button>
 		<span class="sign__text">계정이 없으신가요? <a href="registerForm">회원가입</a></span>
 	</form>
-
 </body>
 </html>

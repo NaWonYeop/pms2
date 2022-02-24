@@ -31,6 +31,7 @@
 	href="resources/pms/css/vertical-layout-light/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="resources/pms/images/favicon.png" />
+<script src="resources/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
 
@@ -64,9 +65,9 @@
 	<!-- endinject -->
 	<!-- Plugin js for this page -->
 	<script src="resources/pms/vendors/chart.js/Chart.min.js"></script>
-  	<script src="resources/pms/vendors/datatables.net/jquery.dataTables.js"></script>
- 	<script src="resources/pms/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  	<script src="resources/pms/js/dataTables.select.min.js"></script>
+	<script src="resources/pms/vendors/datatables.net/jquery.dataTables.js"></script>
+	<script src="resources/pms/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+	<script src="resources/pms/js/dataTables.select.min.js"></script>
 
 	<!-- End plugin js for this page -->
 	<!-- inject:js -->
@@ -81,5 +82,6 @@
 	<script src="resources/pms/js/Chart.roundedBarCharts.js"></script>
 	<!-- End custom js for this page-->
 
+	
 </body>
 </html>

@@ -1,5 +1,7 @@
 package co.test.prj.team.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -8,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import co.test.prj.application.service.AppVO;
 import co.test.prj.team.service.TeamService;
 import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserVO;
@@ -18,7 +24,22 @@ public class TeamController {
 
 	@Autowired
 	private TeamService teamDao;
+	
+	@RequestMapping("/team")
+	public String team(HttpSession session) {
+		return "pms/team/teamSelectList";
+	}
 
+	@RequestMapping("/teamSelectList")
+	@ResponseBody
+	public String teamSelectList(HttpSession session, Model model) {
+		List<TeamVO> list = teamDao.teamSelectList();
+		System.out.println(list);
+		return new Gson().toJson(list);
+	}
+	
+	
+	
 	@RequestMapping("/teamInsert")
 	public String teamInsert(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) {
 		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
@@ -44,12 +65,5 @@ public class TeamController {
 		
 
 		return "";
-	}
-
-	@RequestMapping("/teamSelectList")
-	public String teamSelectList(HttpSession session, Model model) {
-		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
-		
-		return "member/selectList";
 	}
 }
