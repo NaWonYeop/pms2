@@ -11,8 +11,9 @@ import co.test.prj.prg.service.PrgService;
 
 @Controller
 public class PrgController {
+	
 	@Autowired
-	private PrgService service;
+	private PrgService prgDao;
 	
 	@RequestMapping("/midCtgSelect")
 	public String midCtgSelectList(HttpSession session, Model model) {

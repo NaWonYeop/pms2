@@ -17,7 +17,7 @@ import co.test.prj.user.service.UserVO;
 public class TeamController {
 
 	@Autowired
-	private TeamService service;
+	private TeamService teamDao;
 
 	@RequestMapping("/teamInsert")
 	public String teamInsert(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -37,7 +37,7 @@ public class TeamController {
 			team.setTm_pos(tm_pos);
 			team.setTm_sal(tm_sal);
 			
-			service.teamInsert(team);
+			teamDao.teamInsert(team);
 		} else {
 			return "로그인안됨";
 		}

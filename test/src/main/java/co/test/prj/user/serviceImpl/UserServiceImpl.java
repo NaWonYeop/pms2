@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.test.prj.user.service.UserMapper;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
+
 @Repository("userDao")
 public class UserServiceImpl implements UserService {
 	
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVO userOne(String user_email) {
-		
+
 		return map.userOne(user_email);
 	}
 
