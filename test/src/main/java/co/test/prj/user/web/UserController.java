@@ -70,6 +70,7 @@ public class UserController {
 	}
 	@RequestMapping("/searchPassword")
 	public String searchPassword() {
+		
 		return "user/searchPassword";
 	}
 	
