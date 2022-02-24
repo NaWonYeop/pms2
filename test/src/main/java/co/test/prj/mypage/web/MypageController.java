@@ -31,4 +31,9 @@ public class MypageController {
 		public String Withdrawal3() {
 			return "mypage/Withdrawal3";
 		}
+		@RequestMapping("/myfunding")
+		public String myfunding() {
+			return "mypage/myfunding";
+		}
+		
 }

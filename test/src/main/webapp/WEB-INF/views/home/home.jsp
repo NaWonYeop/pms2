@@ -113,14 +113,16 @@
                </div>
                <div class="blog_right_sidebar">
                   <article class="blog_item">
-                     <h3 style="font-weight: bold;">펀딩 제목</h3>
-                     <div class="blog_item_img">
+                     
+                
+
+                     <div class="blog_details">
+                          <div class="blog_item_img">
+                     	<h3 style="font-weight: bold;">펀딩 제목</h3>
                         <img class="card-img rounded-0"
                            src="resources/main/img/blog/single_blog_1.png" alt="">
 
                      </div>
-
-                     <div class="blog_details">
                         <a class="d-inline-block" href="single-blog.html"> </a>
                         <h3 class="right">80%</h3>
                         <div class="progress">
@@ -131,7 +133,7 @@
                         <br>
                         <ul class="blog-info-link">
                            <li><i class="far fa-comments"></i> 현재 펀딩금액</a></li>
-                           <li><i class="far fa-comments"></i> xxxxxxxxx원</a></li>
+                           <li><h3 stlye="font-weight: bold;"><span class="counter" style="font-size:25px;">100,00025</span>원</h3></li>
                         </ul>
                      </div>
                   </article>
