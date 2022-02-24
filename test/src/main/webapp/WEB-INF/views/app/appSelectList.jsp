@@ -2,19 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<script>
-	$(function() {
-		$.ajax({
-			url : 'appSelectList',
-			type : "GET",
-			dataType : "json"
-		}).done(function(json) {
-			console.log(json);
-		}).fail(function(json) {
-			console.log(json);
-		});
-	});
-</script>
+
 <script>
 	/* 
 	 $.ajax({

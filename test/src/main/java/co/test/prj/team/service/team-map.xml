@@ -4,7 +4,7 @@
 
 	<select id="teamSelectList"
 		resultType="co.test.prj.team.service.TeamVO">
-		SELECT * FROM TEAM ORDER BY USER_ID DESC
+		SELECT * FROM TEAM ORDER BY USER_ID
 	</select>
 
 	<select id="teamSelect"
