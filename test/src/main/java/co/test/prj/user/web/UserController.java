@@ -74,8 +74,31 @@ public class UserController {
 		return "user/searchPassword";
 	}
 	
+	@RequestMapping("/insertdev")
+	public String insertdev() {
+		
+		return "user/insertdev";
+	}
 	
-
+	@RequestMapping("/mypage")
+	public String mypage() {
+		
+		return "user/mypage";
+	}
+	
+	@RequestMapping("/userUpdateForm")
+	public String userUpdateForm() {
+		
+		return "user/userUpdateForm";
+	}
+	
+	@RequestMapping("/devUpdateForm")
+	public String devUpdateForm() {
+		
+		return "user/devUpdateForm";
+	}
+	
+	
 	   // 회원가입
 	   @PostMapping("/register")
 	   public String clientRegister(UserVO user, Model model) {
