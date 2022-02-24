@@ -7,80 +7,73 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
 <style type="text/css">
-header {
-	display: flex;
-	justify-content: center;
 }
+   @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+	
+	html {
+		height: 100%;
+	}
+	
+	body {
+	    width:100%;
+	    height:100%;
+	    margin: 0;
+  		padding-top: 200px;
+  		padding-bottom: 40px;
+  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+  		background-repeat: no-repeat;
+	}
+	
+    .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+	}
 
-form {
-	padding: 10px;
-}
+    #btn-Yes{
+        background-color: #e4932b;
+        border: none;
+    }
+	
+	.login .form-control {
+  		position: relative;
+  		height: auto;
+  		-webkit-box-sizing: border-box;
+     	-moz-box-sizing: border-box;
+        	 box-sizing: border-box;
+  		padding: 10px;
+  		font-size: 16px;
+	}
+    .checkbox{
+        margin-right: 20px;
+        text-align: right;
+    }
+    .card-title{
+        margin-left: 30px;
+    }
 
-.input-box {
-	position: relative;
-	margin: 10px 0;
-}
+    .links{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    a{ 
+    	color: #f58b34; text-decoration: none; 
+    }
+    .check{
+    	color : red;
+    }
 
-.input-box>input {
-	background: transparent;
-	border: none;
-	border-bottom: solid 1px #ccc;
-	padding: 20px 0px 5px 0px;
-	font-size: 14pt;
-	width: 100%;
-}
-
-input::placeholder {
-	color: transparent;
-}
-
-input:placeholder-shown+label {
-	color: #aaa;
-	font-size: 14pt;
-	top: 15px;
-}
-
-input:focus+label, label {
-	color: #8aa1a1;
-	font-size: 10pt;
-	pointer-events: none;
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	transition: all 0.2s ease;
-	-webkit-transition: all 0.2s ease;
-	-moz-transition: all 0.2s ease;
-	-o-transition: all 0.2s ease;
-}
-
-input:focus, input:not(:placeholder-shown) {
-	border-bottom: solid 1px #8aa1a1;
-	outline: none;
-}
-
-input[type=submit] {
-	background-color: #8aa1a1;
-	border: none;
-	color: white;
-	border-radius: 5px;
-	width: 100%;
-	height: 35px;
-	font-size: 14pt;
-	margin-top: 100px;
-}
-
-#forgot {
-	text-align: right;
-	font-size: 12pt;
-	color: rgb(164, 164, 164);
-	margin: 10px 0px;
-}
 </style>
-<meta name="viewport"
-	content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 </head>
 <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<header>
 		<h2>Login</h2>
@@ -92,19 +85,38 @@ input[type=submit] {
 		<div class="input-box">
 			<input id="username" type="text" name="username" placeholder="아이디">
 			<label for="username">아이디</label>
-		</div>
 
-		<div class="input-box">
-			<input id="pw" type="password" name="pw" placeholder="비밀번호">
-			<label for="password">비밀번호</label>
+	<div class="card align-middle" style="width:25rem;">
+		<div class="card-title" style="margin-top:30px;">
+            
+			
+
 		</div>
-		<div id="forgot">비밀번호 찾기</div>
-		<input type="submit" value="로그인"> <a href="javascript:void(0)"
-			onclick="kakaoLogin();" class="sign__logo"> <img
-			src="./resources/images/kakao_login_medium" alt="">
-		</a>
-		<a href="registerForm">회원가입</a>
-	</form>
+      <form action="login" class="login" method="POST">
+       
+		<div class="card-body">
+  
+        <input type="text" name="LoginId" id="Id" class="form-control" placeholder="아이디" autofocus required><BR>
+        <input type="password" name="LoginPw" id="Pw" class="form-control" placeholder="비밀번호"  required><br>
+         <p id="check" class="check">${login_msg}</p><br/>
+        <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="로 그 인">
+         <a href="javascript:void(0)"
+			onclick="kakaoLogin();" class="sign__logo"><img
+			src="/resources/images/kakao_login_medium.png" alt="">
+		</a> 
+      </form>
+    
+		</div>
+        <div class="links">
+            <a href="forgotId">아이디 찾기</a> | <a href="forgotPassword">비밀번호 찾기</a> | <a href="registerForm">회원가입</a>
+	
+        </div>
+	
+
+	
+	
+		
+	
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		Kakao.init('89e07434a014632318c7cd9c2821e0a4'); //발급받은 키 중 javascript키를 사용해준다.

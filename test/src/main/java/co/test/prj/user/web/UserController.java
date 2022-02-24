@@ -1,16 +1,16 @@
 package co.test.prj.user.web;
 
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -54,9 +54,40 @@ public class UserController {
 		return userDao.isIdCheck(user_email);
 	}
 	
-	@RequestMapping(value = "/find_pw")
-	public String find_pw() throws Exception{
-		return "/user/find_pw";
+	
+	@RequestMapping("/forgotPassword")
+	public String forgotPassword() {
+		return "user/forgotPassword";
 	}
+	
+	@RequestMapping("/forgotId")
+	public String forgotId() {
+		return "user/forgotId";
+	}
+	@RequestMapping("/searchId")
+	public String searchId() {
+		return "user/searchId";
+	}
+	@RequestMapping("/searchPassword")
+	public String searchPassword() {
+		
+		return "user/searchPassword";
+	}
+	
+	
+
+	   // 회원가입
+	   @PostMapping("/register")
+	   public String clientRegister(UserVO user, Model model) {
+	      int n = userDao.userInsert(user);
+	      if (n != 0) {
+	         model.addAttribute("message", "회원가입 성공하셨습니다.");
+
+	      } else {
+	         model.addAttribute("message", " 회원가입 실패하셨습니다.");
+	      }
+
+	      return "user/register";
+	   }
 
 }
