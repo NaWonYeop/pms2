@@ -2,86 +2,119 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
-<!-- header에 session 쿠키를 사용하지 않는다는 의미 -->
 
-<div class="content-wrapper">
-	<div class="col-lg-12 grid-margin stretch-card">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="card-title">Team Member</h4>
-				<p class="card-description">
-					같은 팀에 속한 팀원
-					<code>프로젝트이름</code>
-				</p>
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>User Number</th>
-								<th>Name</th>
-								<th>Position</th>
-								<th>Departments</th>
-								<th>Salary</th>
-							</tr>
-						</thead>
-						<tbody id="myTbody">
-						</tbody>
-					</table>
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="container-scroller">
+				<div class="col-lg-12 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">Hoverable Table</h4>
+							<p class="card-description">
+								Add class
+								<code>.table-hover</code>
+							</p>
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Number</th>
+											<th>UserName</th>
+											<th>Classification</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody id="myTbody">
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 <script>
-	$(function() {
+	$(function () {
 		$.ajax({
-			url : "teamSelectList",
-			type : "POST",
-			dataType : "json"
-		}).done(function(json) {
-			for(team of json) {
-				$("#myTbody").append(`<tr> 
-				<td>\${team.user_id}<td>
-				<td>\${team.prj_id}<td> 
-				<td>\${team.tm_pos}<td>
-				<td>\${team.tm_dept}<td>
-				<td>\${team.tm_sal}<td> 
+			url: "appSelectList",
+			type: "GET",
+			dataType: "json"
+		}).done(function (json) {
+			for (app of json) {
+				$("#myTbody").append(`
+						
+				<tr class="myTr" data-master_id="\${app.master_id}">
+					<td>\${app.app_id}</td>
+					<td>\${app.user_name}</td>
+					<td>\${app.app_clsfc}</td>
+					<td>
+						<div class="btn-group">
+							<button id="myBtn" type="button"
+								class="btn btn-outline-secondary btn-sm dropdown-toggle"
+								data-toggle="dropdown">\${app.app_stt}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" onclick="chainge(this)" >ing</a> 
+								<a class="dropdown-item" onclick="chainge(this)" >ok</a>
+								<a class="dropdown-item" onclick="chainge(this)" >no</a>
+							</div>
+						</div>
+					</td>
 				</tr>`);
 			};
-		}).fail(function(xhr, status, message) {
+
+		}).fail(function (xhr, status, message) {
 			alert(" status: " + status + " er:" + message);
 		});
 	});
+	
+	
+	function chainge(ths) {
+		var app_id = $(".myTr").children().eq(0).text();
+		var master_id = $(".myTr").data("master_id");
+		var app_stt = $(ths).text();
+		
+		console.log(typeof app_id);
+		console.log(typeof master_id);
+		console.log(typeof app_stt);
+		
+		$('.dropdown-menu').on('click', '.dropdown-item', function () {
+			$.ajax({
+				url: "appUpdate",
+				type: "GET",
+				data : {
+					app_id: app_id,
+					master_id: master_id,
+					app_stt: app_stt
+				},
+				dataType: "text"
+			}).done(function (json) {
+				console.log('성공');
+			});
+		});
+	}
+
+	function addClass(e) {
+		switch (e) {
+			case 'ing':
+				$(".myTr").children().eq(3).addClass("badge badge-info");
+				break;
+			case 'ok':
+				$(".myTr").children().eq(3).addClass("badge badge-success");
+				break;
+			case 'no':
+				$(".myTr").children().eq(3).addClass("badge badge-danger");
+				break;
+		};
+	}
+	
 </script>
 
 
-<!-- <script type="text/javascript">
-	let conPath = '${pageContext.request.contextPath}';
-	$(function () {
-		userList();
-
-		userSelect();
-
-		userDelete();
-
-		userInsert();
-
-		userUpdate();
-
-		init();
-	});
-
-	//초기화
-	function init() {
-		//초기화 버튼 클릭
-		$('#btnInit').on('click', function () {
-			$('#form1').each(function () {
-				this.reset();
-			});
-		});
-	} //init
-
+<!-- <script>
 	//사용자 삭제 요청
 	function userDelete() {
 		//삭제 버튼 클릭

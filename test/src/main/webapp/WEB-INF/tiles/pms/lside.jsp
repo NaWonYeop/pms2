@@ -17,7 +17,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="team"> TeamMember </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="pages/samples/register.html"> Register </a></li>
+						href="application"> Application </a></li>
 				</ul>
 			</div></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
