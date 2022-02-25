@@ -27,14 +27,13 @@ public class TeamController {
 	
 	@RequestMapping("/team")
 	public String team(HttpSession session) {
-		return "pms/team/teamSelectList";
+		return "pms/team/team";
 	}
 
 	@RequestMapping("/teamSelectList")
 	@ResponseBody
 	public String teamSelectList(HttpSession session, Model model) {
 		List<TeamVO> list = teamDao.teamSelectList();
-		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 	
@@ -64,6 +63,12 @@ public class TeamController {
 		}
 		
 
+		return "";
+	}
+	
+	@RequestMapping("/teamDelete")
+	public String teamDelete(HttpSession session, Model model, HttpServletRequest req) {
+		
 		return "";
 	}
 }
