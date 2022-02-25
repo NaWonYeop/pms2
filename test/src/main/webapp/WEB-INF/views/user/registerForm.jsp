@@ -84,15 +84,15 @@
        
 		<div class="card-body">
   
-        <input type="text" name="id" id="id" class="form-control" placeholder="아이디" autofocus required>
+        <input type="text" name="user_email" id="user_email" class="form-control" placeholder="아이디" autofocus required>
         <button type="button" class="button button-contactForm btn_1" id="idCheck"
 							onclick="isIdCheck()" value="NO">Check</button><BR>
-        <input type="password" name="pw" id="pw" class="form-control" placeholder="비밀번호"  required><br>
+        <input type="password" name="user_pwd" id="user_pwd" class="form-control" placeholder="비밀번호"  required><br>
          <input type="password" name="pw1" id="pw1" class="form-control" placeholder="비밀번호 확인"  required><br>
-          <input type="text" name="name" id="name" class="form-control" placeholder="이름"  required><br>
-           <input type="text" name="tel" id="tel" class="form-control" placeholder="전화번호"  required><br>
+          <input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름"  required><br>
+           <input type="text" name="user_tel" id="user_tel" class="form-control" placeholder="전화번호"  required><br>
         
-         <p id="check" class="check">${login_msg}</p><br/>
+         
         <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="회원가입">
         </div>
       </form>
@@ -101,19 +101,19 @@
 
 	<script type="text/javascript">
 		function isIdCheck() {
-			if ($("#id").val() != '') {
+			if ($("#user_email").val() != '') {
 				$.ajax({
 					url : "IsIdCheck",
 					type : "post",
 					data : {
-						"user_email" : $("#id").val()
+						"user_email" : $("#user_email").val()
 					},
 					dataType : "text",
 					success : function(result) {
 						if (result === 'false') {
 							alert("이미 있는 이메일");
-							$("#id").val('');
-							$("#id").focus();
+							$("#user_email").val('');
+							$("#user_email").focus();
 
 						} else {
 							alert("사용가능한 이메일 입니다.");
@@ -127,7 +127,7 @@
 
 			} else {
 				alert("ID 를 입력해 주세요");
-				$("#id").focus();
+				$("#user_email").focus();
 			}
 		}
 
@@ -137,9 +137,9 @@
 				return false;
 			}
 
-			if ($("#pw").val() != $("#pw1").val()) {
+			if ($("#user_pwd").val() != $("#pw1").val()) {
 				alert("패스워드가 일치하지 않습니다.");
-				$("#pw").val('');
+				$("#user_pwd").val('');
 				$("#pw1").val('');
 				$("#pw").focus();
 				return false;

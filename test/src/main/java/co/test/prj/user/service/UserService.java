@@ -17,9 +17,11 @@ public interface UserService {
 
 	boolean isIdCheck(String user_email);
 
-	List<UserVO> userSearch(String key, String data);
+	UserVO userSearch(UserVO user);
 
 	UserVO userOne(String user_email);
+
+	
 
 
 }

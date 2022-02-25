@@ -82,9 +82,9 @@
 		</div>
         
 		<div class="card-body">
-      <form action="findPw" class="form-signin" method="POST">
-        <input type="text" name="name" id="name" class="form-control" placeholder="이름" required><BR>
-        <input type="text" name="tell" id="tell" class="form-control" placeholder="연락처" required><br>
+      <form action="searchId" class="form-signin" method="POST">
+        <input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름" required><BR>
+        <input type="text" name="user_tel" id="user_tel" class="form-control" placeholder="연락처" required><br>
         <p class="checks" id="checks">${findpw_checkf}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
       </form>
@@ -117,16 +117,16 @@
   		}
   		 });
   		
-  		$("#name").focusout(function(){
-	     if($('#name').val() == ""){
+  		$("#user_name").focusout(function(){
+	     if($('#user_name').val() == ""){
 	   		$('#checks').text('이름을 입력해주세요.');
 	   	  	$('#checks').css('color', 'red');
 	     }
 	     });
 	     
-  		$("#email").focusout(function(){
-	     if($('#email').val() == ""){
-	   		$('#checks').text('이메일을 입력해주세요');
+  		$("#user_tel").focusout(function(){
+	     if($('#user_tel').val() == ""){
+	   		$('#checks').text('연락처를 입력해주세요');
 	   	  	$('#checks').css('color', 'red');
 	     }
 	     });

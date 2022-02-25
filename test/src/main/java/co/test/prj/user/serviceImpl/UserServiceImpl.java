@@ -51,16 +51,16 @@ public class UserServiceImpl implements UserService {
 		return map.isIdCheck(user_email);
 	}
 
-	@Override
-	public List<UserVO> userSearch(String key, String data) {
-		
-		return map.userSearch(key, data);
-	}
 
 	@Override
 	public UserVO userOne(String user_email) {
 
 		return map.userOne(user_email);
+	}
+
+	@Override
+	public UserVO userSearch(UserVO user) {
+		return map.userSearch(user);
 	}
 
 
