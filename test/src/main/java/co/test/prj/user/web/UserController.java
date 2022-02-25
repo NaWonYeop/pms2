@@ -34,7 +34,9 @@ public class UserController {
 			session.setAttribute("user_id", user.getUser_id());
 			session.setAttribute("user_email", user.getUser_email());
 			session.setAttribute("user_pwd", user.getUser_pwd());
-		
+			session.setAttribute("user_name", user.getUser_name());
+			session.setAttribute("user_tel", user.getUser_tel());
+
 		}else {
 			return "user/loginForm";
 		}
@@ -102,9 +104,22 @@ public class UserController {
 	}
 	//회원 업데이트 
 	@RequestMapping("/userUpdateForm")
-	public String userUpdateForm() {
-
+	public String userUpdateForm(Model model, HttpSession session) {
 		return "user/userUpdateForm";
+	}
+	//회원정보 수정
+	@PostMapping("/userUpdate")
+	public String userUpdate(UserVO user, Model model, HttpSession session) {
+		System.out.println(user);
+		user.setUser_email(session.getAttribute("user_email").toString());
+		userDao.userUpdate(user);
+		if(user .getUser_pwd() != null) {
+			model.addAttribute("update", "회원수정 성공하였습니다");
+			
+		}else {
+			model.addAttribute("update", "회원수정 실패하였습니다");
+		}
+		return "user/userUpdate";
 	}
 	
 	

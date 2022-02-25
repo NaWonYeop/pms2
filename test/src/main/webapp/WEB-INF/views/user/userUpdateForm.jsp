@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,28 +81,25 @@ a {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
+<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
+	width="100%" height="100%" align="center">
 
-	<div class="card align-middle" style="width:25rem;">
-		<div class="card-title" style="margin-top:30px;">
-            
-			
-		</div>
-      <form action="userUpdateForm" method="post">
-       
-		<div class="card-body">
-  
-        <input type="text" name="id" id="id" class="form-control" placeholder="새로운 아이디" value="${user_email }" autofocus required>
-        <BR>
-        <input type="password" name="pw" id="pw" class="form-control" placeholder="새로운 비밀번호"  required><br>
-          <input type="text" name="name" id="name" class="form-control" placeholder="이름"  required><br>
-           <input type="text" name="tel" id="tel" class="form-control" placeholder="새로운 전화번호"  required><br>
-        
-         <p id="check" class="check">${login_msg}</p><br/>
-        <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="회원수정">
-        </div>
-      </form>
-		</div>
+	<div class="card align-middle" style="width: 25rem;">
+		<div class="card-title" style="margin-top: 30px;"></div>
+		<form action="userUpdate" method="post">
 	
+			<div class="card-body">
+				<input type="password" name="user_pwd" id="user_pwd"
+					class="form-control" placeholder="새로운 비밀번호" value="${user.user_pwd }"><br>
+				<input type="text" name="user_name" id="user_name"
+					class="form-control" placeholder="이름" value="${user.user_name }"><br> <input
+					type="text" name="user_tel" id="user_tel" class="form-control"
+					placeholder="새로운 전화번호" value="${user.user_tel }"><br> <input
+					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
+					value="회원수정">
+			</div>
+		</form>
+	</div>
+
 </body>
 </html>
