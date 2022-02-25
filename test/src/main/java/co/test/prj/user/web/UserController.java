@@ -135,13 +135,32 @@ public class UserController {
 		} else {
 			model.addAttribute("message", " 회원가입 실패하셨습니다.");
 		}
-
-		return "rediect:/register2";
+		
+		return "redirect:/register2";
 	}
-	@PostMapping("/register2")
-	public String clientRegister2() {
-	
+
+	@RequestMapping("/register2")
+	public String register2() {
 		return "user/register";
 	}
+	
+	// 회원탈퇴1
+	@RequestMapping("/Withdrawal")
+	public String Withdrawal() {
+		return "user/Withdrawal1";
+	}
 
+	@RequestMapping("/Withdrawa2")
+	public String Withdrawal2() {
+		return "user/Withdrawal2";
+	}
+	@RequestMapping("/Withdrawa3")
+	public String Withdrawal3() {
+		return "mypage/Withdrawal3";
+	}
+	@RequestMapping("/myfunding")
+	public String myfunding() {
+		return "mypage/myfunding";
+	}
+	
 }
