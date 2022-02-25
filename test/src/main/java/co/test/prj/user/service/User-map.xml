@@ -49,13 +49,8 @@
 	<!-- 회원정보 수정 -->
 	<update id="userUpdate"
 		parameterType="co.test.prj.user.service.UserVO">
-		UPDATE "user"
-		<set>
-			<if test="user_pwd != null"> USER_PWD = #{user_pwd}, </if>
-			<if test="user_name != null"> USER_NAME = #{user_name}, </if>
-			<if test="user_tel != null"> USER_TEL = #{user_tel}, </if>
-		</set>
-		WHERE USER_EMAIL = #{user_email}
+		UPDATE "user" SET USER_PWD=#{user_pwd},USER_NAME=#{user_name},USER_TEL=#{user_tel}
+		WHERE USER_EMAIL =#{user_email}
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="userDelete"

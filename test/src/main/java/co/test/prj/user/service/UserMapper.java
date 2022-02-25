@@ -20,7 +20,6 @@ public interface UserMapper {
 
 	UserVO userSearch(UserVO user);
 
-	UserVO userOne(String user_email);
 	
 	
 }
