@@ -3,10 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1 style="color: white">${message }</h1>
+
+<section class="blog_area section_padding">
+      <div class="container">
+         <div class="row text-center">
+            <!--project-->
+            <h1 id="name" style="color: black;" >${message }</h1>
+         </div>
+      </div>
+   </section>
 </body>
 </html>

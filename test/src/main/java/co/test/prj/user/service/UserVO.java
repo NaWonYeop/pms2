@@ -10,5 +10,11 @@ public class UserVO {
 	private String user_pwd;
 	private String user_name;
 	private int user_tel;
+	private String user_ath;
+	private String user_crr;
+	private String user_age;
+	private String user_job_ttl;
+	private String user_job_cnt;
+	private String user_type;
 
 }

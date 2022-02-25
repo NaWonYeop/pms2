@@ -18,7 +18,7 @@ public interface UserMapper {
 
 	boolean isIdCheck(String user_email);
 
-	List<UserVO> userSearch(@Param("key") String key, @Param("data") String data);
+	UserVO userSearch(UserVO user);
 
 	UserVO userOne(String user_email);
 	

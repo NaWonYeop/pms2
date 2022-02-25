@@ -85,26 +85,27 @@ a {
 
 			<div class="card-body">
 
-				<input type="text" name="LoginId" id="Id" class="form-control"
+				<input type="email" name="user_email" id="user_email" class="form-control"
 					placeholder="아이디" autofocus required><BR> <input
-					type="password" name="LoginPw" id="Pw" class="form-control"
+					type="password" name="user_pwd" id="user_pwd" class="form-control"
 					placeholder="비밀번호" required><br>
-				<p id="check" class="check">${login_msg}</p>
+				
 				<br /> <input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
 					type="submit" value="로 그 인"> <a href="javascript:void(0)"
 					onclick="kakaoLogin();" class="sign__logo"><img
-					src="/resources/images/kakao_login_medium.png" alt=""> </a>
+					src="/test/bin/src/main/webapp/resources/images/kakao_login_medium.png" alt=""></a>
 		</form>
-
+	
 	</div>
+	
 	<div class="links">
 		<a href="forgotId">아이디 찾기</a> | <a href="forgotPassword">비밀번호 찾기</a> |
 		<a href="registerForm">회원가입</a>
 
 	</div>
-
-
 </div>
+
+
 
 
 
@@ -117,7 +118,7 @@ a {
 			Kakao.Auth.login({
 				success : function(response) {
 					Kakao.API.request({
-						url : '/v2/user/me',
+						url : 'home',
 						success : function(response) {
 							console.log(response)
 						},
@@ -135,7 +136,7 @@ a {
 		function kakaoLogout() {
 			if (Kakao.Auth.getAccessToken()) {
 				Kakao.API.request({
-					url : '/v1/user/unlink',
+					url : 'home',
 					success : function(response) {
 						console.log(response)
 					},
