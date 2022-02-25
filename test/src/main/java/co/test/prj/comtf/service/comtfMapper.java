@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface comtfMapper
 {
-	List<comtfVO> comtfSelectList();
+	List<comtfVO> comtfSelectList();//쓸일없음
 
 	comtfVO comtfSelect(comtfVO comtfS);
 

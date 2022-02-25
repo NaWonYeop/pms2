@@ -14,7 +14,8 @@ public class comtfServiceImpl implements comtfService
 {
 	@Autowired
 	private comtfMapper map;
-
+	
+	//쓸일없음
 	@Override
 	public List<comtfVO> comtfSelectList()
 	{

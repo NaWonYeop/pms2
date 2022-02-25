@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface comtfService
 {
-	List<comtfVO> comtfSelectList();
+	List<comtfVO> comtfSelectList();//쓸일없음
 
 	comtfVO comtfSelect(comtfVO comtfS);
 

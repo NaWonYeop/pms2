@@ -1,14 +1,12 @@
 package co.test.prj.comtf.service;
 
-import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class comtfVO {
 	private int ctf_id;			// app_pk
-	private Date ctf_date;		// 프로젝트 생성자
-	private int ctf_cid;				// 첨부파일id
-	private int ctf_use;			// 사용여부
-	
+	private String ctf_st_name;		// 저장파일명
+	private String ctf_oru_name;				// 원파일명
+	private String ctf_usectf_st_course;			// 파일저장경로
 }
