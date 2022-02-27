@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.test.prj.project.service.projectMapper">
+<mapper namespace="co.test.prj.project.service.ProjectMapper">
+			
+	<select id="projectSelectList" resultType="co.test.prj.project.service.ProjectVO">
+		SELECT * FROM PROJECT
+	</select>
+	
+	<!-- 언제 보여줄꺼지? -->
+	<select id="projectSelect" parameterType="co.test.prj.project.service.ProjectVO"
+		resultType="co.test.prj.project.service.ProjectVO">
+		
+	</select>
 
-
+	<insert id="projectInsert" parameterType="co.test.prj.project.service.ProjectVO">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(PRJ_ID) +1 , 1) AS PRJ_ID FROM PROJECT;
+		</selectKey>
+			INSERT INTO PROJECT(PRJ_ID, PRJ_NAME, PRJ_STR, PRJ_ED, PRJ_OFR_PROP, 
+			PRJ_FND_PROP, PRJ_CNT, MASTER_ID, CTF_ID, PRJ_OFR_STR, PRJ_OFR_ED,
+			PRJ_FRN_PRS, PRJ_BK_PRS, PRJ_DB_PRS, PRJ_SER_PRS, PRJ_CND, PRJ_AR,
+			PRJ_FND_STR, PRJ_FND_ED, PRJ_GL_PRC)
+			VALUES(#{prj_id}, #{prj_name}, #{prj_str}, #{prj_ed}, #{prj_ofr_prop}, 
+			#{prj_fnd_prop}, #{prj_cnt}, #{master_id}, #{ctf_id}, #{prj_ofr_str}, #{prj_ofr_ed},
+			#{prj_frn_prs}, #{prj_bk_prs}, #{prj_db_prs}, #{prj_ser_prs}, #{prj_cnd}, #{prj_ar},
+			#{prj_fnd_str}, #{prj_fnd_ed}, #{prj_gl_prc})				
+	</insert>
+	
+	<!-- 업데이트 지만 insert로 버전명 바꿔가면서 씀 -->
+	<insert id="projectUpdate" parameterType="co.test.prj.project.service.ProjectVO">
+	
+	</insert>
+	
+	<delete id="projectDelete" parameterType="co.test.prj.project.service.ProjectVO">
+	
+	</delete>
 
 
 

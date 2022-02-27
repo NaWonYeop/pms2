@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ProjectController {
 	
-	@RequestMapping("/project")
+	@RequestMapping("/projectInsert")
 	public String main() {
-		return "project/bordtest";
+		return "project/projectInsert";
 	}
 
 }
