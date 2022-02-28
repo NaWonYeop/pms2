@@ -58,5 +58,24 @@ public class UserServiceImpl implements UserService {
 		return map.userSearch(user);
 	}
 
+	@Override
+	public UserVO searchPwd(UserVO user) {
+		
+		return map.searchPwd(user);
+	}
+
+	@Override
+	public int updatePwd(UserVO user) {
+		// TODO Auto-generated method stub
+		return map.updatePwd(user);
+	}
+
+	@Override
+	public UserVO checkPwd(UserVO user) {
+		
+		return map.checkPwd(user);
+	}
+
+	
 
 }

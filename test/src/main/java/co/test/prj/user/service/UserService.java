@@ -18,6 +18,13 @@ public interface UserService {
 	boolean isIdCheck(String user_email);
 
 	UserVO userSearch(UserVO user);
+	
+	UserVO searchPwd(UserVO user);
+	
+	int updatePwd(UserVO user);
+	
+	UserVO checkPwd(UserVO user);
+	
 
 
 	

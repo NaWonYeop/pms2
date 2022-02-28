@@ -15,8 +15,13 @@
 			AND user_pwd = #{user_pwd}
 		</if>
 	</select>
+	
+	<select id="searchPwd" resultType="co.test.prj.user.service.UserVO" parameterType="co.test.prj.user.service.UserVO">
+	select * from "user" where user_name = #{user_name} and user_email =  #{user_email}
+	</select>
+	
 	<!-- 비번찾기 -->
-	<update id="update_pw"
+	<update id="updatePwd"
 		parameterType="co.test.prj.user.service.UserVO">
 		update "user" set user_pwd = #{user_pwd} where
 		user_email = #{user_email}
@@ -52,10 +57,15 @@
 		UPDATE "user" SET USER_PWD=#{user_pwd},USER_NAME=#{user_name},USER_TEL=#{user_tel}
 		WHERE USER_EMAIL =#{user_email}
 	</update>
+	<!-- 비밀번호확인  -->
+	<select id="checkPwd" parameterType="co.test.prj.user.service.UserVO"
+	resultType="co.test.prj.user.service.UserVO">
+	select * from "user" where user_pwd = #{user_pwd}
+	</select>
 	<!-- 회원탈퇴 -->
 	<delete id="userDelete"
 		parameterType="co.test.prj.user.service.UserVO">
-		DELETE FROM "user" WHERE USER_EMAIL = #{user_email}
+		DELETE FROM "user" WHERE USER_PWD = #{user_pwd}
 	</delete>
 
  	
