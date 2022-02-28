@@ -18,12 +18,12 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projectInsert")
-	public int projectInsert (MultipartFile mul, ProjectVO project, HttpSession session) {
+	public String projectInsert (MultipartFile mul, ProjectVO project, HttpSession session) {
 		System.out.println("인서트 되냐?");
 		
 		
 		
-		return 0;
+		return "home/home";
 	}
 
 }

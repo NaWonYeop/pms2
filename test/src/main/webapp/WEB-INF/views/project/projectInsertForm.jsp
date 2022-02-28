@@ -31,7 +31,7 @@
 			</div>
 			<div>
 				신청일~마감일
-				<input id="prj_str" name="prj_str" type="date" onchange="dateFun()" >~<input id="prj_ed" name="prj_ed" type="date" onchange="dateFun()" required="required"><br>
+				<input id="prj_str" name="prj_str" type="date">~<input id="prj_ed" name="prj_ed" type="date" required="required"><br>
 			</div>
 			<div>
 				펀딩여부
@@ -44,9 +44,9 @@
 				<!-- 나중에 뒷단에서 처리할것 --><input type="hidden" id="ctf_id" name="ctf_id" value="0">
 				
 				펀딩 시작일~마감일
-				<input id="prj_fnd_str" name="prj_fnd_str" type="date" onchange="dateFun()">~<input id="prj_fnd_ed" name="prj_fnd_ed" type="date" onchange="dateFun()" ><br>
+				<input id="prj_fnd_str" name="prj_fnd_str" type="date">~<input id="prj_fnd_ed" name="prj_fnd_ed" type="date" ><br>
 				목표금액
-				<input type="number" id="prj_gl_prc" name="prj_gl_prc" placeholder="목표금액">만원<br>
+				<input type="number" id="prj_gl_prc" name="prj_gl_prc" value="0" placeholder="목표금액">만원<br>
 				리워드~모달로 추가할까?
 				<button type="button">+</button><br>
 				
@@ -59,17 +59,17 @@
 			</div>
 			<div>
 				구인 시작일~마감일
-				<input id="prj_ofr_str" name="prj_ofr_str" type="date" onchange="dateFun()">~<input id="prj_ofr_ed" name="prj_ofr_ed" type="date" onchange="dateFun()" ><br>
+				<input id="prj_ofr_str" name="prj_ofr_str" type="date">~<input id="prj_ofr_ed" name="prj_ofr_ed" type="date"><br>
 				프론트
-				<input type="number" id="prj_frn_prs" name="prj_frn_prs" placeholder="필요인원">명<br>
+				<input type="number" id="prj_frn_prs" name="prj_frn_prs" value="0" placeholder="필요인원">명<br>
 				백
-				<input type="number" id="prj_bk_prs" name="prj_bk_prs" placeholder="필요인원">명<br>
+				<input type="number" id="prj_bk_prs" name="prj_bk_prs" value="0" placeholder="필요인원">명<br>
 				DB
-				<input type="number" id="prj_db_prs" name="prj_db_prs" placeholder="필요인원">명<br>
+				<input type="number" id="prj_db_prs" name="prj_db_prs" value="0" placeholder="필요인원">명<br>
 				서버
-				<input type="number" id="prj_ser_prs" name="prj_ser_prs" placeholder="필요인원">명<br>
+				<input type="number" id="prj_ser_prs" name="prj_ser_prs" value="0" placeholder="필요인원">명<br>
 				조건
-				<input type="text" id="prj_cnd" name="prj_cnd" placeholder="조건"><br>
+				<input type="text" id="prj_cnd" name="prj_cnd"  placeholder="조건"><br>
 				지역
 				<input type="text" id="prj_ar" name="prj_ar" placeholder="지역">
 			</div>
@@ -100,6 +100,8 @@
 			$("#prj_cnt").val(content4.main);
 			//console.log(content3);
 			console.log(this);
+			
+			
 		}
 	</script>
 	
