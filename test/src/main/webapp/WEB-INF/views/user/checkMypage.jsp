@@ -25,7 +25,7 @@
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
 
-						<h2>회원탈퇴</h2>
+						<h2>비밀번호를 입력하세요</h2>
 					</div>
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 
 				<div class="col-lg-5">
 					<form class="form-contact contact_form"
-						action="Withdrawa2" method="post" id="contactForm"
+						action="mypage" method="post" id="contactForm"
 						novalidate="novalidate">
 						<div class="row ">
 
@@ -42,7 +42,7 @@
 									<input class="form-control" name="user_pwd" id="user_pwd" type="password"
 										onfocus="this.placeholder = ''"
 										onblur="this.placeholder = '비밀번호를 입력해 주세요.'"
-										placeholder='비밀번호를 입력해 주세요.'>
+										placeholder='비밀번호.'>
 								</div>
 							</div>
 							<div class="col-sm-6">

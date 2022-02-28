@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta charset="utf-8">
@@ -90,50 +91,57 @@ a {
 		<form action="registeDev" onsubmit="return formCheck()" method="post">
 
 			<div class="card-body">
-			
-				<label>자격증</label><input type="text" name="id" id="id" class="form-control"
-					placeholder="내용을 입력하세요" autofocus required><BR>
-					
-					<label>취득일</label><input id="date" type="date"  onchange="fnc()" name="id"  class="form-control"
-					placeholder="내용을 입력하세요" autofocus required><BR>
-					
+				<span><label>자격증</label><input id="cert_name" type="text"
+					onchange="fnc()" name="cert_name" class="form-control"
+					placeholder="내용을 입력하세요" autofocus required></span>
+				<button type="button" onclick="add()" id="addBtn">추가</button>
+				<ul id="certList">
 				
-					<label>경력</label><input type="number" class="form-control" id="spinner"
-						name="value"><BR>
-				
-				
-					<label>첨부파일</label><input type="password" name="pw1" id="pw1" class="form-control"
-						required><br>
-				<p id="check" class="check">${login_msg}</p>
-				<br /> <input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="등록하기">
-					<input type="reset" id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block" onclick="cancel()">
+				</ul>
+				<BR> <label>취득일</label><input id="date" type="date"
+					onchange="fnc()" name="id" class="form-control"
+					placeholder="내용을 입력하세요" autofocus required><BR> <label>경력</label><input
+					type="number" class="form-control" id="spinner" name="value"><BR>
+				<label>첨부파일</label><input type="password" name="pw1" id="pw1"
+					class="form-control" required><br> <br /> <input
+					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
+					value="등록하기" onclick=""> <input type="reset" id="btn-Yes"
+					value="취 소" class="btn btn-lg btn-primary btn-block"
+					onclick="cancel()">
+			</div>
 		</form>
 	</div>
 	
-<script type="text/javascript">
-
-	function cancel() {
-		location.href="home";
-	}
-
-	function formCheck() {
-		var confirmation = confirm("등록하시겠습니까?")
-		if (confirmation == true) {
-			return true;
-		} else {
-			return false;
+	<script type="text/javascript">
+		function cancel() {
+			location.href = "home";
 		}
-		
-	}
-	function fnc() {
-        var di=document.getElementById("date");
-        console.log(di.value);
-    }
-	
-	
-	
-</script>
+
+		function formCheck() {
+			var confirmation = confirm("등록하시겠습니까?")
+			if (confirmation == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+		function fnc() {
+			var di = document.getElementById("date");
+			console.log(di.value);
+		}
+
+		function add() {
+			var i = document.createElement("span");
+			var li = document.createElement("li");
+			i.innerHTML = `<input id="date" name = "cert_name" type="hidden" value = "\${cert_name.value}" >`
+			document.getElementsByClassName("card-body")[0].insertBefore(i,addBtn);
+			li.innerHTML = cert_name.value
+			certList.append(li)
+			console.log("add");
+			
+		}
+	</script>
 
 
 </body>

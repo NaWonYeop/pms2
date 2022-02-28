@@ -2,7 +2,6 @@ package co.test.prj.user.service;
 
 import java.util.List;
 
-
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -20,6 +19,9 @@ public interface UserMapper {
 
 	UserVO userSearch(UserVO user);
 
+	UserVO searchPwd(UserVO user);
+
+	int updatePwd(UserVO user);
 	
-	
+	UserVO checkPwd(UserVO user);
 }
