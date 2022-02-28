@@ -27,8 +27,8 @@
 	<update id="appUpdate" parameterType="co.test.prj.application.service.AppVO">
 		UPDATE APPLICATION
 		<set>
-			<if test="app_clsfc != null">APP_CLSFC = #{app_clsfc}</if>
-			<if test="app_stt != null">APP_STT = #{app_stt}</if>
+			<if test="app_clsfc != null">APP_CLSFC = #{app_clsfc},</if>
+			<if test="app_stt != null">APP_STT = #{app_stt},</if>
 		</set>
 		WHERE app_id = #{app_id} AND master_id = #{master_id}
 	</update>

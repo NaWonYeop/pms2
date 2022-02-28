@@ -5,7 +5,7 @@ import java.util.List;
 public interface TeamService {
 	List<TeamVO> teamSelectList();
 
-	TeamVO teamSelect(TeamVO team);
+	List<TeamVO> teamSelect(TeamVO team);
 
 	int teamInsert(TeamVO team);
 

@@ -22,7 +22,7 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public TeamVO teamSelect(TeamVO team) {
+	public List<TeamVO> teamSelect(TeamVO team) {
 		// TODO Auto-generated method stub
 		return map.teamSelect(team);
 	}

@@ -47,7 +47,7 @@
 			for (app of json) {
 				$("#myTbody").append(`
 						
-				<tr class="myTr" data-master_id="\${app.master_id}">
+				<tr class="myTr" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
 					<td>\${app.app_id}</td>
 					<td>\${app.user_name}</td>
 					<td>\${app.app_clsfc}</td>
@@ -64,23 +64,50 @@
 						</div>
 					</td>
 				</tr>`);
+				chaingeClass();
 			};
-
 		}).fail(function (xhr, status, message) {
 			alert(" status: " + status + " er:" + message);
 		});
 	});
 	
+	function getList() {
+		$.ajax({
+			url: "appSelectList",
+			type: "GET",
+			dataType: "json",
+			async: false
+		}).done(function (json) {
+			for (app of json) {
+				$("#myTbody").append(`
+				<tr class="myTr" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}" data-app_stt="\${app.app_stt}">
+					<td>\${app.app_id}</td>
+					<td>\${app.user_name}</td>
+					<td>\${app.app_clsfc}</td>
+					<td >
+						<div class="btn-group">
+							<button id="myBtn" type="button"
+								class="btn btn-outline-secondary btn-sm dropdown-toggle"
+								data-toggle="dropdown">\${app.app_stt}</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" onclick="chainge(this)" >ing</a> 
+								<a class="dropdown-item" onclick="chainge(this)" >ok</a>
+								<a class="dropdown-item" onclick="chainge(this)" >no</a>
+							</div>
+						</div>
+					</td>
+				</tr>`);
+				chaingeClass();
+			};
+		}).fail(function (xhr, status, message) {
+			alert(" status: " + status + " er:" + message);
+		});
+	}
 	
 	function chainge(ths) {
 		var app_id = $(".myTr").children().eq(0).text();
 		var master_id = $(".myTr").data("master_id");
 		var app_stt = $(ths).text();
-		
-		console.log(typeof app_id);
-		console.log(typeof master_id);
-		console.log(typeof app_stt);
-		
 		$('.dropdown-menu').on('click', '.dropdown-item', function () {
 			$.ajax({
 				url: "appUpdate",
@@ -92,22 +119,38 @@
 				},
 				dataType: "text"
 			}).done(function (json) {
-				console.log('성공');
+				$("#myTbody").empty();
+				getList();
+				console.log("체인지 성공!!");
+				var app_stt = $(ths).text();
+				console.log(app_stt);
+				if(app_stt == 'ok') {
+					// 팀추가
+					var prj_id = $(".myTr").data("prj_id");
+					$.ajax({
+						url: "teamInsert",
+						type: "GET",
+						data : {
+							prj_id: prj_id
+						},
+						dataType: "text"
+					}).done(function (text){
+						console.log(text);
+						console.log("팀추가 성공");
+					}).fail(function (xhr, status, msg) {
+						console.log("상태값 :" + status + " Http에러메시지 :" + msg);
+					});
+				}
+			}).fail(function (xhr, status, msg) {
+				console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 			});
 		});
 	}
 
-	function addClass(e) {
-		switch (e) {
-			case 'ing':
-				$(".myTr").children().eq(3).addClass("badge badge-info");
-				break;
-			case 'ok':
-				$(".myTr").children().eq(3).addClass("badge badge-success");
-				break;
-			case 'no':
-				$(".myTr").children().eq(3).addClass("badge badge-danger");
-				break;
+	function chaingeClass() {
+		var myBtn = $("#myBtn").text();
+		if(myBtn == "ok") {
+			$("#myBtn").attr("disabled", "disabled");
 		};
 	}
 	

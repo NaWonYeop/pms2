@@ -2,11 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
+	<div class="card">
+		<div class="card-body">
+			<div class="form-group">
+				<label>My Project</label> <select id="mySelect"
+					class="js-example-basic-single w-100">
+
+				</select>
+				<button id="myBtn" type="button">선택</button>
+			</div>
+		</div>
+	</div>
 	<ul class="nav">
-		<li class="nav-item"><a class="nav-link" href="#"> <i
-				class="icon-grid menu-icon"></i> <span class="menu-title">Dashboard</span>
-		</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
 			href="#auth" aria-expanded="false" aria-controls="auth"> <i
 				class="icon-head menu-icon"></i> <span class="menu-title">User
@@ -14,12 +24,16 @@
 		</a>
 			<div class="collapse" id="auth">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link"
-						href="team"> TeamMember </a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="application"> Application </a></li>
+					<li class="nav-item"><a class="nav-link" href="team">
+							TeamMember </a></li>
+					<li class="nav-item"><a class="nav-link" href="application">
+							Application </a></li>
 				</ul>
 			</div></li>
+		<li class="nav-item"><a class="nav-link" href="#"> <i
+				class="icon-grid menu-icon"></i> <span class="menu-title">Dashboard</span>
+		</a></li>
+
 		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
 			href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
 				<i class="icon-layout menu-icon"></i> <span class="menu-title">UI
@@ -103,3 +117,41 @@
 		</a></li>
 	</ul>
 </nav>
+
+<script>
+$(function() {
+	$.ajax({
+		url : "teamSelect",
+		type : "GET",
+		dataType : "json"
+	}).done(function(json) {
+		for(team of json) {
+			$("#mySelect").append(`
+			<option selected>프로젝트를 선택하세요</option>
+			<option value="\${team.prj_id}">\${team.prj_id}</option>
+			`);
+		};
+	}).fail(function(xhr, status, message) {
+		alert(" status: " + status + " er:" + message);
+	});
+});
+</script>
+
+<script>
+	$("#myBtn").on("click", function(event) {
+		var prj_id = $("#mySelect").val();
+		console.log('myPrj_id= ' + prj_id);
+		$.ajax({
+			url: "myPrj_id",
+			type: "GET",
+			data : {
+				prj_id: prj_id
+			}
+		}).done(function() {
+			console.log("팀 추가 성공");
+		}).fail(function (xhr, status, message) {
+			alert(" status: " + status + " er:" + message);
+		});
+	});
+
+</script>

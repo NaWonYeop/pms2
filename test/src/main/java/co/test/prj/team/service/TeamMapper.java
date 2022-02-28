@@ -5,7 +5,7 @@ import java.util.List;
 public interface TeamMapper {
 	List<TeamVO> teamSelectList();
 
-	TeamVO teamSelect(TeamVO team);
+	List<TeamVO> teamSelect(TeamVO team);
 
 	int teamInsert(TeamVO team);
 

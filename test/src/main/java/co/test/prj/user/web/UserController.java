@@ -1,5 +1,6 @@
 package co.test.prj.user.web;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.test.prj.team.service.TeamService;
+import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -17,6 +20,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userDao;
+	
+	@Autowired
+	private TeamService teamDao;
 
 	// 로그인폼
 	@RequestMapping("/loginForm")
@@ -26,9 +32,11 @@ public class UserController {
 
 	// 로그인
 	@PostMapping("/login")
-	public String login(UserVO user, HttpSession session) {
+	public String login(UserVO user, HttpSession session, HttpServletRequest request) {
 		System.out.println(user);
-		user = userDao.userSelect(user);
+		
+		
+		
 		
 		if (user != null) {
 			session.setAttribute("user_id", user.getUser_id());
@@ -36,7 +44,11 @@ public class UserController {
 			session.setAttribute("user_pwd", user.getUser_pwd());
 			session.setAttribute("user_name", user.getUser_name());
 			session.setAttribute("user_tel", user.getUser_tel());
-
+			user = userDao.userSelect(user);
+			
+			
+			session.setAttribute("sessionUser",user);
+			
 		}else {
 			return "user/loginForm";
 		}

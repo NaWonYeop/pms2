@@ -9,4 +9,5 @@ public class TeamVO {
 	private String tm_pos;
 	private int tm_sal;
 	private String tm_dept;
+	private int master_id;
 }

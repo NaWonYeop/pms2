@@ -20,10 +20,8 @@
 			order="BEFORE">
 			SELECT NVL(MAX(PRG_ID) + 1, 1) AS ID FROM PROGRESS
 		</selectKey> -->
-		INSERT INTO TEAM(USER_ID, PRJ_ID, TM_POS, TM_SAL,
-		TM_DEPT)
-		VALUES (#{user_id}, #{prj_id}, #{tm_pos}, #{tm_sal},
-		#{tm_dept})
+		INSERT INTO TEAM(USER_ID, PRJ_ID)
+		VALUES (#{user_id}, #{prj_id})
 	</insert>
 	
 	<update id="teamUpdate" parameterType="co.test.prj.team.service.TeamVO">

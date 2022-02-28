@@ -34,7 +34,7 @@
 <script>
 	$(function() {
 		$.ajax({
-			url : "teamSelectList",
+			url : "teamSelect",
 			type : "GET",
 			dataType : "json"
 		}).done(function(json) {
@@ -46,6 +46,7 @@
 				<td>\${team.tm_dept}</td>
 				<td>\${team.tm_sal}</td> 
 				</tr>`);
+				
 			};
 		}).fail(function(xhr, status, message) {
 			alert(" status: " + status + " er:" + message);
