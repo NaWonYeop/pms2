@@ -19,10 +19,9 @@ public class TechController {
 	private UserService userDao;
 	
 	@RequestMapping("/techSelectList")
-	@ResponseBody
 	public String techSelectList(Model model) {
-		model.addAttribute("users", userDao.userSelectList());
-		model.addAttribute("techs", techDao.techSelectList());
+		//model.addAttribute("users", userDao.userSelectList());
+		//model.addAttribute("techs", techDao.techSelectList());
 		return "job/jobMain";
 	}
 	

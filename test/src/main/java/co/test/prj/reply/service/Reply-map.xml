@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.reply.service.ReplyMapper">
+	<select id="replyProList" resultType="co.test.prj.reply.service.ReplyVO" parameterType="co.test.prj.reply.service.ReplyVO">
+	SELECT * FROM REPLY WHERE RPL_ID= #{rpl_id}
+	</select>
+
+	<insert id="replyInsert">
+	<selectKey keyProperty="rpl_id" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(RPL_ID) + 1, 1) AS ID FROM REPLY
+		</selectKey>
+	INSERT INTO REPLY VALUES(#{rpl_id},#{user_id},#{brd_id},#{prl_cnt},#{prl_reg_date})
+	</insert>
+	
+	<update id="replyUpdate">
+	
+	</update>
+	
+	<delete id="replyDelete">
+	DELETE FROM REPLY WHERE RPL_ID=#{rpl_id}
+	</delete>
+	
+	<delete id="replyBrdDelete">
+	DELETE FROM REPLY WHERE BRD_ID=#{brd_id}
+	</delete>
+</mapper>

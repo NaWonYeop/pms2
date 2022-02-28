@@ -52,14 +52,13 @@
                         placeholder='Search Keyword' onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Search Keyword'">
                      <div class="input-group-append">
-                        <button class="btn" type="button">
+                        <button class="btn" type="submit">
                            <i class="ti-search"></i>
                         </button>
                      </div>
                   </div>
                </div>
-               <button class="button rounded-0 primary-bg text-white w-100 btn_1"
-                  type="submit">Search</button>
+              
             </form>
          </aside>
       </div>

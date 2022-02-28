@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.board.service.BoardMapper">
+	<select id="boardProList" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
+	SELECT * FROM BOARD WHERE PRJ_ID= #{prj_id}
+	</select>
+
+	<select id="boardFreeList" resultType="co.test.prj.board.service.BoardVO">
+	SELECT * FROM BOARD WHERE PRJ_ID IS NULL ORDER BY BRD_NTC_PROP DESC
+	</select>
+
+	<select id="boardSelect" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
+	SELECT * FROM BOARD WHERE BRD_ID= #{brd_id}
+	</select>
+	
+	<insert id="boardInsert" parameterType="co.test.prj.board.service.BoardVO">
+		<selectKey keyProperty="brd_id" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(BRD_ID) + 1, 1) AS ID FROM BOARD
+		</selectKey>
+	insert into BOARD
+	VALUES(#{brd_id},#{user_id},#{prj_id},#{brd_ttl},#{brd_cnt},#{brd_reg_date},#{brd_ntc_prop})
+	</insert>
+	
+	<update id="boardUpdate" parameterType="co.test.prj.board.service.BoardVO">
+	UPDATE BOARD
+	</update>
+	
+	<delete id="boardDelete" parameterType="co.test.prj.board.service.BoardVO">
+	DELETE FROM BOARD
+	WHERE BRD_ID=#{brd_id}
+	</delete>
+</mapper>

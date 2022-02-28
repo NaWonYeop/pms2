@@ -84,8 +84,8 @@
        
 		<div class="card-body">
   
-        <input type="text" name="user_email" id="user_email" class="form-control" placeholder="아이디" autofocus required>
-        <button type="button" class="button button-contactForm btn_1" id="idCheck"
+        <input type="text" name="user_email" id="user_email" class="form-control col-8 " style="display: inline-block;" placeholder="아이디" autofocus required>
+        <button type="button" class="button button-contactForm btn_1 col-3"  id="idCheck" style="margin-left: 20px;margin-bottom: 20px"
 							onclick="isIdCheck()" value="NO">Check</button><BR>
         <input type="password" name="user_pwd" id="user_pwd" class="form-control" placeholder="비밀번호"  required><br>
          <input type="password" name="pw1" id="pw1" class="form-control" placeholder="비밀번호 확인"  required><br>
