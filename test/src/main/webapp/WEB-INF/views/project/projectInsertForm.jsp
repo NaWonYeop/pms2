@@ -39,14 +39,12 @@
 			</div>
 			<div>
 				메인사진
-				<!-- <input type="file" id="ctf_st_name" name="ctf_st_name" ><br> -->
-				
-				<!-- 나중에 뒷단에서 처리할것 --><input type="hidden" id="ctf_id" name="ctf_id" value="0">
+				<input type="file" id="mul" name="mul" ><br>
 				
 				펀딩 시작일~마감일
 				<input id="prj_fnd_str" name="prj_fnd_str" type="date">~<input id="prj_fnd_ed" name="prj_fnd_ed" type="date" ><br>
 				목표금액
-				<input type="number" id="prj_gl_prc" name="prj_gl_prc" value="0" placeholder="목표금액">만원<br>
+				<input type="number" id="prj_gl_prc" name="prj_gl_prc" class="inNum" placeholder="목표금액">만원<br>
 				리워드~모달로 추가할까?
 				<button type="button">+</button><br>
 				
@@ -61,13 +59,13 @@
 				구인 시작일~마감일
 				<input id="prj_ofr_str" name="prj_ofr_str" type="date">~<input id="prj_ofr_ed" name="prj_ofr_ed" type="date"><br>
 				프론트
-				<input type="number" id="prj_frn_prs" name="prj_frn_prs" value="0" placeholder="필요인원">명<br>
+				<input type="number" id="prj_frn_prs" name="prj_frn_prs" class="inNum" placeholder="필요인원">명<br>
 				백
-				<input type="number" id="prj_bk_prs" name="prj_bk_prs" value="0" placeholder="필요인원">명<br>
+				<input type="number" id="prj_bk_prs" name="prj_bk_prs" class="inNum" placeholder="필요인원">명<br>
 				DB
-				<input type="number" id="prj_db_prs" name="prj_db_prs" value="0" placeholder="필요인원">명<br>
+				<input type="number" id="prj_db_prs" name="prj_db_prs" class="inNum" placeholder="필요인원">명<br>
 				서버
-				<input type="number" id="prj_ser_prs" name="prj_ser_prs" value="0" placeholder="필요인원">명<br>
+				<input type="number" id="prj_ser_prs" name="prj_ser_prs" class="inNum" placeholder="필요인원">명<br>
 				조건
 				<input type="text" id="prj_cnd" name="prj_cnd"  placeholder="조건"><br>
 				지역
@@ -91,7 +89,22 @@
 		}
 	
 		function check() {
-			console.log("들어오냐?");
+			console.log("들어오냐?");			
+			//input number 값없을때 0으로
+			var length = event.path[0].getElementsByClassName('inNum').length;
+			for(i=0; i<length; i++){
+				var val = event.path[0].getElementsByClassName('inNum')[i].value
+				if (val == ''){
+					console.log("여기오냐?");
+					event.path[0].getElementsByClassName('inNum')[i].value = 0;
+					
+				}
+				
+				console.log(val);
+			}
+			
+			
+			
 			//var content = event.path[0].childNodes[3].outerHTML;
 			//var content2 = event.path[0].childNodes[3].outerText;
 			//var content3 = document.querySelector("body > div:nth-child(13) > form > div:nth-child(2) > div > div.ck.ck-editor__main > div").innerHTML;
@@ -102,61 +115,51 @@
 			console.log(this);
 			
 			
+			
 		}
 	</script>
-	
-	
-	
-	
-	
-	
 
-	<script>
-				
-				//ckeditor 시작
-						const watchdog = new CKSource.EditorWatchdog();
-				
-						window.watchdog = watchdog;
-				
-						watchdog.setCreator((element, config) => {
-							return CKSource.Editor
-								.create(element, config)
-								.then(editor => {
-				
-									return editor;
-								})
-						});
-				
-						watchdog.setDestructor(editor => {
 		
-							return editor.destroy();
-						});
+	<script>			
+		//ckeditor 시작
+		const watchdog = new CKSource.EditorWatchdog();
+			
+		window.watchdog = watchdog;
 				
-						watchdog.on('error', handleError);
+		watchdog.setCreator((element, config) => {
+			return CKSource.Editor
+			.create(element, config)
+			.then(editor => {
 				
-						watchdog
-							.create(document.querySelector('#editor'), {
-								placeholder: '상세 내용을 입력해 주세요',
-								licenseKey: '',
-								simpleUpload:
-				                {
-				                    uploadUrl: "/prj/upload/image",
-				                    withCredentials: true,
-				                }
-	
-							})
-							.catch(handleError => {
-								console.log(handleError);
-							})
+				return editor;
+				})
+			});
 				
-						function handleError(error) {
-							console.error('Oops, something went wrong!');
-							console.error(
-								'Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:'
-							);
-							console.warn('Build id: evno2ybtoyrh-aylwhf71detk');
-							console.error(error);
-						}
+		watchdog.setDestructor(editor => {
+			
+			return editor.destroy();
+		});
+					
+		watchdog.on('error', handleError);
+					
+		watchdog.create(document.querySelector('#editor'), {
+			placeholder: '상세 내용을 입력해 주세요',
+			licenseKey: '',
+			simpleUpload: {
+					       uploadUrl: "/prj/upload/image",
+					       withCredentials: true,
+					       }
+		
+			}).catch(handleError => {
+									console.log(handleError);
+									})
+					
+		function handleError(error) {
+			console.error('Oops, something went wrong!');
+			console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+			console.warn('Build id: evno2ybtoyrh-aylwhf71detk');
+			console.error(error);
+		}
 	</script>
 	
 </body>

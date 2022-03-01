@@ -40,4 +40,18 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.projectDelete(project);
 	}
 
+	
+	//오토와이어드 중복사용 알아내면 없앨꺼임
+	@Override
+	public int comtfInsert(ProjectVO project) {
+		// TODO Auto-generated method stub
+		return map.comtfInsert(project);
+	}
+
+	@Override
+	public int comtfCountMax() {
+		// TODO Auto-generated method stub
+		return map.comtfCountMax();
+	}
+
 }

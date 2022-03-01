@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="co.test.prj.comtf.service.comtfMapper">
+<mapper namespace="co.test.prj.comtf.service.ComtfMapper">
 
+	<select id="comtfCountMax" parameterType="co.test.prj.comtf.service.ComtfVO">
+			SELECT NVL(MAX(CTF_ID) + 1, 1) AS ID FROM COMTNFILE;
+	</select>
 
-
-
-
-
-
-
-
-
+	<insert id="comtfInsert"
+		parameterType="co.test.prj.comtf.service.ComtfVO">
+		
+		INSERT INTO COMTNFILE(CTF_ID, CTF_ST_NAME, CTF_ORU_NAME, CTF_USECTF_ST_COURSE)
+		VALUES(#{ctf_id}, #{ctf_st_name}, #{ctf_oru_name}, #{ctf_usectf_st_course});
+	</insert>
 
 
 

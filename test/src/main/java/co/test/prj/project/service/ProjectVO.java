@@ -26,7 +26,7 @@ public class ProjectVO
 	private String prj_ver; // 버전
 	private String prj_cnt; // 상세내용 
 	private int master_id; // fk 담당자 아이디 //우선 널값 해제함
-	private int ctf_id; //첨부파일 일련번호 펀딩사진//우선 널값 해제함
+	//private int ctf_id; //첨부파일 일련번호 펀딩사진//우선 널값 해제함
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_ofr_str; //구인 시작일
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -42,6 +42,17 @@ public class ProjectVO
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_fnd_ed; //펀딩 마감일
 	private int prj_gl_prc; // 목표금액
+	
+	
+	
+	
+	
+	
+	//오토와이어드 중복사용 알아내면 없앨꺼임
+	private int ctf_id;			// app_pk
+	private String ctf_st_name;		// 저장파일명
+	private String ctf_oru_name;				// 원파일명
+	private String ctf_usectf_st_course;			// 파일저장경로
 	
 	
 }
