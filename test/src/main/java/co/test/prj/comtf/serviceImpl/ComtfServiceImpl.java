@@ -5,50 +5,56 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import co.test.prj.comtf.service.comtfMapper;
-import co.test.prj.comtf.service.comtfService;
-import co.test.prj.comtf.service.comtfVO;
+import co.test.prj.comtf.service.ComtfMapper;
+import co.test.prj.comtf.service.ComtfService;
+import co.test.prj.comtf.service.ComtfVO;
 
 @Repository("comtfDao")
-public class comtfServiceImpl implements comtfService
+public class ComtfServiceImpl implements ComtfService
 {
 	@Autowired
-	private comtfMapper map;
+	private ComtfMapper map;
 	
 	//쓸일없음
 	@Override
-	public List<comtfVO> comtfSelectList()
+	public List<ComtfVO> comtfSelectList()
 	{
 		// TODO Auto-generated method stub
 		return map.comtfSelectList();
 	}
 
 	@Override
-	public comtfVO comtfSelect(comtfVO comtfS)
+	public ComtfVO comtfSelect(ComtfVO comtfS)
 	{
 		// TODO Auto-generated method stub
 		return map.comtfSelect(comtfS);
 	}
 
 	@Override
-	public int comtfInsert(comtfVO comtfS)
+	public int comtfInsert(ComtfVO comtfS)
 	{
 		// TODO Auto-generated method stub
 		return map.comtfInsert(comtfS);
 	}
 
 	@Override
-	public int comtfUpdate(comtfVO comtfS)
+	public int comtfUpdate(ComtfVO comtfS)
 	{
 		// TODO Auto-generated method stub
 		return map.comtfUpdate(comtfS);
 	}
 
 	@Override
-	public int comtfDelete(comtfVO comtfS)
+	public int comtfDelete(ComtfVO comtfS)
 	{
 		// TODO Auto-generated method stub
 		return map.comtfDelete(comtfS);
+	}
+
+	@Override
+	public int comtfCountMax(int ctf_id) {
+		// TODO Auto-generated method stub
+		return map.comtfCountMax(ctf_id);
 	}
 	
 	
