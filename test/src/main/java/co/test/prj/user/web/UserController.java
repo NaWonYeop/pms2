@@ -52,14 +52,14 @@ public class UserController {
 		}else {
 			return "user/loginForm";
 		}
-		return "home/home";
+		return "redirect:/home";
 	}
 	
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect : home";
+		return "redirect:/home";
 	}
 	
 	//아이디 중복체크
