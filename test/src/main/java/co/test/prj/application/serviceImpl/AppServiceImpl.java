@@ -22,7 +22,7 @@ public class AppServiceImpl implements AppService {
 	}
 
 	@Override
-	public AppVO appSelect(AppVO app) {
+	public List<AppVO> appSelect(AppVO app) {
 		// TODO Auto-generated method stub
 		return map.appSelect(app);
 	}

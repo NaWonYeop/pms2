@@ -6,6 +6,8 @@ public interface TeamMapper {
 	List<TeamVO> teamSelectList();
 
 	List<TeamVO> teamSelect(TeamVO team);
+	
+	List<TeamVO> myProjectList(TeamVO team);
 
 	int teamInsert(TeamVO team);
 

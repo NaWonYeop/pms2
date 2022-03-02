@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import co.test.prj.application.service.AppService;
 import co.test.prj.application.service.AppVO;
+import co.test.prj.team.service.PrjVO;
 import co.test.prj.user.service.UserVO;
 
 @Controller
@@ -32,74 +33,64 @@ public class AppController {
 	@ResponseBody
 	public String appSelectList(HttpSession session, Model model) {
 		List<AppVO> list = appDao.appSelectList();
-		Gson gsno = new Gson();
-		System.out.println(gsno.toJson(list));
 		return new Gson().toJson(list);
 	}
 
 	@RequestMapping("/appSelect")
+	@ResponseBody
 	public String appSelect(HttpSession session, Model modelm, HttpServletRequest request) {
+		PrjVO myPrj = (PrjVO) session.getAttribute("myPrj");
 		AppVO app = new AppVO();
-		app.setApp_id(Integer.parseInt(request.getParameter("app_id")));
-		appDao.appSelect(app);
-		return "";
+		
+		app.setPrj_id(myPrj.getPrj_id());
+		app.setMaster_id(myPrj.getMaster_id());
+		
+		List<AppVO> list = appDao.appSelect(app);
+		return new Gson().toJson(list);
 	}
 	
 	@RequestMapping("/appInsert")
-	public String appInsert(HttpSession session, Model modelm, HttpServletRequest request) {
-		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
+	public void appInsert(HttpSession session, Model modelm, HttpServletRequest request) {
+		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
+		PrjVO myPrj = (PrjVO) session.getAttribute("myPrj");
 		AppVO app = new AppVO();
 		
-		int app_id = Integer.parseInt(request.getParameter("app_id"));
-		int prj_id = Integer.parseInt(request.getParameter("prj_id"));
-		int master_id = Integer.parseInt(request.getParameter("master_id"));
-		int user_id = loginUser.getUser_id();
-		int app_clsfc = Integer.parseInt(request.getParameter("app_clsfc"));
 		
-		String app_stt = request.getParameter("app_stt");
-		String user_name = request.getParameter("user_name");
+		int prj_id = myPrj.getPrj_id();
+		int master_id = myPrj.getMaster_id();
 		
-		app.setApp_id(app_id);
+		int app_clsfc = 0;
+		if(request.getParameter("app_clsfc") != null) {
+			app_clsfc = Integer.parseInt(request.getParameter("app_clsfc"));
+		} 
+		
+		
 		app.setPrj_id(prj_id);
 		app.setMaster_id(master_id);
-		app.setUser_id(user_id);
+		app.setUser_id(sessionUser.getUser_id());
 		app.setApp_clsfc(app_clsfc);
-		
-		app.setApp_stt(app_stt);
-		app.setUser_name(user_name);
+		app.setUser_name(sessionUser.getUser_name());
 		
 		appDao.appInsert(app);
-		return "";
 	}
 	
 	@RequestMapping("/appUpdate")
 	public String appUpdate(HttpSession session, HttpServletRequest request) {
-		// 수정은 마스터만 가능
-		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
-		
-		System.out.println(request.getParameter("app_id"));
-		System.out.println(request.getParameter("master_id"));
-		System.out.println(request.getParameter("app_clsfc"));
-		System.out.println(request.getParameter("app_stt"));
-		
+		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
 		AppVO app = new AppVO();
 		
-		int app_id = Integer.parseInt(request.getParameter("app_id"));
+		int user_id = sessionUser.getUser_id();
 		int master_id = Integer.parseInt(request.getParameter("master_id"));
+		int app_id = Integer.parseInt(request.getParameter("app_id"));
 		String app_stt = request.getParameter("app_stt");
 		
-		
-		
-		app.setApp_id(app_id);
-		app.setMaster_id(master_id);
-		app.setApp_stt(app_stt);
-		
-		appDao.appUpdate(app);
-		
-//		if(loginUser.getUser_id() == master_id) {
-//			
-//		}
-		
+		if(user_id == master_id) {
+			//유저와 마스터가 동일한 사람인경우 수정가능
+			app.setApp_id(app_id);
+			app.setApp_stt(app_stt);
+			appDao.appUpdate(app);
+		}
+
 		return "pms/app/app";
 	}
 	

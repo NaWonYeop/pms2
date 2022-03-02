@@ -7,11 +7,16 @@
 		SELECT * FROM TEAM ORDER BY USER_ID
 	</select>
 
+	<select id="myProjectList" resultType="co.test.prj.team.service.TeamVO">
+		SELECT * FROM TEAM
+		WHERE user_id = #{user_id}
+	</select>
+
 	<select id="teamSelect"
 		resultType="co.test.prj.team.service.TeamVO"
 		parameterType="co.test.prj.team.service.TeamVO">
 		SELECT * FROM TEAM
-		WHERE user_id = #{user_id}
+		WHERE prj_id = #{prj_id} AND master_id = #{master_id}
 	</select>
 
 	<insert id="teamInsert"

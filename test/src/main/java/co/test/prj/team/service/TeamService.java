@@ -7,6 +7,8 @@ public interface TeamService {
 
 	List<TeamVO> teamSelect(TeamVO team);
 
+	List<TeamVO> myProjectList(TeamVO team);
+
 	int teamInsert(TeamVO team);
 
 	int teamUpdate(TeamVO team);

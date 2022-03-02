@@ -6,7 +6,7 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Striped Table</h4>
+				<h4 class="card-title">Team</h4>
 				<p class="card-description">
 					Add class
 					<code>.table-striped</code>
@@ -39,13 +39,18 @@
 			dataType : "json"
 		}).done(function(json) {
 			for(team of json) {
-				$("#myTbody").append(`<tr>
+				$("#myTbody").append(`<tr id="tr">
 				<td class="py-1">\${team.user_id}</td>
 				<td>\${team.prj_id}</td> 
 				<td>\${team.tm_pos}</td>
 				<td>\${team.tm_dept}</td>
-				<td>\${team.tm_sal}</td> 
+				<td>\${team.tm_sal}</td>
 				</tr>`);
+				
+				/* if(\${team.tm_pos} != "employee") {
+					$("#tr").appendTo(`<td>\${team.tm_sal}</td>`);				
+				} */
+				
 				
 			};
 		}).fail(function(xhr, status, message) {

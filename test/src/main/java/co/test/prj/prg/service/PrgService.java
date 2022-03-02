@@ -3,7 +3,7 @@ package co.test.prj.prg.service;
 import java.util.List;
 
 public interface PrgService {
-	List<PrgVO> midCtgSelectList(); // 중분류조회
+	List<PrgVO> prgSelectNullList(PrgVO prg); // 중분류조회
 
 	List<PrgVO> smlCtgSelectList(int prg_clsfc); // 소분류조회
 

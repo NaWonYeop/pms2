@@ -1,21 +1,14 @@
 package co.test.prj.user.web;
 
-import java.util.Random;
-
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import co.test.prj.team.service.TeamService;
 import co.test.prj.team.service.TeamVO;
@@ -28,9 +21,6 @@ public class UserController {
 	@Autowired
 	private UserService userDao;
 
-	@Autowired
-	private TeamService teamDao;
-
 	// 로그인폼
 	@RequestMapping("/loginForm")
 	public String loginForm() {
@@ -41,7 +31,10 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(UserVO user, HttpSession session, HttpServletRequest request) {
 		System.out.println(user);
-
+		
+		
+		
+		
 		if (user != null) {
 			session.setAttribute("user_id", user.getUser_id());
 			session.setAttribute("user_email", user.getUser_email());
@@ -49,123 +42,109 @@ public class UserController {
 			session.setAttribute("user_name", user.getUser_name());
 			session.setAttribute("user_tel", user.getUser_tel());
 			user = userDao.userSelect(user);
-			session.setAttribute("sessionUser", user);
-
-		} else {
+			
+			
+			session.setAttribute("sessionUser",user);
+			
+		}else {
 			return "user/loginForm";
 		}
 		return "redirect:/home";
 	}
-
-	// 로그아웃
+	
+	//로그아웃
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/home";
 	}
-
-	// 아이디 중복체크
+	
+	//아이디 중복체크
 	@PostMapping("IsIdCheck")
 	@ResponseBody
-	public boolean IsIdCheck(String user_email, Model model) {
+	public boolean IsIdCheck(String user_email) {
 		System.out.println(user_email);
 		return userDao.isIdCheck(user_email);
 	}
-
-	// 비밀번호 찾기
+	//비밀번호 찾기
 	@RequestMapping("/forgotPassword")
-	@ResponseBody
-	public String forgotpassword() {
+	public String forgotPassword() {
 		return "user/forgotPassword";
 	}
-
-	// 찾은 임시비밀번호 인증번호 발송
-	@RequestMapping("/searchPassword")
-	public String searchPassword() {
-		return "user/searchPassword";
-	}
-
-	// 아이디찾기
+	//아이디찾기
 	@RequestMapping("/forgotId")
-	public String forgotId() {
+	public String forgotId() {	
 		return "user/forgotId";
 	}
-
-	// 찾은 아이디 결과창
+	
+	//찾은 아이디 결과창
 	@RequestMapping("/searchId")
 	public String searchId(UserVO user, Model model) {
-
+		
 		user = userDao.userSearch(user);
-		String s = user.getUser_email().replaceAll("(?<=.{3}).", "*");
-
-		if (user.getUser_email() != null) {
+		String s =user.getUser_email().replaceAll("(?<=.{3}).", "*");
+		
+		if(user.getUser_email() != null) {
 			model.addAttribute("idcheck", "당신의 아이디는" + s + "입니다");
-		} else {
+		}else {
 			model.addAttribute("idcheck", "아이디 찾기 실패하였습니다");
 		}
-
+		
 		return "user/searchId";
 	}
+	
+	//찾은 비밀번호 결과창
+	@RequestMapping("/searchPassword")
+	public String searchPassword() {
 
+		return "user/searchPassword";
+	}
 	// 개발자 등록
 	@RequestMapping("/insertdev")
 	public String insertdev() {
 
 		return "user/insertdev";
 	}
-
-	@RequestMapping("/insertDevForm")
-	public String insertDev(UserVO user, Model model) {
-		System.out.println(user);
-		int n = userDao.userUpdate(user);
-		if (n != 0) {
-			model.addAttribute("developer", "개발자 등록 성공하셨습니다");
-		} else {
-			model.addAttribute("developer", "개발자 등록 실패하셨습니다");
-		}
-		return "redirect:/insertDevForm";
-	}
-
-	// 마이페이지
+	//마이페이지
 	@RequestMapping("/mypage")
 	public String mypage() {
 
 		return "user/mypage";
 	}
-
-	// 회원 업데이트
+	//회원 업데이트 
 	@RequestMapping("/userUpdateForm")
 	public String userUpdateForm(Model model, HttpSession session) {
 		return "user/userUpdateForm";
 	}
-
-	// 회원정보 수정
+	//회원정보 수정
 	@PostMapping("/userUpdate")
 	public String userUpdate(UserVO user, Model model, HttpSession session) {
 		System.out.println(user);
 		user.setUser_email(session.getAttribute("user_email").toString());
 		userDao.userUpdate(user);
-		if (user.getUser_pwd() != null) {
+		if(user .getUser_pwd() != null) {
 			model.addAttribute("update", "회원수정 성공하였습니다");
-
-		} else {
+			
+		}else {
 			model.addAttribute("update", "회원수정 실패하였습니다");
 		}
 		return "user/userUpdate";
 	}
-
-	// 개발자 정보 업데이트
+	
+	
+	
+	//개발자 정보 업데이트
 	@RequestMapping("/devUpdateForm")
 	public String devUpdateForm() {
 
 		return "user/devUpdateForm";
 	}
-
-	// 회원가입
-	@RequestMapping("/registerForm")
-	public String registerForm() {
-		return "user/registerForm";
-	}
+	
+	//회원가입
+		@RequestMapping("/registerForm")
+		public String registerForm() {
+			return "user/registerForm";
+		}
 
 	// 회원가입
 	@PostMapping("/register")
@@ -180,7 +159,7 @@ public class UserController {
 		} else {
 			model.addAttribute("message", " 회원가입 실패하셨습니다.");
 		}
-
+		
 		return "redirect:/register2";
 	}
 
@@ -188,30 +167,33 @@ public class UserController {
 	public String register2() {
 		return "user/register";
 	}
-
+	
 	// 회원탈퇴1
 	@RequestMapping("/Withdrawal")
 	public String Withdrawal() {
-
+		
+		
+		
 		return "user/Withdrawal1";
 	}
 
 	@RequestMapping("/Withdrawa2")
 	public String Withdrawal2() {
-
+		
+		
 		return "user/Withdrawal2";
 	}
-
 	@RequestMapping("/Withdrawa3")
 	public String Withdrawal3() {
-
+		
+		
 		return "user/Withdrawal3";
 	}
-
 	@RequestMapping("/myfunding")
 	public String myfunding() {
-
+		
+		
 		return "user/myfunding";
 	}
-
+	
 }
