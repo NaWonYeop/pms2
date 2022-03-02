@@ -40,6 +40,7 @@ public class ComtfController {
 		System.out.println("uploadDir : "+ uploadDir);
 		String uploadId = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(uploadFile.getOriginalFilename());
 		System.out.println("uploadId : "+uploadId);
+		//파일 저장
 		uploadFile.transferTo(new File(uploadDir + uploadId));
 		System.out.println("uploadFile : "+uploadFile);
 		//경로~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

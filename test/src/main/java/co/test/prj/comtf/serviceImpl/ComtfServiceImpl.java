@@ -52,9 +52,9 @@ public class ComtfServiceImpl implements ComtfService
 	}
 
 	@Override
-	public int comtfCountMax(int ctf_id) {
+	public int comtfCountMax() {
 		// TODO Auto-generated method stub
-		return map.comtfCountMax(ctf_id);
+		return map.comtfCountMax();
 	}
 	
 	

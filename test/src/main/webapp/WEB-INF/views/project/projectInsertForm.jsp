@@ -45,8 +45,6 @@
 				<input id="prj_fnd_str" name="prj_fnd_str" type="date">~<input id="prj_fnd_ed" name="prj_fnd_ed" type="date" ><br>
 				목표금액
 				<input type="number" id="prj_gl_prc" name="prj_gl_prc" class="inNum" placeholder="목표금액">만원<br>
-				리워드~모달로 추가할까?
-				<button type="button">+</button><br>
 				
 			</div>
 			
@@ -78,24 +76,25 @@
 				<input type="hidden" id="prj_cnt" name="prj_cnt">
 
 			</div>
-			<input type="submit" value="저장">
+			<input type="submit" value="등록">
 			<input type="reset" value="초기화">
 		</form>
 	</div>
 	<script type="text/javascript">
 		function dateFun() {
-			console.log("날짜 바꾸자?");
+			//이거 해야됨~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			console.log("날짜 바꾸자? 디폴트 sysdate 안되고 시작 끝 날짜 디테일 줄것");
 			
 		}
 	
 		function check() {
-			console.log("들어오냐?");			
+			//console.log("들어오냐?");			
 			//input number 값없을때 0으로
 			var length = event.path[0].getElementsByClassName('inNum').length;
 			for(i=0; i<length; i++){
 				var val = event.path[0].getElementsByClassName('inNum')[i].value
 				if (val == ''){
-					console.log("여기오냐?");
+					console.log("input number 값없을때 0으로");
 					event.path[0].getElementsByClassName('inNum')[i].value = 0;
 					
 				}
@@ -104,7 +103,7 @@
 			}
 			
 			
-			
+			//ckeditor 입력값 가져오기
 			//var content = event.path[0].childNodes[3].outerHTML;
 			//var content2 = event.path[0].childNodes[3].outerText;
 			//var content3 = document.querySelector("body > div:nth-child(13) > form > div:nth-child(2) > div > div.ck.ck-editor__main > div").innerHTML;

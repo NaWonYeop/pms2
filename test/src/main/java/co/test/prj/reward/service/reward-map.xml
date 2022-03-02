@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.reward.service.RewardMapper">
+
+	<select id="rewardInsertSelect"
+		parameterType="co.test.prj.reward.service.RewardVO"
+		resultType="co.test.prj.reward.service.RewardVO">
+		SELECT * FROM REWARD
+		WHERE PRJ_ID = #{prj_id} 
+		AND MASTER_ID = #{master_id}
+		ORDER BY REWARD_ID
+	</select>
+	
+	<insert id="rewardInsert" parameterType="co.test.prj.reward.service.RewardVO">
+		<selectKey keyProperty="reward_id" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(REWARD_ID) + 1, 1) AS ID FROM REWARD
+		</selectKey>
+		INSERT INTO REWARD(REWARD_ID, PRJ_ID, RWD_NAME, RWD_CNT, RWD_PRC, RWD_GOAL, MASTER_ID)
+		VALUES(#{reward_id}, #{prj_id}, #{rwd_name}, #{rwd_cnt}, #{rwd_prc}, #{rwd_goal}, #{master_id})
+	</insert>
+	
+	<delete id="rewardDelete" parameterType="co.test.prj.reward.service.RewardVO">
+		
+	</delete>
+
+</mapper>

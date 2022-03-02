@@ -11,11 +11,12 @@
 		resultType="co.test.prj.project.service.ProjectVO">
 		
 	</select>
+	
+	<select id="projectMaxPId" parameterType="co.test.prj.project.service.ProjectVO" resultType="int">
+		SELECT NVL(MAX(PRJ_ID) + 1, 1) AS ID FROM PROJECT
+	</select>
 
 	<insert id="projectInsert" parameterType="co.test.prj.project.service.ProjectVO">
-		<selectKey keyProperty="prj_id" resultType="int" order="BEFORE">
-			SELECT NVL(MAX(PRJ_ID) + 1, 1) AS ID FROM PROJECT
-		</selectKey>
 			INSERT INTO PROJECT(PRJ_ID, PRJ_NAME, PRJ_STR, PRJ_ED, PRJ_OFR_PROP, 
 			PRJ_FND_PROP, PRJ_CNT, MASTER_ID, CTF_ID, PRJ_OFR_STR, PRJ_OFR_ED,
 			PRJ_FRN_PRS, PRJ_BK_PRS, PRJ_DB_PRS, PRJ_SER_PRS, PRJ_CND, PRJ_AR,
@@ -36,17 +37,6 @@
 	</delete>
 
 
-    <!-- 오토와이어드 중복사용 알아내면 없앨꺼임 -->
-    
-    <select id="comtfCountMax" parameterType="co.test.prj.project.service.ProjectVO" resultType="int">
-			SELECT NVL(MAX(CTF_ID) + 1, 1) AS ID FROM COMTNFILE
-	</select>
-
-	<insert id="comtfInsert"
-		parameterType="co.test.prj.project.service.ProjectVO">
-		INSERT INTO COMTNFILE(CTF_ID, CTF_ST_NAME, CTF_ORU_NAME, CTF_USECTF_ST_COURSE)
-		VALUES(#{ctf_id}, #{ctf_st_name}, #{ctf_oru_name}, #{ctf_usectf_st_course})
-	</insert>
 
 
 </mapper>

@@ -14,5 +14,5 @@ public interface ComtfMapper
 
 	int comtfDelete(ComtfVO comtfS);
 	
-	int comtfCountMax(int ctf_id);
+	int comtfCountMax();
 }
