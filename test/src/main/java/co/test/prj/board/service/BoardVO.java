@@ -8,7 +8,7 @@ public class BoardVO
 {
 	private int brd_id;
 	private int user_id;
-	private int prj_id;
+	private String prj_id;
 	private String brd_ttl;
 	private String brd_cnt;
 	private Date brd_reg_date;

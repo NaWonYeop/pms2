@@ -96,7 +96,7 @@
 					<form action="#">
 						<div class="form-group">
 
-							<div class="input-group mb-3">
+							<div class="input-group mb-4">
 
 
 								<div class="form-select" id="default-select" style="width: 25%;">
@@ -119,11 +119,9 @@
 					</form>
 				</div>
 			</div>
-           <div class="col-9" style="display: inline-block;">
-      		 <H1 style="display: none;">ss</H1>
-            </div>
-            <div class="col-2">
-                <button class="button button-contactForm btn_1"> 등록</button>
+
+            <div class="col-2 text-right">
+                <button class="button button-contactForm btn_1" onclick="location.href='freeboardInsertform' "> 등록</button>
             </div>
 		</div>
 

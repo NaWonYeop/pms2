@@ -20,7 +20,7 @@
 						class="collapse navbar-collapse main-menu-item justify-content-end"
 						id="navbarSupportedContent">
 						<ul class="navbar-nav align-items-center">
-							<li class="nav-item active"><a class="nav-link" href="home">Home</a>
+							<li class="nav-item active"><a class="nav-link" href="freeBoard">게시판</a>
 							</li>
 							<li class="nav-item"><a class="nav-link" href="">구인</a></li>
 							<li class="nav-item"><a class="nav-link" href="">구직</a>

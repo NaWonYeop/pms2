@@ -18,11 +18,20 @@
 			SELECT NVL(MAX(BRD_ID) + 1, 1) AS ID FROM BOARD
 		</selectKey>
 	insert into BOARD
-	VALUES(#{brd_id},#{user_id},#{prj_id},#{brd_ttl},#{brd_cnt},#{brd_reg_date},#{brd_ntc_prop})
+	VALUES(#{brd_id},#{user_id},#{prj_id},#{brd_ttl},#{brd_cnt},SYSDATE,#{brd_ntc_prop})
 	</insert>
 	
 	<update id="boardUpdate" parameterType="co.test.prj.board.service.BoardVO">
 	UPDATE BOARD
+		<set>
+			<if test="prj_id != null"> prj_id = #{prj_id},</if>
+			<if test="brd_ttl != null"> brd_ttl = #{brd_ttl},</if>
+			<if test="brd_cnt != null"> brd_cnt = #{brd_cnt},</if>
+			brd_ntc_prop = #{brd_ntc_prop},
+			brd_reg_date = sysdate,
+		</set>
+		
+		WHERE brd_id = #{brd_id}
 	</update>
 	
 	<delete id="boardDelete" parameterType="co.test.prj.board.service.BoardVO">

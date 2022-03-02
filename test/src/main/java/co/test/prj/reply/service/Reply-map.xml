@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.reply.service.ReplyMapper">
 	<select id="replyProList" resultType="co.test.prj.reply.service.ReplyVO" parameterType="co.test.prj.reply.service.ReplyVO">
-	SELECT * FROM REPLY WHERE RPL_ID= #{rpl_id}
+	SELECT * FROM REPLY WHERE brd_id= #{brd_id}
 	</select>
 
 	<insert id="replyInsert">
 	<selectKey keyProperty="rpl_id" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(RPL_ID) + 1, 1) AS ID FROM REPLY
 		</selectKey>
-	INSERT INTO REPLY VALUES(#{rpl_id},#{user_id},#{brd_id},#{prl_cnt},#{prl_reg_date})
+	INSERT INTO REPLY VALUES(#{rpl_id},#{user_id},#{brd_id},#{rpl_cnt},SYSDATE)
 	</insert>
 	
 	<update id="replyUpdate">

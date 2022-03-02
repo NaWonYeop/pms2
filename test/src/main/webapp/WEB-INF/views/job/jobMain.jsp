@@ -80,7 +80,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="textimonial_iner owl-carousel">
+			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">
 							<div class="col-sm-12 col-lg-12 list">

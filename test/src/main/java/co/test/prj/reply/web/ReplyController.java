@@ -23,8 +23,18 @@ public class ReplyController
 	
 	@RequestMapping("replyList")
 	@ResponseBody
-	public List<ReplyVO> appSelectList(ReplyVO vo,HttpSession session, Model model) {
+	public List<ReplyVO> appSelectList(int brd_id,HttpSession session, Model model) {
+		System.out.println(brd_id);
+		ReplyVO vo=new ReplyVO();
+		vo.setBrd_id(brd_id);
 		List<ReplyVO> list = replyDao.replyProList(vo);
 		return list;
+	}
+	
+	@RequestMapping("rplInsert")
+	public String rplInsert(ReplyVO vo)
+	{
+		replyDao.replyInsert(vo);
+		return "redirect:/freeboardSelect?id="+vo.getBrd_id();
 	}
 }
