@@ -2,6 +2,8 @@ package co.test.prj.user.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -23,5 +25,5 @@ public interface UserMapper {
 
 	int updatePwd(UserVO user);
 	
-	UserVO checkPwd(UserVO user);
+	
 }

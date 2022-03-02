@@ -2,6 +2,8 @@ package co.test.prj.user.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 
 
 public interface UserService {
@@ -23,9 +25,12 @@ public interface UserService {
 	
 	int updatePwd(UserVO user);
 	
-	UserVO checkPwd(UserVO user);
-	
 
+	
+	
+	
+	
+	
 
 	
 

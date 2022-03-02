@@ -16,15 +16,15 @@
 
 						</div>
 						<div class="col-sm-12 text-center">
-							
+
 							<button type="submit"
 								class="button button-contactForm btn_1 w-50">확인</button>
 						</div>
+						</form>
 				</div>
-				</form>
 			</div>
 		</div>
-		</div>
+	
 	</section>
 </body>
 </html>

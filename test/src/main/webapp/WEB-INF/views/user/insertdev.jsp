@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -88,30 +89,37 @@ a {
 
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px;"></div>
-		<form action="registeDev" onsubmit="return formCheck()" method="post">
+		<form action="insertDevForm" onsubmit="return formCheck()"
+			method="post">
 
 			<div class="card-body">
 				<span><label>자격증</label><input id="cert_name" type="text"
-					onchange="fnc()" name="cert_name" class="form-control"
+					name="cert_name" class="form-control"
 					placeholder="내용을 입력하세요" autofocus required></span>
 				<button type="button" onclick="add()" id="addBtn">추가</button>
 				<ul id="certList">
-				
+
 				</ul>
-				<BR> <label>취득일</label><input id="date" type="date"
-					onchange="fnc()" name="id" class="form-control"
-					placeholder="내용을 입력하세요" autofocus required><BR> <label>경력</label><input
-					type="number" class="form-control" id="spinner" name="value"><BR>
-				<label>첨부파일</label><input type="password" name="pw1" id="pw1"
-					class="form-control" required><br> <br /> <input
-					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
-					value="등록하기" onclick=""> <input type="reset" id="btn-Yes"
-					value="취 소" class="btn btn-lg btn-primary btn-block"
+				<BR>
+				<span><label>취득일</label><input id="date" type="date"
+					name="date" onchange="fnc()" class="form-control"
+					placeholder="내용을 입력하세요" autofocus required></span>
+				<button type="button" onclick="addDay()" id="addCert">추가</button>
+				<ul id="certDay">
+
+				</ul>
+				<BR>
+				<label>경력</label><input type="number" class="form-control"
+					id="spinner" name="value"><BR> <label>첨부파일</label><input
+					type="password" name="pw1" id="pw1" class="form-control" required><br>
+				<br /> <input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+					type="submit" value="등록하기" onclick=""> <input type="reset"
+					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
 					onclick="cancel()">
 			</div>
 		</form>
 	</div>
-	
+
 	<script type="text/javascript">
 		function cancel() {
 			location.href = "home";
@@ -131,7 +139,17 @@ a {
 			console.log(di.value);
 		}
 
+		var close = document.getElementsByClassName("close");
+
+		for (var i = 0; i < close.length; i++) {
+			close[i].onclick = function() {
+				var div = this.parentElement;
+				div.style.display = "none";
+			}
+		}
+
 		function add() {
+			console.log(cert_name.value);
 			var i = document.createElement("span");
 			var li = document.createElement("li");
 			i.innerHTML = `<input id="date" name = "cert_name" type="hidden" value = "\${cert_name.value}" >`
@@ -139,7 +157,46 @@ a {
 			li.innerHTML = cert_name.value
 			certList.append(li)
 			console.log("add");
-			
+			var span = document.createElement("span");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close";
+			span.appendChild(txt);
+			li.appendChild(span);
+			for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+					var div = this.parentElement;
+					div.style.display = "none";
+				}
+			}
+
+		}
+		var closed = document.getElementsByClassName("closed");
+
+		for (var i = 0; i < closed.length; i++) {
+			closed[i].onclick = function() {
+				var div1 = this.parentElement;
+				div1.style.display = "none";
+			}
+		}
+		function addDay() {
+			var a = document.createElement("span");
+			var r = document.createElement("li");
+			a.innerHTML = `<input id="date" name="date" type="hidden" value = "\${date.value}">`
+			document.getElementsByClassName("card-body")[1].insertBefore(a,addCert);
+			r.innerHTML = date.value
+			certDay.append(li)
+			console.log("addDay");
+			var span = document.createElement("span");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "closed";
+			span.appendChild(txt);
+			li.appendChild(span);
+			for (i = 0; i < closed.length; i++) {
+				close[i].onclick = function() {
+					var div1 = this.parentElement;
+					div1.style.display = "none";
+				}
+			}
 		}
 	</script>
 

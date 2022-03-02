@@ -15,16 +15,19 @@
 			AND user_pwd = #{user_pwd}
 		</if>
 	</select>
-	
-	<select id="searchPwd" resultType="co.test.prj.user.service.UserVO" parameterType="co.test.prj.user.service.UserVO">
-	select * from "user" where user_name = #{user_name} and user_email =  #{user_email}
+
+	<select id="searchPwd"
+		resultType="co.test.prj.user.service.UserVO"
+		parameterType="co.test.prj.user.service.UserVO">
+		select * from "user" where user_name = #{user_name} and user_email =
+		#{user_email}
 	</select>
-	
+
 	<!-- 비번찾기 -->
 	<update id="updatePwd"
 		parameterType="co.test.prj.user.service.UserVO">
 		update "user" set user_pwd = #{user_pwd} where
-		user_email = #{user_email}
+		user_email = #{user_email} and user_name = #{user_name}
 	</update>
 	<!--회원가입 -->
 	<insert id="userInsert"
@@ -34,7 +37,8 @@
 			SELECT MAX(user_id) + 1 FROM "user"
 		</selectKey>
 		INSERT INTO "user"(USER_ID,USER_EMAIL, USER_PWD,
-		USER_NAME, USER_TEL, user_ath, user_type)
+		USER_NAME, USER_TEL,
+		user_ath, user_type)
 		VALUES(#{user_id},#{user_email},#{user_pwd},#{user_name},#{user_tel},#{user_ath},#{user_type})
 	</insert>
 	<!-- 중복체크 -->
@@ -45,22 +49,36 @@
 		"user"
 		WHERE USER_EMAIL = #{email}
 	</select>
-	
+
 	<!-- 아이디찾기 -->
-	<select id="userSearch" parameterType="co.test.prj.user.service.UserVO"
-	resultType="co.test.prj.user.service.UserVO">
-	SELECT * FROM "user" WHERE USER_NAME = #{user_name} AND USER_TEL = #{user_tel}
+	<select id="userSearch"
+		parameterType="co.test.prj.user.service.UserVO"
+		resultType="co.test.prj.user.service.UserVO">
+		SELECT * FROM "user" WHERE USER_NAME = #{user_name} AND USER_TEL =
+		#{user_tel}
 	</select>
 	<!-- 회원정보 수정 -->
 	<update id="userUpdate"
 		parameterType="co.test.prj.user.service.UserVO">
-		UPDATE "user" SET USER_PWD=#{user_pwd},USER_NAME=#{user_name},USER_TEL=#{user_tel}
+		UPDATE "user"
+		<set>
+			<if test="user_pwd != null"> user_pwd = #{user_pwd}, </if>
+			<if test="user_name != null"> user_name = #{user_name}, </if>
+			<if test="user_tel != null"> user_tel = #{user_tel}, </if>
+			<if test="user_ath != null"> user_ath = #{user_ath}, </if>
+			<if test="user_crr != null"> user_crr = #{user_crr}, </if>
+			<if test="user_age != null"> user_age = #{user_age}, </if>
+			<if test="user_job_ttl != null"> user_job_ttl = #{user_job_ttl}, </if>
+			<if test="user_job_cnt != null"> user_job_cnt = #{user_job_cnt}, </if>
+			<if test="user_type != null"> user_type = #{user_type}, </if>
+		</set>
 		WHERE USER_EMAIL =#{user_email}
 	</update>
-	<!-- 비밀번호확인  -->
-	<select id="checkPwd" parameterType="co.test.prj.user.service.UserVO"
-	resultType="co.test.prj.user.service.UserVO">
-	select * from "user" where user_pwd = #{user_pwd}
+	<!-- 비밀번호확인 -->
+	<select id="checkPwd"
+		parameterType="co.test.prj.user.service.UserVO"
+		resultType="co.test.prj.user.service.UserVO">
+		select * from "user" where user_pwd = #{user_pwd}
 	</select>
 	<!-- 회원탈퇴 -->
 	<delete id="userDelete"
@@ -68,7 +86,6 @@
 		DELETE FROM "user" WHERE USER_PWD = #{user_pwd}
 	</delete>
 
- 	
 </mapper>
 
 	

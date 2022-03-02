@@ -79,75 +79,77 @@ a {
 
 
 	<div class="card align-middle" style="width: 25rem;">
-	
+
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<form action="login" class="login" method="POST">
 
 			<div class="card-body">
 
-				<input type="email" name="user_email" id="user_email" class="form-control"
-					placeholder="아이디" autofocus required><BR> <input
-					type="password" name="user_pwd" id="user_pwd" class="form-control"
-					placeholder="비밀번호" required><br>
-				
-				<br /> <input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="로 그 인"> <a href="javascript:void(0)"
-					onclick="kakaoLogin();" class="sign__logo"><img
-					src="/test/bin/src/main/webapp/resources/images/kakao_login_medium.png" alt=""></a>
+				<input type="email" name="user_email" id="user_email"
+					class="form-control" placeholder="아이디" autofocus required><BR>
+				<input type="password" name="user_pwd" id="user_pwd"
+					class="form-control" placeholder="비밀번호" required><br>
+				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+					type="submit" value="로 그 인"> <br>
+				<a href="javascript:void(0)" onclick="kakaoLogin();" class="sign__logo"><img
+					src="resources/images/kakao_login_medium.png" alt=""></a> <a
+					href="javascript:void(0)" onclick="kakaoLogout();" class="sign__logo">로그아웃</a>
+					</div>
 		</form>
-	
-	</div>
-	
-	<div class="links">
-		<a href="forgotId">아이디 찾기</a> | <a href="forgotPassword">비밀번호 찾기</a> |
-		<a href="registerForm">회원가입</a>
 
 	</div>
-</div>
+
+	<div class="links">
+		<a href="forgotId">아이디 찾기</a> | <a href="forgotPassword">비밀번호 찾기</a> |
+		<a href="registerForm">회원가입</a> |
+
+	</div>
+	
 
 
 
 
 
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script>
-		Kakao.init('89e07434a014632318c7cd9c2821e0a4'); //발급받은 키 중 javascript키를 사용해준다.
-		console.log(Kakao.isInitialized()); // sdk초기화여부판단
-		//카카오로그인
-		function kakaoLogin() {
-			Kakao.Auth.login({
-				success : function(response) {
-					Kakao.API.request({
-						url : 'home',
-						success : function(response) {
-							console.log(response)
-						},
-						fail : function(error) {
-							console.log(error)
-						},
-					})
-				},
-				fail : function(error) {
-					console.log(error)
-				},
-			})
-		}
-		//카카오로그아웃  
-		function kakaoLogout() {
-			if (Kakao.Auth.getAccessToken()) {
-				Kakao.API.request({
-					url : 'home',
-					success : function(response) {
-						console.log(response)
-					},
-					fail : function(error) {
-						console.log(error)
-					},
-				})
-				Kakao.Auth.setAccessToken(undefined)
-			}
-		}
-	</script>
+<script>
+Kakao.init('8132efdd09455dfc39e6ea6c32a19c1f'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+
+</script>
 
 
 </body>
