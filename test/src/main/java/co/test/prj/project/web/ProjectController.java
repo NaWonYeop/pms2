@@ -1,7 +1,6 @@
 package co.test.prj.project.web;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import co.test.prj.comtf.service.ComtfService;
+import co.test.prj.comtf.service.ComtfVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 
@@ -23,9 +24,8 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectDao;
 	
-	//중복사용 어떻게 하냐!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//@Autowired
-	//private ComtfService comtfDao;
+	@Autowired
+	private ComtfService comtfDao;
 	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
@@ -33,11 +33,15 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projectInsert")
-	public String projectInsert (@RequestParam("mul") MultipartFile multi, ProjectVO project, HttpSession session, HttpServletRequest hreq) {
+	public String projectInsert (@RequestParam("mul") MultipartFile multi, ProjectVO project, ComtfVO comtf, HttpSession session, HttpServletRequest hreq) {
 		System.out.println("인서트 되냐?");
 		
+		int pId = projectDao.projectMaxPId();
+		project.setPrj_id(pId);
+		System.out.println("pId : " + pId );
+		
 		//멀티파트 사진 들어올때
-		int fNum = projectDao.comtfCountMax(); //파일 번호 CTF_ID
+		int fNum = comtfDao.comtfCountMax(); //파일 번호 CTF_ID
 		System.out.println(fNum);
 		String oriThuName = multi.getOriginalFilename(); //원파일명 CTF_ORU_NAME
 		System.out.println("원파일명 : " + oriThuName);
@@ -46,7 +50,6 @@ public class ProjectController {
 			String tuuid = UUID.randomUUID().toString();
 			String savThuName = tuuid + oriThuName.substring(oriThuName.lastIndexOf(".")); //저장할 파일명 CTF_ST_NAME
 			System.out.println("저장파일명 : " + savThuName);
-			
 	
 			String path = hreq.getServletContext().getRealPath("\\resources\\upload"); 
 			String path2 = path.replace("\\", "/");
@@ -54,12 +57,15 @@ public class ProjectController {
 			System.out.println("경로 : "+ uploadDir);
 			
 			project.setCtf_id(fNum);
-			project.setCtf_oru_name(oriThuName);
-			project.setCtf_st_name(savThuName);
-			project.setCtf_usectf_st_course(uploadDir);
 			
+			//사진 등록
+			comtf.setCtf_id(fNum);
+			comtf.setCtf_oru_name(oriThuName);
+			comtf.setCtf_st_name(savThuName);
+			comtf.setCtf_usectf_st_course(uploadDir);
 			
-			projectDao.comtfInsert(project);
+			comtfDao.comtfInsert(comtf);
+			
 			try {
 				multi.transferTo(new File(uploadDir, savThuName));
 			} catch (Exception e) {
@@ -71,11 +77,30 @@ public class ProjectController {
 			System.out.println("사진없냐?");
 		}
 		
+		//프로젝트 등록
 		projectDao.projectInsert(project);
 		
 		System.out.println(project.getPrj_name());
+		System.out.println(project.getPrj_fnd_prop());
 		
-		return "project/projectInsertForm";
+		//펀딩 유무 ~> 리워드 보냄
+		if (project.getPrj_fnd_prop() == 0) {
+			System.out.println("펀딩안하면");
+			
+			//나중에 전체목록 만들면 그곳으로 경로 변경할것
+			return "redirect:/projectInsertForm";
+		} else {
+			System.out.println("펀딩하면");
+			
+			session.setAttribute("sessionMId", project.getMaster_id());
+			session.setAttribute("sessionPId", pId);
+			
+			System.out.println("session등록 ~ sessionMId : "+ project.getMaster_id()+", sessionPId : "+ pId);
+			
+			return "redirect:/rewardInsertForm";
+		}
+		
+		
 	}
 
 }
