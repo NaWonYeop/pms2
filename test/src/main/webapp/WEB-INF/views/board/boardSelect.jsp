@@ -147,12 +147,13 @@
 				}
 			}).done(function(result) {
 				for (var i = 0; i < result.length; i++) {
-						<c:forEach var="user" items="${users }">
-							if(${user.user_id} == result[i].user_id)
-							{
-								var res="${user.user_name}"
-							}
-						</c:forEach>	
+					<c:forEach var="user" items="${users }">
+						if(${user.user_id} == result[i].user_id)
+						{
+							var res="${user.user_name}"
+						}
+					</c:forEach>
+						
 						$(".comin").append(`
 								<div class="single-comment justify-content-between d-flex">
 								<div class="user justify-content-between d-flex">
@@ -160,7 +161,7 @@
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
 										<div class="d-flex justify-content-between ">
 											<div class="d-flex align-items-center">
-												<h4 class="idd">
+												<h4 class="idd" name2="\${i}" value="\${result[i].rpl_id}" name="\${result[i].user_id}">
 													\${res}
 												</h4>
 												<p class="date">
@@ -172,13 +173,20 @@
 								</div>
 							</div>	
 						`);
-						
-				}
-				$(".fa-comments").html(result.length + "comments");
-			});
+				}			
+				$(".fa-comments").html(result.length + "comments");			
+			}).done(function(){$(".idd[name='${sessionUser.user_id}']").each(function(index,item){
+					console.log(item);
+					console.log($(item).attr('value'));
+					var obj="<a href='rplDelete?id="+$(item).attr('value')+"'>삭제<a>"
+					
+					
+					$(item).append(obj)
+			})	   } 
 			
-		});
-
+			);//done끝
+		});//ajax끝
+		
 	</script>
 </body>
 </html>
