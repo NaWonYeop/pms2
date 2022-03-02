@@ -2,25 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.prg.service.PrgMapper">
 
-	<!-- 중분류 조회 -->
-	<select id="midCtgSelectList"
+	<select id="prgSelectNullList"
 		resultType="co.test.prj.prg.service.PrgVO">
 		SELECT * FROM PROGRESS
-		WHERE prg_clsfc is null
+		WHERE prj_id = #{prj_id} and prg_manager IS NULL
 	</select>
 
-	<!-- 소분류 조회 -->
-	<select id="smlCtgSelectList"
-		resultType="co.test.prj.prg.service.PrgVO">
+	<select id="prgSelectList" resultType="co.test.prj.prg.service.PrgVO">
 		SELECT * FROM PROGRESS
-		WHERE prg_clsfc = #{prg_clsfc}
-	</select>
-
-	<!-- 단건 조회 -->
-	<select id="selectList"
-		resultType="co.test.prj.prg.service.PrgVO">
-		SELECT * FROM PROGRESS
-		WHERE prg_id = #{prg_id}
+		WHERE prj_id = #{prj_id} and prg_manager IS NOT NULL
 	</select>
 
 	<!-- 중분류 입력 -->
@@ -66,9 +56,10 @@
 		WHERE prg_id = #{prg_id} AND prj_id = #{prj_id}
 	</update>
 
-	<delete id="ctgDelete" parameterType="co.test.prj.prg.service.PrgVO">
+	<delete id="ctgDelete"
+		parameterType="co.test.prj.prg.service.PrgVO">
 		DELETE FROM PROGRESS
-		WHERE prg_id = #{prg_id} AND 
+		WHERE prg_id = #{prg_id} AND
 	</delete>
 
 

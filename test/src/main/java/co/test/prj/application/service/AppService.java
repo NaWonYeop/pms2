@@ -5,7 +5,7 @@ import java.util.List;
 public interface AppService {
 	List<AppVO> appSelectList();
 
-	AppVO appSelect(AppVO app);
+	List<AppVO> appSelect(AppVO app);
 
 	int appInsert(AppVO app);
 

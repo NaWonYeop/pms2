@@ -6,16 +6,15 @@ import lombok.Data;
 
 @Data
 public class PrgVO {
-	private int prg_id;						// 글 일련번호(pk)
-
-	private int user_id;					// 업무 주는 사람
-	private int prj_id;						// 프로젝트 번호
+	private int prg_id;
+	private int master_id;
+	private int prj_id;
 	
-	private String prg_ttl;				// 제목
-	private int prg_clsfc;					// 중, 소 구분(null값의 경우 중분류)
-	private Date prg_str;					// 시작일
-	private Date prg_ed;					// 마감일
-	private int prg_chr;					// 업무 맡을 사람
-	private char prg_cmp_prop;		// 완료여부 
-	private String prg_dept;			// 부서이름(프론트,백엔드)
+	private String prg_content;	// 내용
+	private int prg_manager;		// 소분류, 중분류
+	private Date prg_str;			// 시작날짜
+	private Date prg_ed;				// 종료날짜
+	private int prg_user;				// 담당자
+	private int prg_cmp_prop;		// 완료여부 0:진행 , 1:완료
+	private String prg_dept;		// 담당파트
 }

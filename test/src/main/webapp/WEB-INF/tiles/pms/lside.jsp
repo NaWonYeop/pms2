@@ -30,8 +30,10 @@
 							Application </a></li>
 				</ul>
 			</div></li>
-		<li class="nav-item"><a class="nav-link" href="#"> <i
-				class="icon-grid menu-icon"></i> <span class="menu-title">Dashboard</span>
+			
+			
+		<li class="nav-item"><a class="nav-link" href="progress"> <i
+				class="icon-grid menu-icon"></i> <span class="menu-title">Progress</span>
 		</a></li>
 
 		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
@@ -119,38 +121,43 @@
 </nav>
 
 <script>
-$(function() {
-	$.ajax({
-		url : "teamSelect",
-		type : "GET",
-		dataType : "json"
-	}).done(function(json) {
-		for(team of json) {
-			$("#mySelect").append(`
-			<option selected>프로젝트를 선택하세요</option>
-			<option value="\${team.prj_id}">\${team.prj_id}</option>
-			`);
-		};
-	}).fail(function(xhr, status, message) {
-		alert(" status: " + status + " er:" + message);
+	$(function() {
+		$.ajax({
+			url : "myProjectList",
+			type : "GET",
+			dataType : "json"
+		}).done(function(json) {
+			for(team of json) {
+				$("#mySelect").append(`
+				<option selected>프로젝트를 선택하세요</option>
+				<option id="mst" data-master_id="\${team.master_id}" value="\${team.prj_id}">\${team.prj_id}</option>
+				`);
+			};
+		}).fail(function(xhr, status, message) {
+			alert("프로젝트 리스트 출력 실패");
+		});
 	});
-});
 </script>
 
 <script>
 	$("#myBtn").on("click", function(event) {
 		var prj_id = $("#mySelect").val();
-		console.log('myPrj_id= ' + prj_id);
+		var master_id = $("#mst").data("master_id");
+		
+		console.log('prj_id= ' + prj_id);
+		console.log('master_id= ' + master_id);
+		
 		$.ajax({
-			url: "myPrj_id",
+			url: "myPrj",
 			type: "GET",
 			data : {
-				prj_id: prj_id
+				prj_id: prj_id,
+				master_id: master_id
 			}
 		}).done(function() {
-			console.log("팀 추가 성공");
+			alert("프로젝트 선택완료");
 		}).fail(function (xhr, status, message) {
-			alert(" status: " + status + " er:" + message);
+			alert("프로젝트 선택실패");
 		});
 	});
 

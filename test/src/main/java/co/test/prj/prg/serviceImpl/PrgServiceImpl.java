@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.test.prj.prg.service.PrgMapper;
 import co.test.prj.prg.service.PrgService;
 import co.test.prj.prg.service.PrgVO;
+import co.test.prj.team.service.PrjVO;
 
 @Repository("prgDao")
 public class PrgServiceImpl implements PrgService {
@@ -16,46 +17,9 @@ public class PrgServiceImpl implements PrgService {
 	private PrgMapper map;
 
 	@Override
-	public List<PrgVO> midCtgSelectList() {
+	public List<PrgVO> prgSelectNullList(PrgVO prj) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<PrgVO> smlCtgSelectList(int prg_clsfc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public PrgVO selectList(int prg_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int midCtgInsert() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int smlCtgInsert(int prg_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int ctgUpdate(int prg_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int ctgDelete(int prg_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
 }

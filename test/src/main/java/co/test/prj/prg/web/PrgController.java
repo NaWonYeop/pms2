@@ -15,6 +15,12 @@ public class PrgController {
 
 	@Autowired
 	private PrgService prgDao;
+	
+	
+	@RequestMapping("/progress")
+	public String pregress(HttpSession session, Model model) {
+		return "pms/prg/prg";
+	}
 
 	@RequestMapping("/midCtgSelect")
 	public String midCtgSelectList(HttpSession session, Model model) {

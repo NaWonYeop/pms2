@@ -28,6 +28,12 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
+	public List<TeamVO> myProjectList(TeamVO team) {
+		// TODO Auto-generated method stub
+		return map.myProjectList(team);
+	}
+
+	@Override
 	public int teamInsert(TeamVO team) {
 		// TODO Auto-generated method stub
 		return map.teamInsert(team);

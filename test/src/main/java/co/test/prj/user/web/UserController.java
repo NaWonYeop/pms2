@@ -20,9 +20,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userDao;
-	
-	@Autowired
-	private TeamService teamDao;
 
 	// 로그인폼
 	@RequestMapping("/loginForm")
