@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface TechMapper {
 	List<TechVO> techSelectList();
-	TechVO techSelect(TechVO tech);
+	List<TechVO> techSelect(TechVO tech);
 	int techInsert(TechVO tech);
 	int techUpdate(TechVO tech);
 	int techDelete(TechVO tech);

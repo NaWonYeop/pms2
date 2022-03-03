@@ -76,6 +76,16 @@
 		</dependency>
 
 		<dependency>
+
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+
+			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+
+			<version>1.16</version>
+
+		</dependency>
+
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
@@ -153,19 +163,10 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 		<dependency>
-
-		 
-		
-		
-		
-
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.9.0</version>
 		</dependency>
-
-
-
 
 		<!-- Tiles -->
 		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-extras -->
@@ -183,14 +184,20 @@
 			<version>1.4</version>
 		</dependency>
 
-		
+
 		<!-- 메일 api -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-email</artifactId>
-			<version>1.2</version>
+			<version>1.5</version>
 		</dependency>
 		
+		   <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+
 
 		<!-- Test -->
 		<dependency>

@@ -44,4 +44,11 @@
 		WHERE user_id = #{user_id} AND prj_id = #{prj_id}
 	</delete>
 	
+	
+	<select id="jobDetailSelect" resultType="co.test.prj.team.service.TeamVO"
+		parameterType="co.test.prj.team.service.TeamVO">
+		SELECT * FROM PROJECT P, TEAM T
+		WHERE T.USER_ID = #{user_id} AND P.PRJ_ID = T.PRJ_ID
+	</select>
+	
 </mapper>

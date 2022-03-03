@@ -85,7 +85,14 @@
 		parameterType="co.test.prj.user.service.UserVO">
 		DELETE FROM "user" WHERE USER_PWD = #{user_pwd}
 	</delete>
-
+	
+	<select id="jobSelect" resultType="co.test.prj.user.service.UserVO">
+		SELECT * FROM "user" WHERE USER_ID = ${user_id}
+		<!-- select u.user_name, u.user_crr, u.user_job_ttl, u.user_job_cnt, 
+		(select avg(s.str_avg) from star s where u.user_id = s.user_id group by user_id)
+		from "user" u; -->
+	</select>
+	
 </mapper>
 
 	

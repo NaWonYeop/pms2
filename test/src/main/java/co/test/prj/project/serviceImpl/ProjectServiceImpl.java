@@ -45,6 +45,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.projectMaxPId();
 	}
 
+	@Override
+	public List<ProjectVO> jobJoinList(ProjectVO project) {
+		return map.jobJoinList(project);
+	}
+
+	
+	
+
 	
 
 }

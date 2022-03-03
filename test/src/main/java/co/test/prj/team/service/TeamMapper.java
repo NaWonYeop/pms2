@@ -14,4 +14,6 @@ public interface TeamMapper {
 	int teamUpdate(TeamVO team);
 
 	int teamDelete(TeamVO team);
+	
+	List<TeamVO> jobDetailSelect(TeamVO team);
 }

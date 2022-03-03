@@ -2,22 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.certificate.service.CertMapper">
 	
-	
-	
 	<select id="certSelectList" resultType="co.test.prj.certificate.service.CertVO"
-	parameterType="co.test.prj.certificate.service.CertVO">
-	SELECT CERT_NAME
-	FROM CERTIFICATE
+		parameterType="co.test.prj.certificate.service.CertVO">
+		SELECT CERT_NAME
+		FROM CERTIFICATE
 	</select>
 	
-	<insert id="certInsert">
-	INSERT INTO CERTIFICATE (CERT_NAME)
-	VALUES(#{cert_name})
+	<select id="certSelect" resultType="co.test.prj.certificate.service.CertVO">
+		SELECT * FROM CERTIFICATE WHERE USER_ID = #{user_id}
+	</select>
+	
+	<insert id="certInsert" parameterType="co.test.prj.certificate.service.CertVO">
+		INSERT INTO CERTIFICATE (CERT_NAME)
+		VALUES(#{cert_name})
 	</insert>
 	
-	<delete id="certDelete">
-	DELETE CERTIFICATE
-	WHERE CERT_NAME = #{cert_name}
+	<delete id="certDelete" parameterType="co.test.prj.certificate.service.CertVO">
+		DELETE CERTIFICATE
+		WHERE CERT_NAME = #{cert_name}
 	</delete>
 	
 </mapper>

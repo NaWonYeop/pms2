@@ -21,7 +21,7 @@ public class CertServiceImpl implements CertService {
 	}
 
 	@Override
-	public CertVO certSelect(CertVO cert) {
+	public List<CertVO> certSelect(CertVO cert) {
 		return map.certSelect(cert);
 	}
 
