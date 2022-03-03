@@ -36,12 +36,13 @@ public class UserController {
 		
 		
 		if (user != null) {
+			user = userDao.userSelect(user);
+			
 			session.setAttribute("user_id", user.getUser_id());
 			session.setAttribute("user_email", user.getUser_email());
 			session.setAttribute("user_pwd", user.getUser_pwd());
 			session.setAttribute("user_name", user.getUser_name());
 			session.setAttribute("user_tel", user.getUser_tel());
-			user = userDao.userSelect(user);
 			
 			
 			session.setAttribute("sessionUser",user);

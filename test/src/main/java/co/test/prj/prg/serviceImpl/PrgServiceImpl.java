@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.test.prj.prg.service.PrgMapper;
 import co.test.prj.prg.service.PrgService;
 import co.test.prj.prg.service.PrgVO;
-import co.test.prj.team.service.PrjVO;
+import co.test.prj.team.service.MyPrjVO;
 
 @Repository("prgDao")
 public class PrgServiceImpl implements PrgService {
@@ -17,51 +17,27 @@ public class PrgServiceImpl implements PrgService {
 	private PrgMapper map;
 
 	@Override
-	public List<PrgVO> prgSelectNullList(PrgVO prj) {
+	public List<PrgVO> prgSelectList(int prj_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.prgSelectList(prj_id);
 	}
 
 	@Override
-	public List<PrgVO> smlCtgSelectList(int prg_clsfc)
-	{
+	public int prgInsert(PrgVO prg) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.prgInsert(prg);
 	}
 
 	@Override
-	public PrgVO selectList(int prg_id)
-	{
+	public int prgUpdate(PrgVO prg) {
 		// TODO Auto-generated method stub
-		return null;
+		return map.prgUpdate(prg);
 	}
 
 	@Override
-	public int midCtgInsert()
-	{
+	public int prgDelete(PrgVO prg) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int smlCtgInsert(int prg_id)
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int ctgUpdate(int prg_id)
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int ctgDelete(int prg_id)
-	{
-		// TODO Auto-generated method stub
-		return 0;
+		return map.prgDelete(prg);
 	}
 
 }

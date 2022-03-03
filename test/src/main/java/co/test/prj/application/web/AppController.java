@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 
 import co.test.prj.application.service.AppService;
 import co.test.prj.application.service.AppVO;
-import co.test.prj.team.service.PrjVO;
+import co.test.prj.team.service.MyPrjVO;
 import co.test.prj.user.service.UserVO;
 
 @Controller
@@ -29,17 +29,11 @@ public class AppController {
 		return "pms/app/app";
 	}
 
-	@RequestMapping("/appSelectList")
-	@ResponseBody
-	public String appSelectList(HttpSession session, Model model) {
-		List<AppVO> list = appDao.appSelectList();
-		return new Gson().toJson(list);
-	}
 
 	@RequestMapping("/appSelect")
 	@ResponseBody
 	public String appSelect(HttpSession session, Model modelm, HttpServletRequest request) {
-		PrjVO myPrj = (PrjVO) session.getAttribute("myPrj");
+		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		AppVO app = new AppVO();
 		
 		app.setPrj_id(myPrj.getPrj_id());
@@ -52,7 +46,7 @@ public class AppController {
 	@RequestMapping("/appInsert")
 	public void appInsert(HttpSession session, Model modelm, HttpServletRequest request) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
-		PrjVO myPrj = (PrjVO) session.getAttribute("myPrj");
+		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		AppVO app = new AppVO();
 		
 		

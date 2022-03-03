@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import co.test.prj.team.service.PrjVO;
+import co.test.prj.team.service.MyPrjVO;
 import co.test.prj.team.service.TeamService;
 import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserVO;
@@ -28,7 +28,7 @@ public class TeamController {
 	@RequestMapping("/team")
 	public String team(HttpSession session) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
-		PrjVO prj = (PrjVO) session.getAttribute("myPrj");
+		MyPrjVO prj = (MyPrjVO) session.getAttribute("myPrj");
 		
 		
 		
@@ -38,7 +38,7 @@ public class TeamController {
 	@RequestMapping("/myPrj")
 	@ResponseBody
 	public void myTeam(HttpSession session, HttpServletRequest request) {
-		PrjVO prj = new PrjVO();
+		MyPrjVO prj = new MyPrjVO();
 		
 		prj.setPrj_id(Integer.parseInt(request.getParameter("prj_id")));
 		prj.setMaster_id(Integer.parseInt(request.getParameter("master_id")));
@@ -70,19 +70,12 @@ public class TeamController {
 	@ResponseBody
 	public String teamSelect(HttpSession session, Model model) {
 		// 프로젝트 번호, 마스터 번호로 프로젝트를 찾고 리스트 출력
-		PrjVO myPrj = (PrjVO) session.getAttribute("myPrj");
+		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		TeamVO team = new TeamVO();
 		team.setPrj_id(myPrj.getPrj_id());
 		team.setMaster_id(myPrj.getMaster_id());
 		
 		List<TeamVO> list = teamDao.teamSelect(team);
-		return new Gson().toJson(list);
-	}
-
-	@RequestMapping("/teamSelectList")
-	@ResponseBody
-	public String teamSelectList(HttpSession session, Model model) {
-		List<TeamVO> list = teamDao.teamSelectList();
 		return new Gson().toJson(list);
 	}
 

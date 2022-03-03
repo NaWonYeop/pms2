@@ -16,12 +16,6 @@ public class TeamServiceImpl implements TeamService {
 	private TeamMapper map;
 
 	@Override
-	public List<TeamVO> teamSelectList() {
-		// TODO Auto-generated method stub
-		return map.teamSelectList();
-	}
-
-	@Override
 	public List<TeamVO> teamSelect(TeamVO team) {
 		// TODO Auto-generated method stub
 		return map.teamSelect(team);

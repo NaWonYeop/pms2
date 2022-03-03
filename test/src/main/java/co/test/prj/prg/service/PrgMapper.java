@@ -3,15 +3,12 @@ package co.test.prj.prg.service;
 import java.util.List;
 
 public interface PrgMapper {
-	// 해당 프로젝트 조회
-	List<PrgVO> prgSelectNullList(PrgVO prg); // 중분류조회
 	
-	List<PrgVO> prgSelectList(PrgVO prg); // 소분류조회
+	List<PrgVO> prgSelectList(int prj_id);
 	
-	int midPrgInsert(PrgVO prg);
+	int prgInsert(PrgVO prg);
 	
-	int midPrgUpdate(PrgVO prg);
+	int prgUpdate(PrgVO prg);
 	
-	int midPrgDelete(PrgVO prg);
-
+	int prgDelete(PrgVO prg);
 }

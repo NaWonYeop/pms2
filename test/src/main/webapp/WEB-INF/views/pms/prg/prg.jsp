@@ -17,20 +17,24 @@
 
 
 <script>
-	$(function () {
+	$(function() {
+		
+	});
+
+	function writeClaendar() {
 		var calendarEl = $('#calendar')[0];
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			headerToolbar: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-				},
-				initialView: 'dayGridMonth',
-				selectable: true
+			headerToolbar : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+			},
+			initialView : 'dayGridMonth',
+			selectable : true
 		});
-		
+
 		calendar.render();
-	});
+	}
 </script>
 
 
