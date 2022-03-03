@@ -34,10 +34,19 @@ public class RewardComtroller {
 	}
 	
 	@RequestMapping("/rewardInsert")
-	public String rewardInsert(Model model, RewardVO reward) {
+	public String rewardInsert(RewardVO reward) {
 		System.out.println("리워드 등록");
 		
-		/////////////////////여기부터 하면됨!!!!!!!!!!!!!
+		rewardDao.rewardInsert(reward);
+		
+		return "redirect:/rewardInsertForm";
+	}
+	
+	@RequestMapping("/rewardDelete")
+	public String rewardDelete(RewardVO reward) {
+		System.out.println("리워드 삭제");
+		
+		rewardDao.rewardDelete(reward);
 		
 		return "redirect:/rewardInsertForm";
 	}
