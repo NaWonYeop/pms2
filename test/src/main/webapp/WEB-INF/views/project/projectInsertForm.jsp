@@ -31,7 +31,7 @@
 			</div>
 			<div>
 				신청일~마감일
-				<input id="prj_str" name="prj_str" type="date">~<input id="prj_ed" name="prj_ed" type="date" required="required"><br>
+				<input id="prj_str" name="prj_str" required="required" type="date">~<input id="prj_ed" name="prj_ed" type="date" required="required"><br>
 			</div>
 			<div>
 				펀딩여부
@@ -85,7 +85,10 @@
 			//이거 해야됨~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			console.log("날짜 바꾸자? 디폴트 sysdate 안되고 시작 끝 날짜 디테일 줄것");
 			
+			
 		}
+		
+		//체크박스 체크하면 하위 값들 필수로 들어가게 할것!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 		function check() {
 			//console.log("들어오냐?");			

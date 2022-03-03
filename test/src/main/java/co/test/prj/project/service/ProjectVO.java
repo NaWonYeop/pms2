@@ -43,7 +43,10 @@ public class ProjectVO
 	private Date prj_fnd_ed; //펀딩 마감일
 	private int prj_gl_prc; // 목표금액
 	
-	private int ctf_id;			// app_pk
+	private int ctf_id;			// app_pk 파일저장 일련번호
 	
+	//검색필터
+	private String type; //검색 타입
+	private String keyword; //검색 내용
 	
 }

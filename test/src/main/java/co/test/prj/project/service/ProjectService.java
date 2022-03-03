@@ -9,4 +9,6 @@ public interface ProjectService {
 	int projectDelete(ProjectVO project);
 
 	int projectMaxPId();
+	
+	List<ProjectVO> projectSerchList(ProjectVO project);
 }
