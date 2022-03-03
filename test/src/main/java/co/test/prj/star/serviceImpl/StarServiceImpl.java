@@ -29,6 +29,11 @@ public class StarServiceImpl implements StarService {
 	public int starInsert(StarVO star) {
 		return map.starInsert(star);
 	}
+
+	@Override
+	public List<StarVO> starAllAvg(StarVO star) {
+		return map.starAllAvg(star);
+	}
 	
 	
 }

@@ -50,6 +50,11 @@
 	margin-top: 2.5px;
 	margin-bottom: 2.5px;
 }
+
+.introduce {
+	display: block;
+}
+
 </style>
 </head>
 <body>
@@ -83,44 +88,51 @@
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">
-							<div class="col-sm-12 col-lg-12 list">
-								<div class="single_special_cource">
-									<div class="special_cource_text">
-										<p>김고기 | 3년</p>
-											<c:forEach items="${techs }" var="tech">
-												<span class="btn_4">${techs.tech_name }</span>
-											</c:forEach>
-										<a href="course-details.html">
-											<h3>Web Development</h3>
-										</a>
-										<p>Which whose darkness saying were life unto fish wherein
-											all fish of together called</p>
-										<div class="author_info">
-											<div class="author_img">
-												<div class="author_info_text">
-													<p>Conduct by:</p>
-													<h5>
-														<a href="#">James Well</a>
-													</h5>
-												</div>
-											</div>
-											<div class="author_rating">
-												<div class="rating avg">
-													<div class="star-ratings">
-														<div class="star-ratings-fill" style="width: 70%">
-															<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-														</div>
-														<div class="star-ratings-base">
-															<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-														</div>
+						<c:forEach items="${users }" var="user">
+							<c:if test="${!empty user.user_job_ttl  }">
+								<div class="col-sm-12 col-lg-12 list">
+									<div class="single_special_cource">
+										<div class="special_cource_text">
+											<p class="introduce">${user.user_name } | ${user.user_crr }년</p>
+												<c:forEach items="${techs }" var="tech">
+													<c:if test="${user.user_id == tech.user_id2 }">
+														<span class="btn_4">${tech.tech_name }</span>
+													</c:if>
+												</c:forEach>
+											<a href="jobDetail?user_id=${user.user_id }">
+												<h3>${user.user_job_ttl }</h3>
+											</a>
+											<p>${user.user_job_cnt }</p>
+											<div class="author_info">
+												<div class="author_img">
+													<div class="author_info_text">
+														<p>수행 프로젝트</p>
+														<%-- <c:forEach items="" var=""> --%>
+															<h5>
+																<a href="#">James Well</a>
+															</h5>
+														<%-- </c:forEach> --%>
 													</div>
-													<p>3.8 Ratings</p>
+												</div>
+												<div class="author_rating">
+													<div class="rating avg">
+														<div class="star-ratings">
+															<div class="star-ratings-fill" style="width: 50%">
+																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+															</div>
+															<div class="star-ratings-base">
+																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+															</div>
+														</div>
+														<p>3.8 Ratings</p>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</c:if>
+						</c:forEach>
 
 						<!-- 여기까지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ -->
 
@@ -129,7 +141,13 @@
 			</div>
 		</div>
 	</section>
-
+	
+	<script type="text/javascript">
+		function starAvg(avg) {
+	        const insertAvg = avg * 20;
+	        return insertAvg + 1.5;
+	    }
+	</script>
 	<!-- jquery plugins here-->
 	<!-- jquery -->
 	<script src="js/jquery-1.12.1.min.js"></script>

@@ -46,9 +46,12 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<ProjectVO> projectSerchList(ProjectVO project) {
-		return map.projectSerchList(project);
+	public List<ProjectVO> jobJoinList(ProjectVO project) {
+		return map.jobJoinList(project);
 	}
+
+	
+	
 
 	
 

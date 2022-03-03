@@ -35,8 +35,10 @@
 	<delete id="projectDelete" parameterType="co.test.prj.project.service.ProjectVO">
 	
 	</delete>
-
-
-
+	
+	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
+		SELECT PRJ_NAME FROM PROJECT
+		WHERE master_id = #{master_id} and SYSDATE <![CDATA[<]]> PRJ_OFR_ED
+	</select>
 
 </mapper>

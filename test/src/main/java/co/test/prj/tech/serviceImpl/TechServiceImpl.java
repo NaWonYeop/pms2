@@ -21,7 +21,7 @@ public class TechServiceImpl implements TechService {
 	}
 
 	@Override
-	public TechVO techSelect(TechVO tech) {
+	public List<TechVO> techSelect(TechVO tech) {
 		return map.techSelect(tech);
 	}
 

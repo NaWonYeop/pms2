@@ -25,5 +25,5 @@ public interface UserMapper {
 
 	int updatePwd(UserVO user);
 	
-	
+	UserVO jobSelect(UserVO user);
 }

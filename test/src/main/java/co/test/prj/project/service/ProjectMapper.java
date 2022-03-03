@@ -12,6 +12,6 @@ public interface ProjectMapper {
 	
 	int projectMaxPId();
 	
-	List<ProjectVO> projectSerchList(ProjectVO project);
+	List<ProjectVO> jobJoinList(ProjectVO project);
 	
 }
