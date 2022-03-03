@@ -25,9 +25,8 @@ public class BoardController
 	@RequestMapping("/freeBoard")
 	public String freeBoard(Model model) {
 		List<BoardVO> list=boardDao.boardFreeList();
-		List<UserVO> lis=userDao.userSelectList();
 		model.addAttribute("frees",list);
-		model.addAttribute("users",lis);
+
 		return "board/boardList";
 	}
 	//보드단건

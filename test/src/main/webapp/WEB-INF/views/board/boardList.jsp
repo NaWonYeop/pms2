@@ -74,11 +74,9 @@
 
 							</div>
 							<div class="percentage"><a href="freeboardSelect?id=${free.brd_id }">${free.brd_ttl }</a></div>
-							<c:forEach var="user" items="${users }">
-								<c:if test="${user.user_id eq free.user_id }">
-									<div class="visit">${user.user_name }</div>
-								</c:if>
-							</c:forEach>
+						
+									<div class="visit">${free.user_name }</div>
+					
 
 							<div class="visit text-center">
 								<fmt:formatDate value="${free.brd_reg_date }"

@@ -1,5 +1,13 @@
 package co.test.prj.user.web;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -36,11 +44,7 @@ public class UserController {
 		
 		
 		if (user != null) {
-			session.setAttribute("user_id", user.getUser_id());
-			session.setAttribute("user_email", user.getUser_email());
-			session.setAttribute("user_pwd", user.getUser_pwd());
-			session.setAttribute("user_name", user.getUser_name());
-			session.setAttribute("user_tel", user.getUser_tel());
+			
 			user = userDao.userSelect(user);
 			
 			
@@ -96,8 +100,55 @@ public class UserController {
 	//찾은 비밀번호 결과창
 	@RequestMapping("/searchPassword")
 	public String searchPassword() {
+	      try {
+	          
+	       //int index = username.indexOf("@");
+	       //int indexPw = password.indexOf(",");
+	       String id="";//id
+	       String pwd="";//비번 입력해야됨
+	       String host = "smtp.naver.com";
+	       //네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
+	       //네이버 이메일 비밀번호를 기재합니다.
+	       int port=465;
+	       // 메일 내용
+	       //메일을 발송할 이메일 주소를 기재해 줍니다.
+	       Properties props = System.getProperties();
+	       props.put("mail.smtp.host", host);
+	       props.put("mail.smtp.port", port);
+	       props.put("mail.smtp.auth", "true");
+	       props.put("mail.smtp.ssl.enable", "true");
+	       props.put("mail.smtp.ssl.trust", host);
+	       props.put("mail.debug","true");
+			/*
+			 * System.out.println(password); System.out.println(username.substring(0,
+			 * index));
+			 */
+	       Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	    	   
+	          //String un=username.substring(0, index); 
+	         // String pw=password.substring(0,indexPw);
+	          protected PasswordAuthentication getPasswordAuthentication() {
+	             return new PasswordAuthentication(id, pwd); 
+	             } 
+	          });
+	       session.setDebug(true);
+	       //for debug
+	       Message mimeMessage = new MimeMessage(session);
+	       mimeMessage.setFrom(new InternetAddress(id+"@naver.com"));//보내는사람 주소
+	       mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress());//받는사람 주소
+	       mimeMessage.setSubject("제목!!!!!");
+	       mimeMessage.setText("내용!1");
+	       Transport.send(mimeMessage);
+	       
+	       }catch(Exception e) {
+	          e.printStackTrace();
+	       }
 
-		return "user/searchPassword";
+	       return "redirect:/home";
+
+		
+
+		
 	}
 	// 개발자 등록
 	@RequestMapping("/insertdev")

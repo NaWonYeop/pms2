@@ -6,7 +6,10 @@
 	</select>
 
 	<select id="boardFreeList" resultType="co.test.prj.board.service.BoardVO">
-	SELECT * FROM BOARD WHERE PRJ_ID IS NULL ORDER BY BRD_NTC_PROP DESC
+	SELECT brd_id,brd_ttl,brd_reg_date,U.user_name,b.brd_ntc_prop
+	FROM BOARD B,"user" U  
+	WHERE PRJ_ID IS NULL AND B.USER_ID=U.USER_ID
+	ORDER BY BRD_NTC_PROP DESC
 	</select>
 
 	<select id="boardSelect" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
