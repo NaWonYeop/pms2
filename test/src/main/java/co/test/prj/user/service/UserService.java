@@ -25,7 +25,11 @@ public interface UserService {
 	
 	int updatePwd(UserVO user);
 	
+
 	UserVO jobSelect(UserVO user);
+
+	
+	
 
 	
 	

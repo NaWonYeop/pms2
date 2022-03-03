@@ -12,6 +12,10 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style type="text/css">
 }
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
@@ -90,11 +94,13 @@ a {
 				<input type="password" name="user_pwd" id="user_pwd"
 					class="form-control" placeholder="비밀번호" required><br>
 				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="로 그 인"> <br>
-				<a href="javascript:void(0)" onclick="kakaoLogin();" class="sign__logo"><img
+					type="submit" value="로 그 인"> <br> <a
+					href="javascript:void(0)" onclick="kakaoLogin();"
+					class="sign__logo"><img
 					src="resources/images/kakao_login_medium.png" alt=""></a> <a
-					href="javascript:void(0)" onclick="kakaoLogout();" class="sign__logo">로그아웃</a>
-					</div>
+					href="javascript:void(0)" onclick="kakaoLogout();"
+					class="sign__logo">로그아웃</a>
+			</div>
 		</form>
 
 	</div>
@@ -104,52 +110,98 @@ a {
 		<a href="registerForm">회원가입</a> |
 
 	</div>
-	
-
-
-
-
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-Kakao.init('8132efdd09455dfc39e6ea6c32a19c1f'); //발급받은 키 중 javascript키를 사용해준다.
-console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
-function kakaoLogin() {
-    Kakao.Auth.login({
-      success: function (response) {
-        Kakao.API.request({
-          url: '/v2/user/me',
-          success: function (response) {
-        	  console.log(response)
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      },
-      fail: function (error) {
-        console.log(error)
-      },
-    })
-  }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+	<script>
+		Kakao.init('8132efdd09455dfc39e6ea6c32a19c1f'); //발급받은 키 중 javascript키를 사용해준다.
+		console.log(Kakao.isInitialized()); // sdk초기화여부판단
+		//카카오로그인
+		function kakaoLogin() {
+			Kakao.Auth.login({
+				success : function(response) {
+					Kakao.API.request({
+						url : '/v2/user/me',
+						success : function(response) {
+							console.log(response.kakao_account.email);	
+							addEmail(response.kakao_account.email);
+						},
+						fail : function(error) {
+							console.log(error)
+						},
+					})
+				},
+				fail : function(error) {
+					console.log(error)
+				},
+			})
+		}
+		//카카오로그아웃  
+		function kakaoLogout() {
+			if (Kakao.Auth.getAccessToken()) {
+				Kakao.API.request({
+					url : '/v1/user/unlink',
+					success : function(response) {
+						console.log(response)
+					},
+					fail : function(error) {
+						console.log(error)
+					},
+				})
+				Kakao.Auth.setAccessToken(undefined)
+			}
+		}
 
-</script>
+		$(document).ready(function() {
+			console.log("로그인 결과");
+			console.log('${loginFail}');
+			if ('${loginFail}' != '') {
+				var message = '${loginFail}';
+				/* alert(message); */
+				toastr.options = {
+					"closeButton" : false,
+					"debug" : false,
+					"newestOnTop" : false,
+					"progressBar" : true,
+					"positionClass" : "toast-top-right",
+					"preventDuplicates" : false,
+					"onclick" : null,
+					"showDuration" : "100",
+					"hideDuration" : "1000",
+					"timeOut" : "1500",
+					"extendedTimeOut" : "1000",
+					"showEasing" : "swing",
+					"hideEasing" : "linear",
+					"showMethod" : "fadeIn",
+					"hideMethod" : "fadeOut"
+				}
+				toastr.warning('로그인이 실패하였습니다');
+			}
+		});
+		function addEmail(email){
+			console.log(email+"확인해야함");
+				$.ajax({
+					url : "IsIdCheck",
+					type : "post",
+					data : {
+						"user_email" : email;
+					},
+					dataType : "text",
+					success : function(result) {
+						if (result === 'false') {
+							alert("이미 있는 이메일");
+							session.setAttribute("user_email",email);
+							location.href = "/KakaoLogin";
+						} else {
+							session.setAttriubute("user_email",email);
+							session.setAttriubute("user_type", 2);
+							location.href = "registerForm";
+							//겟매핑 이메일가져와서 레지스터폼으로넘기기
+
+						}
+					}
+				});
+		}
+	</script>
 
 
 </body>

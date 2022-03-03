@@ -48,6 +48,10 @@ body {
 	background-color: #e4932b;
 	border: none;
 }
+#mul{
+	background-color: #e4932b;
+	border: none;
+}
 
 .login .form-control {
 	position: relative;
@@ -90,7 +94,7 @@ a {
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<form action="insertDevForm" onsubmit="return formCheck()"
-			method="post">
+			method="post" enctype="multipart/form-data">
 
 			<div class="card-body">
 				<span><label>자격증</label><input id="cert_name" type="text"
@@ -101,8 +105,8 @@ a {
 
 				</ul>
 				<BR>
-				<span><label>취득일</label><input id="date" type="date"
-					name="date" onchange="fnc()" class="form-control"
+				<span><label>취득일</label><input id="cert_day" type="text"
+					name="cert_day" class="form-control"
 					placeholder="내용을 입력하세요" autofocus required></span>
 				<button type="button" onclick="addDay()" id="addCert">추가</button>
 				<ul id="certDay">
@@ -110,9 +114,10 @@ a {
 				</ul>
 				<BR>
 				<label>경력</label><input type="number" class="form-control"
-					id="spinner" name="value"><BR> <label>첨부파일</label><input
-					type="password" name="pw1" id="pw1" class="form-control" required><br>
-				<br /> <input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+					id="spinner" name="value"><BR> <label>첨부파일</label>
+					<input type="file" id="mul" name="mul" class="btn btn-lg btn-primary btn-block"><br>
+				
+				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
 					type="submit" value="등록하기" onclick=""> <input type="reset"
 					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
 					onclick="cancel()">
@@ -134,10 +139,7 @@ a {
 			}
 
 		}
-		function fnc() {
-			var di = document.getElementById("date");
-			console.log(di.value);
-		}
+	
 
 		var close = document.getElementsByClassName("close");
 
@@ -170,31 +172,23 @@ a {
 			}
 
 		}
-		var closed = document.getElementsByClassName("closed");
-
-		for (var i = 0; i < closed.length; i++) {
-			closed[i].onclick = function() {
-				var div1 = this.parentElement;
-				div1.style.display = "none";
-			}
-		}
 		function addDay() {
 			var a = document.createElement("span");
 			var r = document.createElement("li");
-			a.innerHTML = `<input id="date" name="date" type="hidden" value = "\${date.value}">`
-			document.getElementsByClassName("card-body")[1].insertBefore(a,addCert);
-			r.innerHTML = date.value
-			certDay.append(li)
+			a.innerHTML = `<input id="date" name="cert_day" type="hidden" value = "\${cert_day.value}">`
+			document.getElementsByClassName("card-body")[0].insertBefore(a,addCert);
+			r.innerHTML = cert_day.value
+			certDay.append(r)
 			console.log("addDay");
 			var span = document.createElement("span");
 			var txt = document.createTextNode("\u00D7");
-			span.className = "closed";
+			span.className = "close";
 			span.appendChild(txt);
-			li.appendChild(span);
-			for (i = 0; i < closed.length; i++) {
+			r.appendChild(span);
+			for (i = 0; i < close.length; i++) {
 				close[i].onclick = function() {
-					var div1 = this.parentElement;
-					div1.style.display = "none";
+					var div = this.parentElement;
+					div.style.display = "none";
 				}
 			}
 		}

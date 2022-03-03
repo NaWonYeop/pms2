@@ -83,7 +83,7 @@
 	<!-- 회원탈퇴 -->
 	<delete id="userDelete"
 		parameterType="co.test.prj.user.service.UserVO">
-		DELETE FROM "user" WHERE USER_PWD = #{user_pwd}
+		DELETE FROM "user" WHERE user_id = #{user_id}
 	</delete>
 	
 	<select id="jobSelect" resultType="co.test.prj.user.service.UserVO">

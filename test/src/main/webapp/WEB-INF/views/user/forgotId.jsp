@@ -11,7 +11,10 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    
+    <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>아이디 찾기</title>
@@ -84,7 +87,7 @@
 		<div class="card-body">
       <form action="searchId" class="form-signin" method="POST">
         <input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름" required><BR>
-        <input type="text" name="user_tel" id="user_tel" class="form-control" placeholder="연락처" required><br>
+        <input type="text" pattern="[0-9]+" name="user_tel" id="user_tel" class="form-control" placeholder="연락처" required><br>
         <p class="checks" id="checks">${findpw_checkf}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
       </form>
@@ -97,39 +100,5 @@
 	</div>
   
   </body>
-    <script type="text/javascript">
-
-	
-	  	//아이디 정규식
-		var idJ = /^[a-z0-9]{5,20}$/;
-		
-  		$("#member_id").focusout(function(){
-	     if($('#member_id').val() == ""){
-	   		$('#checks').text('아이디를 입력해주세요.');
-	   	  	$('#checks').css('color', 'red');
-	     }
-	     });
-  		
-  		$("#member_id").focusout(function(){
-  			if(!idJ.test($(this).val())){
-  			$('#checks').text('5~20자의 영문 소문자, 숫자만 사용가능합니다');
-  			$('#checks').css('color', 'red');
-  		}
-  		 });
-  		
-  		$("#user_name").focusout(function(){
-	     if($('#user_name').val() == ""){
-	   		$('#checks').text('이름을 입력해주세요.');
-	   	  	$('#checks').css('color', 'red');
-	     }
-	     });
-	     
-  		$("#user_tel").focusout(function(){
-	     if($('#user_tel').val() == ""){
-	   		$('#checks').text('연락처를 입력해주세요');
-	   	  	$('#checks').css('color', 'red');
-	     }
-	     });
   
-  </script>
 </html>

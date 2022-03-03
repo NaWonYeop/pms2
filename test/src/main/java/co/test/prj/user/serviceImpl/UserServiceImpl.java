@@ -72,9 +72,11 @@ public class UserServiceImpl implements UserService {
 		return map.updatePwd(user);
 	}
 
+
 	@Override
 	public UserVO jobSelect(UserVO user) {
 		return map.jobSelect(user);
 	}
+
 
 }
