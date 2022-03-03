@@ -103,11 +103,6 @@ a {
 
 </body>
 <script type="text/javascript">
-	$(function() {
-		$("#btn-Yes").click(function() {
-			location.href = '/user/searchPassword';
-		});
-	});
 
 	//아이디 정규식
 	var idJ = /^[a-z0-9]{5,20}$/;

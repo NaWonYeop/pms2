@@ -32,7 +32,7 @@
 <script src="resources/css/bootstrap.css"></script>
 <script src="resources/css/bootstrap.min.css"></script>
 <script src="resources/js/bootstrap.js"></script>
-<script src="resources/js/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- popper js -->
 <script src="resources/main/js/popper.min.js"></script>
 <!-- bootstrap js -->

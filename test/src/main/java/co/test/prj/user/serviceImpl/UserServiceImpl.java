@@ -72,4 +72,5 @@ public class UserServiceImpl implements UserService {
 		return map.updatePwd(user);
 	}
 
+
 }

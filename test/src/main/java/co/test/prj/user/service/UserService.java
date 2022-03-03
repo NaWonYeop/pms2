@@ -25,6 +25,8 @@ public interface UserService {
 	
 	int updatePwd(UserVO user);
 	
+	
+	
 
 	
 	
