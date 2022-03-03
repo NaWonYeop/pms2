@@ -3,8 +3,6 @@ package co.test.prj.team.service;
 import java.util.List;
 
 public interface TeamMapper {
-	List<TeamVO> teamSelectList();
-
 	List<TeamVO> teamSelect(TeamVO team);
 	
 	List<TeamVO> myProjectList(TeamVO team);

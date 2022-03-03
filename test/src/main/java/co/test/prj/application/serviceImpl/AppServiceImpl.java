@@ -14,12 +14,6 @@ public class AppServiceImpl implements AppService {
 
 	@Autowired
 	private AppMapper map;
-	
-	@Override
-	public List<AppVO> appSelectList() {
-		// TODO Auto-generated method stub
-		return map.appSelectList();
-	}
 
 	@Override
 	public List<AppVO> appSelect(AppVO app) {

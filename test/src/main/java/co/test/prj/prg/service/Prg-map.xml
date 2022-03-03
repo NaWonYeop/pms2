@@ -2,64 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.prg.service.PrgMapper">
 
-	<select id="prgSelectNullList"
+	<select id="prgSelectList"
 		resultType="co.test.prj.prg.service.PrgVO">
-		SELECT * FROM PROGRESS
-		WHERE prj_id = #{prj_id} and prg_manager IS NULL
+		SELECT LEVEL , p.*
+		FROM progress p
+		WHERE prj_id = #{prj_id}
+		START WITH prg_manager IS NULL
+		CONNECT BY PRIOR prg_id = prg_manager
 	</select>
 
-	<select id="prgSelectList" resultType="co.test.prj.prg.service.PrgVO">
-		SELECT * FROM PROGRESS
-		WHERE prj_id = #{prj_id} and prg_manager IS NOT NULL
-	</select>
-
-	<!-- 중분류 입력 -->
-	<insert id="midCtgInsert"
+	<insert id="prgInsert"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		<selectKey keyProperty="prg_id" resultType="int"
 			order="BEFORE">
 			SELECT NVL(MAX(PRG_ID) + 1, 1) AS ID FROM PROGRESS
 		</selectKey>
-		INSERT INTO PROGRESS (PRG_ID, USER_ID, PRJ_ID, PRG_TTL, PRG_ED,
-		PRG_CMP_PROP, PRG_DEPT)
-		VALUES (#{user_id}, #{prj_id}, #{prg_id},
-		#{prg_ttl}, #{prg_ed}, #{prg_cmp_prop}, #{prg_dept})
+		<!-- manager숫자가 있는 경우 -->
+		<if test="prg_manager != null">
+			INSERT INTO PROGRESS (PRG_ID,MASTER_ID,PRJ_ID,
+			PRG_CONTENT,
+			PRG_MANAGER, PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
+			VALUES (#{prg_id}, #{master_id}, #{prj_id}, #{prg_content},
+			#{prg_manager},
+			#{prg_str}, #{prg_ed}, #{prg_user}, #{prg_cmp_prop})
+		</if>
+		<!-- manager숫자가 없는 경우 -->
+		<if test="prg_manager == null">
+			INSERT INTO PROGRESS (PRG_ID,MASTER_ID, PRJ_ID,
+			PRG_CONTENT,
+			PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
+			VALUES
+			(#{prg_id}, #{master_id}, #{prj_id}, #{prg_content},
+			#{prg_str},
+			#{prg_ed}, #{prg_user}, #{prg_cmp_prop})
+		</if>
 	</insert>
 
-	<!-- 소분류 입력 -->
-	<insert id="smlCtgInsert"
-		parameterType="co.test.prj.prg.service.PrgVO">
-		<selectKey keyProperty="prg_id" resultType="int"
-			order="BEFORE">
-			SELECT NVL(MAX(PRG_ID) + 1, 1) AS ID FROM PROGRESS
-		</selectKey>
-		INSERT INTO PROGRESS (USER_ID, PRJ_ID, PRG_ID, PRG_TTL, PRG_CLSFC,
-		PRG_ED, PRG_CMP_PROP, PRG_DEPT)
-		VALUES (#{user_id}, #{prj_id},
-		#{prg_id}, #{prg_ttl}, #{prg_clsfc}, #{prg_ed}, #{prg_cmp_prop},
-		#{prg_dept})
-	</insert>
 
-	<!-- 내용수정 -->
-	<update id="ctgUpdate"
+	<update id="prgUpdate"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		UPDATE PROGRESS
 		<set>
-			<if test="prg_ttl != null"> PRG_TTL = #{prg_ttl},</if>
-			<if test="prg_ttl != null"> PRG_CLSFC = #{prg_clsfc},</if>
+			<if test="prg_ttl != null"> PRG_CONTENT = #{prg_content},</if>
+			<if test="prg_ttl != null"> PRG_MANAGER = #{prg_manager},</if>
 			<if test="prg_ttl != null"> PRG_STR = #{prg_str},</if>
 			<if test="prg_ttl != null"> PRG_ED = #{prg_ed},</if>
-			<if test="prg_ttl != null"> PRG_CHR = #{prg_chr},</if>
-			<if test="prg_ttl != null"> PRG_CMP_PROP = #{prg_cmp_prop},</if>
-			<if test="prg_ttl != null"> PRG_DEPT = #{prg_dept}</if>
+			<if test="prg_ttl != null"> PRG_USER = #{prg_user},</if>
+			<if test="prg_ttl != null"> PRG_CMP_PROP = #{prg_com_prop},</if>
 		</set>
-		WHERE prg_id = #{prg_id} AND prj_id = #{prj_id}
+		WHERE prg_id = #{prg_id}
 	</update>
 
-	<delete id="ctgDelete"
+	<delete id="prgDelete"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		DELETE FROM PROGRESS
-		WHERE prg_id = #{prg_id} AND
+		WHERE prg_id = #{prg_id}
 	</delete>
 
 

@@ -3,7 +3,7 @@ package co.test.prj.team.service;
 import lombok.Data;
 
 @Data
-public class PrjVO {
+public class MyPrjVO {
 	private int prj_id;
 	private int master_id;
 }
