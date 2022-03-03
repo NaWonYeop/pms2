@@ -20,7 +20,8 @@
 	</insert>
 	
 	<delete id="rewardDelete" parameterType="co.test.prj.reward.service.RewardVO">
-		
+		DELETE FROM REWARD 
+	 	WHERE REWARD_ID = #{reward_id}
 	</delete>
 
 </mapper>

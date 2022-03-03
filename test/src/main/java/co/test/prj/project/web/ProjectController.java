@@ -1,6 +1,7 @@
 package co.test.prj.project.web;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.test.prj.comtf.service.ComtfService;
@@ -33,7 +37,11 @@ public class ProjectController {
 	}
 	
 	@PostMapping("/projectInsert")
-	public String projectInsert (@RequestParam("mul") MultipartFile multi, ProjectVO project, ComtfVO comtf, HttpSession session, HttpServletRequest hreq) {
+	public String projectInsert (
+			@RequestParam("mul") MultipartFile multi, 
+			ProjectVO project, ComtfVO comtf, 
+			HttpSession session, 
+			HttpServletRequest hreq) {
 		System.out.println("인서트 되냐?");
 		
 		int pId = projectDao.projectMaxPId();
@@ -92,6 +100,8 @@ public class ProjectController {
 		} else {
 			System.out.println("펀딩하면");
 			
+			//session 말고 다른방법은????? RedirectAttributes ~ addFlashAttribute 제외
+			
 			session.setAttribute("sessionMId", project.getMaster_id());
 			session.setAttribute("sessionPId", pId);
 			
@@ -102,5 +112,28 @@ public class ProjectController {
 		
 		
 	}
+	
+	//우선 검색창 연습으로 만드는곳
+	@RequestMapping("/project")
+	private String project(Model model) {
+		
+		return "project/project";
+	}
+	
+	@GetMapping("/projectSerchList")
+	@ResponseBody
+	private List<ProjectVO> projectSerchList(@RequestParam("type") String type, @RequestParam("keyword") String keyword, ProjectVO project){
+		System.out.println("검색 들어오는곳");
+		String gettype = type;
+		String getkeyword = keyword;
+		System.out.println("type : "+gettype +", keyword : "+getkeyword);
+		project.setType(gettype);
+		project.setKeyword(getkeyword);
+		
+		
+		return null;
+	}
+	
+	
 
 }

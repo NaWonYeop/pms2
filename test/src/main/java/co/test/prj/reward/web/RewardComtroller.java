@@ -16,9 +16,13 @@ public class RewardComtroller {
 	@Autowired
 	private RewardService rewardDao;
 	
-	
+	//리워드 등록 폼 
 	@RequestMapping("/rewardInsertForm")
 	public String rewardInsertForm(Model model, HttpSession session, RewardVO reward) {
+		//프로젝트 등록시 값을 가져옴
+		
+		//나중에 프로젝트 상세페이지에 리워드보여줄때도 들고오게 할것
+		
 		session.getAttribute("sessionMId");
 		session.getAttribute("sessionPId");
 		
@@ -34,10 +38,19 @@ public class RewardComtroller {
 	}
 	
 	@RequestMapping("/rewardInsert")
-	public String rewardInsert(Model model, RewardVO reward) {
+	public String rewardInsert(RewardVO reward) {
 		System.out.println("리워드 등록");
 		
-		/////////////////////여기부터 하면됨!!!!!!!!!!!!!
+		rewardDao.rewardInsert(reward);
+		
+		return "redirect:/rewardInsertForm";
+	}
+	
+	@RequestMapping("/rewardDelete")
+	public String rewardDelete(RewardVO reward) {
+		System.out.println("리워드 삭제");
+		
+		rewardDao.rewardDelete(reward);
 		
 		return "redirect:/rewardInsertForm";
 	}

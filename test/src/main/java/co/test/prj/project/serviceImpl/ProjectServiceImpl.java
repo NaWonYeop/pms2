@@ -45,6 +45,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.projectMaxPId();
 	}
 
+	@Override
+	public List<ProjectVO> projectSerchList(ProjectVO project) {
+		return map.projectSerchList(project);
+	}
+
 	
 
 }
