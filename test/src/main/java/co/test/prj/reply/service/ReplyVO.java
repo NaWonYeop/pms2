@@ -12,4 +12,6 @@ public class ReplyVO
 	private String rpl_cnt;
 	private Date rpl_reg_date;
 	
+	private String user_name;
+	private String rpl_date_string;
 }

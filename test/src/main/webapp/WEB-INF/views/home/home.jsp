@@ -132,7 +132,9 @@
                         <br>
                         <ul class="blog-info-link">
                            <li><i class="far fa-comments"></i> 현재 펀딩금액</a></li>
-                           <li><h3 stlye="font-weight: bold;"><span class="counter" style="font-size:25px;">100,00025</span>원</h3></li>
+                         
+                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">100,00025</span>원 </div></h3></li>
+                          
                         </ul>
                      </div>
                   </article>

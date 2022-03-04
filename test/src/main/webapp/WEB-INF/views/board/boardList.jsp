@@ -73,7 +73,7 @@
 								</c:choose>
 
 							</div>
-							<div class="percentage"><a href="freeboardSelect?id=${free.brd_id }">${free.brd_ttl }</a></div>
+							<div class="percentage"><a href="freeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a></div>
 						
 									<div class="visit">${free.user_name }</div>
 					

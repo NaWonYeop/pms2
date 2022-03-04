@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.reply.service.ReplyMapper">
 	<select id="replyProList" resultType="co.test.prj.reply.service.ReplyVO" parameterType="co.test.prj.reply.service.ReplyVO">
-	SELECT * FROM REPLY WHERE brd_id= #{brd_id}
+	SELECT RPL_ID,R.USER_ID,BRD_ID,RPL_CNT,RPL_REG_DATE,USER_NAME,TO_CHAR(RPL_REG_DATE,'YYYY-MM-DD') AS RPL_DATE_STRING
+	FROM REPLY R,"user" U
+	WHERE R.USER_ID=U.USER_ID AND R.BRD_ID=#{brd_id}
 	</select>
 
 	<insert id="replyInsert">

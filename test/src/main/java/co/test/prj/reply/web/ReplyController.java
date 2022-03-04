@@ -23,11 +23,10 @@ public class ReplyController
 	//목록불러오기
 	@RequestMapping("replyList")
 	@ResponseBody
-	public List<ReplyVO> appSelectList(int brd_id,HttpSession session, Model model) {
-		System.out.println(brd_id);
-		ReplyVO vo=new ReplyVO();
-		vo.setBrd_id(brd_id);
+	public List<ReplyVO> appSelectList(ReplyVO vo,HttpSession session, Model model) {
+		
 		List<ReplyVO> list = replyDao.replyProList(vo);
+		System.out.println(list);
 		return list;
 	}
 	//인서트
@@ -35,7 +34,7 @@ public class ReplyController
 	public String rplInsert(ReplyVO vo)
 	{
 		replyDao.replyInsert(vo);
-		return "redirect:/freeboardSelect?id="+vo.getBrd_id();
+		return "redirect:/freeboardSelect?brd_id="+vo.getBrd_id();
 	}
 	//단건삭제
 	@RequestMapping("rplDelete")

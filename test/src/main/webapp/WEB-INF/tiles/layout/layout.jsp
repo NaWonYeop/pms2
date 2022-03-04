@@ -11,6 +11,7 @@
 
 
 <link rel="icon" href="resources/main/img/favicon.png">
+<link rel="stylesheet" href="resources/main/css/style.css">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="resources/main/css/bootstrap.min.css">
 <!-- animate CSS -->
@@ -26,13 +27,14 @@
 <!-- swiper CSS -->
 <link rel="stylesheet" href="resources/main/css/slick.css">
 <!-- style CSS -->
-<link rel="stylesheet" href="resources/main/css/style.css">
-<link rel="stylesheet" href="resources/main/css/nice-select.css">
 
-<script src="resources/css/bootstrap.css"></script>
-<script src="resources/css/bootstrap.min.css"></script>
-<script src="resources/js/bootstrap.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <link rel="stylesheet" href="resources/main/css/nice-select.css">
+
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
 <!-- popper js -->
 <script src="resources/main/js/popper.min.js"></script>
 <!-- bootstrap js -->

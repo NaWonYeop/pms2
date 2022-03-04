@@ -31,17 +31,11 @@ public class BoardController
 	}
 	//보드단건
 	@RequestMapping("/freeboardSelect")
-	public String freeboardSelect(Model model,int id) {
-		BoardVO vo=new BoardVO();
-		vo.setBrd_id(id);
-		vo=boardDao.boardSelect(vo);
+	public String freeboardSelect(BoardVO vo,Model model) {
+	
+		vo=boardDao.freeSelect(vo);
 		
-		List<UserVO> lis=userDao.userSelectList();
-		List<BoardVO> list=boardDao.boardFreeList();
-		
-		model.addAttribute("frees",list);
 		model.addAttribute("board",vo);
-		model.addAttribute("users",lis);
 		return "board/boardSelect";
 	}
 	//인서트 화면
@@ -63,14 +57,13 @@ public class BoardController
 	}
 	//업데이트 화면
 	@RequestMapping("/freeboardUpdateform")
-	public String freeboardUpdateform(int brd_id,Model model,HttpSession session)
+	public String freeboardUpdateform(BoardVO vo,Model model,HttpSession session)
 	{
 		if(session.getAttribute("sessionUser")==null)
 		{
 			return "redirect:/freeBoard";
 		}
-		BoardVO vo=new BoardVO();
-		vo.setBrd_id(brd_id);
+		
 		vo=boardDao.boardSelect(vo);
 		
 		model.addAttribute("board",vo);
@@ -85,14 +78,13 @@ public class BoardController
 	}
 	//삭제
 	@RequestMapping("/freeboardDelete")
-	public String freeboardDelete(int brd_id,Model model,HttpSession session)
+	public String freeboardDelete(BoardVO vo,Model model,HttpSession session)
 	{
 		if(session.getAttribute("sessionUser")==null)
 		{
 			return "redirect:/freeBoard";
 		}
-		BoardVO vo=new BoardVO();
-		vo.setBrd_id(brd_id);
+
 		boardDao.boardDelete(vo);
 		return "redirect:/freeBoard";
 	}

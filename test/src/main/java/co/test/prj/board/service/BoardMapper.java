@@ -8,6 +8,8 @@ public interface BoardMapper
 
 	List<BoardVO> boardFreeList();
 
+	BoardVO freeSelect(BoardVO vo);	
+	
 	BoardVO boardSelect(BoardVO vo);
 
 	int boardInsert(BoardVO vo);

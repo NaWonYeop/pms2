@@ -16,6 +16,13 @@
 	SELECT * FROM BOARD WHERE BRD_ID= #{brd_id}
 	</select>
 	
+	<select id="freeSelect" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
+	SELECT B.BRD_ID,B.BRD_TTL,B.BRD_CNT,B.USER_ID,U.USER_NAME
+	FROM BOARD B,"user" U 
+	WHERE B.PRJ_ID IS NULL AND B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id}
+	</select>
+	
+	
 	<insert id="boardInsert" parameterType="co.test.prj.board.service.BoardVO">
 		<selectKey keyProperty="brd_id" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(BRD_ID) + 1, 1) AS ID FROM BOARD

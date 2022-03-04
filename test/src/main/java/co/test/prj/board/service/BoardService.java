@@ -11,6 +11,8 @@ public interface BoardService
 	
 	BoardVO boardSelect(BoardVO vo);
 	
+	BoardVO freeSelect(BoardVO vo);
+	
 	int boardInsert(BoardVO vo);
 
 	int boardUpdate(BoardVO vo);

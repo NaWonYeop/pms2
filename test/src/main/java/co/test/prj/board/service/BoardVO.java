@@ -15,8 +15,4 @@ public class BoardVO
 	private char brd_ntc_prop;
 	
 	private String user_name;
-	private String prev_id;
-	private String next_id;
-	private String prev_name;
-	private String next_name;
 }

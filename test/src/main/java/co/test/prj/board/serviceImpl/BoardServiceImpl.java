@@ -57,4 +57,11 @@ public class BoardServiceImpl implements BoardService
 		return map.boardFreeList();
 	}
 
+	@Override
+	public BoardVO freeSelect(BoardVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.freeSelect(vo);
+	}
+
 }

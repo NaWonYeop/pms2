@@ -36,12 +36,9 @@
 						<div class="blog_details">
 							<h2>${board.brd_ttl }</h2>
 							<ul class="blog-info-link mt-3 mb-4">
-								<li><i class="far fa-user"></i> <c:forEach var="user"
-										items="${users }">
-										<c:if test="${user.user_id eq board.user_id }">
-									${user.user_name }
-								</c:if>
-									</c:forEach></li>
+								<li><i class="far fa-user"></i> 
+									${board.user_name }
+									</li>
 								<li><i class="far fa-comments"></i></li>
 							</ul>
 							<h3>${board.brd_cnt }</h3>
@@ -62,37 +59,7 @@
 							</ul>
 						</div>
 						<div class="navigation-area">
-							<div class="row">
-								<div
-									class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-
-
-									<div class="detials">
-										<p>Prev Post</p>
-										<a href="freeboardSelect?id=${board.brd_id-1 }"> <c:forEach
-												var="free" items="${frees }">
-												<c:if test="${free.brd_id eq board.brd_id-1 }">
-													<h4>${free.brd_ttl }</h4>
-												</c:if>
-											</c:forEach>
-										</a>
-									</div>
-								</div>
-								<div
-									class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-									<div class="detials">
-										<p>Next Post</p>
-										<a href="freeboardSelect?id=${board.brd_id+1 }"> <c:forEach
-												var="free" items="${frees }">
-												<c:if test="${free.brd_id eq board.brd_id+1 }">
-													<h4>${free.brd_ttl }</h4>
-												</c:if>
-											</c:forEach>
-										</a>
-									</div>
-
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -146,14 +113,10 @@
 					brd_id : "${board.brd_id}"
 				}
 			}).done(function(result) {
-				for (var i = 0; i < result.length; i++) {
-					<c:forEach var="user" items="${users }">
-						if(${user.user_id} == result[i].user_id)
-						{
-							var res="${user.user_name}"
-						}
-					</c:forEach>
+				for (var i = 0; i < result.length; i++) {	
+					var date=result[i].rpl_reg_date;
 						
+
 						$(".comin").append(`
 								<div class="single-comment justify-content-between d-flex">
 								<div class="user justify-content-between d-flex">
@@ -161,11 +124,13 @@
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
 										<div class="d-flex justify-content-between ">
 											<div class="d-flex align-items-center">
-												<h4 class="idd" name2="\${i}" value="\${result[i].rpl_id}" name="\${result[i].user_id}">
-													\${res}
+												<h4 class="idd" value="\${result[i].rpl_id}" name="\${result[i].user_id}">
+													\${result[i].user_name}
 												</h4>
 												<p class="date">
-													\${result[i].rpl_reg_date}
+												\${result[i].rpl_date_string}
+												
+												
 												</p>
 											</div>
 										</div>
@@ -186,6 +151,7 @@
 			
 			);//done끝
 		});//ajax끝
+		
 		
 	</script>
 </body>
