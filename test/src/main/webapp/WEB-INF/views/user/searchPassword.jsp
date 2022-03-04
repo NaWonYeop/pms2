@@ -12,8 +12,7 @@
 					<form class="form-contact contact_form" action="home" method="post"
 						id="contactForm" novalidate="novalidate">
 						<div class="row justify-content-center">
-							<h4>임시 비밀번호를 발송하였습니다</h4>
-
+							<h4>${passwordFail }</h4>
 						</div>
 						<div class="col-sm-12 text-center">
 

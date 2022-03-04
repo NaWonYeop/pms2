@@ -1,6 +1,5 @@
 package co.test.prj.user.web;
 
-
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,21 +8,19 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import javax.inject.Inject;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.test.prj.project.service.ProjectVO;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -32,10 +29,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userDao;
-
-	/*
-	 * @Inject BCryptPasswordEncoder pwdEncoder;
-	 */
+	
 
 	// 로그인폼
 	@RequestMapping("/loginForm")
@@ -49,38 +43,15 @@ public class UserController {
 		System.out.println(user);
 		user = userDao.userSelect(user);
 		if (user != null) {
-
-			
 			user = userDao.userSelect(user);
-			
-			
-			session.setAttribute("sessionUser",user);
-			return "redirect:/home";
-		}else {
-			model.addAttribute("loginFail", "1");
-
-			return "user/loginForm";
-		}
-	}
-	@PostMapping("/KakaoLogin")
-	public String KakaoLogin(HttpSession session, HttpServletRequest request, Model model) {
-		UserVO user=new UserVO();
-		user.setUser_email((String)session.getAttribute("user_email"));
-		System.out.println(user);
-		user = userDao.userSelect(user);
-		if (user != null) {
-			session.setAttribute("user_id", user.getUser_id());
-			
-			session.setAttribute("user_name", user.getUser_name());
-			session.setAttribute("user_tel", user.getUser_tel());
 			session.setAttribute("sessionUser", user);
 			return "redirect:/home";
 		} else {
 			model.addAttribute("loginFail", "1");
+
 			return "user/loginForm";
 		}
 	}
-
 
 	// 로그아웃
 	@RequestMapping("logout")
@@ -92,14 +63,35 @@ public class UserController {
 	// 아이디 중복체크
 	@PostMapping("IsIdCheck")
 	@ResponseBody
-	public boolean IsIdCheck(String user_email) {
+	public String IsIdCheck(String user_email, HttpSession session) {
 		System.out.println(user_email);
-		return userDao.isIdCheck(user_email);
+		String location = null;
+		if (!userDao.isIdCheck(user_email)) {
+			session.setAttribute("user_email", user_email);
+			location = "loginForm";
+		} else {
+			session.setAttribute("user_email", user_email);
+			session.setAttribute("user_type", 2);
+			location = "registerForm";
+			// 겟매핑 이메일가져와서 레지스터폼으로넘기기
+
+		}
+
+		return location;
+
 	}
 
 	// 비밀번호 찾기폼
 	@RequestMapping("/forgotPassword")
 	public String forgotPassword() {
+		return "user/forgotPassword";
+	}
+
+	@RequestMapping("/forgotPassword2")
+	public String forgotPassword(@RequestParam("passwordFail") String fail, Model model) {
+		if (fail != null) {
+			model.addAttribute("passwordFail", "1");
+		}
 		return "user/forgotPassword";
 	}
 
@@ -125,56 +117,72 @@ public class UserController {
 
 	// 찾은 비밀번호 결과창
 	@RequestMapping("/searchPassword")
-	public String searchPassword() {
-	      try {
-	          
-	       //int index = username.indexOf("@");
-	       //int indexPw = password.indexOf(",");
-	       String id="";//id
-	       String pwd="";//비번 입력해야됨
-	       String host = "smtp.naver.com";
-	       //네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
-	       //네이버 이메일 비밀번호를 기재합니다.
-	       int port=465;
-	       // 메일 내용
-	       //메일을 발송할 이메일 주소를 기재해 줍니다.
-	       Properties props = System.getProperties();
-	       props.put("mail.smtp.host", host);
-	       props.put("mail.smtp.port", port);
-	       props.put("mail.smtp.auth", "true");
-	       props.put("mail.smtp.ssl.enable", "true");
-	       props.put("mail.smtp.ssl.trust", host);
-	       props.put("mail.debug","true");
-			/*
-			 * System.out.println(password); System.out.println(username.substring(0,
-			 * index));
-			 */
-	       Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-	    	   
-	          //String un=username.substring(0, index); 
-	         // String pw=password.substring(0,indexPw);
-	          protected PasswordAuthentication getPasswordAuthentication() {
-	             return new PasswordAuthentication(id, pwd); 
-	             } 
-	          });
-	       session.setDebug(true);
-	       //for debug
-	       Message mimeMessage = new MimeMessage(session);
-	       mimeMessage.setFrom(new InternetAddress(id+"@naver.com"));//보내는사람 주소
-	       mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress());//받는사람 주소
-	       mimeMessage.setSubject("제목!!!!!");
-	       mimeMessage.setText("내용!1");
-	       Transport.send(mimeMessage);
-	       
-	       }catch(Exception e) {
-	          e.printStackTrace();
-	       }
+	public String searchPassword(UserVO user, Model model, RedirectAttributes re) {
+		user = userDao.searchPwd(user);
+		System.out.println(user);
+		if (user != null) {
+			String email = user.getUser_email();
+			String pw = "";
+			for (int i = 0; i < 6; i++) {
+				pw += (char) ((Math.random() * 26) + 97);
+			}
+			user.setUser_pwd(pw);
+			userDao.userUpdate(user);
+			try {
 
-	       return "redirect:/home";
+				// int index = username.indexOf("@");
+				// int indexPw = password.indexOf(",");
+				String id = "tyi020382";// id
+				String pwd = "dkskalclrptsp12!";// 비번 입력해야됨
+				String host = "smtp.naver.com";
+				// 네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
+				// 네이버 이메일 비밀번호를 기재합니다.
+				int port = 465;
+				// 메일 내용
+				// 메일을 발송할 이메일 주소를 기재해 줍니다.
+				Properties props = System.getProperties();
+				props.put("mail.smtp.host", host);
+				props.put("mail.smtp.port", port);
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.ssl.enable", "true");
+				props.put("mail.smtp.ssl.trust", host);
+				props.put("mail.debug", "true");
+				/*
+				 * System.out.println(password); System.out.println(username.substring(0,
+				 * index));
+				 */
+				Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 
-		
+					// String un=username.substring(0, index);
+					// String pw=password.substring(0,indexPw);
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(id, pwd);
+					}
+				});
+				session.setDebug(true);
+				// for debug
+				Message mimeMessage = new MimeMessage(session);
+				mimeMessage.setFrom(new InternetAddress(id + "@naver.com"));// 보내는사람 주소
+				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));// 받는사람 주소
+				mimeMessage.setSubject("임시비밀번호입니다");
+				mimeMessage.setText(email + "님의 임시비밀번호는" + pw + "입니다");
+				Transport.send(mimeMessage);
 
-		
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("passwordFail", "임시 비밀번호를 발송하였습니다");
+			return "redirect:/searchPassword2";
+		} else {
+			re.addAttribute("passwordFail", "1");
+			return "redirect:/forgotPassword2";
+		}
+
+	}
+
+	@RequestMapping("/searchPassword2")
+	public String searchPassword2() {
+		return "user/searchPassword";
 	}
 
 	// 개발자 등록
@@ -186,8 +194,8 @@ public class UserController {
 
 	// 마이페이지
 	@RequestMapping("/mypage")
-	public String mypage() {
-
+	public String mypage(HttpSession session ) {
+		
 		return "user/mypage";
 	}
 

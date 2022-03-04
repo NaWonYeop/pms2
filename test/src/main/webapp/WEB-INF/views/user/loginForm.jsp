@@ -94,12 +94,11 @@ a {
 				<input type="password" name="user_pwd" id="user_pwd"
 					class="form-control" placeholder="비밀번호" required><br>
 				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="로 그 인"> <br> <a
+					type="submit" value="로 그 인"> <br>
+					 <a
 					href="javascript:void(0)" onclick="kakaoLogin();"
 					class="sign__logo"><img
-					src="resources/images/kakao_login_medium.png" alt=""></a> <a
-					href="javascript:void(0)" onclick="kakaoLogout();"
-					class="sign__logo">로그아웃</a>
+					src="resources/images/kakao_login_medium.png" alt=""></a>
 			</div>
 		</form>
 
@@ -135,21 +134,6 @@ a {
 				},
 			})
 		}
-		//카카오로그아웃  
-		function kakaoLogout() {
-			if (Kakao.Auth.getAccessToken()) {
-				Kakao.API.request({
-					url : '/v1/user/unlink',
-					success : function(response) {
-						console.log(response)
-					},
-					fail : function(error) {
-						console.log(error)
-					},
-				})
-				Kakao.Auth.setAccessToken(undefined)
-			}
-		}
 
 		$(document).ready(function() {
 			console.log("로그인 결과");
@@ -162,7 +146,7 @@ a {
 					"debug" : false,
 					"newestOnTop" : false,
 					"progressBar" : true,
-					"positionClass" : "toast-top-right",
+					"positionClass" : "toast-top-center",
 					"preventDuplicates" : false,
 					"onclick" : null,
 					"showDuration" : "100",
@@ -179,27 +163,23 @@ a {
 		});
 		function addEmail(email){
 			console.log(email+"확인해야함");
-				$.ajax({
+			 $.ajax({
 					url : "IsIdCheck",
 					type : "post",
 					data : {
-						"user_email" : email;
+						"user_email" : email
 					},
 					dataType : "text",
-					success : function(result) {
-						if (result === 'false') {
-							alert("이미 있는 이메일");
-							session.setAttribute("user_email",email);
-							location.href = "/KakaoLogin";
-						} else {
-							session.setAttriubute("user_email",email);
-							session.setAttriubute("user_type", 2);
-							location.href = "registerForm";
-							//겟매핑 이메일가져와서 레지스터폼으로넘기기
-
-						}
+					success:function(result){
+						
+						location.href = result;
+					},
+					error:function(reject){
+						cosole.log(reject);
 					}
+						
 				});
+
 		}
 	</script>
 

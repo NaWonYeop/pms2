@@ -78,5 +78,10 @@ public class UserServiceImpl implements UserService {
 		return map.jobSelect(user);
 	}
 
+	@Override
+	public UserVO MyProject(UserVO user) {
+		return map.MyProject(user);
+	}
 
+	
 }

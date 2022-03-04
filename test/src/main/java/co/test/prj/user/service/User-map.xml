@@ -19,7 +19,8 @@
 	<select id="searchPwd"
 		resultType="co.test.prj.user.service.UserVO"
 		parameterType="co.test.prj.user.service.UserVO">
-		select * from "user" where user_name = #{user_name} and user_email =
+		select * from "user" where user_name = #{user_name} and
+		user_email =
 		#{user_email}
 	</select>
 
@@ -54,7 +55,8 @@
 	<select id="userSearch"
 		parameterType="co.test.prj.user.service.UserVO"
 		resultType="co.test.prj.user.service.UserVO">
-		SELECT * FROM "user" WHERE USER_NAME = #{user_name} AND USER_TEL =
+		SELECT * FROM "user" WHERE USER_NAME = #{user_name} AND
+		USER_TEL =
 		#{user_tel}
 	</select>
 	<!-- 회원정보 수정 -->
@@ -72,7 +74,7 @@
 			<if test="user_job_cnt != null"> user_job_cnt = #{user_job_cnt}, </if>
 			<if test="user_type != null"> user_type = #{user_type}, </if>
 		</set>
-		WHERE USER_EMAIL =#{user_email}
+		WHERE USER_ID =#{user_id}
 	</update>
 	<!-- 비밀번호확인 -->
 	<select id="checkPwd"
@@ -85,14 +87,26 @@
 		parameterType="co.test.prj.user.service.UserVO">
 		DELETE FROM "user" WHERE user_id = #{user_id}
 	</delete>
-	
-	<select id="jobSelect" resultType="co.test.prj.user.service.UserVO">
+
+	<select id="jobSelect"
+		resultType="co.test.prj.user.service.UserVO">
 		SELECT * FROM "user" WHERE USER_ID = ${user_id}
-		<!-- select u.user_name, u.user_crr, u.user_job_ttl, u.user_job_cnt, 
-		(select avg(s.str_avg) from star s where u.user_id = s.user_id group by user_id)
-		from "user" u; -->
+		<!-- select u.user_name, u.user_crr, u.user_job_ttl, u.user_job_cnt, (select 
+			avg(s.str_avg) from star s where u.user_id = s.user_id group by user_id) 
+			from "user" u; -->
 	</select>
-	
+
+	<select id="MyProject"
+		resultType="co.test.prj.project.service.ProjectVO"
+		parameterType="co.test.prj.team.service.TeamVO">
+		SELECT DISTINCT PRJ_ID,PRJ_NAME,PRJ_ED
+		FROM PROJECT
+		WHERE PRJ_ID IN (SELECT DISTINCT PRJ_ID
+		FROM TEAM
+		WHERE USER_ID=#{user_id} OR MASTER_ID=#{master_id}) OR MASTER_ID = #{master_id}
+
+	</select>
+
 </mapper>
 
 	
