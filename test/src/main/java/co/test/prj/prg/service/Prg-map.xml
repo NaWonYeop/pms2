@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.prg.service.PrgMapper">
 
+	<!-- 계층형 조회 -->
 	<select id="prgSelectList"
 		resultType="co.test.prj.prg.service.PrgVO">
 		SELECT LEVEL , p.*
@@ -19,21 +20,21 @@
 		</selectKey>
 		<!-- manager숫자가 있는 경우 -->
 		<if test="prg_manager != null">
-			INSERT INTO PROGRESS (PRG_ID,MASTER_ID,PRJ_ID,
-			PRG_CONTENT,
-			PRG_MANAGER, PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
-			VALUES (#{prg_id}, #{master_id}, #{prj_id}, #{prg_content},
-			#{prg_manager},
-			#{prg_str}, #{prg_ed}, #{prg_user}, #{prg_cmp_prop})
+			INSERT INTO PROGRESS (PRG_ID, MASTER_ID, PRJ_ID,
+			PRG_CONTENT, PRG_MANAGER, PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
+			VALUES
+			(#{prg_id}, #{master_id}, #{prj_id},
+			#{prg_content},
+			#{prg_manager}, #{prg_str},
+			#{prg_ed}, #{prg_user}, #{prg_cmp_prop})
 		</if>
 		<!-- manager숫자가 없는 경우 -->
 		<if test="prg_manager == null">
-			INSERT INTO PROGRESS (PRG_ID,MASTER_ID, PRJ_ID,
-			PRG_CONTENT,
-			PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
+			INSERT INTO PROGRESS (PRG_ID, MASTER_ID,PRJ_ID,
+			PRG_CONTENT, PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
 			VALUES
-			(#{prg_id}, #{master_id}, #{prj_id}, #{prg_content},
-			#{prg_str},
+			(#{prg_id}, #{master_id}, #{prj_id},
+			#{prg_content}, #{prg_str},
 			#{prg_ed}, #{prg_user}, #{prg_cmp_prop})
 		</if>
 	</insert>
@@ -51,6 +52,19 @@
 			<if test="prg_ttl != null"> PRG_CMP_PROP = #{prg_com_prop},</if>
 		</set>
 		WHERE prg_id = #{prg_id}
+	</update>
+
+	<!-- 소분류 변경시키기 -->
+	<update id="smlUpdate"
+		parameterType="co.test.prj.prg.service.PrgVO">
+		<selectKey keyProperty="prg_manager" resultType="int"
+			order="BEFORE">
+			SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL
+		</selectKey>
+		UPDATE PROGRESS
+		SET prg_manager = #{prg_manager}
+		WHERE prg_id =
+		#{prg_id}
 	</update>
 
 	<delete id="prgDelete"

@@ -10,6 +10,7 @@
 			<div class="form-group">
 				<label>My Project</label> <select id="mySelect"
 					class="js-example-basic-single w-100">
+					<option selected>프로젝트를 선택하세요</option>
 
 				</select>
 				<button id="myBtn" type="button">선택</button>
@@ -17,7 +18,21 @@
 		</div>
 	</div>
 	<ul class="nav">
-		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+		<li class="nav-item"><a class="nav-link" href="team"> <i
+				class="icon-grid menu-icon"></i> <span class="menu-title">TeamMember</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link" href="application"> <i
+				class="icon-grid menu-icon"></i> <span class="menu-title">Application</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link" href="progress"> <i
+				class="icon-grid menu-icon"></i> <span class="menu-title">Progress</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link" href="card"> <i
+				class="icon-grid menu-icon"></i> <span class="menu-title">Card</span>
+		</a></li>
+	
+	
+		<!-- <li class="nav-item"><a class="nav-link" data-toggle="collapse"
 			href="#auth" aria-expanded="false" aria-controls="auth"> <i
 				class="icon-head menu-icon"></i> <span class="menu-title">User
 					Pages</span> <i class="menu-arrow"></i>
@@ -30,7 +45,7 @@
 							Application </a></li>
 				</ul>
 			</div></li>
-		<!--  -->
+		
 		<li class="nav-item"><a class="nav-link" data-toggle="collapse"
 			href="#auth" aria-expanded="false" aria-controls="auth"> <i
 				class="icon-head menu-icon"></i> <span class="menu-title">User
@@ -40,13 +55,13 @@
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item"><a class="nav-link" href="progress">
 							Progress </a></li>
-					<li class="nav-item"><a class="nav-link" href="card">
-							Card </a></li>
+					<li class="nav-item"><a class="nav-link" href="card"> Card
+					</a></li>
 				</ul>
 			</div></li>
+
+
 		
-			
-		<!--  -->	
 		<li class="nav-item"><a class="nav-link" href="progress"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Progress</span>
 		</a></li>
@@ -131,7 +146,7 @@
 		<li class="nav-item"><a class="nav-link"
 			href="pages/documentation/documentation.html"> <i
 				class="icon-paper menu-icon"></i> <span class="menu-title">Documentation</span>
-		</a></li>
+		</a></li> -->
 	</ul>
 </nav>
 
@@ -144,7 +159,6 @@
 		}).done(function(json) {
 			for(team of json) {
 				$("#mySelect").append(`
-				<option selected>프로젝트를 선택하세요</option>
 				<option id="mst" data-master_id="\${team.master_id}" value="\${team.prj_id}">\${team.prj_id}</option>
 				`);
 			};

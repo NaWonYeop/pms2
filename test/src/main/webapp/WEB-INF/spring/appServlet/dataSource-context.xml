@@ -7,31 +7,49 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<context:property-placeholder location="classpath:db.properties" />
 
-	<!-- DBCP -->
+
+	<bean class="org.apache.commons.dbcp2.BasicDataSource"
+		id="dataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@pmssystem.cvifj6twlmth.ap-northeast-2.rds.amazonaws.com:1521:ORCL" />
+		<property name="username" value="admin" />
+		<property name="password" value="mypassword" />
+	</bean>
+
+
+
+
+
+	<!-- <context:property-placeholder
+		location="classpath:db.properties" />
+
+	DBCP
 	<bean class="org.apache.commons.dbcp2.BasicDataSource"
 		id="dataSource" destroy-method="close">
 		<property name="driverClassName" value="${driver}" />
 		<property name="url" value="${url}" />
 		<property name="username" value="${user}" />
 		<property name="password" value="${password}" />
+	</bean> -->
+
+	<!-- Mybatis define -->
+	<!-- classpath: 경로 src/main/resources로 연결 -->
+	<!-- classpath*: 경로 src/main/java -->
+
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation"
+			value="classpath:mybatis/mybatis-config.xml" />
+		<property name="mapperLocations"
+			value="classpath*:co/test/prj/**/service/*-map.xml" />
+		<!-- 수동수정 -->
 	</bean>
 
-	  <!-- Mybatis define -->
-   <!-- classpath: 경로 src/main/resources로 연결 -->
-   <!-- classpath*: 경로 src/main/java -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
 
-  <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
-      <property name="dataSource" ref="dataSource"/>
-      <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
-      <property name="mapperLocations" value="classpath*:co/test/prj/**/service/*-map.xml"/>
-      													<!-- 수동수정 -->
-   </bean>	
-	  
-   <bean class="org.mybatis.spring.SqlSessionTemplate">
-      <constructor-arg ref="sqlSessionFactoryBean"/>
-   </bean>
-   
-   <mybatis-spring:scan base-package="co.test.prj"/>
+	<mybatis-spring:scan base-package="co.test.prj" />
 </beans>

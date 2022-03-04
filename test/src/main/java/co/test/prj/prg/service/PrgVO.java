@@ -14,7 +14,7 @@ public class PrgVO {
 	private int prj_id;
 	
 	private String prg_content;	// 내용
-	private int prg_manager;		// 소분류, 중분류
+	private String prg_manager;		// 소분류, 중분류
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prg_str;			// 시작날짜
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
