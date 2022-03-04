@@ -49,4 +49,12 @@ public class ProjectVO
 	private String type; //검색 타입
 	private String keyword; //검색 내용
 	
+	//페이징
+	private int pageNum; //현재 페이지
+	private int amount;  //페이지에 보여줄 게시물 수 
+	
+	private int strPage; //시작 페이지
+	private int endPage; //마지막 페이지
+	private int totalCount; //총 건수 
+	
 }
