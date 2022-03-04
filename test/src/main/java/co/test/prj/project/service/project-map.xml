@@ -36,9 +36,17 @@
 	
 	</delete>
 	
+	
+	<!-- 구직상세 참여프로젝트 >>> 경일 -->
 	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
 		SELECT PRJ_NAME FROM PROJECT
 		WHERE master_id = #{master_id} and SYSDATE <![CDATA[<]]> PRJ_OFR_ED
 	</select>
-
+	
+	<!-- 구인현황 리스트 >>> 경일 -->
+	<select id="ofterList" resultType="co.test.prj.user.service.UserVO">
+		select u.user_name, u.user_crr, u.user_tel, app_stt
+		from "user" u, application a
+		where u.user_id in (select user_id from application where master_id=0 and prj_id = 0 ) and u.user_id=a.user_id;
+	</select>
 </mapper>

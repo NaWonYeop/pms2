@@ -21,6 +21,7 @@ import co.test.prj.comtf.service.ComtfService;
 import co.test.prj.comtf.service.ComtfVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.user.service.UserService;
 
 @Controller
 public class ProjectController {
@@ -30,6 +31,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ComtfService comtfDao;
+	
+	@Autowired
+	private UserService userDao;
 	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
@@ -134,6 +138,14 @@ public class ProjectController {
 		return null;
 	}
 	
-	
+	@RequestMapping("/projectOfrList")
+	private String projectOfrList(Model model) {
+		
+		return "project/projectOfrList";
+	}
 
+	@RequestMapping("/projectAssessList")
+	private String projectAssess() {
+		return "project/projectAssess";
+	}
 }

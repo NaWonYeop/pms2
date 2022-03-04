@@ -55,6 +55,16 @@
 	display: block;
 }
 
+.insertbtn {
+	width: 10%;
+	height: 45px;
+	border-radius: 30px;
+	background-color: rgb(250, 168, 17);
+	border: bisque;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	display: block;
+}
 </style>
 </head>
 <body>
@@ -64,7 +74,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>구..직 상..세</h2>
+							<h2>구..직 상세</h2>
 							<p>
 								Home<span>/</span>Course Details
 							</p>
@@ -85,6 +95,7 @@
 					</div>
 				</div>
 			</div>
+			<button type="button" id="insertbtn" class="insertbtn" onclick="location.href='jobInsertMove'">등록하기</button>
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">
@@ -93,12 +104,12 @@
 								<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce">${user.user_name } | ${user.user_crr }년</p>
-												<c:forEach items="${techs }" var="tech">
-													<c:if test="${user.user_id == tech.user_id2 }">
-														<span class="btn_4">${tech.tech_name }</span>
-													</c:if>
-												</c:forEach>
+											<p class="introduce">${user.user_name }|${user.user_crr }년</p>
+											<c:forEach items="${techs }" var="tech">
+												<c:if test="${user.user_id == tech.user_id2 }">
+													<span class="btn_4">${tech.tech_name }</span>
+												</c:if>
+											</c:forEach>
 											<a href="jobDetail?user_id=${user.user_id }">
 												<h3>${user.user_job_ttl }</h3>
 											</a>
@@ -108,9 +119,9 @@
 													<div class="author_info_text">
 														<p>수행 프로젝트</p>
 														<%-- <c:forEach items="" var=""> --%>
-															<h5>
-																<a href="#">James Well</a>
-															</h5>
+														<h5>
+															<a href="#">James Well</a>
+														</h5>
 														<%-- </c:forEach> --%>
 													</div>
 												</div>
@@ -141,12 +152,12 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<script type="text/javascript">
 		function starAvg(avg) {
-	        const insertAvg = avg * 20;
-	        return insertAvg + 1.5;
-	    }
+			const insertAvg = avg * 20;
+			return insertAvg + 1.5;
+		}
 	</script>
 	<!-- jquery plugins here-->
 	<!-- jquery -->

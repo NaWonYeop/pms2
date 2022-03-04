@@ -72,7 +72,7 @@
 			<if test="user_job_cnt != null"> user_job_cnt = #{user_job_cnt}, </if>
 			<if test="user_type != null"> user_type = #{user_type}, </if>
 		</set>
-		WHERE USER_EMAIL =#{user_email}
+		WHERE USER_ID =#{user_id }
 	</update>
 	<!-- 비밀번호확인 -->
 	<select id="checkPwd"
@@ -86,6 +86,7 @@
 		DELETE FROM "user" WHERE user_id = #{user_id}
 	</delete>
 	
+	<!-- 경일 -->
 	<select id="jobSelect" resultType="co.test.prj.user.service.UserVO">
 		SELECT * FROM "user" WHERE USER_ID = ${user_id}
 		<!-- select u.user_name, u.user_crr, u.user_job_ttl, u.user_job_cnt, 

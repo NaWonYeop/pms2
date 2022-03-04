@@ -17,36 +17,53 @@
     </style>
 </head>
 <body>
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2>구직 등록하기</h2>
+							<p>
+								Home<span>/</span>Course Details
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<div class="container">
         <div class="row">
             <div class="col-12">
                 <h2 class="contact-title">등록하기</h2>
             </div>
             <div class="col-lg-8">
-            <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+            <form class="form-contact contact_form" action="jobInsert" method="post" id="contactForm" novalidate="novalidate">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <p>이름</p>
-                            <div class="name">김고기</div>
+                            <div class="name">${sessionUser.user_name }</div>
                         </div>
                     </div>
+                    <input type="hidden" id="user_id" name="user_id" value="${sessionUser.user_id }"> 
                     <div class="col-12">
                         <div class="form-group">
                         <p>제목</p>
-                        <input class="form-control" name="title" id="title" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Title'" placeholder = 'Enter Title'>
+                        <input class="form-control" name="user_job_ttl" id="user_job_ttl" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Title'" placeholder = 'Enter Title'>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
                             <p>내용</p>
-                            <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Content'" placeholder = 'Enter Content'></textarea>
+                            <textarea class="form-control w-100" name="user_job_cnt" id="user_job_cnt" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Content'" placeholder = 'Enter Content'></textarea>
                         </div>
                     </div>
                     <div class="col-9">
                         <div class="form-group mt-3">
                             <button type="submit" class="button">등록하기</button>
-                            <button type="submit" class="button">취소하기</button>
+                            <button type="button" class="button" onclick="location.href='jobSelectList'">취소하기</button>
                         </div>
                     </div>
                 </div>

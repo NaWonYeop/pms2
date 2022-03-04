@@ -42,7 +42,7 @@
         .modaldal { 
             display:none;
             width: 40%;
-            height: 35%;
+            height: 40%;
             border-radius: 30px;
             background-color: tomato;
             position: fixed;
@@ -105,7 +105,7 @@
         }
         /* rating end */
 
-        .callbtn , .heartbtn, .call {
+        .callbtn , .heartbtn, .updatebtn {
             width: 300px;
             height: 45px;
             border-radius: 30px;
@@ -116,9 +116,16 @@
         }
     
         .call {
-            margin-top: 50px;
+            background-color: bisque;
+            width: 80%;
+            height: 10%;
+            border-radius: 10px;
+            margin-top: 10%;
             text-align: center;
+            
         }
+        
+        
     </style>
 </head>
 <body>
@@ -128,7 +135,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner text-center">
                         <div class="breadcrumb_iner_item">
-                            <h2>구..직 상..세</h2>
+                            <h2>구..직 상세</h2>
                             <p>Home<span>/</span>Course Details</p>
                         </div>
                     </div>
@@ -180,11 +187,17 @@
 	
 	
 	                <div class="col-lg-4 right-contents">
+	                    <c:choose>
+	                    	<c:when test="${sessionUser.user_id eq jobDetail.user_id }">
+	                    		<button type="button" id="updatebtn" class="updatebtn" onclick="location.href='jobUpdateMove'">수정하기</button>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<button type="button" id="heartbtn" class="heartbtn">찜하기</button>
+	                    		<button type="button" id="callbtn" class="callbtn">신청하기</button>
+	                    	</c:otherwise>
+	                    </c:choose>
 	                    
-	                    <button type="button" id="heartbtn" class="heartbtn">찜하기</button>
-	                    <!-- <a type="button" class="btn_1 d-block callbtn" id="callbtn" name="callbtn">신청하기</a> -->
-	                    <button type="button" id="callbtn" class="callbtn">신청하기</button>
-	                    <h4 class="title_top">${jobDetail.user_age }세 | 경력 ${jobDetail.user_crr }년</h4>
+	                    <h4 class="title_top">경력 ${jobDetail.user_crr }년</h4>
 	                    
 	                    <div class="modaldal content">
 	                        <div class="content modalcontent">
@@ -201,8 +214,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        
-	                        <button type="button" class="call">신청하기</button>
+	                        <button type="button" class="call" style="line-height: normal;">신청하기</button>
 	                    </div>
 	                    
 	                    <div class="">
@@ -330,6 +342,19 @@
         $('#callbtn').click(function(e){
             $('.modaldal').fadeIn();
         });
+        
+        //찜하기 일단 보류
+        /* $("#heartbtn").on("click", function() {
+        	const data = {
+        			user_id : '${jobDetail.user_id}'
+        	}
+        	
+	        $ajax({
+	        	url: "",
+	        	type: "post",
+	        	data: data,
+	        });
+        }) */
     </script>
 </body>
 </html>
