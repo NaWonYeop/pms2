@@ -83,8 +83,16 @@
       <form action="register" onsubmit="return formCheck()" method="post">
        
 		<div class="card-body">
-  
-        <input type="text" name="user_email" id="user_email" class="form-control col-8 " style="display: inline-block;" placeholder="아이디" autofocus required>
+  		<c:choose>
+  			<c:when test="${user_email ne null}">
+  				<input type="text" name="user_email" id="user_email" class="form-control col-8 " style="display: inline-block;" placeholder="아이디"  autofocus required value="${user_email }">
+  			</c:when>
+  			
+  			<c:otherwise>
+  				<input type="text" name="user_email" id="user_email" class="form-control col-8 " style="display: inline-block;" placeholder="아이디"  autofocus required>
+  			</c:otherwise>
+  		</c:choose>
+  		
         <button type="button" class="button button-contactForm btn_1 col-3"  id="idCheck" style="margin-left: 20px;margin-bottom: 20px"
 							onclick="isIdCheck()" value="NO">Check</button><BR>
         <input type="password" name="user_pwd" id="user_pwd" class="form-control" placeholder="비밀번호"  required><br>
