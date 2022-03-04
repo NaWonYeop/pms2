@@ -16,5 +16,6 @@ public class UserVO {
 	private String user_job_ttl;
 	private String user_job_cnt;
 	private String user_type;
-
+	private String app_stt;
+	
 }

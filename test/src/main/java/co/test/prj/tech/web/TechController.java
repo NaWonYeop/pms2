@@ -1,5 +1,7 @@
 package co.test.prj.tech.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,11 +72,29 @@ public class TechController {
 		model.addAttribute("starDetail", starDao.starSelect(vo5));
 		
 		ProjectVO vo6 = new ProjectVO();
-		vo6.setMaster_id(user_id);
+		vo6.setMaster_id(user_id); //세션에 담긴 user_id로 바꿔야 됨
 		model.addAttribute("prjList", projectDao.jobJoinList(vo6));
 
 		return "job/jobDetail";
 	}
+	
+	@RequestMapping("/jobInsertMove")
+	public String jobInsertMove() {
+		return "job/jobInsert";
+	}
+	
+	@RequestMapping("/jobInsert")
+	public String jobInsert(Model model, UserVO user, HttpSession session) {
+		model.addAttribute(userDao.userUpdate(user));
+		return "redirect:/jobSelectList";
+	}
+	
+	@RequestMapping("/jobUpdateMove")
+	public String jobUpdateMove() {
+		return "job/jobUpdate";
+	}
+	
+	
 	
 	
 	

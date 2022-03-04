@@ -50,6 +50,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.jobJoinList(project);
 	}
 
+	@Override
+	public List<ProjectVO> ofterList(ProjectVO project) {
+		return map.ofterList(project);
+	}
+
 	
 	
 
