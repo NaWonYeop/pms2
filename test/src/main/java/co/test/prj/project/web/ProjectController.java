@@ -125,11 +125,48 @@ public class ProjectController {
 	private List<ProjectVO> projectSerchList(@RequestParam("type") String type, @RequestParam("keyword") String keyword, ProjectVO project){
 		System.out.println("검색 들어오는곳");
 		String gettype = type;
+		
 		String getkeyword = keyword;
+		//키워드 받은값 앞뒤 공백 지워주기~~~~~~~~~~~~~~~~~~~~~~~~
+		
 		System.out.println("type : "+gettype +", keyword : "+getkeyword);
 		project.setType(gettype);
 		project.setKeyword(getkeyword);
 		
+		projectDao.projectSearchList(project);
+		
+		return null;
+	}
+	
+	@GetMapping("/projectSerchList2")
+	@ResponseBody
+	private List<ProjectVO> projectSerchList2(
+			@RequestParam("type") String type, 
+			@RequestParam("keyword") String keyword,
+			@RequestParam("pageNum") int pageNum,
+			@RequestParam("amount") int amount,
+			ProjectVO project){
+		System.out.println("검색 들어오는곳");
+		String gettype = type;
+		String getkeyword = keyword;
+		//키워드 받은값 앞뒤 공백 지워주기~~~~~~~~~~~~~~~~~~~~~~~~
+
+		System.out.println("type : "+gettype +", keyword : "+getkeyword);
+		
+		project.setType(gettype);
+		project.setKeyword(getkeyword);
+
+		//페이지 처리
+		int getpageNum = pageNum;
+		int getamount = amount;
+		
+		System.out.println("pageNum : "+getpageNum +", amount : "+getamount);
+		
+		project.setPageNum(getpageNum);
+		project.setAmount(getamount);
+		
+		//projectDao.projectSearchList(project);
+		projectDao.projectSearchPageList(project);
 		
 		return null;
 	}

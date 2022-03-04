@@ -50,6 +50,31 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.jobJoinList(project);
 	}
 
+	@Override
+	public List<ProjectVO> projectSearchList(ProjectVO project) {
+		return map.projectSearchList(project);
+	}
+
+	@Override
+	public List<ProjectVO> projectPageList(ProjectVO project) {
+		return map.projectPageList(project);
+	}
+
+	@Override
+	public List<ProjectVO> projectSearchPageList(ProjectVO project) {
+		return map.projectSearchPageList(project);
+	}
+
+	@Override
+	public int projectPageCount(ProjectVO project) {
+		return map.projectPageCount(project);
+	}
+
+	@Override
+	public int projectSearchPageCount(ProjectVO project) {
+		return map.projectSearchPageCount(project);
+	}
+
 	
 	
 

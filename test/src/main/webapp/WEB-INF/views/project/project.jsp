@@ -15,12 +15,12 @@
 	<div class="row justify-content-center">
 		<div class="col-sm-7">
 			<aside class="single_sidebar_widget search_widget">
-				<form name="search-form">
+				<form name="search-form" onclick="getSerchList()">
 					<div class="form-group">
 						<div class="input-group mb-3">
 							<div class="form-select" id="default-select" style="width: 25%;">
 								<select name="type">
-									<option value="all" selected>전체</option>
+									<option value="" selected>전체</option>
 									<option value="fnd">펀딩</option>
 									<option value="ofr">구인</option>
 								</select>
@@ -29,7 +29,7 @@
 								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
 							<div class="input-group-append">
-								<button class="btn" onclick="getSerchList()" type="button">
+								<button class="btn" type="submit">
 									<i class="ti-search"></i>
 								</button>
 							</div>
@@ -39,31 +39,40 @@
 			</aside>
 		</div>
 	</div>
-
-
-	<form name="form1" method="post" action="projectSerchList">
-
-		<select name="search_option">
-			<option value="all"
-				<c:if test="${map.search_option == 'all'}">selected</c:if>>전체</option>
-
-			<option value="fnd"
-				<c:if test="${map.search_option == 'fnd'}">selected</c:if>>펀딩</option>
-
-			<option value="ofr"
-				<c:if test="${map.search_option == 'ofr'}">selected</c:if>>구인</option>
-
-
-		</select> 
-		<input name="keyword" value="${map.keyword}"> 
-		<button type="submit"><i class="ti-search"></i></button>
-		<input type="submit" value="조회">
-	</form>
-
-
-
-
-
+	<!-- 검색창 끝 -->
+	
+	
+	<!-- 검색창 시작 -->
+	<div class="row justify-content-center">
+		<div class="col-sm-7">
+			<aside class="single_sidebar_widget search_widget">
+				<form name="search-form2" onclick="getSerchList2()">
+					<div class="form-group">
+						<div class="input-group mb-3">
+							<div class="form-select" id="default-select" style="width: 25%;">
+								<select name="type">
+									<option value="" selected>전체</option>
+									<option value="fnd">펀딩</option>
+									<option value="ofr">구인</option>
+								</select>
+							</div>
+							<input type="text" name="keyword" class="form-control"
+								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
+							<div class="input-group-append">
+								<button class="btn" type="submit">
+									<i class="ti-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- 페이징 1페이지부터 2개씩 보여줄꺼다-->
+					<input type="hidden" name="pageNum" value="1">
+					<input type="hidden" name="amount" value="10">
+				</form>
+			</aside>
+		</div>
+	</div>
 	<!-- 검색창 끝 -->
 	<div>내용 들어올곳</div>
 
@@ -84,10 +93,25 @@
                 console.log("에러남");
                 callback(data);
             }); */
+	
+		}
+		
+		function getSerchList2() {
+			$.ajax({
+				type : 'GET',
+				url : "/prj/projectSerchList2",
+				data : $("form[name=search-form2]").serialize(),
+				success : function (result) {
+					console.log("검색 하러감?")
+				}
 			
-			
-			
-
+			})
+			/* .done(console.log("갔다옴?"))
+			.fail(function(data){
+                console.log("에러남");
+                callback(data);
+            }); */
+	
 		}
 	</script>
 </body>
