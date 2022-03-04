@@ -9,6 +9,8 @@ public interface PrgService {
 	int prgInsert(PrgVO prg);
 
 	int prgUpdate(PrgVO prg);
+	
+	int smlUpdate(PrgVO prg);
 
 	int prgDelete(PrgVO prg);
 }

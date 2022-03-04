@@ -55,13 +55,23 @@ public class PrgController {
 
 	@RequestMapping("/prgUpdate")
 	public String prgUpdate(HttpSession session, Model model) {
-
 		return "";
 	}
+	
+	@RequestMapping("/smlUpdate")
+	public String smlUpdate(HttpSession session, Model model, PrgVO prg) {
+		//
+		prgDao.smlUpdate(prg);
+		return "";
+	}
+	
 
 	@RequestMapping("/prgDelete")
-	public String prgDelete(HttpSession session, Model model) {
-
+	public String prgDelete(HttpSession session, Model model, PrgVO prg) {
+		prgDao.prgDelete(prg);
+		
 		return "";
 	}
+	
+	
 }

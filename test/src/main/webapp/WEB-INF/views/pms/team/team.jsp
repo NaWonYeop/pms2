@@ -47,9 +47,7 @@
 				<td>\${team.tm_sal}</td>
 				</tr>`);
 				
-				/* if(\${team.tm_pos} != "employee") {
-					$("#tr").appendTo(`<td>\${team.tm_sal}</td>`);				
-				} */
+				
 				
 				
 			};
