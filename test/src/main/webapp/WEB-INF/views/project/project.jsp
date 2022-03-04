@@ -35,45 +35,15 @@
 							</div>
 						</div>
 					</div>
-				</form>
-			</aside>
-		</div>
-	</div>
-	<!-- 검색창 끝 -->
-	
-	
-	<!-- 검색창 시작 -->
-	<div class="row justify-content-center">
-		<div class="col-sm-7">
-			<aside class="single_sidebar_widget search_widget">
-				<form name="search-form2" onclick="getSerchList2()">
-					<div class="form-group">
-						<div class="input-group mb-3">
-							<div class="form-select" id="default-select" style="width: 25%;">
-								<select name="type">
-									<option value="" selected>전체</option>
-									<option value="fnd">펀딩</option>
-									<option value="ofr">구인</option>
-								</select>
-							</div>
-							<input type="text" name="keyword" class="form-control"
-								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
-							<div class="input-group-append">
-								<button class="btn" type="submit">
-									<i class="ti-search"></i>
-								</button>
-							</div>
-						</div>
-					</div>
 					<!-- 페이징 1페이지부터 2개씩 보여줄꺼다-->
 					<input type="hidden" name="pageNum" value="1">
-					<input type="hidden" name="amount" value="10">
+					<input type="hidden" name="amount" value="2">
 				</form>
 			</aside>
 		</div>
 	</div>
 	<!-- 검색창 끝 -->
+	
 	<div>내용 들어올곳</div>
 
 

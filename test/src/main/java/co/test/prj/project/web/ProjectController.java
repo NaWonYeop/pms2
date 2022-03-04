@@ -32,9 +32,6 @@ public class ProjectController {
 	@Autowired
 	private ComtfService comtfDao;
 	
-	@Autowired
-	private UserService userDao;
-	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
 		return "project/projectInsertForm";
@@ -126,54 +123,46 @@ public class ProjectController {
 	
 	@GetMapping("/projectSerchList")
 	@ResponseBody
-	private List<ProjectVO> projectSerchList(@RequestParam("type") String type, @RequestParam("keyword") String keyword, ProjectVO project){
+	private Model projectSerchList(
+		@RequestParam("type") String type, 
+		@RequestParam("keyword") String keyword,
+		@RequestParam("pageNum") int pageNum,
+		@RequestParam("amount") int amount,
+		ProjectVO project,
+		//model 말고 map 객체 만들어서 리턴할것
+		Model model){
 		System.out.println("검색 들어오는곳");
 		String gettype = type;
-		
 		String getkeyword = keyword;
 		//키워드 받은값 앞뒤 공백 지워주기~~~~~~~~~~~~~~~~~~~~~~~~
-		
-		System.out.println("type : "+gettype +", keyword : "+getkeyword);
-		project.setType(gettype);
-		project.setKeyword(getkeyword);
-		
-		projectDao.projectSearchList(project);
-		
-		return null;
-	}
 	
-	@GetMapping("/projectSerchList2")
-	@ResponseBody
-	private List<ProjectVO> projectSerchList2(
-			@RequestParam("type") String type, 
-			@RequestParam("keyword") String keyword,
-			@RequestParam("pageNum") int pageNum,
-			@RequestParam("amount") int amount,
-			ProjectVO project){
-		System.out.println("검색 들어오는곳");
-		String gettype = type;
-		String getkeyword = keyword;
-		//키워드 받은값 앞뒤 공백 지워주기~~~~~~~~~~~~~~~~~~~~~~~~
-
-		System.out.println("type : "+gettype +", keyword : "+getkeyword);
+		System.out.println("검색 타입 : "+gettype +", 검색어 : "+getkeyword);
 		
 		project.setType(gettype);
 		project.setKeyword(getkeyword);
-
+	
 		//페이지 처리
-		int getpageNum = pageNum;
-		int getamount = amount;
+		int getpageNum = pageNum; //시작 페이지 번호
+		int getamount = amount; //한페이지에 보여줄 건수
 		
-		System.out.println("pageNum : "+getpageNum +", amount : "+getamount);
+		System.out.println("시작 페이지 번호 : "+getpageNum +", 한페이지에 보여줄 건수 : "+getamount);
 		
 		project.setPageNum(getpageNum);
 		project.setAmount(getamount);
 		
-		//projectDao.projectSearchList(project);
-		projectDao.projectSearchPageList(project);
+		//projectDao.projectSearchPageList(project);
+		int count = projectDao.projectSearchPageCount(project);
+		System.out.println("총 검색 건수 : " + count);
 		
-		return null;
+		int totalPage = count / getamount ;
+		System.out.println("총 페이지 수 : "+ totalPage );
+		
+		model.addAttribute("projects", projectDao.projectSearchPageList(project));
+		model.addAttribute("page", totalPage);
+		
+		return model;
 	}
+	
 	
 	@RequestMapping("/projectOfrList")
 	private String projectOfrList(Model model) {

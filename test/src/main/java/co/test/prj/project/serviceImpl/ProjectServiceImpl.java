@@ -54,23 +54,20 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<ProjectVO> ofterList(ProjectVO project) {
 		return map.ofterList(project);
 	}
-	public List<ProjectVO> projectSearchList(ProjectVO project) {
-		return map.projectSearchList(project);
-	}
+	
+//	@Override
+//	public List<ProjectVO> projectSearchList(ProjectVO project) {
+//		return map.projectSearchList(project);
+//	}
 
-	@Override
-	public List<ProjectVO> projectPageList(ProjectVO project) {
-		return map.projectPageList(project);
-	}
+//	@Override
+//	public List<ProjectVO> projectPageList(ProjectVO project) {
+//		return map.projectPageList(project);
+//	}
 
 	@Override
 	public List<ProjectVO> projectSearchPageList(ProjectVO project) {
 		return map.projectSearchPageList(project);
-	}
-
-	@Override
-	public int projectPageCount(ProjectVO project) {
-		return map.projectPageCount(project);
 	}
 
 	@Override

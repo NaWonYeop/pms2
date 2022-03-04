@@ -51,7 +51,8 @@
 		where u.user_id in (select user_id from application where master_id=0 and prj_id = 0 ) and u.user_id=a.user_id;
 	</select>
 
-	<select id="projectSearchList" parameterType="co.test.prj.project.service.ProjectVO"
+	<!-- 안쓸꺼임 -->
+	<!-- <select id="projectSearchList" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
 		SELECT * 
 		FROM PROJECT
@@ -65,9 +66,10 @@
 			</when>
 		</choose>
 		ORDER BY PRJ_ID DESC
-	</select>
+	</select> -->
 	
-	<select id="projectPageList" parameterType="co.test.prj.project.service.ProjectVO"
+	<!-- 안쓸꺼임 -->
+	<!-- <select id="projectPageList" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
 		<![CDATA[
 		SELECT *
@@ -79,7 +81,7 @@
 		            A )
 		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
 		]]>
-	</select>
+	</select> -->
 	
 	<select id="projectSearchPageList" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
@@ -106,14 +108,21 @@
 		]]>
 	</select>
 	
-	<select id="projectPageCount" parameterType="co.test.prj.project.service.ProjectVO"
-		resultType="int">
-		
-		
-	</select>
-	
 	<select id="projectSearchPageCount" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="int">
+		
+		SELECT COUNT(*) AS TOTAL
+		FROM PROJECT
+		WHERE PRJ_NAME LIKE '%'||#{keyword}||'%'
+		<choose>
+			<when test="type != null and type.equals('ofr')">
+				AND PRJ_OFR_PROP LIKE '1'
+			</when>
+			<when test="type != null and type.equals('fnd')">
+				AND PRJ_FND_PROP LIKE '1'
+			</when>
+		</choose>
+		ORDER BY PRJ_ID DESC
 		
 	</select>
 
