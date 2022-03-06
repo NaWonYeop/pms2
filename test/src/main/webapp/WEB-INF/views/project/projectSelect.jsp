@@ -43,39 +43,22 @@
 		</div>
 	</div>
 	<!-- 검색창 끝 -->
-	${result }
+	
 	<div id="list">내용 들어올곳
 	
-	<c:forEach items="${result.projects }" var="project">
-	<div class="card">
-	<form action="projectSelect" method="post">
-	<input type="hidden" name="prj_id" id="prj_id" value="${project.prj_id}">
-	<input type="submit" name="prj_name" id="prj_name" value="${project.prj_name}">
-	번호 : ${project.prj_id}<br>
-	이름 : ${project.prj_name}<br>
-	담당자 아이디 : ${project.master_id}<br>
-	시작일 ~ 마감일 : ${project.prj_str} ~ ${project.prj_ed}<br>
-	등록일 : ${project.prj_reg_date}<br>
-	조회수 : ${project.prj_hit}<br>
-	구인 여부 : ${project.prj_ofr_prop}<br>
-	펀딩 여부 : ${project.prj_fnd_prop}<br>
-	버전 : ${project.prj_ver}<br>
-	</form>
-	
-	</div>
-	</c:forEach>
+		번호 : ${project.prj_id}<br>
+		이름 : ${project.prj_name}<br>
+		담당자 아이디 : ${project.master_id}<br>
+		시작일 ~ 마감일 : ${project.prj_str} ~ ${project.prj_ed}<br>
+		등록일 : ${project.prj_reg_date}<br>
+		조회수 : ${project.prj_hit}<br>
+		구인 여부 : ${project.prj_ofr_prop}<br>
+		펀딩 여부 : ${project.prj_fnd_prop}<br>
+		버전 : ${project.prj_ver}<br>
+		상세 내용 : ${project.prj_cnt}<br>
+		
 	</div>
 
-	<div id="page">페이지
-		<c:forEach var="i" begin="1" end="${result.page }">
-			<form action="searchPage" style="display: inline-block;">
-				<input type="submit" name="pageNum" value=" <c:out value="${i}" />">
-				<input type="hidden" name="type" value="${result.type}">
-				<input type="hidden" name="keyword" value="${result.keyword}">
-				<input type="hidden" name="amount" value="${result.amount }">
-			</form>
-		</c:forEach>
-	</div>
 
 	
 		

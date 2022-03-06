@@ -1,12 +1,13 @@
 package co.test.prj.project.web;
 
 import java.io.File;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,6 @@ import co.test.prj.comtf.service.ComtfService;
 import co.test.prj.comtf.service.ComtfVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
-import co.test.prj.user.service.UserService;
 
 @Controller
 public class ProjectController {
@@ -123,23 +123,29 @@ public class ProjectController {
 	
 	@GetMapping("/projectSerchList")
 	@ResponseBody
-	private Model projectSerchList(
+	private Map<String, Object> projectSerchList(
 		@RequestParam("type") String type, 
 		@RequestParam("keyword") String keyword,
 		@RequestParam("pageNum") int pageNum,
 		@RequestParam("amount") int amount,
 		ProjectVO project,
-		//model 말고 map 객체 만들어서 리턴할것
 		Model model){
+		Map<String, Object> map = new HashedMap();
 		System.out.println("검색 들어오는곳");
 		String gettype = type;
 		String getkeyword = keyword;
-		//키워드 받은값 앞뒤 공백 지워주기~~~~~~~~~~~~~~~~~~~~~~~~
+		
+		// 공백 제거 (trim())
+		String trimkeyword = getkeyword.trim();
+		// 공백 제거 문자열 출력
+		System.out.println("원 검색어 : '" + getkeyword + "'");
+		System.out.println("trim 검색어 : '" + trimkeyword + "'");
+
 	
-		System.out.println("검색 타입 : "+gettype +", 검색어 : "+getkeyword);
+		System.out.println("검색 타입 : "+gettype +", 검색어 : "+trimkeyword);
 		
 		project.setType(gettype);
-		project.setKeyword(getkeyword);
+		project.setKeyword(trimkeyword);
 	
 		//페이지 처리
 		int getpageNum = pageNum; //시작 페이지 번호
@@ -150,18 +156,89 @@ public class ProjectController {
 		project.setPageNum(getpageNum);
 		project.setAmount(getamount);
 		
-		//projectDao.projectSearchPageList(project);
 		int count = projectDao.projectSearchPageCount(project);
 		System.out.println("총 검색 건수 : " + count);
 		
-		int totalPage = count / getamount ;
+		double totalPage1 = (double) count /(double) getamount ;
+		int totalPage = (int) Math.ceil( totalPage1 );
+		
 		System.out.println("총 페이지 수 : "+ totalPage );
 		
-		model.addAttribute("projects", projectDao.projectSearchPageList(project));
-		model.addAttribute("page", totalPage);
+		map.put("projects", projectDao.projectSearchPageList(project));
+		map.put("page", totalPage);
+		map.put("type", gettype);
+		map.put("keyword", trimkeyword);
+		map.put("amount", getamount);
 		
-		return model;
+		System.out.println("가라");
+		return map;
 	}
+	
+	
+	@RequestMapping("/searchPage")
+	private String searchPage(
+			@RequestParam("type") String type, 
+			@RequestParam("keyword") String keyword,
+			@RequestParam("pageNum") int pageNum, 
+			@RequestParam("amount") int amount, 
+			ProjectVO project, 
+			Model model) {
+		Map<String, Object> map = new HashedMap();
+		System.out.println("검색 들어오는곳");
+		String gettype = type;
+		String getkeyword = keyword;
+
+		// 공백 제거 (trim())
+		String trimkeyword = getkeyword.trim();
+		// 공백 제거 문자열 출력
+		System.out.println("원 검색어 : '" + getkeyword + "'");
+		System.out.println("trim 검색어 : '" + trimkeyword + "'");
+
+		System.out.println("검색 타입 : " + gettype + ", 검색어 : " + trimkeyword);
+
+		project.setType(gettype);
+		project.setKeyword(trimkeyword);
+
+		// 페이지 처리
+		int getpageNum = pageNum; // 시작 페이지 번호
+		int getamount = amount; // 한페이지에 보여줄 건수
+
+		System.out.println("시작 페이지 번호 : " + getpageNum + ", 한페이지에 보여줄 건수 : " + getamount);
+
+		project.setPageNum(getpageNum);
+		project.setAmount(getamount);
+
+		int count = projectDao.projectSearchPageCount(project);
+		System.out.println("총 검색 건수 : " + count);
+
+		double totalPage1 = (double) count / (double) getamount;
+		int totalPage = (int) Math.ceil(totalPage1);
+
+		System.out.println("총 페이지 수 : " + totalPage);
+
+		map.put("projects", projectDao.projectSearchPageList(project));
+		map.put("page", totalPage);
+		map.put("type", gettype);
+		map.put("keyword", trimkeyword);
+		map.put("amount", getamount);
+		
+		model.addAttribute("result", map);
+
+		System.out.println("가라");
+
+		return "project/project";
+	}
+	
+	@RequestMapping("/projectSelect")
+	private String projectSelect(@RequestParam("prj_id") int id, Model model, ProjectVO project) {
+		System.out.println("상세페이지");
+		project.setPrj_id(id);
+		
+		model.addAttribute("project",projectDao.projectSelect(project));
+		
+		return "project/projectSelect";
+	}
+	
 	
 	
 	@RequestMapping("/projectOfrList")
