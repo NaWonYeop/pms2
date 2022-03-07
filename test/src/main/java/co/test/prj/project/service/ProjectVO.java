@@ -55,7 +55,7 @@ public class ProjectVO
 	
 	private int strPage; //시작 페이지
 	private int endPage; //마지막 페이지
-	private int totalCount; //총 건수 
+	private int totalPage; //총 페이지 
 	
 	private int prj_time; //프로젝트 남은시간
 	private String rwd_name; //프로젝트 리워드이름
