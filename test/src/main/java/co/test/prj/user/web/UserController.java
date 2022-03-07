@@ -1,5 +1,6 @@
 package co.test.prj.user.web;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.test.prj.application.service.AppVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.reward.service.RewardVO;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -29,7 +32,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userDao;
-	
 
 	// 로그인폼
 	@RequestMapping("/loginForm")
@@ -188,14 +190,30 @@ public class UserController {
 	// 개발자 등록
 	@RequestMapping("/insertdev")
 	public String insertdev() {
-
+		
 		return "user/insertdev";
+	}
+	
+	@RequestMapping("/insertDevForm")
+	public String insertDevForm(HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("sessionUser");
+		
+		
+		
+		return "user/insertDevForm";
 	}
 
 	// 마이페이지
 	@RequestMapping("/mypage")
-	public String mypage(HttpSession session ) {
-		
+	public String mypage(HttpSession session, Model model) {
+		UserVO user = (UserVO)session.getAttribute("sessionUser");
+		List<ProjectVO> list = userDao.MyProject(user);
+		model.addAttribute("MyProject",list);
+		List<ProjectVO> funding = userDao.MyFunding(user);
+		model.addAttribute("MyFunding", funding);
+		List<AppVO> app = userDao.MyApp(user);
+		model.addAttribute("MyApp", app);
+		System.out.println(userDao.MyProject(user).get(0));
 		return "user/mypage";
 	}
 
@@ -264,14 +282,17 @@ public class UserController {
 
 	@RequestMapping("/Withdrawa2")
 	public String Withdrawal2(String user_pwd, Model model, HttpSession session) {
-		if (user_pwd.equals(session.getAttribute("user_pwd"))) {
+		UserVO user = (UserVO)session.getAttribute("sessionUser");
+		if (user_pwd.equals(user.getUser_pwd())) {
+			System.out.println("user_pwd");
+			List<ProjectVO> funding = userDao.MyFunding(user);
+			model.addAttribute("MyFunding", funding);	
 			return "user/Withdrawal2";
 		} else {
-			// 메시지 넣기
+			model.addAttribute("FailPassword", "비밀번호가 일치하지않습니다");
 		}
-
-		// 비밀번호 값을 들고온다 세션비밀번호, 비밀번호비교 같으면 이회원을 펀딩리스트 어트리뷰트에담는다 3에보낸다 틀리면
-		return "user/Withdrawal2";
+		
+		return "user/Withdrawal1";
 	}
 
 	@RequestMapping("/Withdrawa3")

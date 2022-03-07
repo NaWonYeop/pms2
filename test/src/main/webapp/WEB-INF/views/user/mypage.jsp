@@ -62,16 +62,14 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-6 col-lg-6">
-				
-					<div class="single_special_cource">
+			
+				<div class="single_special_cource">
 						<div class="special_cource_text">
 							<a href="course-details.html" class="btn_4">참여중인 프로젝트 리스트</a>
-							
-							<p>프로젝트 1</p>
-							<p>프로젝트 2</p>
-							<p>프로젝트 3</p>
-							<p>프로젝트 4</p>
-
+							<c:forEach items="${MyProject}" var="Project">
+							<p>프로젝트명 : ${Project.prj_name} &nbsp; &nbsp;&nbsp; &nbsp; 마감일 : D-${Project.prj_time}</p>
+							</c:forEach>
+						
 
 							<div class="author_info">
 								<div class="author_img">
@@ -89,14 +87,11 @@
 					<div class="single_special_cource">
 						<img src="img/special_cource_2.png" class="special_img" alt="">
 						<div class="special_cource_text">
-							<a href="course-details.html" class="btn_4">펀딩리스트</a> <a
-								href="course-details.html">
-								<h3>Web UX/UI Design</h3>
-							</a>
-							<a href="#"></a>
-							<a href="#"></a>
-							<a href="#"></a>
-							<a href="#"></a>
+							<a href="course-details.html" class="btn_4">펀딩리스트</a> 
+						
+							<c:forEach items="${MyFunding}" var="Funding">
+							<p>프로젝트명 : ${Funding.prj_name} &nbsp;&nbsp;&nbsp;&nbsp; 리워드명 : ${Funding.rwd_name}</p>
+							</c:forEach>
 							
 							<div class="author_info">
 								<div class="author_img">
@@ -114,14 +109,18 @@
 					<div class="single_special_cource">
 						<img src="img/special_cource_3.png" class="special_img" alt="">
 						<div class="special_cource_text">
-							<a href="course-details.html" class="btn_4">알림</a> <a
-								href="course-details.html">
-								<h3>Wordpress Development</h3>
-							</a>
-							<p>알림 1</p>
-							<p>알림 2</p>
-							<p>알림 3</p>
-							<p>알림 4</p>
+							<a href="course-details.html" class="btn_4">알림</a>
+							<c:forEach items="${MyApp}" var="app">
+							<c:choose>
+							<c:when test="${app_clsfc eq 1 }">
+							<p><a href="">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name }에 신청하셨습니다</p>
+							</c:when>
+							<c:otherwise>
+							<p><a href="">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에 협업제의를 받으셨습니다</p>
+							</c:otherwise>
+							</c:choose>
+							</c:forEach>
+							
 							<div class="author_info">
 								<div class="author_img">
 									<img src="img/author/author_3.png" alt="">

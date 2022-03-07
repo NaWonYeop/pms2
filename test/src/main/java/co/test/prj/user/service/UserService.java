@@ -2,6 +2,11 @@ package co.test.prj.user.service;
 
 import java.util.List;
 
+import co.test.prj.application.service.AppVO;
+import co.test.prj.certificate.service.CertVO;
+import co.test.prj.project.service.ProjectVO;
+
+
 
 
 public interface UserService {
@@ -25,6 +30,14 @@ public interface UserService {
 
 	UserVO jobSelect(UserVO user);
 	
-	UserVO MyProject(UserVO user);
+	UserVO checkPwd(UserVO user);
+	
+	CertVO insertDev(UserVO user);
+	
+	List<ProjectVO> MyProject(UserVO user);
+	
+	List<ProjectVO> MyFunding(UserVO user);
+	
+	List<AppVO> MyApp(UserVO user);
 
 }

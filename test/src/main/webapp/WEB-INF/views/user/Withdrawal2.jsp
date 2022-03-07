@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +48,9 @@
 									style="width: 80%; background-color: #f09359"
 									aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
+							<c:forEach items="${MyFunding }" var="funding">
+							<br><p>${funding.rwd_name}</p>
+							</c:forEach>
 							<br>
 							<ul class="blog-info-link">
 								<li><i class="far fa-comments"></i> 현재 펀딩금액</a></li>
@@ -56,8 +60,9 @@
 					</article>
 				</div>
 				<div class="col-lg-5">
-					<form class="form-contact contact_form" action="Withdrawa3" onsubmit="return checkbox()"
-						method="post" id="contactForm" novalidate="novalidate">
+					<form class="form-contact contact_form" action="Withdrawa3"
+						onsubmit="return checkbox()" method="post" id="contactForm"
+						novalidate="novalidate">
 						<div class="row justify-content-center">
 							<h4>회원탈퇴에 동의합니다</h4>
 							<div class="confirm-checkbox"
@@ -81,12 +86,10 @@
 	</section>
 	<script>
 		function checkbox() {
-			if ($('input:checkbox').is(':checked') == false)
-				{
+			if ($('input:checkbox').is(':checked') == false) {
 				alert("동의가 필요합니다.");
 				return false;
-				}
-			else
+			} else
 				return true;
 		}
 	</script>

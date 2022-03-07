@@ -102,20 +102,13 @@ a {
 					placeholder="내용을 입력하세요" autofocus required></span>
 				<button type="button" onclick="add()" id="addBtn">추가</button>
 				<ul id="certList">
-
+					
 				</ul>
 				<BR>
-				<span><label>취득일</label><input id="cert_day" type="text"
-					name="cert_day" class="form-control"
-					placeholder="내용을 입력하세요" autofocus required></span>
-				<button type="button" onclick="addDay()" id="addCert">추가</button>
-				<ul id="certDay">
-
-				</ul>
+				
 				<BR>
 				<label>경력</label><input type="number" class="form-control"
-					id="spinner" name="value"><BR> <label>첨부파일</label>
-					<input type="file" id="mul" name="mul" class="btn btn-lg btn-primary btn-block"><br>
+					id="user_crr" name="user_crr"><BR> 
 				
 				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
 					type="submit" value="등록하기" onclick=""> <input type="reset"
@@ -172,26 +165,7 @@ a {
 			}
 
 		}
-		function addDay() {
-			var a = document.createElement("span");
-			var r = document.createElement("li");
-			a.innerHTML = `<input id="date" name="cert_day" type="hidden" value = "\${cert_day.value}">`
-			document.getElementsByClassName("card-body")[0].insertBefore(a,addCert);
-			r.innerHTML = cert_day.value
-			certDay.append(r)
-			console.log("addDay");
-			var span = document.createElement("span");
-			var txt = document.createTextNode("\u00D7");
-			span.className = "close";
-			span.appendChild(txt);
-			r.appendChild(span);
-			for (i = 0; i < close.length; i++) {
-				close[i].onclick = function() {
-					var div = this.parentElement;
-					div.style.display = "none";
-				}
-			}
-		}
+		
 	</script>
 
 
