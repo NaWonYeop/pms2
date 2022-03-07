@@ -105,5 +105,17 @@ public class UserServiceImpl implements UserService {
 		return map.insertDev(user);
 	}
 
+	@Override
+	public List<ProjectVO> MyInsertProject(int master_id) {
+		// TODO Auto-generated method stub
+		return map.MyInsertProject(master_id);
+	}
+
+	@Override
+	public List<ProjectVO> MyJoinProject(int user_id) {
+		// TODO Auto-generated method stub
+		return map.MyJoinProject(user_id);
+	}
+
 	
 }

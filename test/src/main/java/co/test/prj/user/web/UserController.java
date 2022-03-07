@@ -308,5 +308,14 @@ public class UserController {
 
 		return "user/myfunding";
 	}
-
+	
+	@RequestMapping("/myProject")
+	public String myProject(HttpSession session,Model model) {
+		UserVO user=(UserVO)session.getAttribute("sessionUser");
+		int id=user.getUser_id();
+		model.addAttribute("enterProject",userDao.MyJoinProject(id));
+		model.addAttribute("Myproject",userDao.MyInsertProject(id));
+		
+		return "user/myProject";
+	}
 }

@@ -38,5 +38,9 @@ public interface UserMapper {
 	//개발자 등록
 	CertVO insertDev(UserVO user);
 	
+	//프로젝트관리페이지 
+	List<ProjectVO> MyInsertProject(int master_id);
+	
+	List<ProjectVO> MyJoinProject(int user_id);
 	
 }

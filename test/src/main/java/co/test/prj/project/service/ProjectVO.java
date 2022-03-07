@@ -67,4 +67,9 @@ public class ProjectVO
 	
 	private int prj_time; //프로젝트 남은시간
 	private String rwd_name; //프로젝트 리워드이름
+	
+	//원엽
+	private int count;//현재참여인원
+	private int user_tel;//마스터 전화번호
+	private String user_name;//마스터이름
 }

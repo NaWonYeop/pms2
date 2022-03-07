@@ -40,4 +40,7 @@ public interface UserService {
 	
 	List<AppVO> MyApp(UserVO user);
 
+	List<ProjectVO> MyInsertProject(int master_id);
+	
+	List<ProjectVO> MyJoinProject(int user_id);
 }
