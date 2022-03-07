@@ -54,19 +54,23 @@
 		WHERE prg_id = #{prg_id}
 	</update>
 
+	<select id="selectPrgID" resultType="int" parameterType="co.test.prj.prg.service.PrgVO">
+		SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL AND prj_id = #{prj_id}
+	</select>
+
 	<!-- 소분류 변경시키기 -->
 	<update id="smlUpdate"
 		parameterType="co.test.prj.prg.service.PrgVO">
-		<selectKey keyProperty="prg_manager" resultType="int"
+		<selectKey keyProperty="prg_manager" resultType="String"
 			order="BEFORE">
-			SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL
+			SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL AND prj_id = #{prj_id}
 		</selectKey>
 		UPDATE PROGRESS
 		SET prg_manager = #{prg_manager}
-		WHERE prg_id =
-		#{prg_id}
+		WHERE prg_manager = #{prg_id}
 	</update>
-
+	
+	<!-- 삭제시키기 -->
 	<delete id="prgDelete"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		DELETE FROM PROGRESS

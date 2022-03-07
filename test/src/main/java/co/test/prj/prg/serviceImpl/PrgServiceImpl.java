@@ -43,9 +43,15 @@ public class PrgServiceImpl implements PrgService {
 	@Override
 	public int prgDelete(PrgVO prg) {
 		// TODO Auto-generated method stub
-		map.prgDelete(prg);
 		map.smlUpdate(prg);
+		map.prgDelete(prg);
 		return 0;
+	}
+
+	@Override
+	public int selectPrgID(PrgVO prg) {
+		// TODO Auto-generated method stub
+		return map.selectPrgID(prg);
 	}
 
 	

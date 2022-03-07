@@ -13,4 +13,6 @@ public interface PrgMapper {
 	int smlUpdate(PrgVO prg);
 	
 	int prgDelete(PrgVO prg);
+	
+	int selectPrgID(PrgVO prg);
 }
