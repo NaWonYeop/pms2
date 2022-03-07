@@ -149,51 +149,56 @@ button {
 					</div>
 				</div>
 			</div>
-			
+
 
 			<div class="testimonial_slider">
 				<div class="row">
 					<!-- for문 start -->
-					<div class="col-sm-12 col-lg-12 list">
-						<div class="single_special_cource">
-							<div class="special_cource_text" style="border: 0;">
-								<div class="col-12 author_info"
-									style="border-top: 0; margin-top: 0; padding-top: 0;">
-									<div class="col-8">
-										<div class="author_img">
-											<div class="author_info_text">
-												<p>Conduct by:</p>
-												<h5>
-													<a href="#">무일푼 | 경력 2년 | 010-3131-2456</a>
-												</h5>
+					<c:forEach items="${ofterList }" var="ofterList">
+						<c:if test="${ofterList.app_stt == 'ing' }">
+							<div class="col-sm-12 col-lg-12 list">
+								<div class="single_special_cource">
+									<div class="special_cource_text" style="border: 0;">
+										<div class="col-12 author_info"
+											style="border-top: 0; margin-top: 0; padding-top: 0;">
+											<div class="col-8">
+												<div class="author_img">
+													<div class="author_info_text">
+														<p>Conduct by:</p>
+														<h5>
+															<a href="jobDetail?user_id=${ofterList.user_id }">${ofterList.user_name }
+																| 경력 ${ofterList.user_crr }년 | ${ofterList.user_tel }</a>
+														</h5>
+													</div>
+												</div>
+												<!-- <div class="author_rating">
+	                                            <div class="rating avg">
+	                                                <div class="star-ratings">
+	                                                    <div 
+	                                                    class="star-ratings-fill" style=" width: 70% ">
+	                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+	                                                </div>
+	                                                <div class="star-ratings-base">
+	                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+	                                                </div>
+	                                            </div>
+	                                                <p>3.8 Ratings</p>
+	                                            </div>
+	                                        </div> -->
 											</div>
-										</div>
-										<!-- <div class="author_rating">
-                                            <div class="rating avg">
-                                                <div class="star-ratings">
-                                                    <div 
-                                                    class="star-ratings-fill" style=" width: 70% ">
-                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                                </div>
-                                                <div class="star-ratings-base">
-                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                                </div>
-                                            </div>
-                                                <p>3.8 Ratings</p>
-                                            </div>
-                                        </div> -->
-									</div>
-									<div class="col-4">
-										<div class="button-contactForm">
-											<button type="button" class="joinbtn">수락</button>
-											<button type="button" class="nopebtn">거절</button>
+											<div class="col-4">
+												<div class="button-contactForm">
+													<button type="button" class="joinbtn"
+														onclick="projectOfrAccept()">수락</button>
+													<button type="button" class="nopebtn" onclick="location.href='projectOfrDecline'">거절</button>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-
 							</div>
-						</div>
-					</div>
+						</c:if>
+					</c:forEach>
 					<!-- for문 end -->
 
 
@@ -218,46 +223,50 @@ button {
 			<div class="testimonial_slider">
 				<div class="row">
 					<!-- for문 start -->
-					<div class="col-sm-12 col-lg-12 list">
-						<div class="single_special_cource">
-							<div class="special_cource_text" style="border: 0;">
-								<div class="col-12 author_info"
-									style="border-top: 0; margin-top: 0; padding-top: 0;">
-									<div class="col-8">
-										<div class="author_img">
-											<div class="author_info_text">
-												<p>Conduct by:</p>
-												<h5>
-													<a href="#">김지갑 | 경력 2년 | 010-3131-2456</a>
-												</h5>
+					<c:forEach items="${interest }" var="interest">
+						<div class="col-sm-12 col-lg-12 list">
+							<div class="single_special_cource">
+								<div class="special_cource_text" style="border: 0;">
+									<div class="col-12 author_info"
+										style="border-top: 0; margin-top: 0; padding-top: 0;">
+										<div class="col-8">
+											<div class="author_img">
+												<div class="author_info_text">
+													<p>Conduct by:</p>
+													<h5>
+														<a href="jobDetail?user_id=${interest.user_id }">${interest.user_name }
+															| 경력 ${interest.user_crr }년 | ${interest.user_tel }</a>
+													</h5>
+												</div>
+											</div>
+											<!-- <div class="author_rating">
+	                                            <div class="rating avg">
+	                                                <div class="star-ratings">
+	                                                    <div 
+	                                                    class="star-ratings-fill" style=" width: 70% ">
+	                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+	                                                </div>
+	                                                <div class="star-ratings-base">
+	                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+	                                                </div>
+	                                            </div>
+	                                                <p>3.8 Ratings</p>
+	                                            </div>
+	                                        </div> -->
+										</div>
+
+										<div class="col-4">
+											<div class="button-contactForm">
+												<button type="button" class="joinbtn" onclick="location.href='heartAccept?user_id=${interest.user_id}&prj_id=${prj_id }&user_name=${interest.user_name }'">신청</button>
+												<button type="button" class="nopebtn" onclick="location.href='heartDelete?user_id=${interest.user_id}'">삭제</button>
 											</div>
 										</div>
-										<!-- <div class="author_rating">
-                                            <div class="rating avg">
-                                                <div class="star-ratings">
-                                                    <div 
-                                                    class="star-ratings-fill" style=" width: 70% ">
-                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                                </div>
-                                                <div class="star-ratings-base">
-                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                                                </div>
-                                            </div>
-                                                <p>3.8 Ratings</p>
-                                            </div>
-                                        </div> -->
 									</div>
-									<div class="col-4">
-										<div class="button-contactForm">
-											<button type="button" class="joinbtn">신청</button>
-											<button type="button" class="nopebtn">삭제</button>
-										</div>
-									</div>
-								</div>
 
+								</div>
 							</div>
 						</div>
-					</div>
+					</c:forEach>
 					<!-- for문 end -->
 
 
@@ -266,5 +275,20 @@ button {
 			</div>
 		</div>
 	</section>
+
+	<script type="text/javascript">
+		function projectOfrAccept() {
+			$('.joinbtn').on('click', function() {
+	            $.ajax({
+	                url: 'projectOfrAccept',
+	                type: 'get',
+					data: 
+	                success: function() {
+	                    console.log('gooood');
+	                }
+	            })
+			})
+		}
+	</script>
 </body>
 </html>

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertService;
 import co.test.prj.certificate.service.CertVO;
+import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.star.service.StarService;
@@ -43,7 +45,7 @@ public class TechController {
 	
 	@RequestMapping("/jobSelectList")
 	public String techSelectList(Model model, StarVO star) {
-		model.addAttribute("users", userDao.userSelectList());
+		model.addAttribute("jobs", techDao.jobSelectList());
 		model.addAttribute("techs", techDao.techSelectList());
 		
 		return "job/jobMain";
@@ -73,7 +75,7 @@ public class TechController {
 		
 		ProjectVO vo6 = new ProjectVO();
 		vo6.setMaster_id(user_id); //세션에 담긴 user_id로 바꿔야 됨
-		model.addAttribute("prjList", projectDao.jobJoinList(vo6));
+		model.addAttribute("prjList", techDao.jobJoinList(vo6));
 
 		return "job/jobDetail";
 	}
@@ -94,6 +96,57 @@ public class TechController {
 		return "job/jobUpdate";
 	}
 	
+	//구인현황
+	@RequestMapping("/projectOfrList")
+	private String projectOfrList(Model model, ProjectVO project, TechVO tech, HttpSession session) {
+		UserVO user= (UserVO)session.getAttribute("sessionUser");
+		project.setMaster_id(user.getUser_id());
+
+		model.addAttribute("ofterList", techDao.ofterList(project));
+		
+		model.addAttribute("interest", techDao.interestList(tech));
+		return "project/projectOfrList";
+	}
+	
+	//신청수락
+	@RequestMapping("/projectOfrAccept")
+	private String projectOfrAccept(Model model, HttpSession session,TeamVO vo, AppVO appvo) {
+		
+		techDao.ofterAcceptInsert(vo);
+		
+		appvo.setApp_stt("ok");
+		techDao.ofterAcceptUpdate(appvo);
+		return "redirect:/projectOfrList";
+	}
+	
+	//신청거절
+	@RequestMapping("/projectOfrDecline")
+	private String projectOfrDecline(Model model, AppVO appvo) {
+		appvo.setApp_stt("no");
+		techDao.ofterAcceptUpdate(appvo);
+		return "redirect:/projectOfrList";
+	}
+	
+	//관심 신청
+	@RequestMapping("/heartAccept")
+	private String heartAccept(Model model, AppVO app, HttpSession session) {
+		app.setMaster_id((int)session.getAttribute("master_id"));
+		model.addAttribute(techDao.heartAccept(app));
+		return "redirect:/projectOfrList";
+	}
+	
+	//관심삭제
+	@RequestMapping("/heartDelete")
+	private String heartDelete(Model model, InterestVO interest) {
+		techDao.heartDelete(interest);
+		return "redirect:/projectOfrList";
+	}
+	
+	//평가
+	@RequestMapping("/projectAssessList")
+	private String projectAssess() {
+		return "project/projectAssess";
+	}
 	
 	
 	

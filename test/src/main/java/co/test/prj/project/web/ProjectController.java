@@ -241,14 +241,4 @@ public class ProjectController {
 	
 	
 	
-	@RequestMapping("/projectOfrList")
-	private String projectOfrList(Model model) {
-		
-		return "project/projectOfrList";
-	}
-
-	@RequestMapping("/projectAssessList")
-	private String projectAssess() {
-		return "project/projectAssess";
-	}
 }

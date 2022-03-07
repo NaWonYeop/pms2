@@ -72,9 +72,6 @@
 	text-align: center;
 }
 
-.single_feature_part {
-	position: static;
-}
 
 </style>
 </head>
@@ -109,7 +106,7 @@
 				<div class="col-sm-6 col-xl-3">
 					<div class="single_feature">
 						<div class="single_feature_part">
-							<span class="single_feature_icon"> <i id="ti-layers"
+							<span class="single_feature_icon" style="position: static;"> <i id="ti-layers"
 								class="ti-layers"></i>
 
 								<div class="modaldal content">
@@ -196,6 +193,9 @@
 	<script>
 		function check(e) {
 			if (!$(e.target).hasClass("content")
+					&& !$(e.target).hasClass("justify-content-center")
+					&& !$(e.target).hasClass("flexbox")
+					&& !$(e.target).hasClass("score")
 					&& !$(e.target).hasClass("ti-layers")
 					&& !$(e.target).hasClass("option")
 					&& !$(e.target).hasClass("current")) {

@@ -45,16 +45,6 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.projectMaxPId();
 	}
 
-	@Override
-	public List<ProjectVO> jobJoinList(ProjectVO project) {
-		return map.jobJoinList(project);
-	}
-
-	@Override
-	public List<ProjectVO> ofterList(ProjectVO project) {
-		return map.ofterList(project);
-	}
-	
 //	@Override
 //	public List<ProjectVO> projectSearchList(ProjectVO project) {
 //		return map.projectSearchList(project);
