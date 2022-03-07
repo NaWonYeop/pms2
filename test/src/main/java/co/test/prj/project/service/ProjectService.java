@@ -20,13 +20,10 @@ public interface ProjectService {
 	//구인현황 리스트
 	List<ProjectVO> ofterList(ProjectVO project);
 
-
-	//List<ProjectVO> projectSearchList(ProjectVO project);
-
-	//List<ProjectVO> projectPageList(ProjectVO project);
-
 	List<ProjectVO> projectSearchPageList(ProjectVO project);
 
 	int projectSearchPageCount(ProjectVO project);
+	
+	int projectView(ProjectVO project);
 
 }

@@ -56,9 +56,21 @@
 		펀딩 여부 : ${project.prj_fnd_prop}<br>
 		버전 : ${project.prj_ver}<br>
 		상세 내용 : ${project.prj_cnt}<br>
-		
+		뷰 여부 : ${project.prj_view_prop}<br>
 	</div>
-
+	
+	
+	<form action="projectVerUp">
+		<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+		<input type="hidden" id="prj_ver" name="prj_ver" value="${project.prj_ver}">
+		<input type="submit" value="버전업">
+	</form>
+	
+	
+	<form action="projectViewDel">
+		<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+		<input type="submit" value="삭제">
+	</form>
 
 	
 		
