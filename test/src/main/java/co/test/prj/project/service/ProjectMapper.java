@@ -12,13 +12,6 @@ public interface ProjectMapper {
 	
 	int projectMaxPId();
 	
-	//프로젝트 참여
-	List<ProjectVO> jobJoinList(ProjectVO project);
-
-	//구인현황 리스트
-	List<ProjectVO> ofterList(ProjectVO project);
-
-	
 	//검색기능
 	//List<ProjectVO> projectSearchList(ProjectVO project);
 	

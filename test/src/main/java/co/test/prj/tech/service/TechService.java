@@ -2,10 +2,40 @@ package co.test.prj.tech.service;
 
 import java.util.List;
 
+import co.test.prj.application.service.AppVO;
+import co.test.prj.interest.service.InterestVO;
+import co.test.prj.project.service.ProjectVO;
+import co.test.prj.team.service.TeamVO;
+
 public interface TechService {
 	List<TechVO> techSelectList();
+	
+	List<TechVO> jobSelectList();
+
 	List<TechVO> techSelect(TechVO tech);
+
 	int techInsert(TechVO tech);
+
 	int techUpdate(TechVO tech);
+
 	int techDelete(TechVO tech);
+
+	// 프로젝트 참여
+	List<ProjectVO> jobJoinList(ProjectVO project);
+
+	// 구인현황 리스트
+	List<ProjectVO> ofterList(ProjectVO project);
+	
+	//관심 리스트
+	List<TechVO> interestList(TechVO tech);
+	
+	//신청수락
+	int ofterAcceptUpdate(AppVO app);
+	int ofterAcceptInsert(TeamVO team);
+	
+	//관심수락
+	int heartAccept(AppVO app);
+	
+	//관심거절
+	int heartDelete(InterestVO interest);
 }

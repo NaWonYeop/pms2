@@ -17,5 +17,7 @@ public class UserVO {
 	private String user_job_cnt;
 	private String user_type;
 	private String app_stt;
-	
+	private int app_id;
+	private String tech_name;
+	private int avg;
 }

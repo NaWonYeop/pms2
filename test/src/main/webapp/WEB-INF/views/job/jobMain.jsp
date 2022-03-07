@@ -99,21 +99,21 @@
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">
-						<c:forEach items="${users }" var="user">
-							<c:if test="${!empty user.user_job_ttl  }">
+						<c:forEach items="${jobs }" var="job">
+							<c:if test="${!empty job.user_job_ttl  }">
 								<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce">${user.user_name }|${user.user_crr }년</p>
+											<p class="introduce">${job.user_name } | ${job.user_crr }년</p>
 											<c:forEach items="${techs }" var="tech">
-												<c:if test="${user.user_id == tech.user_id2 }">
+												<c:if test="${job.user_id eq tech.user_id2 }">
 													<span class="btn_4">${tech.tech_name }</span>
 												</c:if>
 											</c:forEach>
-											<a href="jobDetail?user_id=${user.user_id }">
-												<h3>${user.user_job_ttl }</h3>
+											<a href="jobDetail?user_id=${job.user_id }">
+												<h3>${job.user_job_ttl }</h3>
 											</a>
-											<p>${user.user_job_cnt }</p>
+											<p>${job.user_job_cnt }</p>
 											<div class="author_info">
 												<div class="author_img">
 													<div class="author_info_text">
@@ -128,14 +128,14 @@
 												<div class="author_rating">
 													<div class="rating avg">
 														<div class="star-ratings">
-															<div class="star-ratings-fill" style="width: 50%">
+															<div class="star-ratings-fill" style="width: ${job.avg * 20 }%">
 																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 															</div>
 															<div class="star-ratings-base">
 																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 															</div>
 														</div>
-														<p>3.8 Ratings</p>
+														<p>평균 ${job.avg } 점</p>
 													</div>
 												</div>
 											</div>
@@ -159,27 +159,6 @@
 			return insertAvg + 1.5;
 		}
 	</script>
-	<!-- jquery plugins here-->
-	<!-- jquery -->
-	<script src="js/jquery-1.12.1.min.js"></script>
-	<!-- popper js -->
-	<script src="js/popper.min.js"></script>
-	<!-- bootstrap js -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- easing js -->
-	<script src="js/jquery.magnific-popup.js"></script>
-	<!-- swiper js -->
-	<script src="js/swiper.min.js"></script>
-	<!-- swiper js -->
-	<script src="js/masonry.pkgd.js"></script>
-	<!-- particles js -->
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<!-- swiper js -->
-	<script src="js/slick.min.js"></script>
-	<script src="js/jquery.counterup.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<!-- custom js -->
-	<script src="js/custom.js"></script>
+	
 </body>
 </html>
