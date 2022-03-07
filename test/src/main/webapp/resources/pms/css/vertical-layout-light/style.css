@@ -30592,4 +30592,7 @@ div.tagsinput span.tag a {
   }
 }
 
+.container-scroller {
+    min-height: 600px;
+}
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

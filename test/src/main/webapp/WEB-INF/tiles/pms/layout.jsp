@@ -26,11 +26,11 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/pms/js/select.dataTables.min.css">
 <!-- End plugin css for this page -->
+<!-- endinject -->
+<link rel="shortcut icon" href="resources/pms/images/favicon.png" />
 <!-- inject:css -->
 <link rel="stylesheet"
 	href="resources/pms/css/vertical-layout-light/style.css">
-<!-- endinject -->
-<link rel="shortcut icon" href="resources/pms/images/favicon.png" />
 <script src="resources/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>

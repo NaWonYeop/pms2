@@ -13,4 +13,6 @@ public interface PrgService {
 	int smlUpdate(PrgVO prg);
 
 	int prgDelete(PrgVO prg);
+	
+	int selectPrgID(PrgVO prg);
 }
