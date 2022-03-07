@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import co.test.prj.comtf.service.ComtfService;
+import co.test.prj.project.service.ProjectService;
 import co.test.prj.reward.service.RewardService;
 import co.test.prj.reward.service.RewardVO;
 
@@ -15,6 +17,12 @@ public class RewardComtroller {
 
 	@Autowired
 	private RewardService rewardDao;
+	
+	@Autowired
+	private ProjectService projectDao;
+	
+	@Autowired
+	private ComtfService comtfDao;
 	
 	//리워드 등록 폼 
 	@RequestMapping("/rewardInsertForm")

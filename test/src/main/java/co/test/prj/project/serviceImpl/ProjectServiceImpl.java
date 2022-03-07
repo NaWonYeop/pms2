@@ -45,15 +45,8 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.projectMaxPId();
 	}
 
-//	@Override
-//	public List<ProjectVO> projectSearchList(ProjectVO project) {
-//		return map.projectSearchList(project);
-//	}
 
-//	@Override
-//	public List<ProjectVO> projectPageList(ProjectVO project) {
-//		return map.projectPageList(project);
-//	}
+
 
 	@Override
 	public List<ProjectVO> projectSearchPageList(ProjectVO project) {
@@ -63,6 +56,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public int projectSearchPageCount(ProjectVO project) {
 		return map.projectSearchPageCount(project);
+	}
+
+	@Override
+	public int projectView(ProjectVO project) {
+		return map.projectView(project);
 	}
 
 	

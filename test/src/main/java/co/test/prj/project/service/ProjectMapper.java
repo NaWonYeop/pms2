@@ -12,17 +12,23 @@ public interface ProjectMapper {
 	
 	int projectMaxPId();
 	
+
 	//검색기능
 	//List<ProjectVO> projectSearchList(ProjectVO project);
 	
 	//페이징
 	//List<ProjectVO> projectPageList(ProjectVO project);
+
+
 	
 	//검색+페이징
 	List<ProjectVO> projectSearchPageList(ProjectVO project);
 		
 	//검색+페이징 건수 확인
 	int projectSearchPageCount(ProjectVO project);
+	
+	//프로젝트 삭제(보이기만)
+	int projectView(ProjectVO project);
 	
 
 }

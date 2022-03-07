@@ -15,12 +15,17 @@ public interface ProjectService {
 
 	int projectMaxPId();
 
+
 	//List<ProjectVO> projectSearchList(ProjectVO project);
 
 	//List<ProjectVO> projectPageList(ProjectVO project);
 
+
+
 	List<ProjectVO> projectSearchPageList(ProjectVO project);
 
 	int projectSearchPageCount(ProjectVO project);
+	
+	int projectView(ProjectVO project);
 
 }

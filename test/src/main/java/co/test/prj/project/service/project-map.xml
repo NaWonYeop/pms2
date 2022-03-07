@@ -21,11 +21,11 @@
 			INSERT INTO PROJECT(PRJ_ID, PRJ_NAME, PRJ_STR, PRJ_ED, PRJ_OFR_PROP, 
 			PRJ_FND_PROP, PRJ_CNT, MASTER_ID, CTF_ID, PRJ_OFR_STR, PRJ_OFR_ED,
 			PRJ_FRN_PRS, PRJ_BK_PRS, PRJ_DB_PRS, PRJ_SER_PRS, PRJ_CND, PRJ_AR,
-			PRJ_FND_STR, PRJ_FND_ED, PRJ_GL_PRC)
+			PRJ_FND_STR, PRJ_FND_ED, PRJ_GL_PRC, PRJ_VER)
 			VALUES(#{prj_id}, #{prj_name}, #{prj_str}, #{prj_ed}, #{prj_ofr_prop}, 
 			#{prj_fnd_prop}, #{prj_cnt}, #{master_id}, #{ctf_id}, #{prj_ofr_str}, #{prj_ofr_ed},
 			#{prj_frn_prs}, #{prj_bk_prs}, #{prj_db_prs}, #{prj_ser_prs}, #{prj_cnd}, #{prj_ar},
-			#{prj_fnd_str}, #{prj_fnd_ed}, #{prj_gl_prc})				
+			#{prj_fnd_str}, #{prj_fnd_ed}, #{prj_gl_prc}, #{prj_ver})				
 	</insert>
 	
 	<!-- 업데이트 지만 insert로 버전명 바꿔가면서 씀 -->
@@ -33,10 +33,18 @@
 	
 	</insert>
 	
+	<update id="projectView" parameterType="co.test.prj.project.service.ProjectVO">	
+		UPDATE PROJECT
+		SET PRJ_VIEW_PROP = 1
+		WHERE PRJ_ID = #{prj_id}
+	</update>
+	
+	
 	<delete id="projectDelete" parameterType="co.test.prj.project.service.ProjectVO">
 	
 	</delete>
 	
+
 	<!-- 안쓸꺼임 -->
 	<!-- <select id="projectSearchList" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
@@ -68,6 +76,22 @@
 		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select> -->
+
+	
+	<!-- 구직상세 참여프로젝트 >>> 경일 -->
+	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
+		SELECT PRJ_NAME FROM PROJECT
+		WHERE master_id = #{master_id} and SYSDATE <![CDATA[<]]> PRJ_OFR_ED
+	</select>
+	
+
+	<!-- 구인현황 리스트 >>> 경일 -->
+	<select id="ofterList" resultType="co.test.prj.user.service.UserVO">
+		select u.user_name, u.user_crr, u.user_tel, app_stt
+		from "user" u, application a
+		where u.user_id in (select user_id from application where master_id=0 and prj_id = 0 ) and u.user_id=a.user_id;
+	</select>
+
 	
 	<select id="projectSearchPageList" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
@@ -78,7 +102,8 @@
 		                FROM ( ]]>
 		                			SELECT * 
 									FROM PROJECT
-									WHERE PRJ_NAME LIKE '%'||#{keyword}||'%'
+									WHERE PRJ_VIEW_PROP = 0
+									AND PRJ_NAME LIKE '%'
 									<choose>
 										<when test="type != null and type.equals('ofr')">
 											AND PRJ_OFR_PROP LIKE '1'
