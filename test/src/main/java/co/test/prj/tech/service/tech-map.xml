@@ -60,4 +60,20 @@
 	<delete id="heartDelete" parameterType="co.test.prj.interest.service.InterestVO">
 		DELETE FROM INTEREST WHERE USER_ID = #{user_id}
 	</delete>
+	
+	<!-- 평가 -->
+	<select id="AssessList" parameterType="co.test.prj.project.service.ProjectVO" resultType="co.test.prj.tech.service.TechVO">
+		SELECT U.USER_NAME, T.TM_DEPT, U.USER_ID, P.PRJ_ID, P.PRJ_NAME
+		FROM "user" U, PROJECT P, TEAM T
+		WHERE P.PRJ_ID = #{prj_id} AND U.USER_ID = T.USER_ID AND PRJ_DEVED_PROP = 1 AND P.PRJ_ID = T.PRJ_ID
+	</select>
+	
+	<insert id="AssessInsert" parameterType="co.test.prj.star.service.StarVO">
+		insert into star(prj_id, user_id, user_id2, str_prfsn, str_obs, str_pos, str_comm, str_re_empl, str_avg)
+		values(#{prj_id}, #{user_id}, #{user_id2}, #{str_prfsn}, #{str_obs}, #{str_pos}, #{str_comm}, #{str_re_empl}, #{str_avg})
+	</insert>
+	
+	
+	
+	
 </mapper>
