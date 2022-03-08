@@ -36,7 +36,9 @@ public interface UserMapper {
 	//비밀번호 확인
 	UserVO checkPwd(UserVO user);
 	//개발자 등록
-	CertVO insertDev(UserVO user);
+	int insertDev(CertVO cert);
+	//개발자 수정
+	int deleteDev(CertVO cert);
 	
 	//프로젝트관리페이지 
 	List<ProjectVO> MyInsertProject(int master_id);

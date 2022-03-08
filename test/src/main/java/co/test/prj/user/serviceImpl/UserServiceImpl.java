@@ -99,11 +99,6 @@ public class UserServiceImpl implements UserService {
 		return map.checkPwd(user);
 	}
 
-	@Override
-	public CertVO insertDev(UserVO user) {
-		
-		return map.insertDev(user);
-	}
 
 	@Override
 	public List<ProjectVO> MyInsertProject(int master_id) {
@@ -113,15 +108,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<ProjectVO> MyJoinProject(int user_id) {
-		// TODO Auto-generated method stub
 		return map.MyJoinProject(user_id);
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<ProjectVO> MyfundingList(int user_id)
 	{
 		// TODO Auto-generated method stub
 		return map.MyfundingList(user_id);
+=======
+	public int insertDev(CertVO cert) {
+		return map.insertDev(cert);
+	}
+
+	@Override
+	public int deleteDev(CertVO cert) {
+		return map.deleteDev(cert);
+>>>>>>> refs/remotes/origin/0308daeu
 	}
 
 	

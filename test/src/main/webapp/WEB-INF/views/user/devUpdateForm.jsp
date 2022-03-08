@@ -1,15 +1,20 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -40,6 +45,10 @@ body {
 }
 
 #btn-Yes {
+	background-color: #e4932b;
+	border: none;
+}
+#mul{
 	background-color: #e4932b;
 	border: none;
 }
@@ -77,52 +86,91 @@ a {
 	color: red;
 }
 </style>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
-<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 
-	<div class="card align-middle" style="width:25rem;">
-		<div class="card-title" style="margin-top:30px;">
-		</div>
-      <form action="userUpdateForm" method="post">
-       
-		<div class="card-body">
-  
-        <input type="text" name="id" id="id" class="form-control" placeholder="수정할 자격증" value="${user_email }" autofocus required>
-        <BR>
-        <input id="date" type="date"  onchange="fnc()" name="id" 
-					 class="form-control" placeholder="수정할 취득날짜"  required><br>
-          <input type="number" name="name" id="name" class="form-control" placeholder="수정할 경력"  required><br>
-           <input type="text" name="tel" id="tel" class="form-control" placeholder="수정할 첨부파일"  required><br>
-        
-         <p id="check" class="check">${login_msg}</p><br/>
-        <input id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" value="개발자 정보수정">
-        </div>
-      </form>
-		</div>
-		<script type="text/javascript">
+<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
+	width="100%" height="100%" align="center">
 
-	function cancel() {
-		location.href="home";
-	}
+	<div class="card align-middle" style="width: 25rem;">
+		<div class="card-title" style="margin-top: 30px;"></div>
+		<form action="devUpdate" onsubmit="return formCheck()"
+			method="post" enctype="multipart/form-data">
+			
+			<div class="card-body">
+				<span><label>자격증</label><input id="cert_name" type="text"
+					class="form-control"
+					placeholder="내용을 입력하세요" autofocus required></span>
+				<button type="button" onclick="add()" id="addBtn">추가</button>
+				
+				<ul id="certList" >
+				<c:forEach items="${MyCert}" var="certifi">
+				<li>
+					${certifi.cert_name}<span class="close">x</span></li>
+					
+				</c:forEach>	
+				</ul>
+				<BR>
+				
+				<BR>
+				<label>경력</label><input type="number" class="form-control"
+					id="user_crr" name="user_crr"><BR> 
+				
+				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+					type="submit" value="등록하기" onclick=""> <input type="reset"
+					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
+					onclick="cancel()">
+			</div>
+		</form>
+	</div>
 
-	function formCheck() {
-		var confirmation = confirm("등록하시겠습니까?")
-		if (confirmation == true) {
-			return true;
-		} else {
-			return false;
+	<script type="text/javascript">
+		function cancel() {
+			location.href = "home";
+		}
+
+		function formCheck() {
+			var confirmation = confirm("등록하시겠습니까?")
+			if (confirmation == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+
+		var close = document.getElementsByClassName("close");
+		for (var i = 0; i < close.length; i++) {
+			close[i].onclick = function() {
+				var div = this.parentElement;
+				div.remove();
+			}
 		}
 		
-	}
-	function fnc() {
-        var di=document.getElementById("date");
-        console.log(di.value);
-    }
-	
-</script>
-		
-</body>
+		function add() {
+			console.log(cert_name.value);
+			var i = document.createElement("span");
+			var li = document.createElement("li");
+			i.innerHTML = `<input id="date" name = "cert_name" type="hidden" value = "\${cert_name.value}" >`
+			document.getElementsByClassName("card-body")[0].insertBefore(i,addBtn);
+			li.innerHTML = cert_name.value
+			certList.append(li)
+			console.log("add");
+			var span = document.createElement("span");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close";
+			span.appendChild(txt);
+			li.appendChild(span);
+			for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+					var div = this.parentElement;
+					div.remove();
+				}
+			}
 
+		}
+		
+	</script>
+
+
+</body>
 </html>

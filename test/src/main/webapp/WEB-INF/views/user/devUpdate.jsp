@@ -45,7 +45,7 @@
 				"showMethod" : "fadeIn",
 				"hideMethod" : "fadeOut"
 			}
-			toastr.warning('회원가입 성공하셨습니다');
+			toastr.warning('성공적으로 수정하였습니다');
 		}
 	});
 	</script>

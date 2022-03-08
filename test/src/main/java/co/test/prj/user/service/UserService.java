@@ -32,7 +32,10 @@ public interface UserService {
 	
 	UserVO checkPwd(UserVO user);
 	
-	CertVO insertDev(UserVO user);
+	int insertDev(CertVO cert);
+	
+	int deleteDev(CertVO cert);
+	
 	
 	List<ProjectVO> MyProject(UserVO user);
 	
