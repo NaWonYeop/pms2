@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -16,9 +18,11 @@ public class PrgVO {
 	private String prg_content;	// 내용
 	private String prg_manager;		// 섹션, 할일 구분
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date prg_str;			// 시작날짜
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date prg_ed;				// 종료날짜
-	private int prg_user;				// 담당자
+	private String prg_user;				// 담당자
 	private int prg_cmp_prop;		// 완료여부 0:진행 , 1:완료
 }

@@ -30,12 +30,8 @@
 		</if>
 		<!-- manager숫자가 없는 경우 -->
 		<if test="prg_manager == null">
-			INSERT INTO PROGRESS (PRG_ID, MASTER_ID,PRJ_ID,
-			PRG_CONTENT, PRG_STR, PRG_ED, PRG_USER, PRG_CMP_PROP)
-			VALUES
-			(#{prg_id}, #{master_id}, #{prj_id},
-			#{prg_content}, #{prg_str},
-			#{prg_ed}, #{prg_user}, #{prg_cmp_prop})
+			INSERT INTO PROGRESS (PRG_ID, MASTER_ID, PRJ_ID, PRG_CONTENT, PRG_STR, PRG_ED, PRG_CMP_PROP)
+			VALUES (#{prg_id}, #{master_id}, #{prj_id}, #{prg_content}, #{prg_str}, #{prg_ed}, #{prg_cmp_prop})
 		</if>
 	</insert>
 
@@ -44,12 +40,12 @@
 		parameterType="co.test.prj.prg.service.PrgVO">
 		UPDATE PROGRESS
 		<set>
-			<if test="prg_ttl != null"> PRG_CONTENT = #{prg_content},</if>
-			<if test="prg_ttl != null"> PRG_MANAGER = #{prg_manager},</if>
-			<if test="prg_ttl != null"> PRG_STR = #{prg_str},</if>
-			<if test="prg_ttl != null"> PRG_ED = #{prg_ed},</if>
-			<if test="prg_ttl != null"> PRG_USER = #{prg_user},</if>
-			<if test="prg_ttl != null"> PRG_CMP_PROP = #{prg_com_prop},</if>
+			<if test="prg_content != null"> PRG_CONTENT = #{prg_content},</if>
+			<if test="prg_manager != null"> PRG_MANAGER = #{prg_manager},</if>
+			<if test="prg_str != null"> PRG_STR = #{prg_str},</if>
+			<if test="prg_ed != null"> PRG_ED = #{prg_ed},</if>
+			<if test="prg_user != null"> PRG_USER = #{prg_user},</if>
+			<if test="prg_cmp_prop != null"> PRG_CMP_PROP = #{prg_cmp_prop},</if>
 		</set>
 		WHERE prg_id = #{prg_id}
 	</update>
