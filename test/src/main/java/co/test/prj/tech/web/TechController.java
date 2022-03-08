@@ -100,11 +100,13 @@ public class TechController {
 	@RequestMapping("/projectOfrList")
 	private String projectOfrList(Model model, ProjectVO project, TechVO tech, HttpSession session) {
 		UserVO user= (UserVO)session.getAttribute("sessionUser");
+		
 		project.setMaster_id(user.getUser_id());
 
 		model.addAttribute("ofterList", techDao.ofterList(project));
-		
+		model.addAttribute("prj_id",project.getPrj_id());
 		model.addAttribute("interest", techDao.interestList(tech));
+		
 		return "project/projectOfrList";
 	}
 	

@@ -43,4 +43,7 @@ public interface UserMapper {
 	
 	List<ProjectVO> MyJoinProject(int user_id);
 	
+	//내펀딩리스트
+	List<ProjectVO> MyfundingList(int user_id);
+	
 }

@@ -71,8 +71,36 @@
 	margin-top: 10%;
 	text-align: center;
 }
-
-
+.default-select .current{
+    -webkit-tap-highlight-color: transparent !important;
+    
+    border-radius: 5px !important;
+    border: #f9f9ff !important;
+    box-sizing: border-box !important;
+    clear: both !important;
+    cursor: pointer !important;
+    display: block !important;
+    float: left !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    height: 38px !important;
+    line-height: 40px !important;
+    outline: none !important;
+    padding-left: 18px !important;
+    padding-right: 30px !important;
+    position: relative !important;
+    text-align: left !important;
+    -webkit-transition: all 0.2s ease-in-out !important;
+    transition: all 0.2s ease-in-out !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    background: #f9f9ff !important;
+}
 </style>
 </head>
 <body>
@@ -106,8 +134,8 @@
 				<div class="col-sm-6 col-xl-3">
 					<div class="single_feature">
 						<div class="single_feature_part">
-							<span class="single_feature_icon" style="position: static;"> <i id="ti-layers"
-								class="ti-layers"></i>
+							<span class="single_feature_icon" style="position: static;">
+								<i id="ti-layers" class="ti-layers"></i>
 
 								<div class="modaldal content">
 									<div class="content modalcontent">
@@ -115,7 +143,15 @@
 											<h2 class="content prjtitle" style="text-align: center;">평가하기</h2>
 											<div class="flexbox">
 												<p class="content prj" style="">전문성</p>
-												<input type="text" class="score">
+												<div class="default-select" id="default-select">
+													<select>
+														<option value="1">0</option>
+														<option value="1">1</option>
+														<option value="1">2</option>
+														<option value="1">3</option>
+														<option value="1">4</option>
+													</select>
+												</div>
 											</div>
 											<div class="flexbox">
 												<p class="content prj">일정준수</p>

@@ -117,5 +117,12 @@ public class UserServiceImpl implements UserService {
 		return map.MyJoinProject(user_id);
 	}
 
+	@Override
+	public List<ProjectVO> MyfundingList(int user_id)
+	{
+		// TODO Auto-generated method stub
+		return map.MyfundingList(user_id);
+	}
+
 	
 }

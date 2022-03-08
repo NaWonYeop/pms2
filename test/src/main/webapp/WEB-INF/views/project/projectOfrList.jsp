@@ -71,7 +71,7 @@ button {
 						<div class="breadcrumb_iner_item">
 							<h2>구..인현..황</h2>
 							<p>
-								Home<span>/</span>Courses
+								Home<span>/</span>${prj_id }
 							</p>
 						</div>
 					</div>
