@@ -26,10 +26,17 @@
 
 	<!-- 개발자등록 -->
 	<insert id="insertDev" parameterType="co.test.prj.certificate.service.CertVO">
-		INSERT INTO CERTIFICATE(CERT_NAME)
-		VALUES(#{cert_name})
+	<selectKey keyProperty="cert_id" resultType="int"
+			order="BEFORE">
+			SELECT MAX(cert_id) + 1 FROM certificate
+		</selectKey>
+		INSERT INTO CERTIFICATE(CERT_ID,CERT_NAME,USER_ID)
+		VALUES(#{cert_id},#{cert_name}, #{user_id})
 	</insert>
-	
+	<!-- 개발자 자격증수정 -->
+	<delete id="deleteDev" parameterType="co.test.prj.certificate.service.CertVO">
+	delete from certificate where cert_name = #{cert_name}
+	</delete>
 	<!-- 비번찾기 -->
 	<update id="updatePwd"
 		parameterType="co.test.prj.user.service.UserVO">
@@ -54,8 +61,9 @@
 		SELECT CASE WHEN COUNT(*) = 1 THEN 0 ELSE 1 END AS ID
 		FROM
 		"user"
-		WHERE USER_EMAIL = #{email}
+		WHERE USER_EMAIL = #{user_email}
 	</select>
+	
 
 	<!-- 아이디찾기 -->
 	<select id="userSearch"
@@ -94,7 +102,7 @@
 		DELETE FROM "user" WHERE user_id = #{user_id}
 	</delete>
 
-
+	
 	<!-- 경일 -->
 	<select id="jobSelect"
 		resultType="co.test.prj.user.service.UserVO">
