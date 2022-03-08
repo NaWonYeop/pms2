@@ -12,7 +12,12 @@
 		VALUES(#{ctf_id}, #{ctf_st_name}, #{ctf_oru_name}, #{ctf_usectf_st_course})
 	</insert>
 
-
+	<select id="comtfSelect" parameterType="co.test.prj.comtf.service.ComtfVO"
+		resultType="co.test.prj.comtf.service.ComtfVO">
+		SELECT *
+		FROM COMTNFILE
+		WHERE CTF_ID =#{ctf_id} 
+	</select>
 
 
 </mapper>
