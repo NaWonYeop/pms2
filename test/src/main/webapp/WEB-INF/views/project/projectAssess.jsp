@@ -1,5 +1,7 @@
+<%@page import="co.test.prj.user.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +74,36 @@
 	text-align: center;
 }
 
-
+.default-select .current{
+    -webkit-tap-highlight-color: transparent !important;
+    
+    border-radius: 5px !important;
+    border: #f9f9ff !important;
+    box-sizing: border-box !important;
+    clear: both !important;
+    cursor: pointer !important;
+    display: block !important;
+    float: left !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    height: 38px !important;
+    line-height: 40px !important;
+    outline: none !important;
+    padding-left: 18px !important;
+    padding-right: 30px !important;
+    position: relative !important;
+    text-align: left !important;
+    -webkit-transition: all 0.2s ease-in-out !important;
+    transition: all 0.2s ease-in-out !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    background: #f9f9ff !important;
+}
 </style>
 </head>
 <body>
@@ -100,92 +131,96 @@
 				<div class="col-sm-6 col-xl-3 align-self-center">
 					<div class="single_feature_text" style="text-align: center;">
 						<h2>평가하기</h2>
-						<p>프로젝트명</p>
+						<p>${AssessList[0].prj_name }</p>
 					</div>
 				</div>
-				<div class="col-sm-6 col-xl-3">
-					<div class="single_feature">
-						<div class="single_feature_part">
-							<span class="single_feature_icon" style="position: static;"> <i id="ti-layers"
-								class="ti-layers"></i>
 
-								<div class="modaldal content">
-									<div class="content modalcontent">
-										<div class="justify-content-center">
-											<h2 class="content prjtitle" style="text-align: center;">평가하기</h2>
-											<div class="flexbox">
-												<p class="content prj" style="">전문성</p>
-												<input type="text" class="score">
+				<c:forEach items="${AssessList }" var="Assess" varStatus="status">
+					<div class="col-sm-6 col-xl-3">
+						<div class="single_feature">
+							<div class="single_feature_part">
+								<span class="single_feature_icon" style="position: static;">
+									<i id="ti-layers${status.index }" class="ti-layers"
+									onclick="modalFadeSelect(this);"></i>
+									<div class="modaldal content">
+										<input type="hidden" id="aId" value="${Assess.user_id }">
+										<div class="content modalcontent">
+											<div class="justify-content-center">
+												<h2 class="content prjtitle" style="text-align: center;">평가하기</h2>
+												<div class="flexbox">
+													<p class="content prj" style="">전문성</p>
+													<div class="default-select" id="default-select">
+				                                       <select id="str_prfsn">
+				                                          <option value="5">5</option>
+				                                          <option value="4">4</option>
+				                                          <option value="3">3</option>
+				                                          <option value="2">2</option>
+				                                          <option value="1">1</option>
+				                                       </select>
+				                                    </div>
+												</div>
+												<div class="flexbox">
+													<p class="content prj">일정준수</p>
+													<div class="default-select" id="default-select">
+				                                       <select id="str_obs">
+				                                          <option value="5">5</option>
+				                                          <option value="4">4</option>
+				                                          <option value="3">3</option>
+				                                          <option value="2">2</option>
+				                                          <option value="1">1</option>
+				                                       </select>
+				                                    </div>
+												</div>
+												<div class="flexbox">
+													<p class="content prj">적극성</p>
+													<div class="default-select" id="default-select">
+				                                       <select id="str_pos">
+				                                          <option value="5">5</option>
+				                                          <option value="4">4</option>
+				                                          <option value="3">3</option>
+				                                          <option value="2">2</option>
+				                                          <option value="1">1</option>
+				                                       </select>
+				                                    </div>
+												</div>
+												<div class="flexbox">
+													<p class="content prj">의사소통</p>
+													<div class="default-select" id="default-select">
+				                                       <select id="str_comm">
+				                                          <option value="5">5</option>
+				                                          <option value="4">4</option>
+				                                          <option value="3">3</option>
+				                                          <option value="2">2</option>
+				                                          <option value="1">1</option>
+				                                       </select>
+				                                    </div>
+												</div>
+												<div class="flexbox">
+													<p class="content prj">재고용 의사</p>
+													<div class="default-select" id="default-select">
+				                                       <select id="str_re_empl">
+				                                          <option value="5">5</option>
+				                                          <option value="4">4</option>
+				                                          <option value="3">3</option>
+				                                          <option value="2">2</option>
+				                                          <option value="1">1</option>
+				                                       </select>
+				                                    </div>
+												</div>
 											</div>
-											<div class="flexbox">
-												<p class="content prj">일정준수</p>
-												<input type="text" class="score">
-											</div>
-											<div class="flexbox">
-												<p class="content prj">적극성</p>
-												<input type="text" class="score">
-											</div>
-											<div class="flexbox">
-												<p class="content prj">의사소통</p>
-												<input type="text" class="score">
-											</div>
-											<div class="flexbox">
-												<p class="content prj">재고용 의사</p>
-												<input type="text" class="score">
-											</div>
-
+											<button type="button" class="call"
+												style="line-height: normal;" onclick="Assess()">평가하기</button>
 										</div>
-										<button type="button" class="call"
-											style="line-height: normal;">신청하기</button>
 									</div>
+								</span>
+								<h4>${Assess.user_name }</h4>
+								<p>${Assess.tm_dept }</p>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 
-								</div>
-							</span>
-							<h4>김고기</h4>
-							<p>Front-end</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xl-3">
-					<div class="single_feature">
-						<div class="single_feature_part">
-							<span class="single_feature_icon"><i
-								onclick="location.href='#'" class="ti-new-window"></i></span>
-							<h4>나는1엽</h4>
-							<p>Back-end</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xl-3">
-					<div class="single_feature">
-						<div class="single_feature_part single_feature_part_2">
-							<span class="single_service_icon style_icon"><i
-								onclick="location.href='#'" class="ti-light-bulb"></i></span>
-							<h4>실버덕</h4>
-							<p>DB</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xl-3">
-					<div class="single_feature">
-						<div class="single_feature_part">
-							<span class="single_feature_icon"><i
-								onclick="location.href='#'" class="ti-new-window"></i></span>
-							<h4>나는1엽</h4>
-							<p>Back-end</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xl-3">
-					<div class="single_feature">
-						<div class="single_feature_part single_feature_part_2">
-							<span class="single_service_icon style_icon"><i
-								onclick="location.href='#'" class="ti-light-bulb"></i></span>
-							<h4>실버덕</h4>
-							<p>DB</p>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</section>
@@ -193,9 +228,10 @@
 	<script>
 		function check(e) {
 			if (!$(e.target).hasClass("content")
+					&& !$(e.target).hasClass("default-select")
+					&& !$(e.target).hasClass("nice-select")
 					&& !$(e.target).hasClass("justify-content-center")
 					&& !$(e.target).hasClass("flexbox")
-					&& !$(e.target).hasClass("score")
 					&& !$(e.target).hasClass("ti-layers")
 					&& !$(e.target).hasClass("option")
 					&& !$(e.target).hasClass("current")) {
@@ -208,9 +244,41 @@
 			check(e);
 		});
 
-		$('#ti-layers').click(function(e) {
-			$('.modaldal').fadeIn();
-		});
+		/* 	$('#ti-layers').click(function(e) {
+				$('.modaldal').fadeIn();
+			}); */
+
+		function modalFadeSelect(info) {
+			$('#' + info.id).next().fadeIn();
+		}
+		
+		//평가 버튼
+		function Assess() {
+			var aId = $('#aId').val();
+			var prfsn = parseInt($('#str_prfsn').val()); 
+			var obs = parseInt($('#str_obs').val());
+			var pos = parseInt($('#str_pos').val());
+			var comm = parseInt($('#str_comm').val());
+			var reEmpl = parseInt($('#str_re_empl').val());
+			var avg = (prfsn+obs+pos+comm+reEmpl)/5;
+
+			$.ajax({
+				url : "projectAssess",
+				type: "get",
+				data : {
+					prj_id: ${AssessList[0].prj_id },
+					user_id: aId,
+					str_prfsn : prfsn,
+					str_obs : obs,
+					str_pos : pos,
+					str_comm : comm,
+					str_re_empl : reEmpl,
+					str_avg: avg
+				}
+			}).done(function(){
+				console.log('gooood');
+			}) 
+		}
 	</script>
 </body>
 </html>

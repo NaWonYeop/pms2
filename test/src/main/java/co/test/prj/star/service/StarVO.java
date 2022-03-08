@@ -12,5 +12,5 @@ public class StarVO {
 	private int str_pos;
 	private int str_comm;
 	private int str_re_empl;
-	private int str_avg;
+	private double str_avg;
 }

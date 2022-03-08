@@ -5,7 +5,7 @@
 		SELECT * FROM STAR
 	</select>
 	<select id="starSelect" resultType="co.test.prj.star.service.StarVO">
-		SELECT * FROM STAR WHERE USER_ID = #{user_id}
+		SELECT AVG(STR_PRFSN), AVG(STAR_OBS), AVG(STR_POS), AVG(STR_COMM), AVG(STR_RE_EMPL), AVG(STR_AVG) FROM STAR WHERE USER_ID = #{user_id}
 	</select>
 	
 	<select id="starAllAvg" resultType="co.test.prj.star.service.StarVO">

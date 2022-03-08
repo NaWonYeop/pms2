@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertService;
@@ -134,7 +136,6 @@ public class TechController {
 		model.addAttribute(techDao.heartAccept(app));
 		return "redirect:/projectOfrList";
 	}
-	
 	//관심삭제
 	@RequestMapping("/heartDelete")
 	private String heartDelete(Model model, InterestVO interest) {
@@ -142,13 +143,23 @@ public class TechController {
 		return "redirect:/projectOfrList";
 	}
 	
-	//평가
+	//평가페이지
 	@RequestMapping("/projectAssessList")
-	private String projectAssess() {
+	private String projectAssess(Model model, ProjectVO project) {
+		
+		model.addAttribute("AssessList", techDao.AssessList(project));
 		return "project/projectAssess";
 	}
 	
-	
+	//평가 Insert
+	@RequestMapping("/projectAssess")
+	@ResponseBody
+	private void projectAssess(StarVO star, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("sessionUser");
+		star.setUser_id2(user.getUser_id());
+		techDao.AssessInsert(star);
+		
+	}
 	
 	
 }

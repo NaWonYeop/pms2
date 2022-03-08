@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.star.service.StarVO;
 import co.test.prj.team.service.TeamVO;
 import co.test.prj.tech.service.TechMapper;
 import co.test.prj.tech.service.TechService;
@@ -84,6 +85,17 @@ public class TechServiceImpl implements TechService {
 		return map.jobSelectList();
 	}
 
+	@Override
+	public List<TechVO> AssessList(ProjectVO vo) {
+		return map.AssessList(vo);
+	}
+
+	@Override
+	public int AssessInsert(StarVO star) {
+		return map.AssessInsert(star);
+	}
+
+	
 	
 	
 	

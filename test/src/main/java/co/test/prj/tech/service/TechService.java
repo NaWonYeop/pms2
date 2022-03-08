@@ -5,6 +5,7 @@ import java.util.List;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.star.service.StarVO;
 import co.test.prj.team.service.TeamVO;
 
 public interface TechService {
@@ -38,4 +39,10 @@ public interface TechService {
 	
 	//관심거절
 	int heartDelete(InterestVO interest);
+	
+	//평가
+	List<TechVO> AssessList(ProjectVO vo);
+	
+	//평가 insert
+	int AssessInsert(StarVO star);
 }
