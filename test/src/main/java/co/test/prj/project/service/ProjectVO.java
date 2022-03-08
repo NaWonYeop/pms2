@@ -73,4 +73,7 @@ public class ProjectVO
 	private int count;//현재참여인원
 	private int user_tel;//마스터 전화번호
 	private String user_name;//마스터이름
+	private int total;//총 구매액
+	private String ctf_st_name;//섬네일 저장이름
+	private String ctf_usectf_st_course;//저장위치
 }

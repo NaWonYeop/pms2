@@ -66,6 +66,7 @@ public class UserController {
 	@PostMapping("IsIdCheck")
 	@ResponseBody
 	public String IsIdCheck(String user_email, HttpSession session) {
+		
 		System.out.println(user_email);
 		String location = null;
 		if (!userDao.isIdCheck(user_email)) {
@@ -302,13 +303,16 @@ public class UserController {
 		userDao.userDelete(user);
 		return "user/Withdrawal3";
 	}
-
+	//내 펀딩목록
 	@RequestMapping("/myfunding")
-	public String myfunding() {
-
+	public String myfunding(HttpSession session,Model model) {
+		UserVO user=(UserVO)session.getAttribute("sessionUser");
+		int id=user.getUser_id();
+		model.addAttribute("funding",userDao.MyfundingList(id));
+		
 		return "user/myfunding";
 	}
-	
+	//프로젝트관리
 	@RequestMapping("/myProject")
 	public String myProject(HttpSession session,Model model) {
 		UserVO user=(UserVO)session.getAttribute("sessionUser");

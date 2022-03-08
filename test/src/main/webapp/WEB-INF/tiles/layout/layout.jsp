@@ -31,10 +31,7 @@
  <link rel="stylesheet" href="resources/main/css/nice-select.css">
 
 
-<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+    <script src="resources/main/js/jquery-1.12.1.min.js"></script>
 <!-- popper js -->
 <script src="resources/main/js/popper.min.js"></script>
 <!-- bootstrap js -->

@@ -59,7 +59,7 @@
 									</c:choose>
 								</div>
 								<div class="visit">
-									<button class="button button-contactForm btn_1" onclick="location.href='projectOfrList?prj_id${myp.prj_id}'">현황</button>
+									<button class="button button-contactForm btn_1" onclick="location.href='projectOfrList?prj_id=${myp.prj_id}'">현황</button>
 								</div>
 								<div class="visit">
 									<button class="button button-contactForm btn_1" onclick="location.href=''">평가</button>

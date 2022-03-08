@@ -30,11 +30,10 @@
 							
 							<c:if test="${sessionUser ne null }">
 								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="blog.html"
-									id="navbarDropdown" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="true">My Page </a>
+									class="nav-link dropdown-toggle" href="mypage"
+									id="navbarDropdown" >My Page </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="">프로젝트 관리</a>
+										<a class="dropdown-item" href="myProject">프로젝트 관리</a>
 										<a class="dropdown-item" href="myfunding">펀딩내역</a>
 										<a class="dropdown-item" href="">개인정보 변경</a>
 										<a class="dropdown-item" href="">개발자 정보변경</a>

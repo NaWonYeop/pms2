@@ -143,6 +143,6 @@
          </div>
       </div>
    </section>
-
+	 <script src="js/jquery.counterup.min.js"></script>
 </body>
 </html>

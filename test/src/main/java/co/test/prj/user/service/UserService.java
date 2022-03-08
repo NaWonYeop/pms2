@@ -43,4 +43,6 @@ public interface UserService {
 	List<ProjectVO> MyInsertProject(int master_id);
 	
 	List<ProjectVO> MyJoinProject(int user_id);
+	
+	List<ProjectVO> MyfundingList(int user_id);
 }
