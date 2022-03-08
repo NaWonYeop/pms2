@@ -1,10 +1,8 @@
 package co.test.prj.reward.service;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class RewardVO {
 	private int reward_id; //리워드 아이디 ,알아서들어감
 	private int prj_id; //프로젝트 아이디

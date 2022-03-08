@@ -6,11 +6,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+//@Data  //나중에 이걸로 바꿀것 상세내용 때문에 보기 귀찮음
 public class ProjectVO
 {
 	private int prj_id; //pk 일련번호
@@ -31,7 +33,6 @@ public class ProjectVO
 	private int prj_ver; // 버전
 	private String prj_cnt; // 상세내용 
 	private int master_id; // fk 담당자 아이디 //우선 널값 해제함
-	//private int ctf_id; //첨부파일 일련번호 펀딩사진//우선 널값 해제함
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_ofr_str; //구인 시작일

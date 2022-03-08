@@ -18,12 +18,13 @@
 <br>
 <body data-editor="ClassicEditor" data-collaboration="false"
 	data-revision-history="false">
-
+	${sessionScope }<br>
+	
 	<div>
 		<h3>프로젝트 등록</h3>
 		<form action="projectInsert" onsubmit="return check()" method="post" enctype="multipart/form-data">
 			
-			<!-- 로그인 구현되면 수정할것 --><input type="hidden" id="master_id" name="master_id" value="0">
+			<input type="hidden" id="master_id" name="master_id" value="${sessionScope.sessionUser.user_id }">
 			<input type="hidden" id="prj_ver" name="prj_ver" value="0">	
 			<div>
 				제목

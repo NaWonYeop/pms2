@@ -12,6 +12,22 @@
 <br>
 <br>
 <body>
+
+<c:if test="${result.type == 'fnd'}">
+펀딩검색
+</c:if>
+
+<c:if test="${result.type == 'ofr'}">
+구인검색
+</c:if>
+
+<c:if test="${result.type == '' or result.type == null}">
+전체검색
+</c:if>
+<br> 
+${sessionScope }<br>
+${sessionScope.sessionUser.user_id } <!-- master ID 로 사용할것 -->
+
 	<!-- 검색창 시작 -->
 	<div class="row justify-content-center">
 		<div class="col-sm-7">
@@ -20,10 +36,22 @@
 					<div class="form-group">
 						<div class="input-group mb-3">
 							<div class="form-select" id="default-select" style="width: 25%;">
-								<select name="type" value=" <c:out value="${result.type}" />" >
-									<option value="" selected>전체</option>
-									<option value="fnd">펀딩</option>
-									<option value="ofr">구인</option>
+								<select name="type" >
+									<option value="" 
+									<c:if test="${result.type == '' or result.type == null}">
+									selected
+									</c:if>
+									>전체</option>
+									<option value="fnd"
+									<c:if test="${result.type == 'fnd'}">
+									selected
+									</c:if>
+									>펀딩</option>
+									<option value="ofr"
+									<c:if test="${result.type == 'ofr'}">
+									selected
+									</c:if>
+									>구인</option>
 								</select>
 							</div>
 							<input type="text" name="keyword" class="form-control" 
@@ -44,31 +72,60 @@
 		</div>
 	</div>
 	<!-- 검색창 끝 -->
-	${result }
+	
+	<button type="button" onClick="location.href='projectInsertForm'">프로젝트 등록</button><br>
 	<div id="list">
 	<c:if test="${empty result.projects }">
 				검색 결과가 없습니다.
 	</c:if>
-	<c:forEach items="${result.projects }" var="project">
-		<div class="card">
-		<form action="projectSelect" method="post">
-		<input type="hidden" name="prj_id" id="prj_id" value="${project.prj_id}">
-		<input type="submit" name="prj_name" id="prj_name" value="${project.prj_name}">
-		번호 : ${project.prj_id}<br>
-		이름 : ${project.prj_name}<br>
-		담당자 아이디 : ${project.master_id}<br>
-		시작일 ~ 마감일 : 
-		<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
-		<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /><br>
-		등록일 : <fmt:formatDate value="${project.prj_reg_date }" pattern="yyyy-MM-dd" /><br>
-		조회수 : ${project.prj_hit}<br>
-		구인 여부 : ${project.prj_ofr_prop}<br>
-		펀딩 여부 : ${project.prj_fnd_prop}<br>
-		버전 : ${project.prj_ver}<br>
-		뷰 여부 : ${project.prj_view_prop}<br>
-		</form>
-		</div>
-	</c:forEach>
+		<c:forEach items="${result.projects }" var="project">
+		${result}<br>
+		<br>
+		${project}<br>
+			<div class="card">
+			<form action="projectSelect" method="get">
+			<input type="hidden" name="prj_id" id="prj_id" value="${project.prj_id}">
+			<input type="submit" value="${project.prj_name}"><br>
+			(나중에 지울것)번호 : ${project.prj_id}<br>
+			조회수 : ${project.prj_hit}<br>
+			이름 : ${project.prj_name}<br>
+			등록일 : <fmt:formatDate value="${project.prj_reg_date }" pattern="yyyy-MM-dd" /><br>
+			담당자 아이디 : ${project.master_id}<br>
+			시작일 ~ 마감일 : 
+			<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
+			<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /><br>
+			(나중에 삭제)구인 여부 : ${project.prj_ofr_prop}<br>
+			<c:if test="${project.prj_ofr_prop == 1}">
+			<!-- 구인 있을시 -->
+			============구인============<br>
+			구인 시작일 ~ 구인 마감일 : 
+			<fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
+			<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /><br>	
+			프론트 : ${project.prj_frn_prs}<br>
+			백 : ${project.prj_bk_prs}<br>
+			DB : ${project.prj_db_prs}<br>
+			서버 : ${project.prj_ser_prs}<br>
+			조건 : ${project.prj_cnd}<br>
+			지역 : ${project.prj_ar}<br>
+			============구인============<br>
+			</c:if>
+			(나중에 삭제)펀딩 여부 : ${project.prj_fnd_prop}<br>
+			<c:if test="${project.prj_fnd_prop == 1}">
+			<!-- 펀딩 있을시 -->
+			============펀딩============<br>
+			펀딩사진 들고올 아이디 : ${project.ctf_id}<br>
+			펀딩 시작일 ~ 펀딩 마감일 : 
+			<fmt:formatDate value="${project.prj_fnd_str }" pattern="yyyy-MM-dd" /> ~ 
+			<fmt:formatDate value="${project.prj_fnd_ed }" pattern="yyyy-MM-dd" /><br>	
+			목표금액 : ${project.prj_gl_prc}<br>
+			============펀딩============<br>
+			</c:if>
+			개발마감 여부 : ${project.prj_devEd_prop}<br>
+			버전 : ${project.prj_ver}<br>
+			뷰 여부 : ${project.prj_view_prop}<br>
+			</form>
+			</div>
+		</c:forEach>
 	</div>
 
 
@@ -99,21 +156,49 @@
 				
 				for (var a of result.projects){
 					console.log(a);
+					var ofr='';
+					var fnd='';
+					if(a.prj_ofr_prop == 1){
+						ofr = "============구인============<br>"
+							 +"구인 시작일 ~ 구인 마감일 :" 
+							 + a.prj_ofr_str +" ~ "+ a.prj_ofr_ed+ "<br>"	
+							 +"프론트 : "+ a.prj_frn_prs +"<br>"
+							 +"백 : "+ a.prj_bk_prs + "<br>"
+							 +"DB : "+ a.prj_db_prs + "<br>"
+							 +"서버 : "+ a.prj_ser_prs + "<br>"
+							 +"조건 : "+ a.prj_cnd + "<br>"
+							 +"지역 : "+ a.prj_ar + "<br>"
+							 +"============구인============<br>";
+					}
+					if(a.prj_fnd_prop == 1){
+						fnd = "============펀딩============<br>"
+							 +"펀딩사진 들고올 아이디 : "+ a.ctf_id +"<br>"
+							 +"펀딩 시작일 ~ 펀딩 마감일 :" 
+							 + a.prj_fnd_str +" ~ "+ a.prj_fnd_ed+ "<br>"	
+							 +"목표금액 : "+ a.prj_gl_prc + "<br>"
+							 +"============펀딩============<br>";
+					}
 					$("#list").append(`
 							
 							<div class="card">
-							<form action="projectSelect" method="post">
+							<form action="projectSelect" method="get">
 							<input type="hidden" name="prj_id" id="prj_id" value="\${a.prj_id}">
-							<input type="submit" name="prj_name" id="prj_name" value="\${a.prj_name}">
-							번호 : \${a.prj_id}<br>
+							<input type="submit" value="\${a.prj_name}"><br>
+							(나중에 지울것)번호 : \${a.prj_id}<br>
+							조회수 : \${a.prj_hit}<br>
 							이름 : \${a.prj_name}<br>
+							등록일 : \${a.prj_reg_date}<br>
 							담당자 아이디 : \${a.master_id}<br>
 							시작일 ~ 마감일 : \${a.prj_str} ~ \${a.prj_ed}<br>
-							등록일 : \${a.prj_reg_date}<br>
-							조회수 : \${a.prj_hit}<br>
-							구인 여부 : \${a.prj_ofr_prop}<br>
-							펀딩 여부 : \${a.prj_fnd_prop}<br>
-							버전 : \${a.prj_ver}<br>
+							(나중에 삭제)구인 여부 : \${a.prj_ofr_prop}<br>
+							\${ofr}		
+							
+							(나중에 삭제)펀딩 여부 : \${a.prj_fnd_prop}<br>
+							\${fnd}		
+					
+							개발마감 여부 : ${project.prj_devEd_prop}<br>
+							버전 : ${project.prj_ver}<br>
+							뷰 여부 : ${project.prj_view_prop}<br>
 							</form>
 							</div>
 							

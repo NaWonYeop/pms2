@@ -15,14 +15,16 @@
 <br>
 <br>
 <body>
-
+	${sessionScope}<br>
+	${rewards }<br>
+	
 	<h3>
 		리워드 등록
 	</h3>
 
 
 	<form action="rewardInsert">
-		${sessionScope}
+		
 		프로젝트명, 담당자명 보여주기<br>
 		<input type="hidden" id="master_id" name="master_id" value="${sessionScope.sessionMId}"> 
 		<input type="hidden" id="prj_id" name="prj_id" value="${sessionScope.sessionPId}">
@@ -59,7 +61,7 @@
 			</c:forEach>
 		</ul>
 		<!-- 쓸지 안쓸지 고민 -->
-		<button type="button">완료</button>
+		<button type="button" onClick="location.href='projectSelect?prj_id=${sessionScope.sessionPId}'">완료</button><br>
 	</div>
 </body>
 </html>

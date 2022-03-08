@@ -22,6 +22,7 @@ import co.test.prj.comtf.service.ComtfService;
 import co.test.prj.comtf.service.ComtfVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.reward.service.RewardVO;
 
 @Controller
 public class ProjectController {
@@ -100,9 +101,9 @@ public class ProjectController {
 			project.setPrj_id(pId);
 			
 			model.addAttribute("project",projectDao.projectSelect(project));
-			
+			String url = "redirect:/projectSelect?prj_id="+pId;
 			//나중에 전체목록 만들면 그곳으로 경로 변경할것
-			return "project/projectSelect";
+			return url;
 		} else {
 			System.out.println("펀딩하면");
 			
@@ -128,6 +129,7 @@ public class ProjectController {
 			@RequestParam("pageNum") int pageNum, 
 			@RequestParam("amount") int amount, 
 			ProjectVO project, 
+			ComtfVO comtf,
 			Model model) {
 		Map<String, Object> map = new HashedMap();
 		System.out.println("검색 들어오는곳");
@@ -168,6 +170,11 @@ public class ProjectController {
 		map.put("type", gettype);
 		map.put("keyword", trimkeyword);
 		map.put("amount", getamount);
+		
+		//펀딩시 사진 날리기
+		///////////////////////////////////////////////////////////////////////여기작업중
+		//comtfDao.comtfSelect(comtf);
+		
 		
 		model.addAttribute("result", map);
 

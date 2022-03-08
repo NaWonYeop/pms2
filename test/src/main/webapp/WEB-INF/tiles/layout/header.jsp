@@ -20,12 +20,10 @@
 						class="collapse navbar-collapse main-menu-item justify-content-end"
 						id="navbarSupportedContent">
 						<ul class="navbar-nav align-items-center">
-							<li class="nav-item active"><a class="nav-link" href="freeBoard">게시판</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="projectOfrList">구인</a></li>
-							<li class="nav-item"><a class="nav-link" href="jobSelectList">구직</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="">펀딩</a></li>
+							<li class="nav-item active"><a class="nav-link" href="freeBoard">게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="jobSelectList">구직</a></li>
+							<li class="nav-item"><a class="nav-link" href="projectSearchPage?type=ofr&keyword=&pageNum=1&amount=5">구인</a></li>
+							<li class="nav-item"><a class="nav-link" href="projectSearchPage?type=fnd&keyword=&pageNum=1&amount=5">펀딩</a></li>
 							
 							
 							<li class="nav-item"><a class="nav-link" href="pms">PMS</a></li>
