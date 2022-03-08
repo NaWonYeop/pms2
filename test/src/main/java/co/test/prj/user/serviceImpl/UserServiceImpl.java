@@ -13,120 +13,135 @@ import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
 @Repository("userDao")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService
+{
 
 	@Autowired
 	private UserMapper map;
 
 	@Override
-	public List<UserVO> userSelectList() {
+	public List<UserVO> userSelectList()
+	{
 
 		return map.userSelectList();
 	}
 
 	@Override
-	public UserVO userSelect(UserVO user) {
+	public UserVO userSelect(UserVO user)
+	{
 
 		return map.userSelect(user);
 	}
 
 	@Override
-	public int userInsert(UserVO user) {
+	public int userInsert(UserVO user)
+	{
 
 		return map.userInsert(user);
 	}
 
 	@Override
-	public int userUpdate(UserVO user) {
+	public int userUpdate(UserVO user)
+	{
 
 		return map.userUpdate(user);
 	}
 
 	@Override
-	public int userDelete(UserVO user) {
+	public int userDelete(UserVO user)
+	{
 
 		return map.userDelete(user);
 	}
 
 	@Override
-	public boolean isIdCheck(String user_email) {
+	public boolean isIdCheck(String user_email)
+	{
 
 		return map.isIdCheck(user_email);
 	}
 
 	@Override
-	public UserVO userSearch(UserVO user) {
+	public UserVO userSearch(UserVO user)
+	{
 		return map.userSearch(user);
 	}
 
 	@Override
-	public UserVO searchPwd(UserVO user) {
+	public UserVO searchPwd(UserVO user)
+	{
 
 		return map.searchPwd(user);
 	}
 
 	@Override
-	public int updatePwd(UserVO user) {
+	public int updatePwd(UserVO user)
+	{
 		// TODO Auto-generated method stub
 		return map.updatePwd(user);
 	}
 
-
 	@Override
-	public UserVO jobSelect(UserVO user) {
+	public UserVO jobSelect(UserVO user)
+	{
 		return map.jobSelect(user);
 	}
 
 	@Override
-	public List<ProjectVO> MyProject(UserVO user) {
+	public List<ProjectVO> MyProject(UserVO user)
+	{
 		return map.MyProject(user);
 	}
 
 	@Override
-	public List<ProjectVO> MyFunding(UserVO user) {
-		
+	public List<ProjectVO> MyFunding(UserVO user)
+	{
+
 		return map.MyFunding(user);
 	}
 
 	@Override
-	public List<AppVO> MyApp(UserVO user) {
+	public List<AppVO> MyApp(UserVO user)
+	{
 		return map.MyApp(user);
 	}
 
 	@Override
-	public UserVO checkPwd(UserVO user) {
-		
+	public UserVO checkPwd(UserVO user)
+	{
+
 		return map.checkPwd(user);
 	}
 
-
 	@Override
-	public List<ProjectVO> MyInsertProject(int master_id) {
+	public List<ProjectVO> MyInsertProject(int master_id)
+	{
 		// TODO Auto-generated method stub
 		return map.MyInsertProject(master_id);
 	}
 
 	@Override
-	public List<ProjectVO> MyJoinProject(int user_id) {
+	public List<ProjectVO> MyJoinProject(int user_id)
+	{
 		return map.MyJoinProject(user_id);
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<ProjectVO> MyfundingList(int user_id)
 	{
 		// TODO Auto-generated method stub
 		return map.MyfundingList(user_id);
-=======
-	public int insertDev(CertVO cert) {
+	}
+
+	public int insertDev(CertVO cert)
+	{
 		return map.insertDev(cert);
 	}
 
 	@Override
-	public int deleteDev(CertVO cert) {
+	public int deleteDev(CertVO cert)
+	{
 		return map.deleteDev(cert);
->>>>>>> refs/remotes/origin/0308daeu
 	}
 
-	
 }
