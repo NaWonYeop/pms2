@@ -2,7 +2,6 @@ package co.test.prj.prg.web;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,75 +44,80 @@ public class PrgController {
 	@RequestMapping("/prgInsert")
 	@ResponseBody
 	public String prgInsert(HttpSession session, 
-			@RequestParam("prg_content") String prg_content, 
-			@RequestParam(value="prg_str", required = false) String prg_str, 
-			@RequestParam(value="prg_ed", required = false) String prg_ed, 
-			@RequestParam(value="prg_manager", required = false) String prg_manager) {
+			@RequestParam("prg_content") String prg_content,
+			@RequestParam(value = "prg_str", required = false) String prg_str,
+			@RequestParam(value = "prg_ed", required = false) String prg_ed,
+			@RequestParam(value = "prg_manager", required = false) String prg_manager,
+			@RequestParam(value = "prg_user", required = false) String prg_user) {
 		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		int master_id = myPrj.getMaster_id();
 		int prj_id = myPrj.getPrj_id();
-		
+
 		PrgVO prg = new PrgVO();
-		
+
 		prg.setPrj_id(prj_id);
 		prg.setMaster_id(master_id);
 		prg.setPrg_content(prg_content);
 		prg.setPrg_str(MyUtill.convertStringtoDate(prg_str));
 		prg.setPrg_ed(MyUtill.convertStringtoDate(prg_ed));
 		prg.setPrg_manager(prg_manager);
-		System.out.println("prg_manager: " + prg_manager);
-		
-		int count  = prgDao.prgInsert(prg);
+		prg.setPrg_user(prg_user);
+		System.out.println("prg_user: " + prg_user);
+
+		int count = prgDao.prgInsert(prg);
 		String result = null;
-		if(count >0) {
-			result="success";
-		}else {
-			result="fail";
+		if (count > 0) {
+			result = "success";
+		} else {
+			result = "fail";
 		}
-		
+
 		return result;
 	}
-	
-	@RequestMapping("/smlUpdate")
+
+	@RequestMapping("/prgUpdate")
+	@ResponseBody
 	public String smlUpdate(HttpSession session, PrgVO prg) {
-		prgDao.smlUpdate(prg);
-		return "";
+		int count = prgDao.prgUpdate(prg);
+		String result = null;
+		if (count > 0) {
+			result = "success";
+		} else {
+			result = "fail";
+		}
+		return result;
 	}
-	
 
 	@RequestMapping("/midDelete")
 	@ResponseBody
-	public String prgDelete(HttpSession session, PrgVO prg) {
+	public String midDelete(HttpSession session, PrgVO prg) {
 		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		int prj_id = myPrj.getPrj_id();
 		prg.setPrj_id(prj_id);
 		String result = "";
-		
+
 		int min = prgDao.selectPrgID(prg);
-		if(min != prg.getPrg_id()) {
+		if (min != prg.getPrg_id()) {
 			prgDao.smlUpdate(prg);
 			prgDao.prgDelete(prg);
 			result = "success";
 		} else {
 			result = "fail";
 		}
-		
-		
+
 		return result;
 	}
-	
-	@RequestMapping("/smlDelete")
+
+	@RequestMapping("/prgDelete")
 	@ResponseBody
-	public String smlDelete(HttpSession session, PrgVO prg) {
+	public String prgDelete(HttpSession session, PrgVO prg) {
 		int count = prgDao.prgDelete(prg);
 		String result = null;
-		if(count >0) {
-			result="success";
-		}else {
-			result="fail";
+		if (count > 0) {
+			result = "success";
+		} else {
+			result = "fail";
 		}
-		
 		return result;
 	}
-	
 }
