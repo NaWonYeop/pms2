@@ -22,6 +22,7 @@ import co.test.prj.comtf.service.ComtfService;
 import co.test.prj.comtf.service.ComtfVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.reward.service.RewardService;
 import co.test.prj.reward.service.RewardVO;
 
 @Controller
@@ -32,6 +33,9 @@ public class ProjectController {
 	
 	@Autowired
 	private ComtfService comtfDao;
+	
+	@Autowired
+	private RewardService rewardDao;
 	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
@@ -170,9 +174,7 @@ public class ProjectController {
 		map.put("type", gettype);
 		map.put("keyword", trimkeyword);
 		map.put("amount", getamount);
-		
-		//펀딩시 사진 날리기
-		///////////////////////////////////////////////////////////////////////////////////////////////
+				
 		
 		model.addAttribute("result", map);
 
@@ -237,11 +239,26 @@ public class ProjectController {
 	
 	
 	@RequestMapping("/projectSelect")
-	private String projectSelect(@RequestParam("prj_id") int id, Model model, ProjectVO project) {
+	private String projectSelect(
+			@RequestParam("prj_id") int id, 
+			Model model, 
+			ProjectVO project,
+			RewardVO reward) {
 		System.out.println("상세페이지");
 		project.setPrj_id(id);
 		
 		model.addAttribute("project",projectDao.projectSelect(project));
+		System.out.println();
+		System.out.println();
+		//이거 코드 무조건 수정해야됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if(projectDao.projectSelect(project).getPrj_fnd_prop() == 1) {
+			
+			reward.setMaster_id(projectDao.projectSelect(project).getMaster_id());
+			reward.setPrj_id(id);
+			
+			model.addAttribute("rewards", rewardDao.rewardInsertSelect(reward));
+		}
+		
 		
 		return "project/projectSelect";
 	}
