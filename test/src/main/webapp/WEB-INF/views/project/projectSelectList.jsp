@@ -113,7 +113,7 @@ ${sessionScope.sessionUser.user_id } <!-- master ID 로 사용할것 -->
 			<c:if test="${project.prj_fnd_prop == 1}">
 			<!-- 펀딩 있을시 -->
 			============펀딩============<br>
-			펀딩사진 들고올 아이디 : ${project.ctf_id}<br>
+			<img src="./resources/upload/images/${project.ctf_st_name}"><br>
 			펀딩 시작일 ~ 펀딩 마감일 : 
 			<fmt:formatDate value="${project.prj_fnd_str }" pattern="yyyy-MM-dd" /> ~ 
 			<fmt:formatDate value="${project.prj_fnd_ed }" pattern="yyyy-MM-dd" /><br>	
@@ -172,6 +172,7 @@ ${sessionScope.sessionUser.user_id } <!-- master ID 로 사용할것 -->
 					}
 					if(a.prj_fnd_prop == 1){
 						fnd = "============펀딩============<br>"
+							 +"<img src='./resources/upload/images/"+ a.ctf_st_name +"'><br>"
 							 +"펀딩사진 들고올 아이디 : "+ a.ctf_id +"<br>"
 							 +"펀딩 시작일 ~ 펀딩 마감일 :" 
 							 + a.prj_fnd_str +" ~ "+ a.prj_fnd_ed+ "<br>"	

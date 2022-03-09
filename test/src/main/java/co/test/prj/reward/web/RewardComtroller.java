@@ -18,12 +18,6 @@ public class RewardComtroller {
 	@Autowired
 	private RewardService rewardDao;
 	
-	@Autowired
-	private ProjectService projectDao;
-	
-	@Autowired
-	private ComtfService comtfDao;
-	
 	//리워드 등록 폼 
 	@RequestMapping("/rewardInsertForm")
 	public String rewardInsertForm(Model model, HttpSession session, RewardVO reward) {
@@ -36,7 +30,7 @@ public class RewardComtroller {
 		
 		System.out.println("session값 ~ sessionMId : "+ session.getAttribute("sessionMId") +", sessionPId : "+ session.getAttribute("sessionPId"));
 
-		//프로젝트 목록 보여주기
+		//리워드 목록 보여주기
 		reward.setMaster_id((int)session.getAttribute("sessionMId"));
 		reward.setPrj_id((int)session.getAttribute("sessionPId"));
 		
