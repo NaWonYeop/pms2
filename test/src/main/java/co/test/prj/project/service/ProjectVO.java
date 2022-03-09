@@ -76,4 +76,6 @@ public class ProjectVO
 	private int total;//총 구매액
 	private String ctf_st_name;//섬네일 저장이름
 	private String ctf_usectf_st_course;//저장위치
+	private int total_team_prs;//총 구해진 인원
+	private int total_prs;//총구하는 인원
 }

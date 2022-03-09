@@ -63,6 +63,18 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.projectView(project);
 	}
 
+	@Override
+	public List<ProjectVO> mainOfrList() {
+		// TODO Auto-generated method stub
+		return map.mainOfrList();
+	}
+
+	@Override
+	public List<ProjectVO> mainFndList() {
+		// TODO Auto-generated method stub
+		return map.mainFndList();
+	}
+
 	
 	
 

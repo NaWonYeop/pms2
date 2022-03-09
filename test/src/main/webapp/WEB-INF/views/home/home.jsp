@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
 <html>
 
@@ -77,24 +78,28 @@
                   </div>
                </div>
                <div class="blog_left_sidebar">
+               <c:forEach items="${mainOfer }" var="ofr"> 
                   <article class="blog_item">
 
 
                      <div class="blog_details">
-                        <a class="d-inline-block" href="single-blog.html">
-                           <h2>푸로젝트 제목</h2>
+                        <a class="d-inline-block" href="single-blog.html"><!-- 여기 주소 -->
+                           <h2>${ofr.prj_name }</h2>
                         </a> <br>
                         <p class="btn_4">hi</p>
                         <p class="btn_4">bye</p>
                         <p class="btn_4">boy</p>
 
                         <ul class="blog-info-link">
-                           <li><i class="far fa-user"></i> 모집인원 1/3명</a></li>
+                           <li><i class="far fa-user"></i> 모집인원 ${ofr.total_team_prs }/${ofr.total_prs }명</a></li>
                            <li><i class="far fa-comments"></i> 기간
-                              2022/02/14~2022/03/14</a></li>
+                              <fmt:formatDate value="${ofr.prj_ofr_str }"
+									pattern="yyyy-MM-dd" />~<fmt:formatDate value="${ofr.prj_ofr_ed}"
+									pattern="yyyy-MM-dd" /></a></li>
                         </ul>
                      </div>
                   </article>
+                  </c:forEach>
                </div>
             </div>
 
@@ -111,33 +116,35 @@
                   </div>
                </div>
                <div class="blog_right_sidebar">
+                <c:forEach items="${mainFnd }" var="fnd"> 
                   <article class="blog_item">
                      
                 
 
                      <div class="blog_details">
                           <div class="blog_item_img">
-                     	<h3 style="font-weight: bold;">펀딩 제목</h3>
+                     	<h3 style="font-weight: bold;">${fnd.prj_name }</h3>
                         <img class="card-img rounded-0"
-                           src="resources/main/img/blog/single_blog_1.png" alt="">
+                           src="./resources/upload/images/${fnd.ctf_st_name }" alt="">
 
                      </div>
                         <a class="d-inline-block" href="single-blog.html"> </a>
-                        <h3 class="right">80%</h3>
+                        <h3 class="right"><fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
                         <div class="progress">
                            <div class="progress-bar color-3" role="progressbar"
-                              style="width: 80%;background-color: #f09359" aria-valuenow="80" aria-valuemin="0"
+                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359" aria-valuenow="80" aria-valuemin="0"
                               aria-valuemax="100"></div>
                         </div>
                         <br>
                         <ul class="blog-info-link">
                            <li><i class="far fa-comments"></i> 현재 펀딩금액</a></li>
                          
-                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">100,00025</span>원 </div></h3></li>
+                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">${fnd.total }</span>원 </div></h3></li>
                           
                         </ul>
                      </div>
                   </article>
+                  </c:forEach>
                </div>
             </div>
          </div>

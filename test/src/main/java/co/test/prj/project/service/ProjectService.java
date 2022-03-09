@@ -28,4 +28,9 @@ public interface ProjectService {
 	
 	int projectView(ProjectVO project);
 
+	//원엽
+	//메인페이지 뿌려줄 구인(프로젝트)리스트
+	List<ProjectVO> mainOfrList();
+	//메인페이지 뿌려줄 펀딩리스트
+	List<ProjectVO> mainFndList();
 }
