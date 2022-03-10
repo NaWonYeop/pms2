@@ -247,13 +247,15 @@ public class ProjectController {
 		System.out.println("상세페이지");
 		project.setPrj_id(id);
 		
-		model.addAttribute("project",projectDao.projectSelect(project));
+		ProjectVO prj = projectDao.projectSelect(project);
+		
+		model.addAttribute("project",prj);
 		System.out.println();
 		System.out.println();
-		//이거 코드 무조건 수정해야됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if(projectDao.projectSelect(project).getPrj_fnd_prop() == 1) {
+		
+		if(prj.getPrj_fnd_prop() == 1) {
 			
-			reward.setMaster_id(projectDao.projectSelect(project).getMaster_id());
+			reward.setMaster_id(prj.getMaster_id());
 			reward.setPrj_id(id);
 			
 			model.addAttribute("rewards", rewardDao.rewardInsertSelect(reward));
@@ -268,6 +270,93 @@ public class ProjectController {
 		projectDao.projectView(project);
 		
 		return "redirect:/projectSearchPage?type=&keyword=&pageNum=1&amount=5";
+	}
+	
+	@RequestMapping("/projectVerUpForm")
+	private String projectVerUpForm(ProjectVO project, Model model, ComtfVO comtf) {
+		
+		comtf.setCtf_id(project.getCtf_id());
+		
+		model.addAttribute("project", projectDao.projectSelect(project));
+		model.addAttribute("comtf", comtfDao.comtfSelect(comtf));
+		
+		return "project/projectVerUpForm";
+	}
+	@RequestMapping("/projectVerUpdate")
+	private String projectVerUpdate(
+			@RequestParam("mul") MultipartFile multi, 
+			ProjectVO project, ComtfVO comtf, 
+			HttpSession session, 
+			HttpServletRequest hreq,
+			Model model) {
+		
+		System.out.println("업데이트 되냐?");
+		
+		int pId = project.getPrj_id();
+		System.out.println("pId : " + pId );
+		
+		//멀티파트 사진 들어올때
+		int fNum = comtfDao.comtfCountMax(); //파일 번호 CTF_ID
+		System.out.println(fNum);
+		String oriThuName = multi.getOriginalFilename(); //원파일명 CTF_ORU_NAME
+		System.out.println("원파일명 : " + oriThuName);
+		if (!oriThuName.isEmpty()) {
+			System.out.println("사진들어오냐?");
+			String tuuid = UUID.randomUUID().toString();
+			String savThuName = tuuid + oriThuName.substring(oriThuName.lastIndexOf(".")); //저장할 파일명 CTF_ST_NAME
+			System.out.println("저장파일명 : " + savThuName);
+	
+			String path = hreq.getServletContext().getRealPath("\\resources\\upload"); 
+			String path2 = path.replace("\\", "/");
+			String uploadDir = path2 + "/images/";  //저장경로 CTF_USECTF_ST_COURSE
+			System.out.println("경로 : "+ uploadDir);
+			
+			project.setCtf_id(fNum);
+			
+			//사진 등록
+			comtf.setCtf_id(fNum);
+			comtf.setCtf_oru_name(oriThuName);
+			comtf.setCtf_st_name(savThuName);
+			comtf.setCtf_usectf_st_course(uploadDir);
+			
+			comtfDao.comtfInsert(comtf);
+			
+			try {
+				multi.transferTo(new File(uploadDir, savThuName));
+			} catch (Exception e) {
+				System.out.println("이미지 저장시 오류생김");
+				e.printStackTrace();
+			} 
+		
+		} else {
+			System.out.println("사진없냐?");
+		}
+		
+		//프로젝트 업데이트
+		projectDao.projectUpdate(project);
+		
+		System.out.println(project.getPrj_name());
+		System.out.println(project.getPrj_fnd_prop());
+		
+		//펀딩 유무 ~> 리워드 보냄
+		if (project.getPrj_fnd_prop() == 0) {
+			System.out.println("펀딩안하면");
+			
+			model.addAttribute("project",projectDao.projectSelect(project));
+			String url = "redirect:/projectSelect?prj_id="+pId;
+			//나중에 전체목록 만들면 그곳으로 경로 변경할것
+			return url;
+		} else {
+			System.out.println("펀딩하면");
+			
+			session.setAttribute("sessionMId", project.getMaster_id());
+			session.setAttribute("sessionPId", pId);
+			
+			System.out.println("session등록 ~ sessionMId : "+ project.getMaster_id()+", sessionPId : "+ pId);
+			
+			return "redirect:/rewardInsertForm";
+		}
+		
 	}
 	
 	

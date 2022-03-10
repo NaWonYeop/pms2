@@ -18,13 +18,13 @@ public class ProjectVO
 	private int prj_id; //pk 일련번호
 	private String prj_name; //프로젝트명
 	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd") //나갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date prj_str; // 시작일
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date prj_ed; //마감일
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date prj_reg_date; // 등록일 ~디폴트 sysdate로
 	private int prj_hit; //조회수 
 	private int prj_ofr_prop; // 구인 여부 
@@ -33,10 +33,10 @@ public class ProjectVO
 	private int prj_ver; // 버전
 	private String prj_cnt; // 상세내용 
 	private int master_id; // fk 담당자 아이디 //우선 널값 해제함
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_ofr_str; //구인 시작일
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_ofr_ed; //구인 마감일
 	private int prj_frn_prs; //프론트 인원
@@ -45,14 +45,17 @@ public class ProjectVO
 	private int prj_ser_prs; //서버 인원
 	private String prj_cnd; //조건
 	private String prj_ar; //지역
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_fnd_str; //펀딩 시작일
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date prj_fnd_ed; //펀딩 마감일
 	private int prj_gl_prc; // 목표금액
 	private int prj_view_prop; //글 뷰 여부
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date prj_ver_date; //글 수정여부
 	
 	private int ctf_id;			// app_pk 파일저장 일련번호
 	

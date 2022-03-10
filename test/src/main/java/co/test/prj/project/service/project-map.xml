@@ -28,10 +28,33 @@
 			#{prj_fnd_str}, #{prj_fnd_ed}, #{prj_gl_prc}, #{prj_ver})				
 	</insert>
 	
-	<!-- 업데이트 지만 insert로 버전명 바꿔가면서 씀 -->
-	<insert id="projectUpdate" parameterType="co.test.prj.project.service.ProjectVO">
-	
-	</insert>
+	<update id="projectUpdate" parameterType="co.test.prj.project.service.ProjectVO">
+		UPDATE PROJECT
+		<set>
+			<if test="prj_name != null"> PRJ_NAME = #{prj_name},</if>
+			<if test="prj_str != null"> PRJ_STR = #{prj_str},</if>
+			<if test="prj_ed != null"> PRJ_ED = #{prj_ed},</if>
+			<if test="prj_ofr_prop != null"> PRJ_OFR_PROP = #{prj_ofr_prop},</if>
+			<if test="prj_fnd_prop != null"> PRJ_FND_PROP = #{prj_fnd_prop},</if>
+			<if test="prj_deved_prop != null"> PRJ_DEVED_PROP = #{prj_deved_prop},</if>
+			<if test="prj_cnt != null"> PRJ_CNT = #{prj_cnt},</if>
+			<if test="ctf_id != null"> CTF_ID = #{ctf_id},</if>
+			<if test="prj_ofr_str != null"> PRJ_OFR_STR = #{prj_ofr_str},</if>
+			<if test="prj_ofr_ed != null"> PRJ_OFR_ED = #{prj_ofr_ed},</if>
+			<if test="prj_frn_prs != null"> PRJ_FRN_PRS = #{prj_frn_prs},</if>
+			<if test="prj_bk_prs != null"> PRJ_BK_PRS = #{prj_bk_prs},</if>
+			<if test="prj_db_prs != null"> PRJ_DB_PRS = #{prj_db_prs},</if>
+			<if test="prj_ser_prs != null"> PRJ_SER_PRS = #{prj_ser_prs},</if>
+			<if test="prj_cnd != null"> PRJ_CND = #{prj_cnd},</if>
+			<if test="prj_ar != null"> PRJ_AR = #{prj_ar},</if>
+			<if test="prj_fnd_str != null"> PRJ_FND_STR = #{prj_fnd_str},</if>
+			<if test="prj_fnd_ed != null"> PRJ_FND_ED = #{prj_fnd_ed},</if>
+			<if test="prj_gl_prc != null"> PRJ_GL_PRC = #{prj_gl_prc},</if>
+			PRJ_VER_DATE = sysdate,
+		</set>
+		
+		WHERE prj_id = #{prj_id}
+	</update>
 	
 	<update id="projectView" parameterType="co.test.prj.project.service.ProjectVO">	
 		UPDATE PROJECT
