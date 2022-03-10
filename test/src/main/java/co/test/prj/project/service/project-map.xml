@@ -61,7 +61,7 @@
 	
 	<select id="projectSearchPageList" parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
-<![CDATA[
+	<![CDATA[
 		SELECT *
 		FROM ( SELECT ROWNUM RN,
 		            A.*
