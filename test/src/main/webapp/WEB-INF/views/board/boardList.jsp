@@ -118,7 +118,7 @@
 				</div>
 			</div>
 
-            <div class="col-2 text-right">
+            <div class="col-12 text-right">
                 <button class="button button-contactForm btn_1" onclick="location.href='freeboardInsertform' "> 등록</button>
             </div>
 		</div>
