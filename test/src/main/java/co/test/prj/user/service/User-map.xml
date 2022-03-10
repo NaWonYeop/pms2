@@ -55,7 +55,7 @@
 		user_ath, user_type)
 		VALUES(#{user_id},#{user_email},#{user_pwd},#{user_name},#{user_tel},#{user_ath},#{user_type})
 	</insert>
-	<!-- 중복체크 -->
+	<!-- 카카오중복체크 -->
 	<select id="isIdCheck" parameterType="String"
 		resultType="boolean">
 		SELECT CASE WHEN COUNT(*) = 1 THEN 0 ELSE 1 END AS ID
@@ -64,7 +64,14 @@
 		WHERE USER_EMAIL = #{user_email}
 	</select>
 	
-
+	<!-- 일반 회원가입 아이디 -->
+	<select id="nomalCheck" parameterType="String"
+		resultType="boolean">
+		SELECT CASE WHEN COUNT(*) = 1 THEN 0 ELSE 1 END AS ID
+		FROM
+		"user"
+		WHERE USER_EMAIL = #{user_email}
+	</select>
 	<!-- 아이디찾기 -->
 	<select id="userSearch"
 		parameterType="co.test.prj.user.service.UserVO"
@@ -136,15 +143,15 @@
 		AND B.USER_ID =
 		#{user_id}
 	</select>
-
+	<!-- 알람 -->
 	<select id="MyApp"
 		resultType="co.test.prj.application.service.AppVO"
 		parameterType="co.test.prj.user.service.UserVO">
-		SELECT P.PRJ_ID, A.APP_CLSFC, P.PRJ_NAME
-		FROM APPLICATION
-		A, PROJECT P
+		SELECT P.PRJ_ID, A.APP_CLSFC, P.PRJ_NAME, A.APP_INVSB, A.APP_ID
+		FROM APPLICATION A, PROJECT P
 		WHERE A.PRJ_ID = P.PRJ_ID
 		AND A.USER_ID = #{user_id}
+		and A.APP_INVSB = 0
 	</select>
 	
 	<select id="MyInsertProject" parameterType="int" resultType="co.test.prj.project.service.ProjectVO">
@@ -164,6 +171,11 @@
 	FROM BUY B,PROJECT P,COMTNFILE C
 	WHERE B.USER_ID=#{user_id} AND P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID
 	</select>
+	
+	<update id="AppUpdate" parameterType="co.test.prj.application.service.AppVO">
+	UPDATE APPLICATION 
+	SET APP_INVSB=1 WHERE app_id = #{user_id}
+	</update>
 </mapper>
 
 	

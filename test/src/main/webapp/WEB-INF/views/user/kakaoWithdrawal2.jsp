@@ -7,10 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#checkWithdraw{
+.checkWithdraw{
 position: relative;
-top: 100px;
-left: 150px;
+top: 50px;
 }
 </style>
 </head>
@@ -95,9 +94,12 @@ left: 150px;
 							<button type="submit"
 								class="button button-contactForm btn_1 w-50">탈퇴</button>
 						</div>
-						</form>
 				</div>
+				</form>
+			</div>
 
+		</div>
+		</div>
 
 	</section>
 	<script>

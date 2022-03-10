@@ -88,38 +88,32 @@ a {
 		<form action="register" onsubmit="return formCheck()" method="post">
 
 			<div class="card-body">
-						<input type="text" name="user_email" id="user_email"
-							title="이메일주소에 @가 없습니다" class="form-control col-8 "
-							style="display: inline-block;" placeholder="아이디" autofocus
-							required >
-					<button type="button" class="button button-contactForm btn_1 col-3"
-						id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
-						onclick="nomalIdCheck()" value="NO">Check</button>
-					<BR>
-					<input type="password" name="user_pwd" id="user_pwd"
-						class="form-control" placeholder="비밀번호" required>
-					<br>
-					<input type="password" name="pw1" id="pw1" class="form-control"
-						placeholder="비밀번호 확인" required>
-					<br>
-					<input type="text" name="user_name" id="user_name"
-						class="form-control" placeholder="이름" required> ​ <input
-						type="text" name="user_tel" id="user_tel" class="form-control"
-						required pattern="^[0-9]+$" maxlength="13"
-						placeholder="예) 010 1234 5678">
-					<br>
-					<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-						type="submit" value="회원가입">
+				<input type="text" name="user_email" id="user_email" readonly
+					class="form-control col-8 " title="이메일주소에 @가 없습니다"
+					style="display: inline-block;" placeholder="아이디"
+					value="${user_email}">
+
+				<button type="button" class="button button-contactForm btn_1 col-3"
+					id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
+					onclick="isIdCheck()" value="NO">Check</button>
+				<BR>  <input type="text" name="user_name"
+					id="user_name" class="form-control" placeholder="이름" required><br>
+					<input type="hidden" id="user_type" name="user_type" value="1" >
+				​ <input type="text" name="user_tel" id="user_tel"
+					class="form-control" required pattern="^[0-9]+$" maxlength="13"
+					placeholder="예) 010 1234 5678"><br> <input
+					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
+					value="회원가입">
 			</div>
 		</form>
 	</div>
 
 
 	<script type="text/javascript">
-		function nomalIdCheck() {
+		function isIdCheck() {
 			if ($("#user_email").val() != '') {
 				$.ajax({
-					url : "nomalIdCheck",
+					url : "IsIdCheck",
 					type : "post",
 					data : {
 						"user_email" : $("#user_email").val()

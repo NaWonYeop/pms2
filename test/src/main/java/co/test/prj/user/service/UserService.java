@@ -21,6 +21,8 @@ public interface UserService {
 	int userDelete(UserVO user);
 
 	boolean isIdCheck(String user_email);
+	
+	boolean nomalCheck(String user_email);
 
 	UserVO userSearch(UserVO user);
 
@@ -36,6 +38,7 @@ public interface UserService {
 	
 	int deleteDev(CertVO cert);
 	
+	int AppUpdate(int user_id);
 	
 	List<ProjectVO> MyProject(UserVO user);
 	

@@ -13,6 +13,7 @@ public class AppVO {
 
 	private String user_name;// 유저명
 	private String prj_name;
+	private String app_invsb;
 
 
 }

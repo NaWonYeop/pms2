@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	public int updatePwd(UserVO user)
 	{
-		// TODO Auto-generated method stub
+		
 		return map.updatePwd(user);
 	}
 
@@ -142,6 +142,17 @@ public class UserServiceImpl implements UserService
 	public int deleteDev(CertVO cert)
 	{
 		return map.deleteDev(cert);
+	}
+
+	@Override
+	public boolean nomalCheck(String user_email) {
+		return map.nomalCheck(user_email);
+	}
+
+	@Override
+	public int AppUpdate(int user_id) {
+		// TODO Auto-generated method stub
+		return map.AppUpdate(user_id);
 	}
 
 }
