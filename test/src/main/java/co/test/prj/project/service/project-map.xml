@@ -70,7 +70,7 @@
 									FROM PROJECT p JOIN COMTNFILE c
 									ON(p.ctf_id = c.ctf_id)
 									WHERE PRJ_VIEW_PROP = 0
-									AND PRJ_NAME LIKE '%'
+									AND PRJ_NAME LIKE '%'||#{keyword}||'%'
 									<choose>
 										<when test="type != null and type.equals('ofr')">
 											AND PRJ_OFR_PROP LIKE '1'
