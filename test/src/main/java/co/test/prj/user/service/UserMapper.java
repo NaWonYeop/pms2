@@ -17,8 +17,10 @@ public interface UserMapper {
 	int userUpdate(UserVO user);
 	//회원탈퇴
 	int userDelete(UserVO user);
-	//아이디 중복체크
+	//카카오톡아이디 중복체크
 	boolean isIdCheck(String user_email);
+	//일반 아이디 중복체크
+	boolean nomalCheck(String user_email);
 	//아아디찾기
 	UserVO userSearch(UserVO user);
 	//비밀번호찾기
@@ -39,6 +41,8 @@ public interface UserMapper {
 	int insertDev(CertVO cert);
 	//개발자 수정
 	int deleteDev(CertVO cert);
+	
+	int AppUpdate(int user_id);
 	
 	//프로젝트관리페이지 
 	List<ProjectVO> MyInsertProject(int master_id);

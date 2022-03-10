@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row text-center">
 				<!--project-->
-				<h1 id="name" style="color: black;">${message}</h1>
+			
 				
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 				"showMethod" : "fadeIn",
 				"hideMethod" : "fadeOut"
 			}
-			toastr.warning('회원가입 성공하셨습니다');
+			toastr.success('회원가입 성공하셨습니다');
 		}
 	});
 	</script>

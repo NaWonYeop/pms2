@@ -45,7 +45,7 @@
 				"showMethod" : "fadeIn",
 				"hideMethod" : "fadeOut"
 			}
-			toastr.warning('성공적으로 수정하였습니다');
+			toastr.success('성공적으로 수정하였습니다');
 		}
 	});
 	</script>

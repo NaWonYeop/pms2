@@ -158,7 +158,7 @@ a {
 					"showMethod" : "fadeIn",
 					"hideMethod" : "fadeOut"
 				}
-				toastr.warning('로그인이 실패하였습니다');
+				toastr.error('로그인이 실패하였습니다');
 			}
 		});
 		function addEmail(email){

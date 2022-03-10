@@ -33,7 +33,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userDao;
-	
 
 	@Autowired
 	private CertService certDao;
@@ -71,25 +70,39 @@ public class UserController {
 	@PostMapping("IsIdCheck")
 	@ResponseBody
 	public String IsIdCheck(String user_email, HttpSession session) {
-		
+
 		System.out.println(user_email);
 		String location = null;
-		if(user_email.indexOf("@") == -1) {
+		if (user_email.indexOf("@") == -1) {
 			location = "Fail";
-		}
-		else if (!userDao.isIdCheck(user_email)) {
-			session.setAttribute("user_email", user_email);
-			location = "false";
+		} else if (!userDao.isIdCheck(user_email)) {
+			UserVO user = new UserVO();
+			user.setUser_email(user_email);
+			session.setAttribute("sessionUser", userDao.userSelect(user));
+			location = "home";
 		} else {
 			session.setAttribute("user_email", user_email);
-			session.setAttribute("user_type", 2);
-			location = "registerForm";
+			
+			location = "kakaoRegisterForm";
 			// 겟매핑 이메일가져와서 레지스터폼으로넘기기
 
 		}
 
 		return location;
 
+	}
+
+	// 카카오 회원가입폼
+	@RequestMapping("/kakaoRegisterForm")
+	public String kakaoRegisterForm() {
+		return "user/kakaoRegisterForm";
+	}
+	
+	//일반회원 아이디체크
+	@PostMapping("/nomalIdCheck")
+	@ResponseBody
+	public boolean nomalIdCheck(String user_email) {
+		return userDao.nomalCheck(user_email);
 	}
 
 	// 비밀번호 찾기폼
@@ -200,16 +213,17 @@ public class UserController {
 	@RequestMapping("/insertDevForm")
 	public String insertdev() {
 		
-		
 		return "user/insertDevForm";
 	}
-	//개발자 등록
+
+	// 개발자 등록
 	@RequestMapping("/insertDev")
-	public String insertDevForm(UserVO vo, HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
+	public String insertDevForm(UserVO vo, HttpSession session, Model model,
+			@RequestParam("cert_name") List<String> list) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		userDao.userUpdate(vo);
 		vo.setUser_id(user.getUser_id());
-		for(String temp : list) {
+		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
 			cert.setCert_name(temp);
@@ -229,7 +243,7 @@ public class UserController {
 		model.addAttribute("MyFunding", funding);
 		List<AppVO> app = userDao.MyApp(user);
 		model.addAttribute("MyApp", app);
-		System.out.println(userDao.MyProject(user).get(0));
+		
 		return "user/mypage";
 	}
 
@@ -256,6 +270,7 @@ public class UserController {
 		}
 
 	}
+
 	@RequestMapping("/checkUserPassword2")
 	public String checkUserPassword2(@RequestParam("FailCheckPassword") String Fail, Model model) {
 		if (Fail != null) {
@@ -263,7 +278,6 @@ public class UserController {
 		}
 		return "user/checkUserPassword";
 	}
-	
 
 	// 회원정보 수정
 	@PostMapping("/userUpdate")
@@ -289,21 +303,22 @@ public class UserController {
 		model.addAttribute("MyCert", certifi);
 		return "user/devUpdateForm";
 	}
-	//개발자 정보 업데이트 결과창
+
+	// 개발자 정보 업데이트 결과창
 	@PostMapping("/devUpdate")
 	public String devUpdate(UserVO vo, HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
 		userDao.deleteDev(del);
-		for(String temp : list) {
+		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
 			cert.setCert_name(temp);
 			cert.setUser_id(user.getUser_id());
 			userDao.insertDev(cert);
 		}
-	
+
 		return "user/devUpdate";
 	}
 
@@ -318,7 +333,7 @@ public class UserController {
 	public String clientRegister(UserVO user, Model model, RedirectAttributes re) {
 		System.out.println(user);
 		user.setUser_ath("user");
-		user.setUser_type("0");
+		
 		int n = userDao.userInsert(user);
 		if (n != 0) {
 			re.addAttribute("message", "회원가입 성공하셨습니다");
@@ -340,14 +355,16 @@ public class UserController {
 	public String Withdrawal() {
 		return "user/Withdrawal1";
 	}
-	//회원탈퇴2
+	
+
+	// 회원탈퇴2
 	@RequestMapping("/Withdrawa2")
 	public String Withdrawal2(String user_pwd, Model model, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		if (user_pwd.equals(user.getUser_pwd())) {
 			System.out.println("user_pwd");
-			List<ProjectVO> funding = userDao.MyFunding(user);
-			model.addAttribute("MyFunding", funding);
+			int id = user.getUser_id();
+			model.addAttribute("funding", userDao.MyfundingList(id));
 			return "user/Withdrawal2";
 		} else {
 			model.addAttribute("FailPassword", "비밀번호가 일치하지않습니다");
@@ -355,27 +372,49 @@ public class UserController {
 
 		return "user/Withdrawal1";
 	}
-	//회원탈퇴 결과창
+
+	// 회원탈퇴 결과창
 	@RequestMapping("/Withdrawa3")
 	public String Withdrawal3(HttpSession session) {
 		UserVO user = new UserVO();
 		user.setUser_id((int) session.getAttribute("user_id"));
 		userDao.userDelete(user);
+		System.out.println(userDao.userDelete(user));
 		return "user/Withdrawal3";
 	}
+	//카카오 회원탈퇴
+		@RequestMapping("/kakaoWithdrawal")
+		public String kakaoWithdrawal() {
+			return "user/kakaoWithdrawal";
+		}
+		// 회원탈퇴2
+		@RequestMapping("/kakaoWithdrawa2")
+		public String kakaoWithdrawal2(String user_email, Model model, HttpSession session) {
+			UserVO user = (UserVO) session.getAttribute("sessionUser");
+			if (user_email.equals(user.getUser_email())) {
+				System.out.println("user_email");
+				int id = user.getUser_id();
+				model.addAttribute("funding", userDao.MyfundingList(id));
+				return "user/kakaoWithdrawal2";
+			} else {
+				model.addAttribute("FailPassword", "비밀번호가 일치하지않습니다");
+			}
 
-
-
-	//펀딩리스트
-	@RequestMapping("/myfunding")
-	public String myfunding(HttpSession session,Model model) {
-		UserVO user=(UserVO)session.getAttribute("sessionUser");
-		int id=user.getUser_id();
-		model.addAttribute("funding",userDao.MyfundingList(id));
+			return "user/kakaoWithdrawal1";
+		}
 		
+
+	// 펀딩리스트
+	@RequestMapping("/myfunding")
+	public String myfunding(HttpSession session, Model model) {
+		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		int id = user.getUser_id();
+		model.addAttribute("funding", userDao.MyfundingList(id));
+
 		return "user/myfunding";
 	}
-	//프로젝트관리
+
+	// 프로젝트관리
 	@RequestMapping("/myProject")
 	public String myProject(HttpSession session, Model model) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
@@ -384,5 +423,11 @@ public class UserController {
 		model.addAttribute("Myproject", userDao.MyInsertProject(id));
 
 		return "user/myProject";
+	}
+	@RequestMapping("/MyAppDown")
+	@ResponseBody
+	public void MyAppDown(int id ) {
+		userDao.AppUpdate(id);
+		
 	}
 }
