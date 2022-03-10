@@ -166,8 +166,10 @@ button {
 													<div class="author_info_text">
 														<p>Conduct by:</p>
 														<h5>
-															<a href="jobDetail?user_id=${ofterList.user_id }">${ofterList.user_name }
-																| 경력 ${ofterList.user_crr }년 | ${ofterList.user_tel }</a>
+															<a href="jobDetail?user_id=${ofterList.user_id }">${ofterList.user_name } | 
+															<c:if test="${ofterList.user_crr != null}">경력 ${ofterList.user_crr }년</c:if>
+															<c:if test="${ofterList.user_crr eq null}">경력없음</c:if> | ${ofterList.user_tel }</a>
+															<input type="hidden" id="uId" value="${ofterList.user_id }">
 														</h5>
 													</div>
 												</div>
@@ -188,9 +190,9 @@ button {
 											</div>
 											<div class="col-4">
 												<div class="button-contactForm">
-													<button type="button" class="joinbtn"
-														onclick="projectOfrAccept()">수락</button>
-													<button type="button" class="nopebtn" onclick="location.href='projectOfrDecline'">거절</button>
+													<button type="button" class="joinbtn${ofterList.user_id }"
+														onclick="projectOfrAccept(${ofterList.user_id}, ${ofterList.app_id })">수락</button>
+													<button type="button" class="nopebtn${ofterList.app_id }" onclick="projectOfrDecline(${ofterList.app_id})">거절</button>
 												</div>
 											</div>
 										</div>
@@ -234,8 +236,9 @@ button {
 												<div class="author_info_text">
 													<p>Conduct by:</p>
 													<h5>
-														<a href="jobDetail?user_id=${interest.user_id }">${interest.user_name }
-															| 경력 ${interest.user_crr }년 | ${interest.user_tel }</a>
+														<a href="jobDetail?user_id=${interest.user_id }">${interest.user_name } | 
+														<c:if test="${interest.user_crr != null}">경력 ${interest.user_crr }년</c:if>
+														<c:if test="${interest.user_crr eq null}">경력없음</c:if> | ${interest.user_tel }</a>
 													</h5>
 												</div>
 											</div>
@@ -258,7 +261,7 @@ button {
 										<div class="col-4">
 											<div class="button-contactForm">
 												<button type="button" class="joinbtn" onclick="location.href='heartAccept?user_id=${interest.user_id}&prj_id=${prj_id }&user_name=${interest.user_name }'">신청</button>
-												<button type="button" class="nopebtn" onclick="location.href='heartDelete?user_id=${interest.user_id}'">삭제</button>
+												<button type="button" class="nopebtn" onclick="heartDelete()">삭제</button>
 											</div>
 										</div>
 									</div>
@@ -277,18 +280,50 @@ button {
 	</section>
 
 	<script type="text/javascript">
-		function projectOfrAccept() {
-			$('.joinbtn').on('click', function() {
+		function projectOfrAccept(e, s) {
+			console.log($(".joinbtn"+e+"").val());
 	            $.ajax({
 	                url: 'projectOfrAccept',
 	                type: 'get',
-					data: 
+					data: {
+						user_id: e,
+						prj_id: ${prj_id },
+						master_id: ${sessionUser.user_id},
+						app_id: s
+					},
 	                success: function() {
 	                    console.log('gooood');
 	                }
 	            })
+		}
+		
+		function projectOfrDecline(e) {
+			$.ajax({
+				url: 'projectOfrDecline',
+				type: 'post',
+				data: {
+					app_stt: "no",
+					app_id: e
+				},
+				success: function() {
+					console.log('success');
+				}
 			})
 		}
+		
+		/* function heartDelete() {
+			$.ajax({
+				url: 'heartDelete',
+				type: 'post',
+				data: {
+					user_id: 
+					user_id2:
+				},
+				success: function() {
+					console.log("goooodd");
+				}
+			})
+		} */
 	</script>
 </body>
 </html>

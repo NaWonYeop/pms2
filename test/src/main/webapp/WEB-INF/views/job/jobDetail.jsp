@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <title>Insert title here</title>
 	<style>
         .Tname {
@@ -192,7 +194,7 @@
 	                    		<button type="button" id="updatebtn" class="updatebtn" onclick="location.href='jobUpdateMove'">수정하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<button type="button" id="heartbtn" class="heartbtn">찜하기</button>
+	                    		<button type="button" id="heartbtn" class="heartbtn" onclick="heart()">찜하기</button>
 	                    		<button type="button" id="callbtn" class="callbtn">신청하기</button>
 	                    	</c:otherwise>
 	                    </c:choose>
@@ -206,15 +208,15 @@
 	                                <p class="content prj">프로젝트</p>
 	                                
 	                                <div class="content form-select" id="dropdown">
-	                                    <select class="content prjlist">
+	                                    <select class="content prjlist" id="pId">
 	                                    	<c:forEach items="${prjList }" var="prjList">
-		                                        <option value="1">${prjList.prj_name }</option>
+		                                        <option value="${prjList.prj_id }">${prjList.prj_name }</option>
 	                                    	</c:forEach>
 	                                    </select>
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <button type="button" class="call" style="line-height: normal;">신청하기</button>
+	                        <button type="button" class="call" onclick="requsetWork()" style="line-height: normal;">신청하기</button>
 	                    </div>
 	                    
 	                    <div class="">
@@ -326,8 +328,28 @@
 	            </div>
         </div>
     </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        
+    
+    toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "1000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}    
+    
         function check(e)
         {
             if(!$(e.target).hasClass("content")&& !$(e.target).hasClass("callbtn") 
@@ -355,6 +377,33 @@
 	        	data: data,
 	        });
         }) */
+        function heart() {
+        	$.ajax({
+        		url: 'heartInsert',
+        		type: 'post',
+        		data: {
+        			user_id: ${sessionUser.user_id},
+        			user_id2: ${jobDetail.user_id}
+        		}
+        	}).done(function() {
+        		toastr.success('찜하기 성공!');
+        	})
+        }
+        
+        function requsetWork() {
+        	$.ajax({
+        		url: 'requestWork',
+        		type: 'post', 
+        		data: {
+        			user_id: ${jobDetail.user_id},
+        			prj_id: $("#pId").val(),
+        		},
+        		success: function() {
+        			toastr.success('신청하기 성공!');
+        		}
+        	})
+        }
     </script>
+    
 </body>
 </html>

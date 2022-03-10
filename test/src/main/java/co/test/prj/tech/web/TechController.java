@@ -5,13 +5,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.test.prj.application.service.AppService;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertService;
 import co.test.prj.certificate.service.CertVO;
+import co.test.prj.interest.service.InterestService;
 import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
@@ -45,6 +46,12 @@ public class TechController {
 	@Autowired
 	private ProjectService projectDao;
 	
+	@Autowired
+	private AppService appDao;
+	
+	@Autowired
+	private InterestService interDao;
+	
 	@RequestMapping("/jobSelectList")
 	public String techSelectList(Model model, StarVO star) {
 		model.addAttribute("jobs", techDao.jobSelectList());
@@ -54,7 +61,7 @@ public class TechController {
 	}
 	
 	@RequestMapping("/jobDetail")
-	public String jobDetail(int user_id, Model model) {
+	public String jobDetail(int user_id, Model model, HttpSession session) {
 		UserVO vo = new UserVO();
 		vo.setUser_id(user_id);
 		model.addAttribute("jobDetail", userDao.jobSelect(vo));
@@ -76,7 +83,8 @@ public class TechController {
 		model.addAttribute("starDetail", starDao.starSelect(vo5));
 		
 		ProjectVO vo6 = new ProjectVO();
-		vo6.setMaster_id(user_id); //세션에 담긴 user_id로 바꿔야 됨
+		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		vo6.setMaster_id(uId.getUser_id()); 
 		model.addAttribute("prjList", techDao.jobJoinList(vo6));
 
 		return "job/jobDetail";
@@ -89,6 +97,8 @@ public class TechController {
 	
 	@RequestMapping("/jobInsert")
 	public String jobInsert(Model model, UserVO user, HttpSession session) {
+		UserVO userId = (UserVO)session.getAttribute("sessionUser");
+		user.setUser_id(userId.getUser_id());
 		model.addAttribute(userDao.userUpdate(user));
 		return "redirect:/jobSelectList";
 	}
@@ -98,15 +108,34 @@ public class TechController {
 		return "job/jobUpdate";
 	}
 	
+	//구인 신청하기
+	@RequestMapping("/requestWork")
+	@ResponseBody
+	public void requestWork(HttpSession session, AppVO app) {
+		UserVO userId = (UserVO)session.getAttribute("sessionUser");
+		app.setMaster_id(userId.getUser_id());
+		app.setApp_clsfc(0);
+		app.setApp_stt("ing");
+		appDao.appInsert(app);
+	}
+	
+	//찜하기
+	@RequestMapping("/heartInsert")
+	@ResponseBody
+	public void heartInsert(InterestVO inter) {
+		interDao.heartInsert(inter);
+	}
+	
 	//구인현황
 	@RequestMapping("/projectOfrList")
 	private String projectOfrList(Model model, ProjectVO project, TechVO tech, HttpSession session) {
 		UserVO user= (UserVO)session.getAttribute("sessionUser");
-		
 		project.setMaster_id(user.getUser_id());
-
 		model.addAttribute("ofterList", techDao.ofterList(project));
+		
 		model.addAttribute("prj_id",project.getPrj_id());
+		
+		tech.setUser_id(user.getUser_id());
 		model.addAttribute("interest", techDao.interestList(tech));
 		
 		return "project/projectOfrList";
@@ -125,8 +154,8 @@ public class TechController {
 	
 	//신청거절
 	@RequestMapping("/projectOfrDecline")
+	@ResponseBody
 	private String projectOfrDecline(Model model, AppVO appvo) {
-		appvo.setApp_stt("no");
 		techDao.ofterAcceptUpdate(appvo);
 		return "redirect:/projectOfrList";
 	}
@@ -134,13 +163,14 @@ public class TechController {
 	//관심 신청
 	@RequestMapping("/heartAccept")
 	private String heartAccept(Model model, AppVO app, HttpSession session) {
-		app.setMaster_id((int)session.getAttribute("master_id"));
+		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		app.setMaster_id(uId.getUser_id());
 		model.addAttribute(techDao.heartAccept(app));
 		return "redirect:/projectOfrList";
 	}
 	//관심삭제
 	@RequestMapping("/heartDelete")
-	private String heartDelete(Model model, InterestVO interest) {
+	private String heartDelete(InterestVO interest) {
 		techDao.heartDelete(interest);
 		return "redirect:/projectOfrList";
 	}

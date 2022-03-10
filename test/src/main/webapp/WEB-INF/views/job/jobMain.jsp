@@ -95,7 +95,56 @@
 					</div>
 				</div>
 			</div>
-			<button type="button" id="insertbtn" class="insertbtn" onclick="location.href='jobInsertMove'">등록하기</button>
+			<%-- <form action="">
+				<input type="text" list="ttl" id="list">
+				<datalist id="ttl">
+					<c:forEach items="${jobs }" var="job">
+						<option value="${job.user_job_ttl }" />
+					</c:forEach>
+				</datalist>
+				<button type="submit">검색</button>
+			</form> --%>
+			
+			<!-- 검색기능 -->
+			<form action="projectSearchPage" >
+					<div class="form-group">
+						<div class="input-group mb-3">
+							<div class="form-select" id="default-select" style="width: 25%;">
+								<select name="type" >
+									<option value="" 
+									<c:if test="${result.type == '' or result.type == null}">
+									selected
+									</c:if>
+									>전체</option>
+									<option value="fnd"
+									<c:if test="${result.type == 'fnd'}">
+									selected
+									</c:if>
+									>펀딩</option>
+									<option value="ofr"
+									<c:if test="${result.type == 'ofr'}">
+									selected
+									</c:if>
+									>구인</option>
+								</select>
+							</div>
+							<input type="text" name="keyword" class="form-control" 
+								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
+							<div class="input-group-append">
+								<button class="btn" type="submit" >
+									<i class="ti-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- 페이징 1페이지부터 2개씩 보여줄꺼다-->
+					<input type="hidden" name="pageNum" value="1"> 
+					<input type="hidden" name="amount" value="5">
+				</form>
+			
+			<button type="button" id="insertbtn" class="insertbtn"
+				onclick="location.href='jobInsertMove'">등록하기</button>
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">
@@ -104,7 +153,7 @@
 								<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce">${job.user_name } | ${job.user_crr }년</p>
+											<p class="introduce">${job.user_name }| ${job.user_crr }년</p>
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${job.user_id eq tech.user_id2 }">
 													<span class="btn_4">${tech.tech_name }</span>
@@ -128,7 +177,8 @@
 												<div class="author_rating">
 													<div class="rating avg">
 														<div class="star-ratings">
-															<div class="star-ratings-fill" style="width: ${job.avg * 20 }%">
+															<div class="star-ratings-fill"
+																style="width: ${job.avg * 20 }%">
 																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 															</div>
 															<div class="star-ratings-base">
@@ -158,7 +208,9 @@
 			const insertAvg = avg * 20;
 			return insertAvg + 1.5;
 		}
+		
+		
 	</script>
-	
+
 </body>
 </html>
