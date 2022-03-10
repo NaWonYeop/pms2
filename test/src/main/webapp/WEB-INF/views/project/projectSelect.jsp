@@ -13,7 +13,7 @@
 <br>
 <body>
  ${project}<br>
-	
+ ${sessionScope }
 	<div id="list">
 		(나중에 지울것)번호 : ${project.prj_id}<br>
 			조회수 : ${project.prj_hit}<br>
@@ -65,21 +65,26 @@
 			상세 내용 : ${project.prj_cnt}<br>
 	</div>
 	
+	<c:if test="${sessionScope.sessionUser.user_id == project.master_id }">
 	
-	<form action="projectVerUp">
-		<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
-		<input type="hidden" id="prj_ver" name="prj_ver" value="${project.prj_ver}">
-		<input type="submit" value="버전업">
-	</form>
+		<form action="projectVerUpForm">
+			<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+			<input type="submit" value="수정">
+		</form>
 	
+		<form action="rewardInsertForm">
+			<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+			<input type="hidden" id="master_id" name="master_id" value="${project.master_id}">
+			<input type="hidden" id="go" name="go" value="selectPage">
+			<input type="submit" value="리워드 관리">
+		</form>
+			
+		<form action="projectViewDel">
+			<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+			<input type="submit" value="삭제">
+		</form>
 	
-	<form action="projectViewDel">
-		<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
-		<input type="submit" value="삭제">
-	</form>
-
-	
-		
+	</c:if>
 		
 </body>
 </html>

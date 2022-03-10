@@ -4,30 +4,49 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<head>
+	<style type="text/css">
+	  .name {
+	            font-weight: bold;
+	            font-size: large;
+	        }
+	
+	  .button {
+	      margin-right: 2%;
+	  }
+</style>
+</head>
 <body>
-
-<c:if test="${result.type == 'fnd'}">
-펀딩검색
-</c:if>
-
-<c:if test="${result.type == 'ofr'}">
-구인검색
-</c:if>
-
-<c:if test="${result.type == '' or result.type == null}">
-전체검색
-</c:if>
-<br> 
-${sessionScope }<br>
-${sessionScope.sessionUser.user_id } <!-- master ID 로 사용할것 -->
-
+	<section class="breadcrumb breadcrumb_bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb_iner text-center">
+							<div class="breadcrumb_iner_item">
+								<h2>
+								<c:if test="${result.type == 'fnd'}">
+								펀딩 리스트
+								</c:if>
+								
+								<c:if test="${result.type == 'ofr'}">
+								구인 리스트
+								</c:if>
+								
+								<c:if test="${result.type == '' or result.type == null}">
+								전체 리스트
+								</c:if>
+								</h2>
+								<p>
+									Home<span>/</span>Course Details
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<br>
+	
 	<!-- 검색창 시작 -->
 	<div class="row justify-content-center">
 		<div class="col-sm-7">
@@ -74,71 +93,142 @@ ${sessionScope.sessionUser.user_id } <!-- master ID 로 사용할것 -->
 	<!-- 검색창 끝 -->
 	
 	<button type="button" onClick="location.href='projectInsertForm'">프로젝트 등록</button><br>
-	<div id="list">
-	<c:if test="${empty result.projects }">
-				검색 결과가 없습니다.
-	</c:if>
-		<c:forEach items="${result.projects }" var="project">
-		${result}<br>
-		<br>
-		${project}<br>
-			<div class="card">
-			<form action="projectSelect" method="get">
-			<input type="hidden" name="prj_id" id="prj_id" value="${project.prj_id}">
-			<input type="submit" value="${project.prj_name}"><br>
-			(나중에 지울것)번호 : ${project.prj_id}<br>
-			조회수 : ${project.prj_hit}<br>
-			이름 : ${project.prj_name}<br>
-			등록일 : <fmt:formatDate value="${project.prj_reg_date }" pattern="yyyy-MM-dd" /><br>
-			담당자 아이디 : ${project.master_id}<br>
-			시작일 ~ 마감일 : 
-			<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
-			<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /><br>
-			(나중에 삭제)구인 여부 : ${project.prj_ofr_prop}<br>
-			<c:if test="${project.prj_ofr_prop == 1}">
-			<!-- 구인 있을시 -->
-			============구인============<br>
-			구인 시작일 ~ 구인 마감일 : 
-			<fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
-			<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /><br>	
-			프론트 : ${project.prj_frn_prs}<br>
-			백 : ${project.prj_bk_prs}<br>
-			DB : ${project.prj_db_prs}<br>
-			서버 : ${project.prj_ser_prs}<br>
-			조건 : ${project.prj_cnd}<br>
-			지역 : ${project.prj_ar}<br>
-			============구인============<br>
-			</c:if>
-			(나중에 삭제)펀딩 여부 : ${project.prj_fnd_prop}<br>
-			<c:if test="${project.prj_fnd_prop == 1}">
-			<!-- 펀딩 있을시 -->
-			============펀딩============<br>
-			<img src="./resources/upload/images/${project.ctf_st_name}"><br>
-			펀딩 시작일 ~ 펀딩 마감일 : 
-			<fmt:formatDate value="${project.prj_fnd_str }" pattern="yyyy-MM-dd" /> ~ 
-			<fmt:formatDate value="${project.prj_fnd_ed }" pattern="yyyy-MM-dd" /><br>	
-			목표금액 : ${project.prj_gl_prc}<br>
-			============펀딩============<br>
-			</c:if>
-			개발마감 여부 : ${project.prj_devEd_prop}<br>
-			버전 : ${project.prj_ver}<br>
-			뷰 여부 : ${project.prj_view_prop}<br>
-			</form>
-			</div>
-		</c:forEach>
-	</div>
-
-
 	
-	<div id="more">더보기
-		<form id="morePage" onsubmit="return false" onclick="ajaxMorePage()" style="display: inline-block;">
-			<input type="submit" value="더보기">
-			<input type="hidden" name="pageNum" id="moreKey" value="2">
-			<input type="hidden" name="type" value="${result.type}">
-			<input type="hidden" name="keyword" value="${result.keyword}">
-			<input type="hidden" name="amount"  value="${result.amount}">
-		</form>
-	</div>
+	<section class="blog_area section_padding">
+		<div class="container">
+	        <div class="row">
+	        	<div class="col-lg-12 mb-5 mb-lg-0">
+	               <div class="row justify-content-center">
+	                  <div class="col-xl-5">
+	                     <div class="section_tittle text-center">
+	                        <h2>리스트</h2>
+	                     </div>
+	                  </div>
+					</div>
+	            </div>
+	            
+				<div class="col-lg-12">
+					<div id="list">
+						<c:if test="${empty result.projects }">
+							 <div class="form-group">
+	                            <p>검색 결과가 없습니다.</p>
+	                         </div>
+						</c:if>
+					
+						<c:forEach items="${result.projects }" var="project">
+						<%-- ${result}<br>
+						<br>
+						${project}<br> --%>
+							<article class="blog_item">
+								<div class="blog_details">
+									<form class="form-contact contact_form" action="projectSelect" method="get">
+										<input type="hidden" name="prj_id" id="prj_id" value="${project.prj_id}">
+										<div class="col-12">
+												<input type="submit" class="d-inline-block blog_details h2" style="border: 0px; background-color: #ffffff;" value="${project.prj_name}">
+	                            				<p style="display: inline-block;">    조회수 : ${project.prj_hit}</p>
+										</div>
+										
+										<p>기간 : 
+										<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
+										<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /></p>
+										
+										
+										<c:if test="${project.prj_fnd_prop == 1}">
+										<!-- 펀딩 있을시 -->
+					                    <div class="blog_item_img">
+					                     	<h3 style="font-weight: bold;">펀딩</h3>
+					                     	<div class="col-12">
+					                        <div class="col-6">
+					                        <img class="card-img rounded-0"
+					                           src="./resources/upload/images/${project.ctf_st_name }" alt="사진이 없습니다.">
+					                    	</div>
+					                    	</div>
+					                    </div>
+					                    
+					                    
+					                    
+					                    <a class="d-inline-block" href="single-blog.html"> </a>
+				                        <h3 class="right">
+				                        <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
+				                        <div class="progress">
+				                           <div class="progress-bar color-3" role="progressbar"
+				                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359" 
+				                              aria-valuenow="80" 
+				                              aria-valuemin="0"
+				                              aria-valuemax="100">
+				                            </div>
+				                        </div>
+				                        <br>
+				                        <ul class="blog-info-link">
+				                           <li>
+					                           <i class="far fa-comments"></i> 
+					                           	현재 펀딩금액
+				                           </li>
+				                         
+				                           <li> 
+					                           <h3 stlye="font-weight: bold;"> 
+					                           <div class="single_member_counter">
+					                           <span class="counter" style="font-size:25px;">${fnd.total }</span>원 
+					                           </div>
+					                           </h3>
+				                           </li>
+				                          
+				                        </ul>
+					                    
+						
+										펀딩 시작일 ~ 펀딩 마감일 : 
+										<fmt:formatDate value="${project.prj_fnd_str }" pattern="yyyy-MM-dd" /> ~ 
+										<fmt:formatDate value="${project.prj_fnd_ed }" pattern="yyyy-MM-dd" /><br>	
+										목표금액 : ${project.prj_gl_prc}<br>
+										</c:if>
+										
+										
+										
+										(나중에 삭제)구인 여부 : ${project.prj_ofr_prop}<br>
+										<c:if test="${project.prj_ofr_prop == 1}">
+										<!-- 구인 있을시 -->
+										============구인============<br>
+										구인 시작일 ~ 구인 마감일 : 
+										<fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
+										<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /><br>	
+										프론트 : ${project.prj_frn_prs}<br>
+										백 : ${project.prj_bk_prs}<br>
+										DB : ${project.prj_db_prs}<br>
+										서버 : ${project.prj_ser_prs}<br>
+										조건 : ${project.prj_cnd}<br>
+										지역 : ${project.prj_ar}<br>
+										============구인============<br>
+										</c:if>
+										
+										개발마감 여부 : ${project.prj_devEd_prop}<br>
+										버전 : ${project.prj_ver}<br>
+										뷰 여부 : ${project.prj_view_prop}<br>
+										
+									</form>
+								</div>
+								
+								
+							</article>
+						</c:forEach>
+					</div>
+				
+				
+					
+					<div id="more">더보기
+						<form id="morePage" onsubmit="return false" onclick="ajaxMorePage()" style="display: inline-block;">
+							<input type="submit" value="더보기">
+							<input type="hidden" name="pageNum" id="moreKey" value="2">
+							<input type="hidden" name="type" value="${result.type}">
+							<input type="hidden" name="keyword" value="${result.keyword}">
+							<input type="hidden" name="amount"  value="${result.amount}">
+						</form>
+					</div>
+				
+				</div>
+				
+			</div>
+		</div>
+	</section>
 	
 	<script type="text/javascript">
 	function ajaxMorePage() {
