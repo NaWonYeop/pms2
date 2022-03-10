@@ -23,6 +23,18 @@ public class PrgServiceImpl implements PrgService {
 	}
 
 	@Override
+	public List<PrgVO> calSelectList(int prj_id) {
+		// TODO Auto-generated method stub
+		return map.calSelectList(prj_id);
+	}
+
+	@Override
+	public List<PrgVO> toDoSelect(PrgVO prg) {
+		// TODO Auto-generated method stub
+		return map.toDoSelect(prg);
+	}
+	
+	@Override
 	public int prgInsert(PrgVO prg) {
 		// TODO Auto-generated method stub
 		return map.prgInsert(prg);
@@ -39,7 +51,7 @@ public class PrgServiceImpl implements PrgService {
 		// TODO Auto-generated method stub
 		return map.smlUpdate(prg);
 	}
-	
+
 	@Override
 	public int prgDelete(PrgVO prg) {
 		// TODO Auto-generated method stub

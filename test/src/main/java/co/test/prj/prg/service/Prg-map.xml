@@ -12,6 +12,20 @@
 		CONNECT BY PRIOR prg_id = prg_manager
 	</select>
 
+	<!-- calandar형 조회 -->
+	<select id="calSelectList"
+		resultType="co.test.prj.prg.service.PrgVO">
+		SELECT * FROM PROGRESS
+		WHERE prj_id = #{prj_id} AND
+		prg_manager IS NULL
+	</select>
+
+	<select id="toDoSelect"
+		resultType="co.test.prj.prg.service.PrgVO">
+		SELECT * FROM PROGRESS
+		WHERE prg_manager = #{prg_manager} AND prj_id = #{prj_id}
+	</select>
+
 	<insert id="prgInsert"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		<selectKey keyProperty="prg_id" resultType="int"
@@ -30,8 +44,11 @@
 		</if>
 		<!-- manager숫자가 없는 경우 -->
 		<if test="prg_manager == null">
-			INSERT INTO PROGRESS (PRG_ID, MASTER_ID, PRJ_ID, PRG_CONTENT, PRG_STR, PRG_ED, PRG_CMP_PROP)
-			VALUES (#{prg_id}, #{master_id}, #{prj_id}, #{prg_content}, #{prg_str}, #{prg_ed}, #{prg_cmp_prop})
+			INSERT INTO PROGRESS (PRG_ID, MASTER_ID, PRJ_ID,
+			PRG_CONTENT, PRG_STR, PRG_ED, PRG_CMP_PROP)
+			VALUES (#{prg_id},
+			#{master_id}, #{prj_id}, #{prg_content}, #{prg_str}, #{prg_ed},
+			#{prg_cmp_prop})
 		</if>
 	</insert>
 
@@ -50,8 +67,10 @@
 		WHERE prg_id = #{prg_id}
 	</update>
 
-	<select id="selectPrgID" resultType="int" parameterType="co.test.prj.prg.service.PrgVO">
-		SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL AND prj_id = #{prj_id}
+	<select id="selectPrgID" resultType="int"
+		parameterType="co.test.prj.prg.service.PrgVO">
+		SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS
+		NULL AND prj_id = #{prj_id}
 	</select>
 
 	<!-- 소분류 변경시키기 -->
@@ -59,13 +78,15 @@
 		parameterType="co.test.prj.prg.service.PrgVO">
 		<selectKey keyProperty="prg_manager" resultType="String"
 			order="BEFORE">
-			SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL AND prj_id = #{prj_id}
+			SELECT MIN(PRG_ID) FROM PROGRESS WHERE prg_manager IS NULL AND
+			prj_id = #{prj_id}
 		</selectKey>
 		UPDATE PROGRESS
 		SET prg_manager = #{prg_manager}
-		WHERE prg_manager = #{prg_id}
+		WHERE prg_manager =
+		#{prg_id}
 	</update>
-	
+
 	<!-- 삭제시키기 -->
 	<delete id="prgDelete"
 		parameterType="co.test.prj.prg.service.PrgVO">

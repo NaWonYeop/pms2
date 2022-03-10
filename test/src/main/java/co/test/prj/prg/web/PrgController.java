@@ -1,5 +1,6 @@
 package co.test.prj.prg.web;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,13 +32,33 @@ public class PrgController {
 	public String card(HttpSession session, Model model) {
 		return "pms/prg/card";
 	}
-
+	
 	@RequestMapping("/prgSelectList")
 	@ResponseBody
 	public List<PrgVO> prgSelectList(HttpSession session, Model model) {
 		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		int prj_id = myPrj.getPrj_id();
 		List<PrgVO> list = prgDao.prgSelectList(prj_id);
+		return list;
+	}
+	
+	@RequestMapping("/toDoSelect")
+	@ResponseBody
+	public List<PrgVO> toDoSelect(HttpSession session, PrgVO prg) {
+		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
+		int prj_id = myPrj.getPrj_id();
+		prg.setPrj_id(prj_id);
+		List<PrgVO> list = prgDao.toDoSelect(prg);
+		return list;
+	}
+	
+	
+	@RequestMapping("/calSelectList")
+	@ResponseBody
+	public List<PrgVO> calSelectList(HttpSession session, Model model) {
+		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
+		int prj_id = myPrj.getPrj_id();
+		List<PrgVO> list = prgDao.calSelectList(prj_id);
 		return list;
 	}
 
@@ -58,8 +79,12 @@ public class PrgController {
 		prg.setPrj_id(prj_id);
 		prg.setMaster_id(master_id);
 		prg.setPrg_content(prg_content);
+		System.out.println("prg_str" + prg_str);
+		System.out.println("prg_ed" + prg_ed);
 		prg.setPrg_str(MyUtill.convertStringtoDate(prg_str));
 		prg.setPrg_ed(MyUtill.convertStringtoDate(prg_ed));
+		System.out.println("prg_str after" + MyUtill.convertStringtoDate(prg_str));
+		System.out.println("prg_ed after" + MyUtill.convertStringtoDate(prg_ed));
 		prg.setPrg_manager(prg_manager);
 		prg.setPrg_user(prg_user);
 		System.out.println("prg_user: " + prg_user);
