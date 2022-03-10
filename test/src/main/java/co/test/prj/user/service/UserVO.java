@@ -19,5 +19,5 @@ public class UserVO {
 	private String app_stt;
 	private int app_id;
 	private String tech_name;
-	private int avg;
+	private double avg;
 }

@@ -18,10 +18,10 @@
 			SELECT NVL(MAX(APP_ID) + 1, 1) AS ID FROM APPLICATION
 		</selectKey>
 		INSERT INTO APPLICATION (APP_ID, PRJ_ID, MASTER_ID, USER_ID,
-		APP_CLSFC, APP_STT, USER_NAME)
+		APP_CLSFC, APP_STT)
 		VALUES(#{app_id}, #{prj_id}, #{master_id},
 		#{user_id},
-		#{app_clsfc}, #{app_stt}, #{user_name})
+		#{app_clsfc}, #{app_stt})
 	</insert>
 	
 	<update id="appUpdate" parameterType="co.test.prj.application.service.AppVO">

@@ -6,8 +6,8 @@
 	</select>
 	
 	<select id="jobSelectList" resultType="co.test.prj.user.service.UserVO">
-		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, (SELECT AVG(STR_AVG) FROM STAR WHERE USER_ID=U.USER_ID) AS AVG
-		FROM "user" U
+		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 
+		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
 	</select>
 	
 	<select id="techSelect" resultType="co.test.prj.tech.service.TechVO">
@@ -16,8 +16,8 @@
 	
 	<!-- 구직상세 참여프로젝트 >>> 경일 -->
 	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
-		SELECT PRJ_NAME FROM PROJECT
-		WHERE master_id = #{master_id} and SYSDATE <![CDATA[<]]> PRJ_OFR_ED
+		SELECT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME FROM PROJECT P, "user" U
+		WHERE P.MASTER_ID = #{master_id} AND SYSDATE <![CDATA[<]]> P.PRJ_OFR_ED
 	</select>
 	
 
@@ -30,9 +30,9 @@
 	
 	<!-- 구인현황 관심리스트 -->
 	<select id="interestList" resultType="co.test.prj.user.service.UserVO">
-		SELECT U.USER_ID, U.USER_NAME, U.USER_CRR, U.USER_TEL
+		SELECT I.USER_ID2 AS USER_ID, U.USER_NAME, U.USER_CRR, U.USER_TEL
 		FROM "user" U, INTEREST I
-		WHERE U.USER_ID = I.USER_ID
+		WHERE U.USER_ID = I.USER_ID2 and i.user_id = #{user_id}
 	</select>
 	
 	<!-- 신청 수락 -->
@@ -53,12 +53,12 @@
 			order="BEFORE">
 			SELECT NVL(MAX(APP_ID) + 1, 1) AS ID FROM APPLICATION
 		</selectKey>
-		INSERT INTO APPLICATION(APP_ID, PRJ_ID, MASTER_ID, USER_ID, APP_CLSFC, APP_STT, USER_NAME)
-		VALUES(#{app_id}, #{prj_id}, #{master_id}, #{user_id}, 0, 'ing', #{user_name})
+		INSERT INTO APPLICATION(APP_ID, PRJ_ID, MASTER_ID, USER_ID, APP_CLSFC, APP_STT)
+		VALUES(#{app_id}, #{prj_id}, #{master_id}, #{user_id}, 0, 'ing')
 	</insert>
 	
 	<delete id="heartDelete" parameterType="co.test.prj.interest.service.InterestVO">
-		DELETE FROM INTEREST WHERE USER_ID = #{user_id}
+		DELETE FROM INTEREST WHERE USER_ID = #{user_id} AND USER_ID2 = #{user_id2}
 	</delete>
 	
 	<!-- 평가 -->

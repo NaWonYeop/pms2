@@ -63,27 +63,27 @@
 		resultType="co.test.prj.project.service.ProjectVO">
 		<![CDATA[
 		SELECT *
-		FROM ( SELECT ROWNUM RN,
-		            A.*
-		                FROM ( ]]>
-		                			SELECT p.*,c.ctf_usectf_st_course, c.ctf_st_name
-									FROM PROJECT p JOIN COMTNFILE c
-									ON(p.ctf_id = c.ctf_id)
-									WHERE PRJ_VIEW_PROP = 0
-									AND PRJ_NAME LIKE '%'
-									<choose>
-										<when test="type != null and type.equals('ofr')">
-											AND PRJ_OFR_PROP LIKE '1'
-										</when>
-										<when test="type != null and type.equals('fnd')">
-											AND PRJ_FND_PROP LIKE '1'
-										</when>
-									</choose>
-									ORDER BY PRJ_ID DESC
-		            <![CDATA[ ) 
-		            A )
-		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
-		]]>
+      	FROM ( SELECT ROWNUM RN,
+                  A.*
+                      FROM ( ]]>
+                               SELECT p.*,c.ctf_usectf_st_course, c.ctf_st_name
+                           FROM PROJECT p JOIN COMTNFILE c
+                           ON(p.ctf_id = c.ctf_id)
+                           WHERE PRJ_VIEW_PROP = 0
+                           AND PRJ_NAME LIKE '%'||#{keyword}||'%'
+                           <choose>
+                              <when test="type != null and type.equals('ofr')">
+                                 AND PRJ_OFR_PROP LIKE '1'
+                              </when>
+                              <when test="type != null and type.equals('fnd')">
+                                 AND PRJ_FND_PROP LIKE '1'
+                              </when>
+                           </choose>
+                           ORDER BY PRJ_ID DESC
+                  <![CDATA[ ) 
+                  A )
+      	WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
+      	]]>
 	</select>
 	
 	<select id="projectSearchPageCount" parameterType="co.test.prj.project.service.ProjectVO"

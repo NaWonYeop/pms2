@@ -136,6 +136,7 @@
             </div>
 
             <c:forEach items="${AssessList }" var="Assess" varStatus="status">
+            	<c:if test="${sessionUser.user_id != Assess.user_id }">
                <div class="col-sm-6 col-xl-3">
                   <div class="single_feature">
                      <div class="single_feature_part">
@@ -146,11 +147,11 @@
                               <input type="hidden" id="aId" value="${Assess.user_id }">
                               <div class="content modalcontent">
                                  <div class="justify-content-center">
-                                    <h2 class="content prjtitle" style="text-align: center;">평가하기</h2>
+                                    <h2 class="content prjtitle" style="text-align: center;">${Assess.user_name }</h2>
                                     <div class="flexbox">
                                        <p class="content prj" style="">전문성</p>
                                        <div class="default-select" id="default-select">
-                                                   <select id="str_prfsn">
+                                                   <select id="str_prfsn${Assess.user_id }">
                                                       <option value="5">5</option>
                                                       <option value="4">4</option>
                                                       <option value="3">3</option>
@@ -162,7 +163,7 @@
                                     <div class="flexbox">
                                        <p class="content prj">일정준수</p>
                                        <div class="default-select" id="default-select">
-                                                   <select id="str_obs">
+                                                   <select id="str_obs${Assess.user_id }">
                                                       <option value="5">5</option>
                                                       <option value="4">4</option>
                                                       <option value="3">3</option>
@@ -174,7 +175,7 @@
                                     <div class="flexbox">
                                        <p class="content prj">적극성</p>
                                        <div class="default-select" id="default-select">
-                                                   <select id="str_pos">
+                                                   <select id="str_pos${Assess.user_id }">
                                                       <option value="5">5</option>
                                                       <option value="4">4</option>
                                                       <option value="3">3</option>
@@ -186,7 +187,7 @@
                                     <div class="flexbox">
                                        <p class="content prj">의사소통</p>
                                        <div class="default-select" id="default-select">
-                                                   <select id="str_comm">
+                                                   <select id="str_comm${Assess.user_id }">
                                                       <option value="5">5</option>
                                                       <option value="4">4</option>
                                                       <option value="3">3</option>
@@ -198,7 +199,7 @@
                                     <div class="flexbox">
                                        <p class="content prj">재고용 의사</p>
                                        <div class="default-select" id="default-select">
-                                                   <select id="str_re_empl">
+                                                   <select id="str_re_empl${Assess.user_id }">
                                                       <option value="5">5</option>
                                                       <option value="4">4</option>
                                                       <option value="3">3</option>
@@ -209,7 +210,7 @@
                                     </div>
                                  </div>
                                  <button type="button" class="call"
-                                    style="line-height: normal;" onclick="Assess()">평가하기</button>
+                                    style="line-height: normal;" onclick="Assess(${Assess.user_id })">평가하기</button>
                               </div>
                            </div>
                         </span>
@@ -218,6 +219,7 @@
                      </div>
                   </div>
                </div>
+               </c:if>
             </c:forEach>
 
 
@@ -253,15 +255,15 @@
       }
       
       //평가 버튼
-      function Assess() {
+      function Assess(e) {
          var aId = $('#aId').val();
-         var prfsn = parseInt($('#str_prfsn').val()); 
-         var obs = parseInt($('#str_obs').val());
-         var pos = parseInt($('#str_pos').val());
-         var comm = parseInt($('#str_comm').val());
-         var reEmpl = parseInt($('#str_re_empl').val());
+         var prfsn = parseInt($("#str_prfsn"+e+" option:selected").val()); 
+         var obs = parseInt($("#str_obs"+e+" option:selected").val());
+         var pos = parseInt($("#str_pos"+e+" option:selected").val());
+         var comm = parseInt($("#str_comm"+e+" option:selected").val());
+         var reEmpl = parseInt($("#str_re_empl"+e+" option:selected").val());
          var avg = (prfsn+obs+pos+comm+reEmpl)/5;
-
+         
          $.ajax({
             url : "projectAssess",
             type: "get",
