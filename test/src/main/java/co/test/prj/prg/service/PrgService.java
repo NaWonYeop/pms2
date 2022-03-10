@@ -5,6 +5,10 @@ import java.util.List;
 public interface PrgService {
 	
 	List<PrgVO> prgSelectList(int prj_id);
+	
+	List<PrgVO> calSelectList(int prj_id);
+	
+	List<PrgVO> toDoSelect(PrgVO prg);
 
 	int prgInsert(PrgVO prg);
 

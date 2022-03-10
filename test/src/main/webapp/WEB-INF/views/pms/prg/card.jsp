@@ -164,7 +164,7 @@
 				}
 			}
 		}).fail(function () {
-			console.log('실패');
+			console.log('리스트 출력 실패');
 		});
 	}
 </script>
