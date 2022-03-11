@@ -82,6 +82,7 @@ button {
 
 	<section class="testimonial_part section_padding">
 		<div class="container-fluid">
+		
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
@@ -90,51 +91,41 @@ button {
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-12 col-sm-12 col-md-12">
-					<div class="textimonial_iner owl-carousel">
-						<div class="testimonial_slider">
-							<div class="row">
-								<div class="col-lg-12 col-xl-12 col-sm-12 align-self-center">
-									<div class="testimonial_slider_text"
-										style="background-color: burlywood;">
-										<h2>김고기</h2>
-										<h4>경력 2년 | 010-3131-2456</h4>
-										<h5>Back-end</h5>
+			
+			<div class="testimonial_slider">
+				<div class="row">
+					<!-- for문 start -->
+					<c:forEach items="${memberList }" var="memberList">
+							<div class="col-sm-12 col-lg-12 list">
+								<div class="single_special_cource">
+									<div class="special_cource_text" style="border: 0;">
+										<div class="col-12 author_info"
+											style="border-top: 0; margin-top: 0; padding-top: 0;">
+											<div class="col-8">
+												<div class="author_img">
+													<div class="author_info_text">
+														<p>Conduct by:</p>
+														<h5>
+															<a href="jobDetail?user_id=${memberList.user_id }">${memberList.user_name } | 
+															<c:if test="${memberList.user_crr != null}">경력 ${memberList.user_crr }년</c:if>
+															<c:if test="${memberList.user_crr eq null}">경력없음</c:if> | 0${memberList.user_tel }</a>
+															<h5>${memberList.tm_dept }</h5>
+															<input type="hidden" id="uId" value="${memberList.user_id }">
+														</h5>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
-								<!-- <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <h4>난워녑</h4>
-                                        <h4>25세 | 경력 2년 | 010-8540-1561</h4>
-                                        <h5> Front-end</h5>
-                                    </div>
-                                </div> -->
 							</div>
-						</div>
-						<div class="testimonial_slider">
-							<div class="row">
-								<div class="col-lg-12 col-xl-12 col-sm-12 align-self-center">
-									<div class="testimonial_slider_text"
-										style="background-color: burlywood;">
-										<h2>나는워녑</h2>
-										<h4>경력 2년 | 010-3131-2456</h4>
-										<h5>Front-end</h5>
-									</div>
-								</div>
+					</c:forEach>
 
-								<!-- <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <h4>난워녑</h4>
-                                        <h4>25세 | 경력 2년 | 010-8540-1561</h4>
-                                        <h5> Front-end</h5>
-                                    </div>
-                                </div> -->
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
+			
+			
 		</div>
 	</section>
 	<!-- ------------------------------------------------------------------- -->
@@ -168,7 +159,7 @@ button {
 														<h5>
 															<a href="jobDetail?user_id=${ofterList.user_id }">${ofterList.user_name } | 
 															<c:if test="${ofterList.user_crr != null}">경력 ${ofterList.user_crr }년</c:if>
-															<c:if test="${ofterList.user_crr eq null}">경력없음</c:if> | ${ofterList.user_tel }</a>
+															<c:if test="${ofterList.user_crr eq null}">경력없음</c:if> | 0${ofterList.user_tel }</a>
 															<input type="hidden" id="uId" value="${ofterList.user_id }">
 														</h5>
 													</div>
@@ -238,7 +229,7 @@ button {
 													<h5>
 														<a href="jobDetail?user_id=${interest.user_id }">${interest.user_name } | 
 														<c:if test="${interest.user_crr != null}">경력 ${interest.user_crr }년</c:if>
-														<c:if test="${interest.user_crr eq null}">경력없음</c:if> | ${interest.user_tel }</a>
+														<c:if test="${interest.user_crr eq null}">경력없음</c:if> | 0${interest.user_tel }</a>
 													</h5>
 												</div>
 											</div>
@@ -260,8 +251,8 @@ button {
 
 										<div class="col-4">
 											<div class="button-contactForm">
-												<button type="button" class="joinbtn" onclick="location.href='heartAccept?user_id=${interest.user_id}&prj_id=${prj_id }&user_name=${interest.user_name }'">신청</button>
-												<button type="button" class="nopebtn" onclick="heartDelete()">삭제</button>
+												<button type="button" class="joinbtn" onclick="heartAccept(${interest.user_id})">신청</button>
+												<button type="button" class="nopebtn" onclick="heartDelete(${interest.user_id})">삭제</button>
 											</div>
 										</div>
 									</div>
@@ -280,21 +271,38 @@ button {
 	</section>
 
 	<script type="text/javascript">
+		toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "1000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+		} 
+		
 		function projectOfrAccept(e, s) {
-			console.log($(".joinbtn"+e+"").val());
-	            $.ajax({
-	                url: 'projectOfrAccept',
-	                type: 'get',
-					data: {
-						user_id: e,
-						prj_id: ${prj_id },
-						master_id: ${sessionUser.user_id},
-						app_id: s
-					},
-	                success: function() {
-	                    console.log('gooood');
-	                }
-	            })
+            $.ajax({
+                url: 'projectOfrAccept',
+                type: 'get',
+				data: {
+					user_id: e,
+					prj_id: ${prj_id },
+					master_id: ${sessionUser.user_id},
+					app_id: s
+				},
+                success: function() {
+                    toastr.success("수락 성공!")
+                }
+            })
 		}
 		
 		function projectOfrDecline(e) {
@@ -306,24 +314,38 @@ button {
 					app_id: e
 				},
 				success: function() {
-					console.log('success');
+					toastr.success("거절되었습니다.")
+				}
+			})
+		}
+		function heartAccept(e) {
+			$.ajax({
+				url: 'heartAccept',
+				type: 'post',
+				data: {
+					prj_id: ${prj_id},
+					master_id: ${sessionUser.user_id},
+					user_id: e
+				},
+				success: function(){
+					toastr.success("신청 완료!");
 				}
 			})
 		}
 		
-		/* function heartDelete() {
+		function heartDelete(e) {
 			$.ajax({
 				url: 'heartDelete',
 				type: 'post',
 				data: {
-					user_id: 
-					user_id2:
+					user_id: ${sessionUser.user_id},
+					user_id2: e
 				},
 				success: function() {
-					console.log("goooodd");
+					toastr.success("관심목록에서 삭제되었습니다.");
 				}
 			})
-		} */
+		} 
 	</script>
 </body>
 </html>

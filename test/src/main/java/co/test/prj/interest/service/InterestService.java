@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface InterestService {
 	int heartInsert(InterestVO interset);
+	int heartDelete(InterestVO interest);
 }

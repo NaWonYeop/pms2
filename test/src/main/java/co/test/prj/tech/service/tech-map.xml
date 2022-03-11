@@ -20,12 +20,23 @@
 		WHERE P.MASTER_ID = #{master_id} AND SYSDATE <![CDATA[<]]> P.PRJ_OFR_ED
 	</select>
 	
-
+	<!-- 구직상세 찜하기 체크 -->
+	<select id="heartbtnCheck" resultType="co.test.prj.interest.service.InterestVO">
+		SELECT USER_ID2 FROM INTEREST WHERE USER_ID = #{user_id} AND USER_ID2 = #{user_id2}
+	</select>
+	
+	<!-- 구인현황 확정멤버리스트 -->
+	<select id="memberList" resultType="co.test.prj.user.service.UserVO">
+		SELECT USER_NAME, USER_CRR, USER_TEL, TM_DEPT
+		FROM "user" U, TEAM T
+		WHERE PRJ_ID= #{prj_id} AND U.USER_ID=T.USER_ID
+	</select>
+	
 	<!-- 구인현황 신청리스트 -->
 	<select id="ofterList" resultType="co.test.prj.user.service.UserVO">
 		SELECT U.USER_ID, U.USER_NAME, U.USER_CRR, U.USER_TEL, A.APP_STT, A.APP_ID
 		FROM "user" U, APPLICATION A
-		WHERE U.USER_ID IN (select user_id from application where master_id=#{master_id} and prj_id = #{prj_id} ) AND U.USER_ID = A.USER_ID
+		WHERE U.USER_ID IN (select user_id from application where master_id=#{master_id} and prj_id = #{prj_id} ) AND U.USER_ID = A.USER_ID AND PRJ_ID = #{prj_id} AND APP_CLSFC = 1
 	</select>
 	
 	<!-- 구인현황 관심리스트 -->
@@ -63,16 +74,28 @@
 	
 	<!-- 평가 -->
 	<select id="AssessList" parameterType="co.test.prj.project.service.ProjectVO" resultType="co.test.prj.tech.service.TechVO">
-		SELECT U.USER_NAME, T.TM_DEPT, U.USER_ID, P.PRJ_ID, P.PRJ_NAME
-		FROM "user" U, PROJECT P, TEAM T
-		WHERE P.PRJ_ID = #{prj_id} AND U.USER_ID = T.USER_ID AND PRJ_DEVED_PROP = 1 AND P.PRJ_ID = T.PRJ_ID
+		SELECT U.USER_NAME,T.TM_DEPT,U.USER_ID,P.PRJ_NAME,STR_RESULT, P.PRJ_ID
+		FROM TEAM T LEFT OUTER JOIN STAR S ON (S.USER_ID=T.USER_ID AND S.PRJ_ID=T.PRJ_ID ),PROJECT P,"user" U
+		WHERE T.PRJ_ID= #{prj_id} AND U.USER_ID=T.USER_ID AND P.PRJ_ID=T.PRJ_ID 
 	</select>
 	
 	<insert id="AssessInsert" parameterType="co.test.prj.star.service.StarVO">
-		insert into star(prj_id, user_id, user_id2, str_prfsn, str_obs, str_pos, str_comm, str_re_empl, str_avg)
-		values(#{prj_id}, #{user_id}, #{user_id2}, #{str_prfsn}, #{str_obs}, #{str_pos}, #{str_comm}, #{str_re_empl}, #{str_avg})
+		INSERT INTO STAR(PRJ_ID, USER_ID, USER_ID2, STR_PRFSN, STR_OBS, STR_POS, STR_COMM, STR_RE_EMPL, STR_AVG)
+		VALUES(#{prj_id}, #{user_id}, #{user_id2}, #{str_prfsn}, #{str_obs}, #{str_pos}, #{str_comm}, #{str_re_empl}, #{str_avg})
 	</insert>
 	
+	<update id="AssessUpdate" parameterType="co.test.prj.star.service.StarVO">
+		UPDATE STAR
+			<set>
+				STR_PRFSN = #{str_prfsn},
+				STR_OBS = #{str_obs},
+				STR_POS = #{str_pos},
+				STR_COMM = #{str_comm},
+				STR_RE_EMPL = #{str_re_empl},
+				STR_AVG = #{str_avg}
+			</set>
+		WHERE USER_ID=#{user_id} AND PRJ_ID=#{prj_id}
+	</update>
 	
 	
 	

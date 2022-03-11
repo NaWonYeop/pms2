@@ -18,6 +18,11 @@ public class InterestServiceImpl implements InterestMapper {
 	public int heartInsert(InterestVO interset) {
 		return map.heartInsert(interset);
 	}
+
+	@Override
+	public int heartDelete(InterestVO interest) {
+		return map.heartDelete(interest);
+	}
 	
 	
 	

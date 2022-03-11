@@ -140,82 +140,97 @@
                <div class="col-sm-6 col-xl-3">
                   <div class="single_feature">
                      <div class="single_feature_part">
-                        <span class="single_feature_icon" style="position: static;">
-                           <i id="ti-layers${status.index }" class="ti-layers"
-                           onclick="modalFadeSelect(this);"></i>
-                           <div class="modaldal content">
-                              <input type="hidden" id="aId" value="${Assess.user_id }">
-                              <div class="content modalcontent">
-                                 <div class="justify-content-center">
-                                    <h2 class="content prjtitle" style="text-align: center;">${Assess.user_name }</h2>
-                                    <div class="flexbox">
-                                       <p class="content prj" style="">전문성</p>
-                                       <div class="default-select" id="default-select">
-                                                   <select id="str_prfsn${Assess.user_id }">
-                                                      <option value="5">5</option>
-                                                      <option value="4">4</option>
-                                                      <option value="3">3</option>
-                                                      <option value="2">2</option>
-                                                      <option value="1">1</option>
-                                                   </select>
-                                                </div>
-                                    </div>
-                                    <div class="flexbox">
-                                       <p class="content prj">일정준수</p>
-                                       <div class="default-select" id="default-select">
-                                                   <select id="str_obs${Assess.user_id }">
-                                                      <option value="5">5</option>
-                                                      <option value="4">4</option>
-                                                      <option value="3">3</option>
-                                                      <option value="2">2</option>
-                                                      <option value="1">1</option>
-                                                   </select>
-                                                </div>
-                                    </div>
-                                    <div class="flexbox">
-                                       <p class="content prj">적극성</p>
-                                       <div class="default-select" id="default-select">
-                                                   <select id="str_pos${Assess.user_id }">
-                                                      <option value="5">5</option>
-                                                      <option value="4">4</option>
-                                                      <option value="3">3</option>
-                                                      <option value="2">2</option>
-                                                      <option value="1">1</option>
-                                                   </select>
-                                                </div>
-                                    </div>
-                                    <div class="flexbox">
-                                       <p class="content prj">의사소통</p>
-                                       <div class="default-select" id="default-select">
-                                                   <select id="str_comm${Assess.user_id }">
-                                                      <option value="5">5</option>
-                                                      <option value="4">4</option>
-                                                      <option value="3">3</option>
-                                                      <option value="2">2</option>
-                                                      <option value="1">1</option>
-                                                   </select>
-                                                </div>
-                                    </div>
-                                    <div class="flexbox">
-                                       <p class="content prj">재고용 의사</p>
-                                       <div class="default-select" id="default-select">
-                                                   <select id="str_re_empl${Assess.user_id }">
-                                                      <option value="5">5</option>
-                                                      <option value="4">4</option>
-                                                      <option value="3">3</option>
-                                                      <option value="2">2</option>
-                                                      <option value="1">1</option>
-                                                   </select>
-                                                </div>
-                                    </div>
-                                 </div>
-                                 <button type="button" class="call"
-                                    style="line-height: normal;" onclick="Assess(${Assess.user_id })">평가하기</button>
-                              </div>
-                           </div>
+                        <span id="ti-layers${status.index }" class="single_feature_icon" onclick="modalFadeSelect(this);" style="position: static;">
+                           <i id="ti-layers${status.index }" class="ti-layers"></i>
+                           
+	                           <div class="modaldal content">
+	                              <input type="hidden" id="aId${Assess.user_id }" value="${Assess.user_id }">
+	                              <div class="content modalcontent">
+	                                 <div class="justify-content-center">
+	                                    <h2 class="content prjtitle" style="text-align: center;">${Assess.user_name }</h2>
+	                                    <div class="flexbox">
+	                                       <p class="content prj" style="">전문성</p>
+	                                       <div class="default-select" id="default-select">
+	                                                   <select id="str_prfsn${Assess.user_id }">
+	                                                      <option value="5">5</option>
+	                                                      <option value="4">4</option>
+	                                                      <option value="3">3</option>
+	                                                      <option value="2">2</option>
+	                                                      <option value="1">1</option>
+	                                                   </select>
+	                                                </div>
+	                                    </div>
+	                                    <div class="flexbox">
+	                                       <p class="content prj">일정준수</p>
+	                                       <div class="default-select" id="default-select">
+	                                                   <select id="str_obs${Assess.user_id }">
+	                                                      <option value="5">5</option>
+	                                                      <option value="4">4</option>
+	                                                      <option value="3">3</option>
+	                                                      <option value="2">2</option>
+	                                                      <option value="1">1</option>
+	                                                   </select>
+	                                                </div>
+	                                    </div>
+	                                    <div class="flexbox">
+	                                       <p class="content prj">적극성</p>
+	                                       <div class="default-select" id="default-select">
+	                                                   <select id="str_pos${Assess.user_id }">
+	                                                      <option value="5">5</option>
+	                                                      <option value="4">4</option>
+	                                                      <option value="3">3</option>
+	                                                      <option value="2">2</option>
+	                                                      <option value="1">1</option>
+	                                                   </select>
+	                                                </div>
+	                                    </div>
+	                                    <div class="flexbox">
+	                                       <p class="content prj">의사소통</p>
+	                                       <div class="default-select" id="default-select">
+	                                                   <select id="str_comm${Assess.user_id }">
+	                                                      <option value="5">5</option>
+	                                                      <option value="4">4</option>
+	                                                      <option value="3">3</option>
+	                                                      <option value="2">2</option>
+	                                                      <option value="1">1</option>
+	                                                   </select>
+	                                                </div>
+	                                    </div>
+	                                    <div class="flexbox">
+	                                       <p class="content prj">재고용 의사</p>
+	                                       <div class="default-select" id="default-select">
+	                                                   <select id="str_re_empl${Assess.user_id }">
+	                                                      <option value="5">5</option>
+	                                                      <option value="4">4</option>
+	                                                      <option value="3">3</option>
+	                                                      <option value="2">2</option>
+	                                                      <option value="1">1</option>
+	                                                   </select>
+	                                                </div>
+	                                    </div>
+	                                 </div>
+	                                 <c:if test="${Assess.str_result eq 0  }">
+	                                 <button type="button" class="call" id="insert${Assess.user_id }"
+	                                    style="line-height: normal;" onclick="Assess(${Assess.user_id },0)">평가하기</button>
+			                         </c:if>
+			                         <c:if test="${Assess.str_result eq 1  }">
+	                                 <button type="button" class="call" id="update"
+	                                    style="line-height: normal;" onclick="Assess(${Assess.user_id },1)">평가하기</button>
+			                         </c:if>
+	                              </div>
+	                           </div>
                         </span>
                         <h4>${Assess.user_name }</h4>
                         <p>${Assess.tm_dept }</p>
+                        <c:choose>
+                        	<c:when test="${Assess.str_result eq 1 }">
+                        		<h3 id="success">평가완료</h3>	
+                        	</c:when>
+                        	<c:otherwise>
+                        		<h3 id="error${Assess.user_id }">평가 미완료</h3>
+                        	</c:otherwise>
+                        </c:choose>
+                        
                      </div>
                   </div>
                </div>
@@ -236,7 +251,8 @@
                && !$(e.target).hasClass("flexbox")
                && !$(e.target).hasClass("ti-layers")
                && !$(e.target).hasClass("option")
-               && !$(e.target).hasClass("current")) {
+               && !$(e.target).hasClass("current")
+               && !$(e.target).hasClass("single_feature_icon")) {
             $('.modaldal').fadeOut();
          }
       }
@@ -251,12 +267,20 @@
          }); */
 
       function modalFadeSelect(info) {
-         $('#' + info.id).next().fadeIn();
+        	 console.log('#' + info.id);
+         $('#' + info.id).children('.modaldal').fadeIn();
       }
       
       //평가 버튼
-      function Assess(e) {
-         var aId = $('#aId').val();
+      function Assess(e,ch) {
+    	 var url;
+    	 if(ch==0)	{
+    		 url= 'projectAssess';
+    	} else {
+    		url= 'projectAssessUpdate';
+    	}
+    	 
+         var aId = $("#aId"+e).val();
          var prfsn = parseInt($("#str_prfsn"+e+" option:selected").val()); 
          var obs = parseInt($("#str_obs"+e+" option:selected").val());
          var pos = parseInt($("#str_pos"+e+" option:selected").val());
@@ -265,7 +289,7 @@
          var avg = (prfsn+obs+pos+comm+reEmpl)/5;
          
          $.ajax({
-            url : "projectAssess",
+            url : url,
             type: "get",
             data : {
                prj_id: ${AssessList[0].prj_id },
@@ -278,8 +302,16 @@
                str_avg: avg
             }
          }).done(function(){
-            console.log('gooood');
+            toastr.success("평가 성공!");
          }) 
+          if(ch==0)	{
+        	  console.log('aaaaaaaaa');
+        	  $('#insert'+e).removeAttr('onclick');
+        	  $('#insert'+e).attr("onclick", "Assess("+e+",1)");
+        	  
+        	  $('#error'+e).text("평가완료");
+        	  
+          }
       }
    </script>
 </body>

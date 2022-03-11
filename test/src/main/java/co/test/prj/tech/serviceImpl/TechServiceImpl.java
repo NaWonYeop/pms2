@@ -13,6 +13,7 @@ import co.test.prj.team.service.TeamVO;
 import co.test.prj.tech.service.TechMapper;
 import co.test.prj.tech.service.TechService;
 import co.test.prj.tech.service.TechVO;
+import co.test.prj.user.service.UserVO;
 
 @Repository("techDao")
 public class TechServiceImpl implements TechService {
@@ -93,6 +94,21 @@ public class TechServiceImpl implements TechService {
 	@Override
 	public int AssessInsert(StarVO star) {
 		return map.AssessInsert(star);
+	}
+
+	@Override
+	public int AssessUpdate(StarVO star) {
+		return map.AssessUpdate(star);
+	}
+
+	@Override
+	public List<UserVO> memberList(ProjectVO project) {
+		return map.memberList(project);
+	}
+
+	@Override
+	public InterestVO heartbtnCheck(InterestVO inter) {
+		return map.heartbtnCheck(inter);
 	}
 
 	

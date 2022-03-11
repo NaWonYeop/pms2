@@ -7,6 +7,7 @@ import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.star.service.StarVO;
 import co.test.prj.team.service.TeamVO;
+import co.test.prj.user.service.UserVO;
 
 public interface TechMapper {
 	List<TechVO> techSelectList();
@@ -23,7 +24,13 @@ public interface TechMapper {
 
 	// 프로젝트 참여
 	List<ProjectVO> jobJoinList(ProjectVO project);
-
+	
+	//찜하기 버튼 체크
+	InterestVO heartbtnCheck(InterestVO inter);
+	
+	// 확정멤버 리스트
+	List<UserVO> memberList(ProjectVO project);
+	
 	// 구인현황 리스트
 	List<ProjectVO> ofterList(ProjectVO project);
 	
@@ -45,4 +52,7 @@ public interface TechMapper {
 	
 	//평가 insert
 	int AssessInsert(StarVO star);
+	
+	//평가 update
+	int AssessUpdate(StarVO star);
 }
