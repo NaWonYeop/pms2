@@ -88,17 +88,43 @@
       <form action="searchId" class="form-signin" method="POST">
         <input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름" required><BR>
         <input type="text" pattern="[0-9]+" name="user_tel" id="user_tel" class="form-control" placeholder="연락처" required><br>
-        <p class="checks" id="checks">${findpw_checkf}</p><br/>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
       </form>
       
 		</div>
         <div class="links">
             <a href=forgotPassword>비밀번호 찾기</a> | <a href="loginForm">로그인</a> | <a href="registerForm">회원가입</a>
-
         </div>
 	</div>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		console.log("로그인 결과");
+		console.log('${idcheck}');
+		if ('${idcheck}' != '') {
+			var message = '${idcheck}';
+			/* alert(message); */
+			toastr.options = {
+				"closeButton" : false,
+				"debug" : false,
+				"newestOnTop" : false,
+				"progressBar" : true,
+				"positionClass" : "toast-top-center",
+				"preventDuplicates" : false,
+				"onclick" : null,
+				"showDuration" : "100",
+				"hideDuration" : "1000",
+				"timeOut" : "1500",
+				"extendedTimeOut" : "1000",
+				"showEasing" : "swing",
+				"hideEasing" : "linear",
+				"showMethod" : "fadeIn",
+				"hideMethod" : "fadeOut"
+			}
+			toastr.warning('잘못된 정보입니다');
+		}
+	});
+	</script>
   </body>
   
 </html>

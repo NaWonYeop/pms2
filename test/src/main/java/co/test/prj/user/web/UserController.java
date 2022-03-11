@@ -129,14 +129,16 @@ public class UserController {
 	@RequestMapping("/searchId")
 	public String searchId(UserVO user, Model model) {
 		user = userDao.userSearch(user);
-		if (user.getUser_email() != null) {
+		if (user != null) {
 			String s = user.getUser_email().replaceAll("(?<=.{3}).", "*");
 			model.addAttribute("idcheck", "당신의 아이디는" + s + "입니다");
+			return "user/searchId";
 		} else {
-			model.addAttribute("idcheck", "아이디 찾기 실패하였습니다");
+			model.addAttribute("idcheck", "1");
 		}
+		return "user/forgotId";
 
-		return "user/searchId";
+		
 	}
 
 	// 찾은 비밀번호 결과창
@@ -211,8 +213,13 @@ public class UserController {
 
 	// 개발자 등록
 	@RequestMapping("/insertDevForm")
-	public String insertdev() {
-		
+	public String insertdev(HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		user = userDao.userSelect(user);
+		if(user.getUser_job_ttl() != null) {
+			return  "redirect:/home";
+			//토스트 넣어야됨
+		}
 		return "user/insertDevForm";
 	}
 
@@ -283,11 +290,12 @@ public class UserController {
 	@PostMapping("/userUpdate")
 	public String userUpdate(UserVO user, Model model, HttpSession session) {
 		System.out.println(user);
-		user.setUser_email(session.getAttribute("user_email").toString());
+		UserVO vo = new UserVO();
+		vo = (UserVO)session.getAttribute("sessionUser");
+		user.setUser_id(vo.getUser_id());
 		if (user.getUser_pwd() != null) {
 			model.addAttribute("update", "회원수정 성공하였습니다");
 			userDao.userUpdate(user);
-
 		} else {
 			model.addAttribute("update", "회원수정 실패하였습니다");
 		}
@@ -299,6 +307,7 @@ public class UserController {
 	public String devUpdateForm(HttpSession session, Model model) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		CertVO cert = new CertVO();
+		cert.setUser_id(user.getUser_id());
 		List<CertVO> certifi = certDao.certSelect(cert);
 		model.addAttribute("MyCert", certifi);
 		return "user/devUpdateForm";
@@ -311,11 +320,12 @@ public class UserController {
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
 		userDao.deleteDev(del);
+		
 		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
-			cert.setCert_name(temp);
 			cert.setUser_id(user.getUser_id());
+			cert.setCert_name(temp);
 			userDao.insertDev(cert);
 		}
 
@@ -360,7 +370,12 @@ public class UserController {
 	// 회원탈퇴2
 	@RequestMapping("/Withdrawa2")
 	public String Withdrawal2(String user_pwd, Model model, HttpSession session) {
+		System.out.println(user_pwd);
+		if(user_pwd == null) {
+			return "redirect:/home";
+		}
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		userDao.userSelect(user);
 		if (user_pwd.equals(user.getUser_pwd())) {
 			System.out.println("user_pwd");
 			int id = user.getUser_id();
@@ -369,7 +384,6 @@ public class UserController {
 		} else {
 			model.addAttribute("FailPassword", "비밀번호가 일치하지않습니다");
 		}
-
 		return "user/Withdrawal1";
 	}
 
@@ -382,10 +396,10 @@ public class UserController {
 		System.out.println(userDao.userDelete(user));
 		return "user/Withdrawal3";
 	}
-	//카카오 회원탈퇴
+		//카카오 회원탈퇴
 		@RequestMapping("/kakaoWithdrawal")
 		public String kakaoWithdrawal() {
-			return "user/kakaoWithdrawal";
+			return "user/kakaoWithdrawal1";
 		}
 		// 회원탈퇴2
 		@RequestMapping("/kakaoWithdrawa2")
