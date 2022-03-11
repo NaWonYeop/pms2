@@ -125,6 +125,7 @@
         
         
     </style>
+
 </head>
 
 <body>
@@ -142,11 +143,11 @@
             </div>
         </div>
     </section>
-<%--  ${project}<br>
- ${sessionScope } --%>
+${project}<br>
+ ${sessionScope }
  	<section class="course_details_area section_padding">
         <div class="container">
-        
+        	<input type="hidden" id="">
         	<div class="col-12 Tname">
 	            <h4 class="title_top" style="font-size: 50px;">${project.prj_name}</h4>
 	            조회수 : ${project.prj_hit}<br>
@@ -258,7 +259,7 @@
         		</div>
         		
         		
-        		
+        		${sessionScope.sessionUser.user_id }
         		
         		
         		
@@ -268,19 +269,31 @@
         		 	<h3 style="font-weight: bold;">리워드 리스트</h3>
         			</c:if>
         			<c:forEach items="${rewards }" var="reward">
-        			
+        			<form>
         			<article class="blog_item">
         				<div class="blog_details">
-        					<a class="d-inline-block" href="single-blog.html"><!-- 여기 주소 -->
-                           	<h2>${reward.rwd_name}</h2>
-                        	</a> <br>
-							리워드 내용 : ${reward.rwd_cnt}<br>
-							금액 : ${reward.rwd_prc}<br>
+        				<!-- 이거 아이디 값으로 찾는거 라 딴건 바꿔도 괜찮아요-->
+                           	<h3 id="n${reward.reward_id }">${reward.rwd_name}</h3>
+                           	<h2 id="p${reward.reward_id }">${reward.rwd_prc}</h2>
+							
+							내용 : ${reward.rwd_cnt}<br>
 							구입수량 : ${reward.rwd_cot}<br>
 							판매수량 : ${reward.rwd_goal}<br>
 							(나중에 삭제할것)판매 여부 : ${reward.rwd_stt}<br>
+							<input type="number" id="c${reward.reward_id }" name="buy_count" required placeholder="구매수량(기본:1개)">
+							<div class ="btns">
+							<!-- 버튼들은 클래스 바꾸면 안되요 -->
+								<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매">
+								<input type="button" class="rfnd btn_4" value="환불">
+							</div>
+	        				
         				</div>
+        				
+        				
+        				
+
         			</article>
+        			</form>
 					</c:forEach>
         		
         		
@@ -294,6 +307,121 @@
 			
 		</div>
 	</section>	
-		
+	<script type="text/javascript">
+	$(document).ready(function(){
+		   	//아임포트 준비
+			var IMP = window.IMP;
+			var code = "imp48219552"; //가맹점 식별코드
+			IMP.init(code);
+			
+			
+		}); //doc.ready
+	
+		$(".wBuy").click(function(e){
+			console.log('구매 클릭');
+			var rId = $(".wBuy").prevObject.context.activeElement.id;
+			var rName = document.getElementById('n'+rId).innerHTML;
+			var rPrc = document.getElementById('p'+rId).innerHTML;
+			var rCnt = document.getElementById('c'+rId).value;
+			
+			if (!document.getElementById('c'+rId).checkValidity()) {
+				 console.log("기본값 1 넣는곳");
+				 rCnt = 1;
+			}
+			
+			console.log("리워드 아이디 : "+ rId);
+			console.log("리워드 이름 : "+ rName);
+			console.log("리워드 금액 : "+ rPrc);
+			console.log("리워드 구매수 : "+ rCnt);
+			console.log("구매시작");
+			//결제요청
+			IMP.request_pay({
+				//name과 amout만있어도 결제 진행가능
+				//pg : 'kakao', //pg사 선택 (kakao, kakaopay 둘다 가능)
+				pg: "html5_inicis",
+				pay_method: 'card',
+				merchant_uid : 'merchant_' + new Date().getTime(),
+				name : rName, // 상품명
+				amount : rPrc,
+				buyer_email : '',
+				buyer_name : '',
+				buyer_tel : '',  //필수항목
+				//결제완료후 이동할 페이지 kko나 kkopay는 생략 가능
+				//m_redirect_url : 'https://localhost:8080/payments/complete'
+			}, function(rsp){
+				if(rsp.success){//결제 성공시
+					var msg = '결제가 완료되었습니다';
+					var result = {
+					"imp_uid" : rsp.imp_uid,
+					"merchant_uid" : rsp.merchant_uid,
+					"biz_email" : '',
+					"pay_date" : new Date().getTime(),
+					"amount" : rsp.paid_amount,
+					"card_no" : rsp.apply_num,
+					"refund" : 'payed'
+					}
+					console.log("결제성공 " + msg);
+					$.ajax({
+						url : '/samsam/insertPayCoupon.do', 
+				        type :'POST',
+				        data : JSON.stringify(result,
+				        		['imp_uid', 'merchant_uid', 'biz_email', 
+				        			'pay_date', 'amount', 'card_no', 'refund']),
+				        contentType:'application/json;charset=utf-8',
+				        dataType: 'json', //서버에서 보내줄 데이터 타입
+				        success: function(res){
+				        			        	
+				          if(res == 1){
+							 console.log("추가성공");	
+							 pay += 5;
+							 $('#pay_coupon').html(pay);			           
+				          }else{
+				             console.log("Insert Fail!!!");
+				          }
+				        },
+				        error:function(){
+				          console.log("Insert ajax 통신 실패!!!");
+				        }
+					}) //ajax
+					
+				}
+				else{//결제 실패시
+					var msg = '결제에 실패했습니다';
+					msg += '에러 : ' + rsp.error_msg
+				}
+				console.log(msg);
+			});//pay
+		}); //check1 클릭 이벤트
+		 
+		$("#check2").click(function(e){
+		      console.log("남은이용권"+$('#pay_coupon').text());
+		      if($('#pay_coupon').text() >= 5){
+			$.ajax({
+					url: "/samsam/coupon_cancel.do",
+					type:"post",
+					//datatype:"json",
+					contentType : 'application/x-www-form-urlencoded; charset = utf-8',
+					data : {
+						"biz_email" : '' // 주문번호
+						//"cancle_request_amount" : 2000, //환불금액
+						//"reason": "테스트 결제 환불", //환불사유
+						//"refund_holder": "홍길동", //[가상계좌 환불시 필수입력] 환불 가상계좌 예금주
+						//"refund_bank":"88", //[가상계좌 환불시 필수입력] 환불 가상계좌 은행코드(ex Kg이니시스의 경우 신한은행 88)
+						//"refund_account": "56211105948400" // [가상계좌 환불시 필수입력] 환불 가상계좌 번호
+					}
+				}).done(function(result){ //환불 성공
+					 pay -= 5;
+					 $('#pay_coupon').html(pay);	
+					console.log("환불 성공 : "+ result);
+				}).fail(function(error){
+					console.log("환불 실패 : "+ error);
+				});//ajax
+			} else{
+				console.log("환불 실패 : 남은 결제권 환불 불가");
+			}
+		}); //check2 클릭
+	
+	</script>
+	
 </body>
 </html>

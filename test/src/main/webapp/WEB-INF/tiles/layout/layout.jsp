@@ -51,6 +51,8 @@
 <script src="resources/main/js/waypoints.min.js"></script>
 <!-- custom js -->
 <script src="resources/main/js/custom.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>

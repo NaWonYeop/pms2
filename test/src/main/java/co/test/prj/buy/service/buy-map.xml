@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.buy.service.BuyMapper">
+
+	<insert id="buyInsert" parameterType="co.test.prj.board.service.BoardVO">
+	
+		<selectKey keyProperty="buy_id" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(BUY_ID) + 1, 1) AS ID FROM BUY
+		</selectKey>
+			INSERT INTO BUY(BUY_ID, USER_ID, BUY_WAY, REWARD_ID, PRJ_ID, BUY_COUNT)
+			VALUES(#{buy_id},#{user_id},#{buy_way},#{reward_id},#{prj_id}, #{buy_count})
+	</insert>
+
+
+
+	
+</mapper>

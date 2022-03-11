@@ -333,6 +333,7 @@ public class ProjectController {
 		}
 		
 		//프로젝트 업데이트
+		System.out.println(project);
 		projectDao.projectUpdate(project);
 		
 		System.out.println(project.getPrj_name());
