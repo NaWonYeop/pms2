@@ -49,8 +49,8 @@
             <div class="col-lg-8">
 				<form class="form-contact contact_form" action="projectVerUpdate" onsubmit="return check()" method="post" enctype="multipart/form-data">
 					<div class="row">
+						<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id }">
 						<input type="hidden" id="master_id" name="master_id" value="${sessionScope.sessionUser.user_id }">
-						<input type="hidden" id="prj_ver" name="prj_ver" value="0">	
 	                    <div class="col-sm-6">
 							<div class="form-group">
 	                            <p>프로젝트 명</p>

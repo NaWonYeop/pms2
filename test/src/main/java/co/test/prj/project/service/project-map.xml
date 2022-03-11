@@ -36,7 +36,7 @@
 			<if test="prj_ed != null"> PRJ_ED = #{prj_ed},</if>
 			<if test="prj_ofr_prop != null"> PRJ_OFR_PROP = #{prj_ofr_prop},</if>
 			<if test="prj_fnd_prop != null"> PRJ_FND_PROP = #{prj_fnd_prop},</if>
-			<if test="prj_deved_prop != null"> PRJ_DEVED_PROP = #{prj_deved_prop},</if>
+			<if test="prj_devEd_prop != null"> PRJ_DEVED_PROP = #{prj_devEd_prop},</if>
 			<if test="prj_cnt != null"> PRJ_CNT = #{prj_cnt},</if>
 			<if test="ctf_id != null"> CTF_ID = #{ctf_id},</if>
 			<if test="prj_ofr_str != null"> PRJ_OFR_STR = #{prj_ofr_str},</if>
