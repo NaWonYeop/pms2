@@ -130,7 +130,7 @@ $(document).ready(function() {
 			"showMethod" : "fadeIn",
 			"hideMethod" : "fadeOut"
 		}
-		toastr.warning('올바른 비밀번호를 입력해주세요');
+		toastr.warning('올바른 정보를 입력해주세요');
 	}
 });
 

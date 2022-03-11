@@ -7,12 +7,37 @@
 		<div class="container">
 			<div class="row" align="center">
 				<!--project-->
-				<h1 style="color: black;">${update }</h1>
-				<h3>비밀번호도 함께 찾고 싶으신가요?</h3>
-				<h4>비밀번호 재설정을 선택하면, 지금 바로 새로운 비밀번호로 바꿔서 로그인 할수 있어요</h4>
-				<a href="forgotPassword">비밀번호 재설정하기</a>
+				
 			</div>
 		</div>
 	</section>
 </body>
+<script type="text/javascript">
+$(document).ready(function() {
+	console.log("로그인 결과");
+	console.log('${update}');
+	if ('${update}' == '') {
+		var message = '${update}';
+		/* alert(message); */
+		toastr.options = {
+			"closeButton" : false,
+			"debug" : false,
+			"newestOnTop" : false,
+			"progressBar" : true,
+			"positionClass" : "toast-top-center",
+			"preventDuplicates" : false,
+			"onclick" : null,
+			"showDuration" : "100",
+			"hideDuration" : "1000",
+			"timeOut" : "1500",
+			"extendedTimeOut" : "1000",
+			"showEasing" : "swing",
+			"hideEasing" : "linear",
+			"showMethod" : "fadeIn",
+			"hideMethod" : "fadeOut"
+		}
+		toastr.success('회원수정 성공하셨습니다');
+	}
+});
+</script>
 </html>

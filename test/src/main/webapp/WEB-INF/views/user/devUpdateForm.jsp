@@ -99,14 +99,14 @@ a {
 			<div class="card-body">
 				<span><label>자격증</label><input id="cert_name" type="text"
 					class="form-control"
-					placeholder="내용을 입력하세요" autofocus required></span>
+					placeholder="내용을 입력하세요" ></span>
 				<button type="button" onclick="add()" id="addBtn">추가</button>
 				
-				<ul id="certList" >
+				<ul id="certList">
 				<c:forEach items="${MyCert}" var="certifi">
 				<li>
 					${certifi.cert_name}<span class="close">x</span></li>
-					
+					<input id="date" name ="cert_name" type="hidden" value = "${certifi.cert_name}" >
 				</c:forEach>	
 				</ul>
 				<BR>
@@ -116,7 +116,7 @@ a {
 					id="user_crr" name="user_crr"><BR> 
 				
 				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="등록하기" onclick=""> <input type="reset"
+					type="submit" value="수정하기"> <input type="reset"
 					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
 					onclick="cancel()">
 			</div>
@@ -129,7 +129,7 @@ a {
 		}
 
 		function formCheck() {
-			var confirmation = confirm("등록하시겠습니까?")
+			var confirmation = confirm("수정하시겠습니까?")
 			if (confirmation == true) {
 				return true;
 			} else {
@@ -150,7 +150,7 @@ a {
 			console.log(cert_name.value);
 			var i = document.createElement("span");
 			var li = document.createElement("li");
-			i.innerHTML = `<input id="date" name = "cert_name" type="hidden" value = "\${cert_name.value}" >`
+			i.innerHTML = `<input id="date" name ="cert_name" type="hidden" value = "\${cert_name.value}" >`
 			document.getElementsByClassName("card-body")[0].insertBefore(i,addBtn);
 			li.innerHTML = cert_name.value
 			certList.append(li)

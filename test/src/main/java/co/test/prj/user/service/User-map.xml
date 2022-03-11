@@ -35,7 +35,7 @@
 	</insert>
 	<!-- 개발자 자격증수정 -->
 	<delete id="deleteDev" parameterType="co.test.prj.certificate.service.CertVO">
-	delete from certificate where cert_name = #{cert_name}
+	delete from certificate where user_id = #{user_id}
 	</delete>
 	<!-- 비번찾기 -->
 	<update id="updatePwd"
@@ -77,8 +77,7 @@
 		parameterType="co.test.prj.user.service.UserVO"
 		resultType="co.test.prj.user.service.UserVO">
 		SELECT * FROM "user" WHERE USER_NAME = #{user_name} AND
-		USER_TEL =
-		#{user_tel}
+		USER_TEL = #{user_tel}
 	</select>
 	<!-- 회원정보 수정 -->
 	<update id="userUpdate"

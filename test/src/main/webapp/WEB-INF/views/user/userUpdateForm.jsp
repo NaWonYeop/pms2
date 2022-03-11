@@ -90,11 +90,11 @@ a {
 	
 			<div class="card-body">
 				<input type="password" name="user_pwd" id="user_pwd"
-					class="form-control" placeholder="새로운 비밀번호" ><br>
+					class="form-control" placeholder="새로운 비밀번호"  required="required"><br>
 				<input type="text" name="user_name" id="user_name"
-					class="form-control" placeholder="이름" ><br> <input
+					class="form-control" placeholder="이름" required="required"><br><input
 					type="text" name="user_tel" id="user_tel" class="form-control"
-					placeholder="새로운 전화번호" ><br> <input
+					placeholder="새로운 전화번호" required="required"><br> <input
 					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
 					value="회원수정">
 			</div>
