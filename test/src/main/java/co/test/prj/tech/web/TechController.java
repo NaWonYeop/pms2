@@ -84,9 +84,11 @@ public class TechController {
 		
 		ProjectVO vo6 = new ProjectVO();
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		if(uId!=null)
+		{
 		vo6.setMaster_id(uId.getUser_id()); 
 		model.addAttribute("prjList", techDao.jobJoinList(vo6));
-
+		}
 		return "job/jobDetail";
 	}
 	
