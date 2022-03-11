@@ -11,6 +11,11 @@
 		START WITH prg_manager IS NULL
 		CONNECT BY PRIOR prg_id = prg_manager
 	</select>
+	
+	<select id="prgCheck" resultType="int"
+		parameterType="co.test.prj.prg.service.PrgVO">
+		
+	</select>
 
 	<!-- calandar형 조회 -->
 	<select id="calSelectList"
@@ -62,7 +67,6 @@
 			<if test="prg_str != null"> PRG_STR = #{prg_str},</if>
 			<if test="prg_ed != null"> PRG_ED = #{prg_ed},</if>
 			<if test="prg_user != null"> PRG_USER = #{prg_user},</if>
-			<if test="prg_cmp_prop != null"> PRG_CMP_PROP = #{prg_cmp_prop},</if>
 		</set>
 		WHERE prg_id = #{prg_id}
 	</update>
@@ -85,6 +89,13 @@
 		SET prg_manager = #{prg_manager}
 		WHERE prg_manager =
 		#{prg_id}
+	</update>
+
+	<!-- 완료 상태로 변경 -->
+	<update id="smlCheck" parameterType="co.test.prj.prg.service.PrgVO">
+		UPDATE PROGRESS
+		SET prg_cmp_prop = 1
+		WHERE prg_id = #{prg_id}
 	</update>
 
 	<!-- 삭제시키기 -->

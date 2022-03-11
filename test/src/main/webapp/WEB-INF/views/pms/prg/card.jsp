@@ -5,11 +5,17 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<!-- Button trigger modal -->
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" style="width: 50%"
+						aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">100%</div>
+				</div>
+				<!-- 섹션입력 모달 버튼 -->
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#exampleModalCenter">섹션 입력</button>
+				<br>
+				<br>
 
-				<!-- Modal -->
+				<!-- 섹션Modal창 -->
 				<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalCenterTitle"
 					aria-hidden="true">
@@ -33,7 +39,10 @@
 											type="date" class="form-control" id="prg_str" name="prg_str">
 
 										<label for="prg_ed">종료일</label> <input type="date"
-											class="form-control" id="prg_ed" name="prg_ed">
+											class="form-control" id="prg_ed" name="prg_ed"> <label
+											for="insertTeams">담당</label> <select id="insertTeams"
+											class="js-example-basic-single w-100">
+										</select>
 									</div>
 									<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 								</form>
@@ -54,7 +63,7 @@
 				<!-- Card End -->
 
 
-				<!-- UpdateModal -->
+				<!-- 업데이트Modal 창 -->
 				<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
 					aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -76,7 +85,10 @@
 											type="date" class="form-control" id="prg_str" name="prg_str">
 
 										<label for="prg_ed">종료일</label> <input type="date"
-											class="form-control" id="prg_ed" name="prg_ed">
+											class="form-control" id="prg_ed" name="prg_ed"> <label
+											for="updateTeams">담당</label> <select id="updateTeams"
+											class="js-example-basic-single w-100">
+										</select>
 									</div>
 									<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 								</form>
@@ -100,8 +112,8 @@
 	$(function() {
 		list();
 		$('#exampleModalCenter').on('shown.bs.modal', function (e) {
-			$("#teams").empty();
 			$('[name="prg_manager"]').remove();
+			$('#updateTeams').remove();
 			var prg_manager = e.relatedTarget.dataset.prg_id;
 			if($(e.relatedTarget).hasClass("todo")){
 				$("#insertForm").append(`<input type="hidden" name="prg_manager" value="\${prg_manager}">`);
@@ -110,27 +122,20 @@
 					type : "GET",
 					dataType : "json"
 				}).done(function(json) {
-					var cnt = 0;
-					$("#insertForm").append(`
-							<label for="teams">담당</label>
-							<select id="teams" class="js-example-basic-single w-100">
-							`);
+					$("#insertTeams").empty();
 					for(team of json) {
-						cnt++;
-						$("#teams").append(`
-								<option id="team" value="\${team.user_id}">\${team.user_id}</option>
-								`);
+						$("#insertTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 					};
-					$("#insertForm").append(`</select>`);
-					console.log(cnt);
 				}).fail(function(xhr, status, message) {
 					alert(" status: " + status + " er:" + message);
 				});
 			};
 		});
 		
-		$('#updateModal').on('shown.bs.modal', function (e) {
-			
+		$('#exampleModalCenter').on('shown.bs.modal', function (e) {
+			$("#prg_content").val('');
+			$("#prg_str").val('');
+			$("#prg_ed").val('');
 		});
 		
 	});
@@ -157,10 +162,18 @@
 				} else if(prg.level == 2) {
 					var ul = $(`<ul class="list-group list-group-flush"></ul>`);
 					var li2 = $(`<li class="list-group-item">\${prg.prg_content}
-							<button id="smlUpBtn" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" type="button" class="btn btn-info" data-toggle="modal" data-target="#updateModal">수정</button>
-					<button id="smlBtn" data-prg_id="\${prg.prg_id}" type="button" class="btn btn-danger">x</button></li>`);
+							<button id="smlChk" type="button" data-prg_id="\${prg.prg_id}" class="btn btn-success 1">완료</button>
+							<button id="smlUpBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" class="btn btn-info 2" data-toggle="modal" data-target="#updateModal">수정</button>
+							<button id="smlBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" class="btn btn-danger 3">x</button>
+							</li>`);
 					ul.append(li2);
 					li.append(ul);
+					if(prg.prg_cmp_prop != 0) {
+						console.log("버튼 비활성화");
+						$(".1").attr("disabled", "disabled");
+						$(".2").attr("disabled", "disabled");
+						$(".3").attr("disabled", "disabled");
+					}
 				}
 			}
 		}).fail(function () {
@@ -170,8 +183,6 @@
 </script>
 
 <script>
-	
-	
 	$.ajax({
 		url : "teamSelect",
 		type : "GET",
@@ -186,6 +197,29 @@
 		alert(" status: " + status + " er:" + message);
 	});
 
+	// 완료버튼 만들기
+	$("#card").on("click", "#smlChk", function(e) {
+		var result = confirm("완료 하시겠습니까?");
+		if (!result){
+			return;				
+		}
+		
+		var prg_id = e.currentTarget.dataset.prg_id;
+		$.ajax({
+			url: "smlCheck",
+			type: "GET",
+			dataType: "text",
+			data: {
+				prg_id: prg_id
+			}
+		}).done(function(result) {
+			list();
+		}).fail(function (xhr, status, msg) {
+			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
+		});
+	});
+	
+	
 	// 동적 버튼만들기 - 부모태그에 클릭이벤트를 걸고 실제 거는 클래스를 클릭뒤에 적어준다.
 	// 클릭했을 때 삭제시키는 함수
 	$(".modal-footer").on("click", "#submitBtn", function() {
@@ -260,7 +294,6 @@
 		var prg_str = e.currentTarget.dataset.prg_str;
 		var prg_ed = e.currentTarget.dataset.prg_ed;
 		var prg_content = e.currentTarget.dataset.prg_content;
-		console.log(prg_id, prg_str, prg_ed);
 		$('input[name=prg_id]').attr('value', prg_id);
 		$('input[name=prg_str]').attr('value', prg_str);
 		$('input[name=prg_ed]').attr('value', prg_ed);
@@ -270,12 +303,12 @@
 	
 	// 할 일 수정 모달 띄우기
 	$("#card").on("click", "#smlUpBtn", function(e) {
+		$("#updateTeams").empty();
 		var prg_id = e.currentTarget.dataset.prg_id;
 		var prg_str = e.currentTarget.dataset.prg_str;
 		var prg_ed = e.currentTarget.dataset.prg_ed;
 		var prg_content = e.currentTarget.dataset.prg_content;
-		var prg_user = e.currentTarget.dataset.prg_user;
-		console.log(prg_id, prg_str, prg_ed);
+		
 		$('input[name=prg_id]').attr('value', prg_id);
 		$('input[name=prg_str]').attr('value', prg_str);
 		$('input[name=prg_ed]').attr('value', prg_ed);
@@ -285,19 +318,9 @@
 			type : "GET",
 			dataType : "json"
 		}).done(function(json) {
-			var cnt = 0;
-			$("#updateForm").append(`
-					<label for="teams">담당</label>
-					<select id="teams" class="js-example-basic-single w-100">
-					`);
 			for(team of json) {
-				cnt++;
-				$("#teams").append(`
-						<option id="team" value="\${team.user_id}">\${team.user_id}</option>
-						`);
+				$("#updateTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 			};
-			$("#insertForm").append(`</select>`);
-			console.log(cnt);
 		}).fail(function(xhr, status, message) {
 			alert(" status: " + status + " er:" + message);
 		});
@@ -321,5 +344,7 @@
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
+	
+	
 	
 </script>
