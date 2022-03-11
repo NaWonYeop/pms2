@@ -5,4 +5,8 @@
 		INSERT INTO INTEREST(USER_ID, USER_ID2)
 		VALUES(#{user_id}, #{user_id2})
 	</insert>
+	
+	<delete id="heartDelete" parameterType="co.test.prj.interest.service.InterestVO">
+		DELETE FROM INTEREST WHERE USER_ID = #{user_id} AND USER_ID2 = #{user_id2}
+	</delete>
 </mapper>

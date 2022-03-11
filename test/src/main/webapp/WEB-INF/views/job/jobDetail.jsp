@@ -2,11 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page import="co.test.prj.user.service.UserVO"%>
+<%@page import="co.test.prj.interest.service.InterestVO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <title>Insert title here</title>
 	<style>
@@ -157,9 +159,7 @@
 	                <h4 class="title_top" style="font-size: 50px;">개발자 ${jobDetail.user_name }</h4>
 	            </div>
 	            	<c:forEach items="${certDetail }" var="certList">
-				    	<div class="col-8 course_details_left">
-				        	<span class="btn_4">${certList.cert_name }</span>
-				        </div>
+				        <span class="btn_4">${certList.cert_name }</span>
 			        </c:forEach>
 	            <div class="row">
 	                <div class="col-lg-8 course_details_left">
@@ -194,7 +194,8 @@
 	                    		<button type="button" id="updatebtn" class="updatebtn" onclick="location.href='jobUpdateMove'">수정하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<button type="button" id="heartbtn" class="heartbtn" onclick="heart()">찜하기</button>
+			                    	<button type="button" id="heartbtn" class="heartbtn" onclick="heart()">찜하기</button>
+	                    			<button type="button" id="heartCancelbtn" class="heartbtn" onclick="heartCancel()">찜취소</button>
 	                    		<button type="button" id="callbtn" class="callbtn">신청하기</button>
 	                    	</c:otherwise>
 	                    </c:choose>
@@ -329,10 +330,24 @@
         </div>
     </section>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-    
-    toastr.options = {
+    <% UserVO user=(UserVO)session.getAttribute("sessionUser");%>
+    $(document).ready(function(){
+	    <%if(user==null)
+	    {%>
+	       $('#heartbtn').hide();
+	       $('#heartCancelbtn').hide();
+	    <%}
+	    else
+	    {%>
+	    if("${heartCheck}" != "no") {
+	    	$('#heartbtn').hide();
+	    } else {
+	    	$('#heartCancelbtn').hide();
+	    }
+	    <%}%>
+    })
+    /* toastr.options = {
 			  "closeButton": false,
 			  "debug": false,
 			  "newestOnTop": false,
@@ -349,7 +364,7 @@
 			  "showMethod": "fadeIn",
 			  "hideMethod": "fadeOut"
 			}    
-    
+     */
         function check(e)
         {
             if(!$(e.target).hasClass("content")&& !$(e.target).hasClass("callbtn") 
@@ -378,16 +393,54 @@
 	        });
         }) */
         function heart() {
+        <% 
+        if(user==null)
+        {%>
+           //toastr.warning('로그인이 필요합니다.');
+           
+        <%}
+        else
+        {%>
+        $.ajax({
+    		url: 'heartInsert',
+    		type: 'post',
+    		data: {
+    			user_id: ${sessionUser.user_id},
+    			user_id2: ${jobDetail.user_id}
+    		},
+    		success: function() {
+    			$('#heartbtn').hide();
+        		$('#heartCancelbtn').show();	
+    		}
+    	})
+    		//toastr.success('찜하기 성공!');
+    	
+        <%}%>;
+  		}
+        
+        function heartCancel() {
+        	<% 
+            if(user==null)
+            {%>
+               //toastr.warning('로그인이 필요합니다.');
+               
+            <%}
+            else
+            {%>
         	$.ajax({
-        		url: 'heartInsert',
+        		url: 'heartCancel',
         		type: 'post',
         		data: {
         			user_id: ${sessionUser.user_id},
         			user_id2: ${jobDetail.user_id}
         		}
         	}).done(function() {
-        		toastr.success('찜하기 성공!');
+        		//toastr.success('찜하기 취소되었습니다.');
+        		$('#heartbtn').show();
+    			$('#heartCancelbtn').hide();
+    			
         	})
+        	<%}%>;
         }
         
         function requsetWork() {
@@ -399,7 +452,7 @@
         			prj_id: $("#pId").val(),
         		},
         		success: function() {
-        			toastr.success('신청하기 성공!');
+        			//toastr.success('신청하기 성공!');
         		}
         	})
         }

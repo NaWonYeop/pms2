@@ -84,10 +84,30 @@ public class TechController {
 		
 		ProjectVO vo6 = new ProjectVO();
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
-		vo6.setMaster_id(uId.getUser_id()); 
-		model.addAttribute("prjList", techDao.jobJoinList(vo6));
-
+		if(uId!=null) {
+			vo6.setMaster_id(uId.getUser_id()); 
+			model.addAttribute("prjList", techDao.jobJoinList(vo6));
+			
+			InterestVO vo7 = new InterestVO();
+			vo7.setUser_id(uId.getUser_id()); //세션아이디
+			vo7.setUser_id2(user_id);
+			vo7=techDao.heartbtnCheck(vo7);
+			if(vo7 != null)	{
+				model.addAttribute("heartCheck", vo7.getUser_id());
+			} else {
+				model.addAttribute("heartCheck", "no");
+			}
+		
+		}
+		
+		
 		return "job/jobDetail";
+		
+	}
+	@RequestMapping("/heartCancel")
+	@ResponseBody
+	public void heartCancel(InterestVO inter) {
+		interDao.heartDelete(inter);
 	}
 	
 	@RequestMapping("/jobInsertMove")
@@ -129,6 +149,9 @@ public class TechController {
 	//구인현황
 	@RequestMapping("/projectOfrList")
 	private String projectOfrList(Model model, ProjectVO project, TechVO tech, HttpSession session) {
+		
+		model.addAttribute("memberList", techDao.memberList(project));
+		
 		UserVO user= (UserVO)session.getAttribute("sessionUser");
 		project.setMaster_id(user.getUser_id());
 		model.addAttribute("ofterList", techDao.ofterList(project));
@@ -162,17 +185,17 @@ public class TechController {
 	
 	//관심 신청
 	@RequestMapping("/heartAccept")
-	private String heartAccept(Model model, AppVO app, HttpSession session) {
+	@ResponseBody
+	private void heartAccept(Model model, AppVO app, HttpSession session) {
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
 		app.setMaster_id(uId.getUser_id());
 		model.addAttribute(techDao.heartAccept(app));
-		return "redirect:/projectOfrList";
 	}
 	//관심삭제
 	@RequestMapping("/heartDelete")
-	private String heartDelete(InterestVO interest) {
+	@ResponseBody
+	private void heartDelete(InterestVO interest) {
 		techDao.heartDelete(interest);
-		return "redirect:/projectOfrList";
 	}
 	
 	//평가페이지
@@ -190,6 +213,16 @@ public class TechController {
 		UserVO user = (UserVO)session.getAttribute("sessionUser");
 		star.setUser_id2(user.getUser_id());
 		techDao.AssessInsert(star);
+		
+	}
+	
+	//평가 Update
+	@RequestMapping("/projectAssessUpdate")
+	@ResponseBody
+	private void projectAssessUpdate(StarVO star, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("sessionUser");
+		star.setUser_id2(user.getUser_id());
+		techDao.AssessUpdate(star);
 		
 	}
 	

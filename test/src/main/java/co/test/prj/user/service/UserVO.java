@@ -20,4 +20,5 @@ public class UserVO {
 	private int app_id;
 	private String tech_name;
 	private double avg;
+	private String tm_dept;
 }
