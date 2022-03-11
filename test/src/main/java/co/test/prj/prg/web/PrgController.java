@@ -1,6 +1,5 @@
 package co.test.prj.prg.web;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +31,7 @@ public class PrgController {
 	public String card(HttpSession session, Model model) {
 		return "pms/prg/card";
 	}
-	
+
 	@RequestMapping("/prgSelectList")
 	@ResponseBody
 	public List<PrgVO> prgSelectList(HttpSession session, Model model) {
@@ -41,7 +40,7 @@ public class PrgController {
 		List<PrgVO> list = prgDao.prgSelectList(prj_id);
 		return list;
 	}
-	
+
 	@RequestMapping("/toDoSelect")
 	@ResponseBody
 	public List<PrgVO> toDoSelect(HttpSession session, PrgVO prg) {
@@ -51,8 +50,7 @@ public class PrgController {
 		List<PrgVO> list = prgDao.toDoSelect(prg);
 		return list;
 	}
-	
-	
+
 	@RequestMapping("/calSelectList")
 	@ResponseBody
 	public List<PrgVO> calSelectList(HttpSession session, Model model) {
@@ -64,8 +62,7 @@ public class PrgController {
 
 	@RequestMapping("/prgInsert")
 	@ResponseBody
-	public String prgInsert(HttpSession session, 
-			@RequestParam("prg_content") String prg_content,
+	public String prgInsert(HttpSession session, @RequestParam("prg_content") String prg_content,
 			@RequestParam(value = "prg_str", required = false) String prg_str,
 			@RequestParam(value = "prg_ed", required = false) String prg_ed,
 			@RequestParam(value = "prg_manager", required = false) String prg_manager,
@@ -137,6 +134,19 @@ public class PrgController {
 	@ResponseBody
 	public String prgDelete(HttpSession session, PrgVO prg) {
 		int count = prgDao.prgDelete(prg);
+		String result = null;
+		if (count > 0) {
+			result = "success";
+		} else {
+			result = "fail";
+		}
+		return result;
+	}
+
+	@RequestMapping("/smlCheck")
+	@ResponseBody
+	public String smlCheck(PrgVO prg) {
+		int count = prgDao.smlCheck(prg);
 		String result = null;
 		if (count > 0) {
 			result = "success";

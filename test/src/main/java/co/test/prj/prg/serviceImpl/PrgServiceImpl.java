@@ -66,6 +66,18 @@ public class PrgServiceImpl implements PrgService {
 		return map.selectPrgID(prg);
 	}
 
+	@Override
+	public int smlCheck(PrgVO prg) {
+		// TODO Auto-generated method stub
+		return map.smlCheck(prg);
+	}
+
+	@Override
+	public int prgCheck(PrgVO prg) {
+		// TODO Auto-generated method stub
+		return map.prgCheck(prg);
+	}
+
 	
 
 }
