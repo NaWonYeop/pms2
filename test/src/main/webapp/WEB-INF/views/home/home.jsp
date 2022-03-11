@@ -86,9 +86,9 @@
                         <a class="d-inline-block" href="single-blog.html"><!-- 여기 주소 -->
                            <h2>${ofr.prj_name }</h2>
                         </a> <br>
-                        <p class="btn_4">hi</p>
-                        <p class="btn_4">bye</p>
-                        <p class="btn_4">boy</p>
+                        <c:if test="${!empty ofr.prj_ar }"><p class="btn_4">${ofr.prj_ar }</p></c:if>
+                        <c:if test="${!empty ofr.prj_cnd }"><p class="btn_4">${ofr.prj_cnd }</p></c:if>
+                          
 
                         <ul class="blog-info-link">
                            <li><i class="far fa-user"></i> 모집인원 ${ofr.total_team_prs }/${ofr.total_prs }명</a></li>

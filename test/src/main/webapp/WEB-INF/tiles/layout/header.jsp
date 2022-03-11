@@ -35,8 +35,8 @@
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item" href="myProject">프로젝트 관리</a>
 										<a class="dropdown-item" href="myfunding">펀딩내역</a>
-										<a class="dropdown-item" href="">개인정보 변경</a>
-										<a class="dropdown-item" href="">개발자 정보변경</a>
+										<a class="dropdown-item" href="checkUserPassword">개인정보 변경</a>
+										<a class="dropdown-item" href="devUpdateForm">개발자 정보변경</a>
 										<a class="dropdown-item" href="Withdrawal">회원탈퇴</a>
 									</div></li>
 							</c:if>

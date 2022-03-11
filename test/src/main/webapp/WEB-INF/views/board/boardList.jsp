@@ -1,3 +1,4 @@
+<%@page import="co.test.prj.user.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -119,10 +120,41 @@
 			</div>
 
             <div class="col-12 text-right">
-                <button class="button button-contactForm btn_1" onclick="location.href='freeboardInsertform' "> 등록</button>
+                <button class="button button-contactForm btn_1" onclick="logincheck()"> 등록</button>
             </div>
 		</div>
 
 	</section>
+	<script>
+	function logincheck(){
+		 toastr.options = {
+				  "closeButton": false,
+				  "debug": false,
+				  "newestOnTop": false,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "100",
+				  "hideDuration": "1000",
+				  "timeOut": "1500",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				};
+		 
+		<% UserVO user=(UserVO)session.getAttribute("sessionUser");
+			if(user==null)
+			{%>
+				toastr.warning('로그인이 필요합니다.');
+			<%}
+			else
+			{%>
+			location.href="freeboardInsertform";
+			<%}%>;
+	}
+	</script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@page import="co.test.prj.user.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -73,7 +74,7 @@
 				</div>
 				<div class="comment-form col-lg-12">
 					<h4>Leave a Reply</h4>
-					<form class="form-contact comment_form" action="rplInsert" id="commentForm">
+					<form class="form-contact comment_form" onsubmit="return loginCheck()" action="rplInsert" id="commentForm">
 						
 							<div class="col-12">
 								<div class="form-group">
@@ -84,7 +85,7 @@
 							<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							<input type="hidden" name="user_id" id="user_id" value="${sessionUser.user_id }">
 							<div class="form-group mt-3 text-right">
-								<button type="submit" class="button btn_1 button-contactForm">add
+								<button type="submit"  class="button btn_1 button-contactForm">add
 									Reply</button>
 							</div>
 					</form>
@@ -105,7 +106,9 @@
 	</section>
 
 	<script>
+
 		$(function() {
+			
 			$.ajax({
 				url : "replyList",
 				type : "GET",
@@ -152,6 +155,36 @@
 			);//done끝
 		});//ajax끝
 		
+		function loginCheck(){
+			 toastr.options = {
+					  "closeButton": false,
+					  "debug": false,
+					  "newestOnTop": false,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "100",
+					  "hideDuration": "1000",
+					  "timeOut": "1500",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}    
+			<% UserVO user=(UserVO)session.getAttribute("sessionUser");
+				if(user==null)
+				{%>
+					toastr.warning('로그인이 필요합니다.');
+					return false;	
+				<%}
+				else
+				{%>
+					return true;
+					
+				<%}%>;
+		}
 		
 	</script>
 </body>
