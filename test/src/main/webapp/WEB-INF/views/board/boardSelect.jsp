@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<section class="breadcrumb ">
@@ -106,7 +107,6 @@
 	</section>
 
 	<script>
-
 		$(function() {
 			
 			$.ajax({
@@ -119,7 +119,6 @@
 				for (var i = 0; i < result.length; i++) {	
 					var date=result[i].rpl_reg_date;
 						
-
 						$(".comin").append(`
 								<div class="single-comment justify-content-between d-flex">
 								<div class="user justify-content-between d-flex">
