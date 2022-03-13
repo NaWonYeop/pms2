@@ -143,8 +143,8 @@
             </div>
         </div>
     </section>
-${project}<br>
- ${sessionScope }
+<%-- ${project}<br>
+ ${sessionScope } --%>
  	<section class="course_details_area section_padding">
         <div class="container">
         	<input type="hidden" id="">
@@ -292,23 +292,39 @@ ${project}<br>
 										<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매">
 										<input type="button" class="rfnd btn_4" value="환불">
 									</div>
-			        				
 		        				</div>
-		
 		        			</article>
 	        			</form>
 					</c:forEach>
-        		
         		</div>
-        		
         	</div>
-        
-			
-			
-			
 		</div>
 	</section>	
+	
+	<div id="ether">
+	이더리움 들고오자
+	<button id="dCoin">코인</button>
+	</div>
+	
+	
 	<script type="text/javascript">
+	$("#dCoin").click(function(e){
+		console.log("가니?")
+		 $.ajax({
+				url : '/prj/ajaxCoin', 
+		        type :'POST',
+		        success: function(res){
+		        			        	
+					 console.log("추가성공");	
+		        },
+		        error:function(){
+		          console.log("Insert ajax 통신 실패!!!");
+		        }
+			}) //ajax
+		
+	});
+	
+	
 	$(document).ready(function(){
 		   	//아임포트 준비
 			var IMP = window.IMP;
@@ -445,6 +461,8 @@ ${project}<br>
 			});//pay
 		}); //check1 클릭 이벤트
 		 
+		
+		//환불은 다른데서 사용할것
 		$("#check2").click(function(e){
 		      console.log("남은이용권"+$('#pay_coupon').text());
 		      if($('#pay_coupon').text() >= 5){
