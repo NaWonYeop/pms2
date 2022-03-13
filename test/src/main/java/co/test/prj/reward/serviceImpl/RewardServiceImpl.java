@@ -45,4 +45,14 @@ public class RewardServiceImpl implements RewardService {
 		return map.rewardInsertSelect(reward);
 	}
 
+	@Override
+	public int rewardCotUpdate(RewardVO reward) {
+		return map.rewardCotUpdate(reward);
+	}
+
+	@Override
+	public int rewardMaxCot(RewardVO reward) {
+		return map.rewardMaxCot(reward);
+	}
+
 }

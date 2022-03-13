@@ -18,9 +18,17 @@ public class BuyVO {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date buy_date;
 	private int reward_id;
+	private int prj_id; //프로젝트 아이디
+	private int buy_count; //구매수량
+	
+	
+	private String buy_muid; //상점 거래ID ~환불시 필요
+	
+	//환불
 	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
-	private Date buy_rfnd_date;
-	private int buy_rfnd_prc;
-	private int buy_count;
+	private Date buy_rfnd_date; //환불날짜 
+	private int buy_rfnd_prc; //환불금액
+	
+	
 }

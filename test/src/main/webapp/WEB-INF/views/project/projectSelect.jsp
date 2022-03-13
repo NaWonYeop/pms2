@@ -243,14 +243,14 @@ ${project}<br>
 						</form>
 					
 						<form action="rewardInsertForm">
-							<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="hidden" id="master_id" name="master_id" value="${project.master_id}">
 							<input type="hidden" id="go" name="go" value="selectPage">
 							<input type="submit" value="리워드 관리">
 						</form>
 							
 						<form action="projectViewDel">
-							<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="submit" value="삭제">
 						</form>
 					
@@ -259,7 +259,12 @@ ${project}<br>
         		</div>
         		
         		
-        		${sessionScope.sessionUser.user_id }
+        		<input type="hidden" id="user_id" name="user_id" value="${sessionScope.sessionUser.user_id }">
+        		<input type="hidden" id="user_name" name="user_name" value="${sessionScope.sessionUser.user_name }">
+        		<input type="hidden" id="user_email" name="user_email" value="${sessionScope.sessionUser.user_email }">
+        		<input type="hidden" id="user_tel" name="user_tel" value="${sessionScope.sessionUser.user_tel }">
+        		<input type="hidden" id="cash" name="buy_way" value="cash">
+        		<input type="hidden" id="coin" name="buy_way" value="coin">
         		
         		
         		
@@ -269,36 +274,32 @@ ${project}<br>
         		 	<h3 style="font-weight: bold;">리워드 리스트</h3>
         			</c:if>
         			<c:forEach items="${rewards }" var="reward">
-        			<form>
-        			<article class="blog_item">
-        				<div class="blog_details">
-        				<!-- 이거 아이디 값으로 찾는거 라 딴건 바꿔도 괜찮아요-->
-                           	<h3 id="n${reward.reward_id }">${reward.rwd_name}</h3>
-                           	<h2 id="p${reward.reward_id }">${reward.rwd_prc}</h2>
-							
-							내용 : ${reward.rwd_cnt}<br>
-							구입수량 : ${reward.rwd_cot}<br>
-							판매수량 : ${reward.rwd_goal}<br>
-							(나중에 삭제할것)판매 여부 : ${reward.rwd_stt}<br>
-							<input type="number" id="c${reward.reward_id }" name="buy_count" required placeholder="구매수량(기본:1개)">
-							<div class ="btns">
-							<!-- 버튼들은 클래스 바꾸면 안되요 -->
-								<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매">
-								<input type="button" class="rfnd btn_4" value="환불">
-							</div>
-	        				
-        				</div>
-        				
-        				
-        				
-
-        			</article>
-        			</form>
+	        			<form>
+		        			<article class="blog_item">
+		        				<div class="blog_details">
+		        				<!-- 이거 아이디 값으로 찾는거 라 딴건 바꿔도 괜찮아요-->
+		                           	<h3 id="n${reward.reward_id }">${reward.rwd_name}</h3>
+		                           	<h2 id="p${reward.reward_id }">${reward.rwd_prc}</h2>
+									
+									내용 : ${reward.rwd_cnt}<br>
+									구입수량 : ${reward.rwd_cot}<br>
+									판매수량 : ${reward.rwd_goal}<br>
+									(나중에 삭제할것)판매 여부 : ${reward.rwd_stt}<br>
+									<input type="number" id="c${reward.reward_id }" name="buy_count" required placeholder="구매수량(기본:1개)">
+									<div class ="btns">
+									<!-- 버튼들은 클래스 바꾸면 안되요 -->
+										<input type="hidden" name="reward_id" value="${reward.reward_id }">
+										<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매">
+										<input type="button" class="rfnd btn_4" value="환불">
+									</div>
+			        				
+		        				</div>
+		
+		        			</article>
+	        			</form>
 					</c:forEach>
         		
-        		
         		</div>
-        		
         		
         	</div>
         
@@ -319,20 +320,49 @@ ${project}<br>
 	
 		$(".wBuy").click(function(e){
 			console.log('구매 클릭');
+			
+			//debugger
+			var uId = document.getElementById('user_id').value;
+			var uName = document.getElementById('user_name').value;
+			var uEmail = document.getElementById('user_email').value;
+			var uTel = document.getElementById('user_tel').value;
+			
 			var rId = $(".wBuy").prevObject.context.activeElement.id;
 			var rName = document.getElementById('n'+rId).innerHTML;
 			var rPrc = document.getElementById('p'+rId).innerHTML;
 			var rCnt = document.getElementById('c'+rId).value;
+			
+			
+			//현금or코인
+			var rCash = document.getElementById('cash').value;
+			var rCoin = document.getElementById('coin').value;
+			
+			var pId = document.getElementById('prj_id').value;
 			
 			if (!document.getElementById('c'+rId).checkValidity()) {
 				 console.log("기본값 1 넣는곳");
 				 rCnt = 1;
 			}
 			
+			var rPay = parseInt(rCnt) * parseInt(rPrc);
+			console.log("구매자 아이디 : "+ uId);
+			console.log("구매자 이름 : "+ uName);
+			console.log("구매자 메일 : "+ uEmail);
+			console.log("구매자 연락처 : "+ uTel);
+			
 			console.log("리워드 아이디 : "+ rId);
 			console.log("리워드 이름 : "+ rName);
 			console.log("리워드 금액 : "+ rPrc);
 			console.log("리워드 구매수 : "+ rCnt);
+			console.log("결제액 : "+ rPay);
+			
+			
+			console.log("리워드 구매법 : "+ rCash);
+			console.log("리워드 구매법 : "+ rCoin);
+			
+			console.log("프로젝트 아이디 : "+ pId);
+			
+			//debugger;
 			console.log("구매시작");
 			//결제요청
 			IMP.request_pay({
@@ -342,42 +372,64 @@ ${project}<br>
 				pay_method: 'card',
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name : rName, // 상품명
-				amount : rPrc,
-				buyer_email : '',
-				buyer_name : '',
-				buyer_tel : '',  //필수항목
+				amount : rPay,
+				buyer_email : uEmail,
+				buyer_name : uName,
+				buyer_tel : uTel,  //필수항목
 				//결제완료후 이동할 페이지 kko나 kkopay는 생략 가능
 				//m_redirect_url : 'https://localhost:8080/payments/complete'
 			}, function(rsp){
 				if(rsp.success){//결제 성공시
 					var msg = '결제가 완료되었습니다';
+					
+					//나중에 지울것
+					/*
 					var result = {
-					"imp_uid" : rsp.imp_uid,
-					"merchant_uid" : rsp.merchant_uid,
-					"biz_email" : '',
-					"pay_date" : new Date().getTime(),
-					"amount" : rsp.paid_amount,
-					"card_no" : rsp.apply_num,
+					"imp_uid" : rsp.imp_uid, //고유ID
+					"merchant_uid" : rsp.merchant_uid, //상점 거래ID ~환불시 필요
+					"biz_email" : uEmail, 
+					"pay_date" : new Date().getTime(), 
+					"amount" : rsp.paid_amount, //결제금액
+					"card_no" : rsp.apply_num, //카드 승인번호
 					"refund" : 'payed'
 					}
-					console.log("결제성공 " + msg);
-					$.ajax({
-						url : '/samsam/insertPayCoupon.do', 
+					console.log("결제성공 : " + msg);
+					console.log("고유ID : " + rsp.imp_uid);
+					console.log("상점 거래ID : " + rsp.merchant_uid);
+					console.log("이메일 : " + uEmail);
+					console.log("결제일 : " + new Date().getTime());
+					console.log("결제금액 : " + rsp.paid_amount);
+					console.log("카드 승인번호 : " + rsp.apply_num);
+					*/
+					//데이터 저장시 필요한 데이터
+					var save ={
+						"user_id" : uId,
+						"buy_way" : rCash,
+						"reward_id" : rId,
+						"prj_id" : pId,
+						"buy_count" : rCnt,
+						"buy_muid" : rsp.merchant_uid
+							
+					}
+					
+					
+					 $.ajax({
+						url : '/prj/ajaxCashBuy', 
 				        type :'POST',
-				        data : JSON.stringify(result,
-				        		['imp_uid', 'merchant_uid', 'biz_email', 
-				        			'pay_date', 'amount', 'card_no', 'refund']),
+				        data : JSON.stringify(save,
+				        		['user_id', 'buy_way', 'reward_id', 
+				        			'prj_id', 'buy_count', 'buy_muid']),
 				        contentType:'application/json;charset=utf-8',
 				        dataType: 'json', //서버에서 보내줄 데이터 타입
 				        success: function(res){
 				        			        	
 				          if(res == 1){
 							 console.log("추가성공");	
-							 pay += 5;
-							 $('#pay_coupon').html(pay);			           
+							 //pay += 5;
+							 //$('#pay_coupon').html(pay);			           
 				          }else{
 				             console.log("Insert Fail!!!");
-				          }
+				          } 
 				        },
 				        error:function(){
 				          console.log("Insert ajax 통신 실패!!!");

@@ -23,5 +23,18 @@
 		DELETE FROM REWARD 
 	 	WHERE REWARD_ID = #{reward_id}
 	</delete>
+	
+	<update id="rewardCotUpdate">
+		UPDATE REWARD
+		<set>
+			RWD_COT = #{rwd_cot}
+		</set>
+		WHERE REWARD_ID = #{reward_id}
+	</update>
+
+	
+	<select id="rewardMaxCot" parameterType="co.test.prj.reward.service.RewardVO" resultType="int">
+		SELECT MAX(RWD_COT) AS count FROM REWARD where REWARD_ID = #{reward_id}
+	</select>
 
 </mapper>

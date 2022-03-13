@@ -17,4 +17,9 @@ public class BuyServiceImpl implements BuyService {
 		return map.buyInsert(buy);
 	}
 
+	@Override
+	public int buyMaxId() {
+		return map.buyMaxId();
+	}
+
 }

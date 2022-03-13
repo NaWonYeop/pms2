@@ -11,4 +11,7 @@ public interface RewardService {
 	
 	List<RewardVO> rewardInsertSelect(RewardVO reward);
 
+	int rewardCotUpdate(RewardVO reward);
+	
+	int rewardMaxCot(RewardVO reward);
 }
