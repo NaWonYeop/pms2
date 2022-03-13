@@ -4,25 +4,34 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	
+
 	<!-- 한글 필터 적용 -->
- 	<filter>
+	<filter>
 		<filter-name>charsetFilter</filter-name>
 		<filter-class>co.test.prj.CharsetFilter</filter-class>
-		             <!-- 수동변경 -->
+		<!-- 수동변경 -->
 	</filter>
 	<filter-mapping>
 		<filter-name>charsetFilter</filter-name>
-		<url-pattern>/*</url-pattern>	
-	</filter-mapping> 
-	
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<!-- 서블릿이 동작할때 초기값을 가져가는곳 ~ 이곳을 바탕으로 스프링 컨테이너를 만든다 -->
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- The definition of the Root Spring Container shared by all Servlets 
+		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+		<param-value>/WEB-INF/spring/*-context.xml</param-value>
 	</context-param>
-	
+
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -38,7 +47,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>

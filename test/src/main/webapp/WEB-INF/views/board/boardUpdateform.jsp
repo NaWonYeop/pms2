@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="resources/build2/ckeditor.js"></script>
 </head>
 <body>
  <section class="breadcrumb">
@@ -47,9 +48,9 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  
-                    <textarea class="form-control w-100" name="brd_cnt" id="brd_nct" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder = 'Enter Message'>${board.brd_cnt }</textarea>
-                </div>
+                     <div class="form-control w-100" id="editor" >${board.brd_cnt }</div>
+                    <input type="hidden" id="brd_cnt" name="brd_cnt">
+                 </div>
               </div>
         
              <input type="hidden" id="user_id" name="user_id" value="${sessionUser.user_id }">
@@ -66,13 +67,52 @@
     </div>
   </section>
   <script type="text/javascript">
-  console.log(${sessionUser.user_ath});
   function checkbox() {
 		if ($('input:checkbox').is(':checked') == true)
 			{
 				$("#brd_ntc_prop").val("1");			
 			}
+		var content4 = watchdog._getData();
+		$("#brd_cnt").val(content4.main);
 		return true;
+	}
+  const watchdog = new CKSource.EditorWatchdog();
+	
+	window.watchdog = watchdog;
+			
+	watchdog.setCreator((element, config) => {
+		return CKSource.Editor
+		.create(element, config)
+		.then(editor => {
+			
+			return editor;
+			})
+		});
+			
+	watchdog.setDestructor(editor => {
+		
+		return editor.destroy();
+	});
+				
+	watchdog.on('error', handleError);
+				
+	watchdog.create(document.querySelector('#editor'), {
+		placeholder: '상세 내용을 입력해 주세요',
+		licenseKey: '',
+		simpleUpload: {
+				       uploadUrl: "/prj/upload/image",
+				       withCredentials: true,
+				       }
+	
+		}).catch(handleError => {
+								console.log(handleError);
+								})
+				
+	function handleError(error) {
+		console.error('Oops, something went wrong!');
+		console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+		console.warn('Build id: evno2ybtoyrh-aylwhf71detk');
+		console.error(error);
 	}
   </script>
 </body>
