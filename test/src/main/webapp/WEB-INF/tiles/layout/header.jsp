@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <header class="main_menu home_menu" style="background-color: #fff;">
 	<div class="container">
 		<div class="row align-items-center">
@@ -29,6 +30,9 @@
 							<li class="nav-item"><a class="nav-link" href="pms">PMS</a></li>
 							
 							<c:if test="${sessionUser ne null }">
+							<!--<sec:authorize access="isAuthenticated()">-->
+					
+							
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="mypage"
 									id="navbarDropdown" >My Page </a>
@@ -39,16 +43,19 @@
 										<a class="dropdown-item" href="devUpdateForm">개발자 정보변경</a>
 										<a class="dropdown-item" href="Withdrawal">회원탈퇴</a>
 									</div></li>
-							</c:if>
+									
 							
-							<c:if test="${sessionUser eq null }">
-								<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"
-									href="loginForm">Sign in</a></li>
-							</c:if>
-							<c:if test="${sessionUser ne null }">
 								<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"
 									href="logout">Logout</a></li>
-							</c:if>
+							<!--</sec:authorize>-->
+								</c:if>
+							<sec:authorize access="isAnonymous()">
+							<!--<c:if test="${sessionUser eq null }">-->
+								<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"
+									href="loginForm">Sign in</a></li>
+							<!-- </c:if> -->	
+							</sec:authorize>
+							
 						</ul>
 					</div>
 				</nav>

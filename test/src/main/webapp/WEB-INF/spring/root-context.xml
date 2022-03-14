@@ -19,6 +19,7 @@
               login-page="/loginForm" default-target-url="/home" />
 
       <logout logout-url="/logout" logout-success-url="/home"   delete-cookies="" />
+       <csrf disabled="true" />
    </http>
 
    <authentication-manager>

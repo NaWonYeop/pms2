@@ -32,7 +32,7 @@ public class HomeController {
 	 
 	
 	@RequestMapping("/home")
-	public String home(Locale locale, Model model,Principal principle) {
+	public String home(Locale locale, Model model,Principal principle,HttpSession session) {
 	
 		
 		  model.addAttribute("mainOfer",projectDao.mainOfrList());
@@ -42,9 +42,9 @@ public class HomeController {
 		
 			
 			System.out.println("로그인했음!!!!");
-			UserVO userDetails =
+			UserVO usr =
 					(UserVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			System.out.println(userDetails);
+			session.setAttribute("sessionUser",	usr);
 		}
 		return "home/home";
 	}
