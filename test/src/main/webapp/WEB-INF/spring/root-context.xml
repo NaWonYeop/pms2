@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-</beans>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<context:component-scan base-package="co.test.prj" >
+	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+
+    <http auto-config="true" use-expressions="true">
+      <intercept-url pattern="/**" access="permitAll" />
+
+      <form-login username-parameter="user_email"
+              password-parameter="user_pwd" login-processing-url="/login" 
+              login-page="/loginForm" default-target-url="/home" />
+
+      <logout logout-url="/logout" logout-success-url="/home"   delete-cookies="" />
+   </http>
+
+   <authentication-manager>
+      <authentication-provider  user-service-ref="cunstomUser">
+     <!--  <password-encoder hash="bcrypt"/> -->
+      </authentication-provider>
+   </authentication-manager>
+ <!--  <beans:bean id="userService" class="co.test.prj.security.cunstomUser"/>
+   -->
+ 
+ </beans:beans>

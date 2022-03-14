@@ -10,7 +10,17 @@
 	<select id="userSelect"
 		resultType="co.test.prj.user.service.UserVO"
 		parameterType="co.test.prj.user.service.UserVO">
-		SELECT * FROM "user" WHERE user_email = #{user_email}
+		SELECT USER_ID,
+USER_EMAIL,
+'{noop}'||USER_PWD as USER_PWD,
+USER_NAME,
+USER_TEL,
+USER_ATH,
+USER_J_DATE,
+USER_CRR,
+USER_AGE,
+USER_JOB_TTL,
+USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 		<if test="user_pwd != null">
 			AND user_pwd = #{user_pwd}
 		</if>
