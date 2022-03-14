@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <style type="text/css">
 @font-face {
 	font-family: 'MinSans-Medium';
@@ -12,7 +13,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 </style>
 </head>
 <body>
@@ -25,7 +25,8 @@
 					<form class="form-contact contact_form" action="home" method="post"
 						id="contactForm" novalidate="novalidate">
 						<div class="row justify-content-center">
-							<h4  style="font-family: 'MinSans-Medium';">해당 이메일로 임시비밀번호가 발송되었습니다</h4>
+							<h4 style="font-family: 'MinSans-Medium';">해당 이메일로 임시비밀번호가
+								발송되었습니다</h4>
 						</div>
 						<div class="col-sm-12 text-center">
 

@@ -12,10 +12,7 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-	integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style type="text/css">
 }
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
@@ -109,7 +106,6 @@ a {
 		<a href="registerForm">회원가입</a> |
 
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		Kakao.init('8132efdd09455dfc39e6ea6c32a19c1f'); //발급받은 키 중 javascript키를 사용해준다.

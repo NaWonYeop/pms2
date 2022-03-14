@@ -77,6 +77,10 @@ a {
 .check {
 	color: red;
 }
+.row {
+	position: relative;
+	left: 15px;
+}
 </style>
 </head>
 
@@ -99,9 +103,20 @@ a {
 				<BR>  <input type="text" name="user_name"
 					id="user_name" class="form-control" placeholder="이름" required><br>
 					<input type="hidden" id="user_type" name="user_type" value="1" >
-				​ <input type="text" name="user_tel" id="user_tel"
-					class="form-control" required pattern="^[0-9]+$" maxlength="13"
-					placeholder="예) 010 1234 5678"><br> <input
+				​	<div class="row">
+					<select id="user_tel1" name="user_tel1" class="form-control col-3">
+					<option value="">::선택::</option>
+					<option value="011">011</option>
+					<option value="016">016</option>
+					<option value="017">017</option>
+					<option value="019">019</option>
+					<option value="010">010</option>
+				</select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-3" id="user_tel2" name="user_tel2" maxlength="4" size="4"
+					/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="user_tel3" name="user_tel3"  
+					size="4" maxlength="4" class="form-control col-3" /></div><br>
+					
+					<input type="hidden" id="user_tel" name="user_tel"> <input
 					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
 					value="회원가입">
 			</div>
@@ -150,7 +165,7 @@ a {
 		}
 
 		function formCheck() {
-			if ($("idCheck").val() == 'No') {
+			if ($("idCheck").val() == 'NO') {
 				alert("이메일 중복 체크를 해주세요.")
 				return false;
 			}
@@ -162,6 +177,10 @@ a {
 				$("#user_pwd").focus();
 				return false;
 			}
+			var check1 = document.getElementById('user_tel1').value;
+			var check2 = document.getElementById('user_tel2').value;
+			var check3 = document.getElementById('user_tel3').value;
+			document.getElementById('user_tel').value = check1 + check2 + check3;
 			return true;
 		}
 	</script>
