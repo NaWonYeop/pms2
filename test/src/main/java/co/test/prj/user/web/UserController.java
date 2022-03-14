@@ -268,6 +268,7 @@ public class UserController {
 	@RequestMapping("/userUpdateForm")
 	public String userUpdateForm(String user_pwd, Model model, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		System.out.println(user.getPassword());
 		if (user_pwd.equals(user.getUser_pwd())) {
 			return "user/userUpdateForm";
 		} else {
