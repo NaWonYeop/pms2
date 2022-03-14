@@ -155,4 +155,11 @@ public class PrgController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("/prgCheck")
+	@ResponseBody
+	public int prgCheck(PrgVO prg) {
+		int percent = prgDao.prgCheck(prg);
+		return percent;
+	}
 }
