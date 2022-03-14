@@ -5,15 +5,10 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<div class="progress">
-					<div class="progress-bar" role="progressbar" style="width: 50%"
-						aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">100%</div>
-				</div>
 				<!-- 섹션입력 모달 버튼 -->
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#exampleModalCenter">섹션 입력</button>
-				<br>
-				<br>
+				<br> <br>
 
 				<!-- 섹션Modal창 -->
 				<div class="modal fade" id="exampleModalCenter" tabindex="-1"
@@ -152,6 +147,10 @@
 			for(prg of json) {
 				if(prg.level == 1) {
 					var li = $(`
+							<div class="progress">
+								<div id="prgBar\${prg.prg_id}" class="progress-bar" role="progressbar" style="width: 0%"
+								aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+							</div>
 							<li class="list-group-item">\${prg.prg_content}
 							<button data-prg_id="\${prg.prg_id}" type="button" class="btn btn-primary todo" data-toggle="modal"
 								data-target="#exampleModalCenter">할 일 입력</button>
@@ -159,9 +158,10 @@
 							<button id="midBtn" data-prg_id="\${prg.prg_id}" type="button" class="btn btn-danger" >x</button>
 							</li>`);
 					$("#card").append(li);
+					prgPersent(prg.prg_id);
 				} else if(prg.level == 2) {
 					var ul = $(`<ul class="list-group list-group-flush"></ul>`);
-					var li2 = $(`<li class="list-group-item">\${prg.prg_content}
+					var li2 = $(`<li id="myLi\${prg.prg_id}" class="list-group-item">\${prg.prg_content}
 							<button id="smlChk" type="button" data-prg_id="\${prg.prg_id}" class="btn btn-success 1">완료</button>
 							<button id="smlUpBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" class="btn btn-info 2" data-toggle="modal" data-target="#updateModal">수정</button>
 							<button id="smlBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" class="btn btn-danger 3">x</button>
@@ -169,15 +169,31 @@
 					ul.append(li2);
 					li.append(ul);
 					if(prg.prg_cmp_prop != 0) {
-						console.log("버튼 비활성화");
-						$(".1").attr("disabled", "disabled");
-						$(".2").attr("disabled", "disabled");
-						$(".3").attr("disabled", "disabled");
+						$("#myLi"+prg.prg_id+' button').attr('disabled', 'disabled');
 					}
 				}
 			}
 		}).fail(function () {
 			console.log('리스트 출력 실패');
+		});
+	}
+	
+	// 완료퍼센트 확인하기
+	function prgPersent(prg_id) {
+		var prg_manager = prg_id;
+		$.ajax({
+			url: "prgCheck",
+			type : "GET",
+			dataType : "json",
+			data: {
+				prg_manager: prg_manager
+			}
+		}).done(function (result){
+			$("#prgBar"+prg_id).attr("aria-valuenow", result);
+			$("#prgBar"+prg_id).html(result+"%");
+			$("#prgBar"+prg_id).css("width", result+"%");
+		}).fail(function(xhr, status, message) {
+			alert(" status: " + status + " er:" + message);
 		});
 	}
 </script>

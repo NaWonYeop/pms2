@@ -11,10 +11,12 @@
 		START WITH prg_manager IS NULL
 		CONNECT BY PRIOR prg_id = prg_manager
 	</select>
-	
+
 	<select id="prgCheck" resultType="int"
 		parameterType="co.test.prj.prg.service.PrgVO">
-		
+		SELECT SUM(prg_cmp_prop)/COUNT(prg_id) * 100 AS percent
+		FROM PROGRESS
+		WHERE prg_manager = #{prg_manager}
 	</select>
 
 	<!-- calandar형 조회 -->
@@ -28,7 +30,8 @@
 	<select id="toDoSelect"
 		resultType="co.test.prj.prg.service.PrgVO">
 		SELECT * FROM PROGRESS
-		WHERE prg_manager = #{prg_manager} AND prj_id = #{prj_id}
+		WHERE prg_manager = #{prg_manager}
+		AND prj_id = #{prj_id}
 	</select>
 
 	<insert id="prgInsert"
@@ -92,10 +95,12 @@
 	</update>
 
 	<!-- 완료 상태로 변경 -->
-	<update id="smlCheck" parameterType="co.test.prj.prg.service.PrgVO">
+	<update id="smlCheck"
+		parameterType="co.test.prj.prg.service.PrgVO">
 		UPDATE PROGRESS
 		SET prg_cmp_prop = 1
-		WHERE prg_id = #{prg_id}
+		WHERE prg_id =
+		#{prg_id}
 	</update>
 
 	<!-- 삭제시키기 -->
