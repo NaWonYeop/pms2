@@ -310,12 +310,16 @@
 	<script type="text/javascript">
 	$("#dCoin").click(function(e){
 		console.log("가니?")
+		var won = 50000;
 		 $.ajax({
 				url : '/prj/ajaxCoin', 
 		        type :'POST',
+		        data: {
+		        	"won" : won
+		        },
 		        success: function(res){
 		        			        	
-					 console.log("추가성공");	
+					 console.log(res);	
 		        },
 		        error:function(){
 		          console.log("Insert ajax 통신 실패!!!");

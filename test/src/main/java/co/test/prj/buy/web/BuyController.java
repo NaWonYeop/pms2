@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.test.prj.buy.service.BuyService;
@@ -36,7 +37,7 @@ public class BuyController {
 	
 	@PostMapping("/ajaxCashBuy")
 	@ResponseBody
-	private int ajaxCashBuy(@RequestBody BuyVO buy, RewardVO reward ,BuyVO buy2) {
+	private int ajaxCashBuy(@RequestBody BuyVO buy, RewardVO reward) {
 		System.out.println("결제했니?");
 		//////////////////pId 입력 오류 모르겠음~~~~~~~~~~~~~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //		System.out.println(buy);
@@ -58,6 +59,8 @@ public class BuyController {
 //		System.out.println(buy2);
 //		
 //		buyDao.buyInsert(buy2);
+		
+		
 		buy.setBuy_id(buyDao.buyMaxId());
 		buyDao.buyInsert(buy);
 		System.out.println("인서트 됨?");
@@ -69,40 +72,68 @@ public class BuyController {
 		System.out.println("총 수량 : " + rCot);
 		
 		reward.setRwd_cot(rCot);
-		rewardDao.rewardCotUpdate(reward);
+		int result = rewardDao.rewardCotUpdate(reward);
 		System.out.println("리워드 업데이트");
 		
-		return 1;
+		return result;
 	}
 	
 	
 	@RequestMapping("/ajaxCoin")
-	public String ajaxCoin() {
+	@ResponseBody
+	public double ajaxCoin(@RequestParam("won") int won) {
 		System.out.println("오니?");
 		// 파싱한 데이터를 저장할 변수
-    	String result = "";
-    	double cashWD = 0;
-		try {
-			//환율 가져오기
-			URL url = new URL("https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD");
-			
-			BufferedReader bf;
-			
-			bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-
-    		result = bf.readLine();
-        	JSONParser jsonParser = new JSONParser();
-        	JSONArray jsonarray = (JSONArray)jsonParser.parse(result);
-        	JSONObject jsonObject = (JSONObject)jsonarray.get(0);
-        	//cashWD = (double)jsonObject.get("cashBuyingPrice");
-        	cashWD = (double)jsonObject.get("basePrice");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("환율 가져오기 실패");
-		}
+//    	String result = "";
+//    	double cashWD = 0;
+//		try {
+//			//환율 가져오기
+//			URL url = new URL("https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD");
+//			
+//			BufferedReader bf;
+//			
+//			bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+//
+//    		result = bf.readLine();
+//        	JSONParser jsonParser = new JSONParser();
+//        	JSONArray jsonarray = (JSONArray)jsonParser.parse(result);
+//        	JSONObject jsonObject = (JSONObject)jsonarray.get(0);
+//        	//cashWD = (double)jsonObject.get("cashBuyingPrice");
+//        	cashWD = (double)jsonObject.get("basePrice");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("환율 가져오기 실패");
+//		}
+		
+//		System.out.println("이더리움 시세 가져오기 시작");
+//		String etherURL = "https://kr.investing.com/crypto/ethereum";
+//		String select = "#last_last";
+//		Document doc = null;
+//		
+//		try {
+//			System.out.println("접속?");
+//			doc = Jsoup.connect(etherURL).get();
+//			System.out.println("됨?");
+//			
+//		} catch (IOException e) {
+//			System.out.println("접속?????");
+//			e.printStackTrace();
+//		}
+//		
+//		Elements etherGO = doc.select(select);
+//		System.out.println(etherGO.text());
+//		//이더리움 
+//		double ether = Double.parseDouble(etherGO.text().replace(",", ""));
+//		
+//		System.out.println("1달러 원가격 : " + cashWD);
+//		System.out.println("1 이더 달러가격 : " + ether );
+//		
+//		//int totalWon = (int) Math.round(ether* cashWD);
+//		double totalWon = ether* cashWD;
+		
 		
 		System.out.println("이더리움 시세 가져오기 시작");
-		String etherURL = "https://kr.investing.com/crypto/ethereum";
+		String etherURL = "https://kr.investing.com/crypto/ethereum/eth-krw-converter";
 		String select = "#last_last";
 		Document doc = null;
 		
@@ -121,13 +152,22 @@ public class BuyController {
 		//이더리움 
 		double ether = Double.parseDouble(etherGO.text().replace(",", ""));
 		
-		System.out.println("1달러 원가격 : " + cashWD);
-		System.out.println(" 1 이더 달러가격 : " + ether );
+//		System.out.println("1달러 원가격 : " + cashWD);
+//		System.out.println("1 이더 달러가격 : " + ether );
+		System.out.println("1 이더 원화가격 : " + ether );
 		
-		double totalWon = ether* cashWD;
-		System.out.println("1이더 현금가격 : "+ totalWon);
+		//int totalWon = (int) Math.round(ether* cashWD);
+//		double totalWon = ether* cashWD;
 		
-		return null;
+		
+//		System.out.println("1이더 현금가격 : "+ totalWon);
+		System.out.println("현금가격 : "+ won);
+		
+		System.out.println(won/ether);
+		
+		return won/ether;
+		
+		
 	}
 
 	
