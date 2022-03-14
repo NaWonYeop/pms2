@@ -41,7 +41,7 @@ body {
 }
 
 #btn-Yes {
-	background-color: #e4932b;
+	background-color: #576EF2;
 	border: none;
 }
 

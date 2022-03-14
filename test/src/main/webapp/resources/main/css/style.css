@@ -2,10 +2,17 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:800|Poppins:300,400,500,600,700,800|Roboto:300,400,500");
 /* line 2, E:/172 Etrain Education/172_Etrain_Education_html/sass/_extends.scss */
 .btn_1, .btn_2:hover, .main_menu .navbar-toggler:after, .banner_part .banner_text .btn_1, .feature_part .single_feature:hover span {
-  background-image: linear-gradient(to left, #ee390f 0%, #f9b700 51%, #ee390f 100%);
+  background-image: linear-gradient(135deg, #8884ff 0%, #04068a 100%);
 }
 
 /* line 6, E:/172 Etrain Education/172_Etrain_Education_html/sass/_extends.scss */
+li {
+	font-family: 'TmoneyRoundWindExtraBold';
+}
+
+span {
+	font-family: 'TmoneyRoundWindRegular';
+}
 .member_counter {
   background-image: -moz-linear-gradient(0deg, #ee390f 0%, #f9b700 100%);
   background-image: -webkit-linear-gradient(0deg, #ee390f 0%, #f9b700 100%);
@@ -14,9 +21,23 @@
 
 /**************** extend css start ****************/
 /**************** common css start ****************/
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TmoneyRoundWindRegular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* line 3, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   padding: 0;
   margin: 0;
   font-size: 14px;
@@ -152,13 +173,13 @@ a:hover {
 /* line 72, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 h1, h2, h3, h4, h5, h6 {
   color: #0c2e60;
-  font-family: "Poppins", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
 }
 
 /* line 76, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 p {
   color: #666666;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   line-height: 1.929;
   font-size: 14px;
   margin-bottom: 0px;
@@ -277,7 +298,7 @@ a:focus, .button:focus, button:focus, .btn:focus {
   text-align: center;
   width: 80px;
   height: 2px;
-  background-color: #ff663b;
+  background-color: #576EF2;
 }
 
 @media (max-width: 576px) {
@@ -613,9 +634,8 @@ ul {
 
 /* line 97, E:/172 Etrain Education/172_Etrain_Education_html/sass/_button.scss */
 .btn_4 {
-  background-color: #ff663b;
+  background-color: #798BF2;
   padding: 3.5px 21px;
-  background: #ff663b;
   text-transform: capitalize;
   display: inline-block;
   border: 2px solid transparent;
@@ -626,7 +646,7 @@ ul {
 
 /* line 106, E:/172 Etrain Education/172_Etrain_Education_html/sass/_button.scss */
 .btn_4:hover {
-  background: rgba(255, 102, 59, 0.8);
+  background: #1D28F2;
   color: #fff;
 }
 
@@ -642,7 +662,7 @@ ul {
   color: #fff;
   border: 1px solid #edeff2;
   text-transform: uppercase;
-  background-color: #ff663b;
+  background-color: #576EF2;
   cursor: pointer;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -713,7 +733,7 @@ ul {
 
 /* line 14, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
 .blog_area a:hover, .blog_area a :hover {
-  color: #ff663b;
+  color: #576EF2;
 }
 
 /* line 20, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
@@ -1219,7 +1239,7 @@ ul {
 
 /* line 540, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
 .blog_details a:hover {
-  color: #ff663b !important;
+  color: #576EF2 !important;
 }
 
 /* line 545, E:/172 Etrain Education/172_Etrain_Education_html/sass/_blog.scss */
@@ -2189,7 +2209,7 @@ ul {
   color: #0c2e60;
   font-size: 15px;
   padding: 0px 24px;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -2201,7 +2221,7 @@ ul {
 
 /* line 46, E:/172 Etrain Education/172_Etrain_Education_html/sass/_menu.scss */
 .main_menu .main-menu-item ul li .nav-link:hover {
-  color: #ee390f;
+  color: #1D28F2;
 }
 
 /* line 51, E:/172 Etrain Education/172_Etrain_Education_html/sass/_menu.scss */
@@ -2237,7 +2257,7 @@ ul {
 
 /* line 84, E:/172 Etrain Education/172_Etrain_Education_html/sass/_menu.scss */
 .dropdown .dropdown-menu .dropdown-item:hover {
-  color: #ff663b !important;
+  color: #1D28F2 !important;
 }
 
 /* line 90, E:/172 Etrain Education/172_Etrain_Education_html/sass/_menu.scss */
@@ -2418,7 +2438,7 @@ ul {
   color: #fff;
   font-size: 15px;
   padding: 0px 24px;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -2637,7 +2657,7 @@ ul {
 .banner_part .banner_text p {
   font-size: 15px;
   line-height: 1.8;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   color: #777777;
 }
 
@@ -2883,7 +2903,7 @@ ul {
   color: #ff7e5f;
   font-size: 22px;
   font-style: italic;
-  font-family: "Poppins", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   font-weight: 300;
 }
 
@@ -3356,7 +3376,7 @@ ul {
 
 /* line 81, E:/172 Etrain Education/172_Etrain_Education_html/sass/_learning.scss */
 .learning_part .learning_member_text h5 {
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   color: #556172;
   font-size: 14px;
   font-weight: 500;
@@ -4013,6 +4033,7 @@ ul {
   padding: 35px 35px 40px;
   border: 1px solid #edeff2;
   border-top: 0px;
+  background-color: #F5F7FF;
 }
 
 @media (max-width: 576px) {
@@ -4055,7 +4076,7 @@ ul {
 
 /* line 73, E:/172 Etrain Education/172_Etrain_Education_html/sass/_special_cource.scss */
 .special_cource .single_special_cource .special_cource_text h3:hover {
-  color: #ff663b;
+  color: #576EF2;
 }
 
 @media (max-width: 576px) {
@@ -4690,7 +4711,7 @@ ul {
 /* line 163, E:/172 Etrain Education/172_Etrain_Education_html/sass/_testimonial_part.scss */
 .testimonial_part h5 {
   font-size: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   color: #888888;
 }
 
@@ -4790,7 +4811,7 @@ ul {
   font-size: 13px;
   color: #999999;
   border: 0px solid transparent;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
 }
 
 /* line 65, E:/172 Etrain Education/172_Etrain_Education_html/sass/_footer.scss */
@@ -4810,7 +4831,7 @@ ul {
   border: 0;
   font-size: 12px;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   position: relative;
   left: 0;
 }
@@ -5234,15 +5255,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 227, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
 .genric-btn.primary-border {
-  color: #ff663b;
-  border: 1px solid #ff663b;
+  color: #576EF2;
+  border: 1px solid #576EF2;
   background: #fff;
 }
 
 /* line 231, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
 .genric-btn.primary-border:hover {
   color: #fff;
-  background: #ff663b;
+  background: #576EF2;
   border: 1px solid transparent;
 }
 
@@ -6235,7 +6256,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 1026, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
 .default-select .nice-select .list .option:hover {
-  color: #ff663b;
+  color: #576EF2;
   background: transparent;
 }
 
@@ -6261,7 +6282,7 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
   border-radius: 0px;
   height: 40px;
-  background: #f9f9ff;
+  background: #F5F7FF;
   padding-left: 45px;
   padding-right: 40px;
   width: 100%;
@@ -6292,13 +6313,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 1067, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
 .form-select .nice-select .list .option.selected {
-  color: #ff663b;
+  color: #576EF2;
   background: transparent;
 }
 
 /* line 1071, E:/172 Etrain Education/172_Etrain_Education_html/sass/_elements.scss */
 .form-select .nice-select .list .option:hover {
-  color: #ff663b;
+  color: #576EF2;
   background: transparent;
 }
 
@@ -6654,7 +6675,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 35, E:/172 Etrain Education/172_Etrain_Education_html/sass/_copyright_part.scss */
 .copyright_part .footer-social a:hover {
-  background-color: #ff7e5f !important;
+  background-color: #1D28F2 !important;
   color: #fff !important;
 }
 
@@ -6859,7 +6880,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 1, E:/172 Etrain Education/172_Etrain_Education_html/sass/_breadcrumb.scss */
 .breadcrumb_bg {
-  background-image: url("../img/breadcrumb.png");
+  /* background-image: url("../img/breadcrumb.png"); */
+  background-color: #576EF2;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -6868,7 +6890,6 @@ h1, h2, h3, h4, h5, h6 {
 /* line 5, E:/172 Etrain Education/172_Etrain_Education_html/sass/_breadcrumb.scss */
 .breadcrumb {
   position: relative;
-  z-index: 1;
   text-align: center;
 }
 
@@ -7041,7 +7062,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #999999;
   border: 0px solid transparent;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
 }
 
 /* line 65, E:/172 Etrain Education/172_Etrain_Education_html/sass/_footer.scss */
@@ -7061,7 +7082,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 0;
   font-size: 12px;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: "TmoneyRoundWindExtraBold";
   position: relative;
   left: 0;
 }

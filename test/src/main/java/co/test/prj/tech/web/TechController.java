@@ -124,11 +124,6 @@ public class TechController {
 		return "redirect:/jobSelectList";
 	}
 	
-	@RequestMapping("/jobUpdateMove")
-	public String jobUpdateMove() {
-		return "job/jobUpdate";
-	}
-	
 	//구인 신청하기
 	@RequestMapping("/requestWork")
 	@ResponseBody

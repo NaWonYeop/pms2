@@ -8,7 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<style>
+	.formbtn {
+		display: inline;
+		float: right;
+		margin-right: 10px;
+	}
+</style>
 </head>
 <body>
 	<section class="breadcrumb ">
@@ -36,7 +42,17 @@
 					<div class="single-post">
 
 						<div class="blog_details">
-							<h2>${board.brd_ttl }</h2>
+							<h2 style="display: inline;">${board.brd_ttl }</h2>
+							<c:if test="${sessionUser.user_id eq board.user_id }">
+							<form action="freeboardUpdateform" class="formbtn">
+								<input type="submit" class="btn_4" value="수정"></button>
+								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
+							</form>
+							<form action="freeboardDelete" class="formbtn">
+								<input type="submit" class="btn_4" value="삭제"></button>
+								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
+							</form>
+							</c:if>
 							<ul class="blog-info-link mt-3 mb-4">
 								<li><i class="far fa-user"></i> 
 									${board.user_name }
@@ -92,16 +108,7 @@
 					</form>
 				</div>
 			</div>
-			<c:if test="${sessionUser.user_id eq board.user_id }">
-			<form action="freeboardUpdateform">
-				<input type="submit" class="genric-btn info-border radius" value="수정"></button>
-				<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
-			</form>
-			<form action="freeboardDelete">
-				<input type="submit" class="genric-btn info-border radius" value="삭제"></button>
-				<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
-			</form>
-			</c:if>
+			
 		</div>
 		</div>
 	</section>

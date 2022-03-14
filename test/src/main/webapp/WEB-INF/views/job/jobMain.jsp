@@ -9,6 +9,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>Insert title here</title>
 <style>
+
 .star-ratings {
 	color: #aaa9a9;
 	position: relative;
@@ -46,24 +47,15 @@
 	margin-bottom: 20px;
 }
 
-.btn_4 {
-	margin-top: 2.5px;
-	margin-bottom: 2.5px;
-}
+
 
 .introduce {
 	display: block;
 }
 
 .insertbtn {
-	width: 10%;
-	height: 45px;
-	border-radius: 30px;
-	background-color: rgb(250, 168, 17);
-	border: bisque;
-	margin-top: 10px;
-	margin-bottom: 30px;
-	display: block;
+	margin-bottom: 20px;
+	border-radius: 5px;
 }
 </style>
 </head>
@@ -143,8 +135,8 @@
 					<input type="hidden" name="amount" value="5">
 				</form>
 			
-			<button type="button" id="insertbtn" class="insertbtn"
-				onclick="location.href='jobInsertMove'">등록하기</button>
+			<button type="button" id="insertbtn" class="btn_4 insertbtn"
+				onclick="location.href='jobInsertMove'">등록 및 수정</button>
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">

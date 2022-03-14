@@ -4,6 +4,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
 <html>
+<style>
+	.blog_item {
+		background-color: #F5F7FF;
+	}
+	
+	.btn_4 {
+		background-color: #798BF2;
+	}
+	
+	.breadcrumb_bg {
+		background-color: #576EF2;
+	}
+	
+	li {
+		font-family: 'TmoneyRoundWindRegular';
+	}
+</style>
 
 <body>
    <!--::header part start::-->
@@ -11,20 +28,22 @@
    <!-- Header part end-->
 
    <!-- breadcrumb start-->
-   <section class="breadcrumb  col-xs-6">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-12">
-               <div class="breadcrumb_iner text-center">
-                  <div class="breadcrumb_iner_item">
-                     <h2></h2>
-
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
+   <section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2>여기는 메인페이지</h2>
+							<p>
+								나는원엽이라능~
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
    <!-- breadcrumb start-->
 
 
@@ -70,12 +89,10 @@
             <!--project-->
             <div class="col-lg-6 mb-5 mb-lg-0">
                <div class="row justify-content-center">
-                  <div class="col-xl-5">
                      <div class="section_tittle text-center">
 
                         <h2>모집중인 프로젝트</h2>
                      </div>
-                  </div>
                </div>
                <div class="blog_left_sidebar">
                <c:forEach items="${mainOfer }" var="ofr"> 
@@ -108,12 +125,10 @@
             <!--  funding-->
             <div class="col-lg-6 mb-5 mb-lg-0">
                <div class="row justify-content-center">
-                  <div class="col-xl-5">
                      <div class="section_tittle text-center">
 
                         <h2>진행중인 펀딩목록</h2>
                      </div>
-                  </div>
                </div>
                <div class="blog_right_sidebar">
                 <c:forEach items="${mainFnd }" var="fnd"> 
@@ -132,12 +147,12 @@
                         <h3 class="right"><fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
                         <div class="progress">
                            <div class="progress-bar color-3" role="progressbar"
-                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359" aria-valuenow="80" aria-valuemin="0"
+                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #1D28F2" aria-valuenow="80" aria-valuemin="0"
                               aria-valuemax="100"></div>
                         </div>
                         <br>
                         <ul class="blog-info-link">
-                           <li><i class="far fa-comments"></i> 현재 펀딩금액</a></li>
+                           <li><i class="far fa-comments"></i> 현재 펀딩금액</li>
                          
                            <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">${fnd.total }</span>원 </div></h3></li>
                           

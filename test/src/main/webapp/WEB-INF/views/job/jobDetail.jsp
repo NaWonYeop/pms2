@@ -13,6 +13,7 @@
 
 <title>Insert title here</title>
 	<style>
+		
         .Tname {
             margin-bottom: 60px;
         }
@@ -49,7 +50,8 @@
             width: 40%;
             height: 40%;
             border-radius: 30px;
-            background-color: tomato;
+            border: 3px solid #798BF2;
+            background-color: #F5F7FF;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -70,11 +72,7 @@
             font-size: xx-large;
         }
 
-        .prjlist {
-            width: 300px;
-            text-align: center;
-            
-        }
+        
         /* modal end */
 
         /* rating */
@@ -130,7 +128,27 @@
             
         }
         
+        .modalInbtn {
+        	    width: 75%;
+			    height: 15%;
+			    align-content: center;
+			    margin-top: 15%;
+        }
         
+        .form-select .nice-select {
+        	width: 100%;
+        	text-align: center;
+        	background-color: #fff;
+        	
+        }
+        
+       .content {
+       		text-align: center;
+       }
+       
+       #dropdown {
+       		text-align: center;
+       }
     </style>
 </head>
 <body>
@@ -192,12 +210,12 @@
 	                <div class="col-lg-4 right-contents">
 	                    <c:choose>
 	                    	<c:when test="${sessionUser.user_id eq jobDetail.user_id }">
-	                    		<button type="button" id="updatebtn" class="updatebtn" onclick="location.href='jobUpdateMove'">수정하기</button>
+	                    		<button type="button" id="updatebtn" class="btn_4" onclick="location.href='jobInsertMove'">수정하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
-			                    	<button type="button" id="heartbtn" class="heartbtn" onclick="heart()">찜하기</button>
-	                    			<button type="button" id="heartCancelbtn" class="heartbtn" onclick="heartCancel()">찜취소</button>
-	                    		<button type="button" id="callbtn" class="callbtn">신청하기</button>
+			                    	<button type="button" id="heartbtn" class="btn_4" onclick="heart()">찜하기</button>
+	                    			<button type="button" id="heartCancelbtn" class="btn_4" onclick="heartCancel()">찜취소</button>
+	                    		<button type="button" id="callbtn" class="btn_4">신청하기</button>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
@@ -218,7 +236,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <button type="button" class="call" onclick="requsetWork()" style="line-height: normal;">신청하기</button>
+	                        <button type="button" class="btn_4 modalInbtn" onclick="requsetWork()">신청하기</button>
 	                    </div>
 	                    
 	                    <div class="">
@@ -331,10 +349,6 @@
         </div>
     </section>
     
-<<<<<<< HEAD
-   
-=======
->>>>>>> refs/remotes/origin/0311_headache11
     <script>
     <% UserVO user=(UserVO)session.getAttribute("sessionUser");%>
     $(document).ready(function(){
@@ -352,7 +366,7 @@
 	    }
 	    <%}%>
     })
-    /* toastr.options = {
+    toastr.options = {
 			  "closeButton": false,
 			  "debug": false,
 			  "newestOnTop": false,
@@ -369,11 +383,14 @@
 			  "showMethod": "fadeIn",
 			  "hideMethod": "fadeOut"
 			}    
-     */
+     
         function check(e)
         {
-            if(!$(e.target).hasClass("content")&& !$(e.target).hasClass("callbtn") 
-                && !$(e.target).hasClass("option") && !$(e.target).hasClass("current")) {
+            if(!$(e.target).hasClass("content")
+            		&& !$(e.target).hasClass("callbtn")
+            		&& !$(e.target).hasClass("btn_4")
+	                && !$(e.target).hasClass("option") 
+	                && !$(e.target).hasClass("current")) {
                 $('.modaldal').fadeOut();
             }
         }
@@ -401,7 +418,7 @@
         <% 
         if(user==null)
         {%>
-           //toastr.warning('로그인이 필요합니다.');
+           toastr.warning('로그인이 필요합니다.');
            
         <%}
         else
@@ -418,7 +435,7 @@
         		$('#heartCancelbtn').show();	
     		}
     	})
-    		//toastr.success('찜하기 성공!');
+    		toastr.success('찜하기 성공!');
     	
         <%}%>;
   		}
@@ -427,7 +444,7 @@
         	<% 
             if(user==null)
             {%>
-               //toastr.warning('로그인이 필요합니다.');
+               toastr.warning('로그인이 필요합니다.');
                
             <%}
             else
@@ -440,7 +457,7 @@
         			user_id2: ${jobDetail.user_id}
         		}
         	}).done(function() {
-        		//toastr.success('찜하기 취소되었습니다.');
+        		toastr.success('찜하기 취소되었습니다.');
         		$('#heartbtn').show();
     			$('#heartCancelbtn').hide();
     			
@@ -457,7 +474,7 @@
         			prj_id: $("#pId").val(),
         		},
         		success: function() {
-        			//toastr.success('신청하기 성공!');
+        			toastr.success('신청하기 성공!');
         		}
         	})
         }

@@ -36,7 +36,7 @@
 	<div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="contact-title">등록하기</h2>
+                <h2 class="contact-title">등록 및 수정</h2>
             </div>
             <div class="col-lg-8">
             <form class="form-contact contact_form" action="jobInsert" method="post" id="contactForm" novalidate="novalidate">

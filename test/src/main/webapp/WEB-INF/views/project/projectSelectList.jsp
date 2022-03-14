@@ -14,6 +14,26 @@
 	  .button {
 	      margin-right: 2%;
 	  }
+	  
+	  input {
+	  	padding-top: 5px;
+	  	padding-bottom: 5px;
+	  	padding-left: 10px;
+	  	padding-right: 10px;
+	  	margin: 10px;
+	  	font-family: 'TmoneyRoundWindRegular';
+	  	
+	  }
+	  
+	  .prjInsertbtn {
+	  	text-align: center;
+	  }
+	  
+	  .right {
+	  	float: right;
+	  	margin-right: 30px;
+	  	margin-top: 16px;
+	  }
 </style>
 </head>
 <body>
@@ -91,9 +111,9 @@
 		</div>
 	</div>
 	<!-- 검색창 끝 -->
-	
-	<button type="button" onClick="location.href='projectInsertForm'">프로젝트 등록</button><br>
-	
+	<div class="prjInsertbtn">
+	<button class="btn_1" type="button" onClick="location.href='projectInsertForm'" style="width: 40%">프로젝트 등록</button><br>
+	</div>
 	<section class="blog_area section_padding">
 		<div class="container">
 	        <div class="row">
@@ -124,14 +144,14 @@
 										<div class="row">
 											
 												<input type="hidden" name="prj_id" id="prj_id" value="${project.prj_id}">
-												<div class="col-12">
-														<input type="submit" class="d-inline-block h2" style="border: 0px; background-color: #ff663b; color: #ffffff;" value="${project.prj_name}">
-			                            				<p style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수 : ${project.prj_hit}</p>
+												<div class="col-12" style="margin-bottom: 40px;">
+														<input type="submit" class="d-inline-block h2" style="border: 0px; background-color: #576EF2; color: #ffffff;" value="${project.prj_name}">
+			                            				<p style="display: inline-block; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수 : ${project.prj_hit}</p>
 												</div>
 												
 												
 													<c:if test="${project.prj_fnd_prop == 1}">
-													<div class="col-lg-6">
+													<div class="col-lg-7">
 													<!-- 펀딩 있을시 -->
 									                    <div class="blog_item_img">
 									                     	<h3 style="font-weight: bold;">펀딩</h3>
@@ -146,9 +166,9 @@
 									                    </div>
 									                    <a class="d-inline-block" href="single-blog.html"> </a>
 								                        <h3 class="right">
-								                        <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
+								                        	<fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
 								                        <div class="col-12">
-									                        <div class="col-12">
+									                        <div class="col-10">
 										                        <div class="progress">
 										                           <div class="progress-bar color-3" role="progressbar"
 										                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359" 
@@ -157,6 +177,7 @@
 										                              aria-valuemax="100">
 										                            </div>
 										                        </div>
+										                        
 										                     </div>
 											            </div>
 								                        <br>
@@ -177,14 +198,14 @@
 									                           </h3>
 								                           </li>
 								                        </ul>	
-														(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원<br>
+														<p>(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원</p><br>
 													</div>
 													</c:if>
 													
 													
 													
 													<c:if test="${project.prj_ofr_prop == 1}">
-													<div class="col-lg-4">
+													<div class="col-lg-5">
 													<!-- 구인 있을시 -->
 														<div class="blog_item_img">
 									                     	<h3 style="font-weight: bold;">구인</h3>

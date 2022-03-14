@@ -18,7 +18,6 @@
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
-
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.1</version>
@@ -198,6 +197,20 @@
 			<version>1.5</version>
 		</dependency>
 
+		<!-- 크롤링 -->
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+        	<groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.14.3</version>
+        </dependency>
+        
+        <dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+        
 		
 		<!-- Test -->
 		<dependency>

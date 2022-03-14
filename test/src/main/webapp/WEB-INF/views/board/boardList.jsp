@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.progress-table {
+		font-family: 'TmoneyRoundWindRegular';
+	}
+</style>
 </head>
 <body>
 	<section class="breadcrumb breadcrumb_bg">
