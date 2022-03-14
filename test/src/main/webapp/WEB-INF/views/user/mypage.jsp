@@ -49,7 +49,7 @@
 
 					<div class="single_special_cource">
 						<div class="special_cource_text">
-							<p class="btn_4">참여중인 프로젝트 리스트</p>
+							<a class="btn_4" href="myProject">참여중인 프로젝트 리스트</a>
 							
 							<c:choose>
 								<c:when test="${empty MyProject}">
@@ -74,7 +74,7 @@
 
 					<div class="single_special_cource">
 						<div class="special_cource_text">
-							<p class="btn_4">펀딩 리스트</p>
+							<a class="btn_4" href="myfunding">펀딩 리스트</a>
 
 
 							<c:choose>

@@ -82,7 +82,7 @@ public class UserController {
 			location = "home";
 		} else {
 			session.setAttribute("user_email", user_email);
-			
+
 			location = "kakaoRegisterForm";
 			// 겟매핑 이메일가져와서 레지스터폼으로넘기기
 
@@ -97,8 +97,8 @@ public class UserController {
 	public String kakaoRegisterForm() {
 		return "user/kakaoRegisterForm";
 	}
-	
-	//일반회원 아이디체크
+
+	// 일반회원 아이디체크
 	@PostMapping("/nomalIdCheck")
 	@ResponseBody
 	public boolean nomalIdCheck(String user_email) {
@@ -138,7 +138,6 @@ public class UserController {
 		}
 		return "user/forgotId";
 
-		
 	}
 
 	// 찾은 비밀번호 결과창
@@ -216,9 +215,9 @@ public class UserController {
 	public String insertdev(HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		user = userDao.userSelect(user);
-		if(user.getUser_job_ttl() != null) {
-			return  "redirect:/home";
-			//토스트 넣어야됨
+		if (user.getUser_job_ttl() != null) {
+			return "redirect:/home";
+			// 토스트 넣어야됨
 		}
 		return "user/insertDevForm";
 	}
@@ -250,7 +249,7 @@ public class UserController {
 		model.addAttribute("MyFunding", funding);
 		List<AppVO> app = userDao.MyApp(user);
 		model.addAttribute("MyApp", app);
-		
+
 		return "user/mypage";
 	}
 
@@ -291,7 +290,7 @@ public class UserController {
 	public String userUpdate(UserVO user, Model model, HttpSession session) {
 		System.out.println(user);
 		UserVO vo = new UserVO();
-		vo = (UserVO)session.getAttribute("sessionUser");
+		vo = (UserVO) session.getAttribute("sessionUser");
 		user.setUser_id(vo.getUser_id());
 		if (user.getUser_pwd() != null) {
 			model.addAttribute("update", "회원수정 성공하였습니다");
@@ -320,7 +319,6 @@ public class UserController {
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
 		userDao.deleteDev(del);
-		
 		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
@@ -343,7 +341,7 @@ public class UserController {
 	public String clientRegister(UserVO user, Model model, RedirectAttributes re) {
 		System.out.println(user);
 		user.setUser_ath("user");
-		
+
 		int n = userDao.userInsert(user);
 		if (n != 0) {
 			re.addAttribute("message", "회원가입 성공하셨습니다");
@@ -365,13 +363,12 @@ public class UserController {
 	public String Withdrawal() {
 		return "user/Withdrawal1";
 	}
-	
 
 	// 회원탈퇴2
 	@RequestMapping("/Withdrawa2")
 	public String Withdrawal2(String user_pwd, Model model, HttpSession session) {
 		System.out.println(user_pwd);
-		if(user_pwd == null) {
+		if (user_pwd == null) {
 			return "redirect:/home";
 		}
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
@@ -390,33 +387,36 @@ public class UserController {
 	// 회원탈퇴 결과창
 	@RequestMapping("/Withdrawa3")
 	public String Withdrawal3(HttpSession session) {
-		UserVO user = new UserVO();
-		user.setUser_id((int) session.getAttribute("user_id"));
+		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		UserVO user1 = new UserVO();
+		user1.setUser_id(user.getUser_id());
 		userDao.userDelete(user);
+		session.invalidate();
 		System.out.println(userDao.userDelete(user));
 		return "user/Withdrawal3";
 	}
-		//카카오 회원탈퇴
-		@RequestMapping("/kakaoWithdrawal")
-		public String kakaoWithdrawal() {
-			return "user/kakaoWithdrawal1";
-		}
-		// 회원탈퇴2
-		@RequestMapping("/kakaoWithdrawa2")
-		public String kakaoWithdrawal2(String user_email, Model model, HttpSession session) {
-			UserVO user = (UserVO) session.getAttribute("sessionUser");
-			if (user_email.equals(user.getUser_email())) {
-				System.out.println("user_email");
-				int id = user.getUser_id();
-				model.addAttribute("funding", userDao.MyfundingList(id));
-				return "user/kakaoWithdrawal2";
-			} else {
-				model.addAttribute("FailPassword", "비밀번호가 일치하지않습니다");
-			}
 
-			return "user/kakaoWithdrawal1";
+	// 카카오 회원탈퇴
+	@RequestMapping("/kakaoWithdrawal")
+	public String kakaoWithdrawal() {
+		return "user/kakaoWithdrawal1";
+	}
+
+	// 회원탈퇴2
+	@RequestMapping("/kakaoWithdrawa2")
+	public String kakaoWithdrawal2(String user_email, Model model, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		if (user_email.equals(user.getUser_email())) {
+			System.out.println("user_email");
+			int id = user.getUser_id();
+			model.addAttribute("funding", userDao.MyfundingList(id));
+			return "user/kakaoWithdrawal2";
+		} else {
+			model.addAttribute("FailPassword", "비밀번호가 일치하지않습니다");
 		}
-		
+
+		return "user/kakaoWithdrawal1";
+	}
 
 	// 펀딩리스트
 	@RequestMapping("/myfunding")
@@ -438,10 +438,11 @@ public class UserController {
 
 		return "user/myProject";
 	}
+
 	@RequestMapping("/MyAppDown")
 	@ResponseBody
-	public void MyAppDown(int id ) {
+	public void MyAppDown(int id) {
 		userDao.AppUpdate(id);
-		
+
 	}
 }
