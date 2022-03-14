@@ -97,6 +97,7 @@ a {
 					class="sign__logo"><img
 					src="resources/images/kakao_login_medium.png" alt=""></a>
 			</div>
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 		</form>
 
 	</div>

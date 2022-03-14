@@ -1,9 +1,17 @@
 package co.test.prj.user.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class UserVO implements UserDetails{
 
 	private int user_id;
 	private String user_email;
@@ -21,4 +29,47 @@ public class UserVO {
 	private String tech_name;
 	private double avg;
 	private String tm_dept;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities()
+	{
+		List<GrantedAuthority> auth = new ArrayList<>();
+		auth.add(new SimpleGrantedAuthority("ROLE_"+this.getUser_ath().toUpperCase()));
+		return auth;
+	}
+	@Override
+	public String getPassword()
+	{
+		// TODO Auto-generated method stub
+		return user_pwd;
+	}
+	@Override
+	public String getUsername()
+	{
+		// TODO Auto-generated method stub
+		return user_email;
+	}
+	@Override
+	public boolean isAccountNonExpired()
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked()
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired()
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled()
+	{
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.application.service.AppMapper">
 
-	<select id="appSelectList" resultType="co.test.prj.application.service.AppVO">
+	<!-- <select id="appSelectList" resultType="co.test.prj.application.service.AppVO">
 		SELECT * FROM APPLICATION ORDER BY APP_ID ASC
-	</select>
+	</select> -->
 
 	<select id="appSelect" resultType="co.test.prj.application.service.AppVO">
 		SELECT * FROM APPLICATION
