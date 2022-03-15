@@ -31,13 +31,13 @@
 			</div>
 			<div class="row justify-content-center">
 
-				<div class="col-lg-5">
+				<div class="col-lg-7" >
 					<form class="form-contact contact_form"
 						action="userUpdateForm" method="post" id="contactForm"
 						novalidate="novalidate">
 						<div class="row ">
 
-							<div class="col-sm-6">
+							<div class="col-sm-7" style="margin-left: 10%">
 								<div class="form-group">
 									<input class="form-control" name="user_pwd" id="user_pwd" type="password"
 										onfocus="this.placeholder = ''"
@@ -45,7 +45,7 @@
 										placeholder='비밀번호.'>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<button type="submit" class="button button-contactForm btn_1">확인</button>
 
 							</div>

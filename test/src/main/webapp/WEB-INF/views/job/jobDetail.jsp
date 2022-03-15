@@ -91,7 +91,7 @@
         padding: 0;
         position: absolute;
         z-index: 1;
-        display: flex;
+        /* display: flex; */
         top: 0;
         left: 0;
         overflow: hidden;
@@ -142,9 +142,7 @@
         	
         }
         
-       .content {
-       		text-align: center;
-       }
+      
        
        #dropdown {
        		text-align: center;
@@ -190,19 +188,20 @@
 	                        <div class="content">
 	                            ${jobDetail.user_job_cnt }
 	                        </div>
-	
+							
 	                        <h4 class="title">참여 프로젝트</h4>
 	                        
+							<div class="joinPrj">
 	                        <c:forEach items="${prjDetail }" var="prjList">
-		                        <div class="content">
+		                        <div class="content"  style="background-color: #F5F7FF; margin-bottom: 3%; border-radius: 10px;">
 		                            <div class="prjtitle">${prjList.prj_name }</div>
-		                            <span class="btn_4">${prjList.tm_pos }</span>
-		                            <span class="btn_4">${prjList.tm_dept }</span><br>
+		                            <span class="btn_4" style="background-color: #F27457;">${prjList.tm_pos }</span>
+		                            <span class="btn_4" style="background-color: #F27457;">${prjList.tm_dept }</span><br>
 		                            
 		                            <fmt:formatDate value="${prjList.prj_str }" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${prjList.prj_ed }" pattern="yyyy-MM-dd" />
 		                        </div>
 	                        </c:forEach>
-	                        
+	                        </div>
 	                    </div>
 	                </div>
 	
@@ -247,7 +246,7 @@
 	                    </div>
 	
 	                    <h4 class="title_top">평점</h4>
-	                    <div class="content">
+	                    <div class="">
 	                        <div class="review-top row pt-40">
 	                            <div class="col-lg-12">
 	
@@ -265,7 +264,8 @@
 	                                        </div>
 	                                    <span>${starDetail.str_avg } 점</span>
 	                                </div>
-	                                <h6 class="mb-15">상세평점</h6>
+	                                
+	                                <h6>상세평점</h6>
 	                                
 	                                <div class="d-flex flex-row reviews justify-content-between">
 	                                    <span>전문성</span>

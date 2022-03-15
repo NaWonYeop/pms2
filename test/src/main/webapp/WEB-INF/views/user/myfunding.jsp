@@ -15,6 +15,10 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+.blog_details {
+	background-color: #F5F7FF;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -49,19 +53,25 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${ funding}" var="fun">
-							<div class="blog_details col-4" style="display: inline-block;">
+							<div class="blog_details col-4" style="display: inline-block; margin-bottom: 2%; ">
 								<div class="blog_item_img">
 
 									<img class="card-img rounded-0"
 										src="./resources/upload/images/${fun.ctf_st_name }" alt="">
 
 								</div>
-								<a class="d-inline-block" href="single-blog.html"> <br>
+								<div class="col-lg-12" style="margin-top: 5%;">
+								<a class="d-inline-block" href="single-blog.html">
 									<h3 style="font-weight: bold; font-family: 'MinSans-Medium';">${fun.prj_name }</h3>
 
-
-								</a> <br>
-								<div class="col-lg-9"
+								</a> 
+								<h3 style="float: right">
+										<fmt:formatNumber value="${fun.total/fun.prj_gl_prc*100 }"
+											pattern="00" />
+										%
+									</h3>
+								</div>
+								<div class="col-lg-12"
 									style="display: inline-block; padding-left: 0px;">
 									<div class="progress">
 										<div class="progress-bar" role="progressbar"
@@ -69,18 +79,11 @@
 											aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
-								<div class="col-lg-2" style="display: inline-block;">
-
-									<h3>
-										<fmt:formatNumber value="${fun.total/fun.prj_gl_prc*100 }"
-											pattern="00" />
-										%
-									</h3>
-								</div>
+								
 
 								<br>
 								<ul class="blog-info-link">
-									<li><i class="far fa-comments"></i> 현재 펀딩금액</a></li>
+									<li><h3 class="far fa-comments"></h3> 현재 펀딩금액</li>
 									<li>
 										<h3 stlye="font-weight: bold;">
 											<span class="counter" style="font-size: 20px;">${fun.total }</span>

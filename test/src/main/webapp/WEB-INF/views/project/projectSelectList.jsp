@@ -20,7 +20,6 @@
 	  	padding-bottom: 5px;
 	  	padding-left: 10px;
 	  	padding-right: 10px;
-	  	margin: 10px;
 	  	font-family: 'TmoneyRoundWindRegular';
 	  	
 	  }
@@ -66,6 +65,8 @@
 			</div>
 	</section>
 	<br>
+	
+	
 	
 	<!-- 검색창 시작 -->
 	<div class="row justify-content-center">
