@@ -40,7 +40,6 @@
 <script>
 	$(function () {
 		getList();
-		chaingeClass();
 	});
 	
 	function getList() {
@@ -52,33 +51,39 @@
 		}).done(function (json) {
 			for (app of json) {
 				$("#myTbody").append(`
-				<tr class="myTr" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
+				<tr id="myTr\${app.app_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
 					<td>\${app.app_id}</td>
 					<td>\${app.user_name}</td>
 					<td>\${app.app_clsfc}</td>
 					<td>
 						<div class="btn-group">
-							<button id="btn" type="button"
+							<button id="btn\${app.app_id}" type="button"
 								class="btn btn-outline-secondary btn-sm dropdown-toggle"
 								data-toggle="dropdown">\${app.app_stt}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" onclick="appUpdate(this)" >ing</a> 
-								<a class="dropdown-item" onclick="appUpdate(this)" >ok</a>
-								<a class="dropdown-item" onclick="appUpdate(this)" >no</a>
+								<a class="dropdown-item" data-user_id="\${app.user_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ing" onclick="appUpdate(this)" >ing</a> 
+								<a class="dropdown-item" data-user_id="\${app.user_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ok" onclick="appUpdate(this)" >ok</a>
+								<a class="dropdown-item" data-user_id="\${app.user_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="no" onclick="appUpdate(this)" >no</a>
 							</div>
 						</div>
 					</td>
 				</tr>`);
+				chaingeClass();
 			};
 		}).fail(function (xhr, status, message) {
 			alert(" status: " + status + " er:" + message);
 		});
 	}
 	
-	function appUpdate(ths) {
-		var app_id = $(".myTr").children().eq(0).text();
-		var master_id = $(".myTr").data("master_id");
-		var app_stt = $(ths).text();
+	function appUpdate(app) {
+		var app_id = $(app).data('app_id');
+		var master_id = $(app).data('master_id');
+		var app_stt = $(app).data('app_stt');
+		var user_id = $(app).data('user_id');
+		console.log(app_id);
+		console.log(master_id);
+		console.log(app_stt);
+		console.log(user_id);
 		$('.dropdown-menu').on('click', '.dropdown-item', function () {
 			$.ajax({
 				url: "appUpdate",
@@ -86,7 +91,8 @@
 				data : {
 					app_id: app_id,
 					master_id: master_id,
-					app_stt: app_stt
+					app_stt: app_stt,
+					user_id: user_id
 				},
 				dataType: "json"
 			}).done(function (json) {
@@ -118,10 +124,10 @@
 	}
 
 	function chaingeClass() {
-		var btn = $("#btn").text();
-		if(btn != "ing") {
-			$("#btn").attr("disabled", "disabled");
-		};
+		var btn = $("#btn"+app.app_id).text();
+		if(btn == "ok" || btn == "no") {
+			$("#btn"+app.app_id).attr('disabled', 'disabled');
+		}
 	}
 	
 </script>

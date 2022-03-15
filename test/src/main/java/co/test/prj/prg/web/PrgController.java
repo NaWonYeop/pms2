@@ -158,8 +158,13 @@ public class PrgController {
 	
 	@RequestMapping("/prgCheck")
 	@ResponseBody
-	public int prgCheck(PrgVO prg) {
-		int percent = prgDao.prgCheck(prg);
+	public String prgCheck(PrgVO prg) {
+		
+		String percent = String.valueOf(prgDao.prgCheck(prg));
+		System.out.println("percent: " + percent);
+		if(percent == null) {
+			percent = "0";
+		}
 		return percent;
 	}
 }

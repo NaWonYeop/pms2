@@ -22,5 +22,5 @@ public interface PrgService {
 
 	int smlCheck(PrgVO prg);
 
-	int prgCheck(PrgVO prg);
+	String prgCheck(PrgVO prg);
 }

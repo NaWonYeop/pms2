@@ -22,6 +22,6 @@ public interface PrgMapper {
 	
 	int smlCheck(PrgVO prg);
 	
-	int prgCheck(PrgVO prg);
+	String prgCheck(PrgVO prg);
 	
 }
