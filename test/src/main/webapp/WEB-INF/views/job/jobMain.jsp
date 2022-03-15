@@ -150,6 +150,58 @@
 			
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
+				<div claas="row">
+				
+					<c:if test="${!empty inters}">
+					<h1>찌이이이이임</h1>
+						<c:forEach items="${inters }" var="inter">
+							<div class="col-sm-12 col-lg-12 list">
+									<div class="single_special_cource">
+										<div class="special_cource_text">
+											<p class="introduce">${inter.user_name }| ${inter.user_crr }년</p>
+											<c:forEach items="${techs }" var="tech">
+												<c:if test="${inter.user_id eq tech.user_id2 }">
+													<span class="btn_4">${tech.tech_name }</span>
+												</c:if>
+											</c:forEach>
+											<a href="jobDetail?user_id=${inter.user_id }">
+												<h3>${inter.user_job_ttl }</h3>
+											</a>
+											<p>${inter.user_job_cnt }</p>
+											<div class="author_info">
+												<div class="author_img">
+													<div class="author_info_text">
+														<p>수행 프로젝트</p>
+														<%-- <c:forEach items="" var=""> --%>
+														<h5>
+															<a href="#">James Well</a>
+														</h5>
+														<%-- </c:forEach> --%>
+													</div>
+												</div>
+												<div class="author_rating">
+													<div class="rating avg">
+														<div class="star-ratings">
+															<div class="star-ratings-fill"
+																style="width: ${inter.avg * 20 }%">
+																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+															</div>
+															<div class="star-ratings-base">
+																<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+															</div>
+														</div>
+														<p>평균 ${inter.avg } 점</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						
+						</c:forEach>
+					찜끝
+					</c:if>
+				</div>
 					<div class="row">
 						<c:forEach items="${jobs }" var="job">
 							<c:if test="${!empty job.user_job_ttl  }">

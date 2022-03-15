@@ -13,7 +13,10 @@ public interface TechService {
 	List<TechVO> techSelectList();
 	
 	List<TechVO> jobSelectList();
-
+	
+	//찜목록들
+	List<TechVO> jobInterList(int user_id);
+	
 	List<TechVO> techSelect(TechVO tech);
 
 	int techInsert(TechVO tech);

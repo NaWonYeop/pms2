@@ -9,6 +9,15 @@
 		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 
 		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
 	</select>
+	<!-- 찜해놓은 리스트  -->
+
+	<select id="jobInterList" resultType="co.test.prj.user.service.UserVO" parameterType="int">
+	SELECT U.USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 	STAR WHERE USER_ID=U.USER_ID), 0) AS AVG
+	FROM "user" U 
+	WHERE USER_ID IN(SELECT USER_ID2 AS USER_ID
+	FROM "user" U,INTEREST I
+	WHERE U.USER_ID=#{user_id} AND U.USER_ID=I.USER_ID)
+	</select>
 	
 	<select id="techSelect" resultType="co.test.prj.tech.service.TechVO">
 		SELECT * FROM TECH WHERE USER_ID2 = #{user_id2}

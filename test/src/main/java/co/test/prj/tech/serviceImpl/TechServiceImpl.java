@@ -111,6 +111,13 @@ public class TechServiceImpl implements TechService {
 		return map.heartbtnCheck(inter);
 	}
 
+	@Override
+	public List<TechVO> jobInterList(int user_id)
+	{
+		// TODO Auto-generated method stub
+		return map.jobInterList(user_id);
+	}
+
 	
 	
 	

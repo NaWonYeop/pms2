@@ -3,6 +3,7 @@ package co.test.prj.user.web;
 import java.util.List;
 import java.util.Properties;
 
+import javax.annotation.Nonnull;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -13,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +32,7 @@ import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertService;
 import co.test.prj.certificate.service.CertVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.security.cunstomUser;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -34,7 +41,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userDao;
-
+	@Autowired
+	private cunstomUser cusd;
+	
 	@Autowired
 	private CertService certDao;
 
@@ -70,13 +79,24 @@ public class UserController {
 	// 아이디 중복체크
 	@PostMapping("IsIdCheck")
 	@ResponseBody
-	public String IsIdCheck(String user_email, HttpSession session) {
+	public String IsIdCheck(HttpServletRequest request,String user_email, HttpSession session) {
 
 		System.out.println(user_email);
 		String location = null;
 		if (user_email.indexOf("@") == -1) {
 			location = "Fail";
 		} else if (!userDao.isIdCheck(user_email)) {
+			//카카오 로그인 부분
+			 UserDetails kakaoVO=(UserDetails)cusd.loadUserByUsername(user_email);
+			 Authentication authentication = new
+			 UsernamePasswordAuthenticationToken(kakaoVO, kakaoVO.getPassword(),
+			 kakaoVO.getAuthorities()); SecurityContext securityContext =
+			 SecurityContextHolder.getContext();
+			 securityContext.setAuthentication(authentication); session =
+			 request.getSession(true);
+			 session.setAttribute("SPRING_SECURITY_CONTEXT",securityContext);
+			
+			
 			UserVO user = new UserVO();
 			user.setUser_email(user_email);
 			session.setAttribute("sessionUser", userDao.userSelect(user));

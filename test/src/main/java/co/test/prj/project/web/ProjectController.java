@@ -24,6 +24,7 @@ import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.reward.service.RewardService;
 import co.test.prj.reward.service.RewardVO;
+import co.test.prj.user.service.UserVO;
 
 @Controller
 public class ProjectController {
@@ -132,6 +133,7 @@ public class ProjectController {
 			@RequestParam("keyword") String keyword,
 			@RequestParam("pageNum") int pageNum, 
 			@RequestParam("amount") int amount, 
+			HttpSession session, 
 			ProjectVO project, 
 			ComtfVO comtf,
 			Model model) {
@@ -177,7 +179,10 @@ public class ProjectController {
 				
 		
 		model.addAttribute("result", map);
-
+		
+		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+	
+		
 		System.out.println("가라");
 
 		return "project/projectSelectList";

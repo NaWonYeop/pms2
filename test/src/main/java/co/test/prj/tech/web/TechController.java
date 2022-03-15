@@ -53,7 +53,12 @@ public class TechController {
 	private InterestService interDao;
 	
 	@RequestMapping("/jobSelectList")
-	public String techSelectList(Model model, StarVO star) {
+	public String techSelectList(Model model, StarVO star,HttpSession session) {
+		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		if(uId!=null)
+		{
+			model.addAttribute("inters",techDao.jobInterList(uId.getUser_id()));
+		}
 		model.addAttribute("jobs", techDao.jobSelectList());
 		model.addAttribute("techs", techDao.techSelectList());
 		
