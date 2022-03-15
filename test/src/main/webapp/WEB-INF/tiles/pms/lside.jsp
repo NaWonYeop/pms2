@@ -18,16 +18,16 @@
 		</div>
 	</div>
 	<ul class="nav">
-		<li class="nav-item"><a class="nav-link" href="team"> <i
+		<li class="nav-item"><a class="nav-link" href="pmsteam"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">TeamMember</span>
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="application"> <i
+		<li class="nav-item"><a class="nav-link" href="pmsapplication"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Application</span>
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="progress"> <i
+		<li class="nav-item"><a class="nav-link" href="pmsprogress"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Progress</span>
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="card"> <i
+		<li class="nav-item"><a class="nav-link" href="pmscard"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Card</span>
 		</a></li>
 	

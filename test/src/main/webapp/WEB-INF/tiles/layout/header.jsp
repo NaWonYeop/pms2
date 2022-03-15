@@ -29,8 +29,8 @@
 							
 							<li class="nav-item"><a class="nav-link" href="pms">PMS</a></li>
 							
-							<c:if test="${sessionUser ne null }">
-							<!--<sec:authorize access="isAuthenticated()">-->
+							<!--<c:if test="${sessionUser ne null }">-->
+							<sec:authorize access="isAuthenticated()">
 					
 							
 								<li class="nav-item dropdown"><a
@@ -39,16 +39,15 @@
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item" href="myProject">프로젝트 관리</a>
 										<a class="dropdown-item" href="myfunding">펀딩내역</a>
-										<a class="dropdown-item" href="checkUserPassword">개인정보 변경</a>
+										<a class="dropdown-item" href="mycheckUserPassword">개인정보 변경</a>
 										<a class="dropdown-item" href="devUpdateForm">개발자 정보변경</a>
-										<a class="dropdown-item" href="Withdrawal">회원탈퇴</a>
+										<a class="dropdown-item" href="myWithdrawal">회원탈퇴</a>
 									</div></li>
 									
 							
-								<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"
-									href="logout">Logout</a></li>
-							<!--</sec:authorize>-->
-								</c:if>
+							<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"	href="logout">Logout</a></li>
+							</sec:authorize>
+								<!--</c:if>-->
 							<sec:authorize access="isAnonymous()">
 							<!--<c:if test="${sessionUser eq null }">-->
 								<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"

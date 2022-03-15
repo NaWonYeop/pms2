@@ -42,10 +42,10 @@ public class BoardController
 	@RequestMapping("/freeboardInsertform")
 	public String freeboardInsertform(Model model,HttpSession session)
 	{
-		if(session.getAttribute("sessionUser")==null)
-		{
-			return "redirect:/freeBoard";
-		}
+		/*
+		 * if(session.getAttribute("sessionUser")==null) { return "redirect:/freeBoard";
+		 * }
+		 */
 		return "board/boardInsertform";
 	}
 	//인서트

@@ -215,7 +215,7 @@
 	                    	<c:otherwise>
 			                    	<button type="button" id="heartbtn" class="btn_4" onclick="heart()">찜하기</button>
 	                    			<button type="button" id="heartCancelbtn" class="btn_4" onclick="heartCancel()">찜취소</button>
-	                    		<button type="button" id="callbtn" class="btn_4">신청하기</button>
+	                    			<button type="button" id="callbtn" class="btn_4">신청하기</button>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    

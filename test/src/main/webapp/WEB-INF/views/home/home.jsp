@@ -63,7 +63,7 @@
 
                      <div class="form-select" id="default-select" style="width: 25%;">
                         <select>
-                           <option value=" 1">프로젝트</option>
+                           <option value=" 1">프로젝트 </option>
                            <option value="1">펀딩</option>
 
                         </select>
@@ -91,7 +91,7 @@
                <div class="row justify-content-center">
                      <div class="section_tittle text-center">
 
-                        <h2>모집중인 프로젝트</h2>
+                        <h2>모집중인 프로젝트${SPRING_SECURITY_CONTEXT }</h2>
                      </div>
                </div>
                <div class="blog_left_sidebar">

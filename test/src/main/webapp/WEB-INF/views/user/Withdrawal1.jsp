@@ -37,7 +37,7 @@
 
 				<div class="col-lg-5">
 					<form class="form-contact contact_form"
-						action="Withdrawa2" method="post" id="contactForm"
+						action="myWithdrawa2" method="post" id="contactForm"
 						novalidate="novalidate">
 						<div class="row ">
 

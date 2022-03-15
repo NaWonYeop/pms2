@@ -254,7 +254,7 @@ public class UserController {
 	}
 
 	// 개인정보 수정전 비밀번호 확인
-	@RequestMapping("/checkUserPassword")
+	@RequestMapping("/mycheckUserPassword")
 	public String checkUserPassword(HttpSession session, Model model) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		if (user != null) {
@@ -273,12 +273,12 @@ public class UserController {
 			return "user/userUpdateForm";
 		} else {
 			model.addAttribute("FailCheckPassword", "1");
-			return "redirect:/checkUserPassword2";
+			return "redirect:/mycheckUserPassword2";
 		}
 
 	}
 
-	@RequestMapping("/checkUserPassword2")
+	@RequestMapping("/mycheckUserPassword2")
 	public String checkUserPassword2(@RequestParam("FailCheckPassword") String Fail, Model model) {
 		if (Fail != null) {
 			model.addAttribute("FailCheckPassword", "1");
@@ -360,13 +360,13 @@ public class UserController {
 	}
 
 	// 회원탈퇴1
-	@RequestMapping("/Withdrawal")
+	@RequestMapping("/myWithdrawal")
 	public String Withdrawal() {
 		return "user/Withdrawal1";
 	}
 
 	// 회원탈퇴2
-	@RequestMapping("/Withdrawa2")
+	@RequestMapping("/myWithdrawa2")
 	public String Withdrawal2(String user_pwd, Model model, HttpSession session) {
 		System.out.println(user_pwd);
 		if (user_pwd == null) {
@@ -386,7 +386,7 @@ public class UserController {
 	}
 
 	// 회원탈퇴 결과창
-	@RequestMapping("/Withdrawa3")
+	@RequestMapping("/myWithdrawa3")
 	public String Withdrawal3(HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		UserVO user1 = new UserVO();

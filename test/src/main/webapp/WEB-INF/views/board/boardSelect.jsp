@@ -179,7 +179,8 @@
 					  "showMethod": "fadeIn",
 					  "hideMethod": "fadeOut"
 					}    
-			<% UserVO user=(UserVO)session.getAttribute("sessionUser");
+			 return true;
+		<%-- 	<% UserVO user=(UserVO)session.getAttribute("sessionUser");
 				if(user==null)
 				{%>
 					toastr.warning('로그인이 필요합니다.');
@@ -189,7 +190,7 @@
 				{%>
 					return true;
 					
-				<%}%>;
+				<%}%>; --%>
 		}
 		
 	</script>

@@ -25,7 +25,7 @@ public class TeamController {
 	@Autowired
 	private TeamService teamDao;
 
-	@RequestMapping("/team")
+	@RequestMapping("/pmsteam")
 	public String team(HttpSession session) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
 		MyPrjVO prj = (MyPrjVO) session.getAttribute("myPrj");

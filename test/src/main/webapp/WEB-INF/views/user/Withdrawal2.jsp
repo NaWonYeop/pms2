@@ -94,7 +94,7 @@ left: 25%;
             </div>
         </div>
 				<div class="col-lg-6" id="checkWithdraw">
-					<form class="form-contact contact_form" action="Withdrawa3"
+					<form class="form-contact contact_form" action="myWithdrawa3"
 						onsubmit="return checkbox()" method="post" id="contactForm"
 						novalidate="novalidate">
 						<div class="row justify-content-center">
