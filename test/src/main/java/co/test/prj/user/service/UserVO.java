@@ -2,6 +2,7 @@ package co.test.prj.user.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,6 +30,7 @@ public class UserVO implements UserDetails{
 	private String tech_name;
 	private double avg;
 	private String tm_dept;
+	private Date user_j_date;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{

@@ -64,7 +64,7 @@
 	
 	
 	<delete id="projectDelete" parameterType="co.test.prj.project.service.ProjectVO">
-	
+		DELETE FROM PROJECT WHERE PRJ_ID=#{prj_id}
 	</delete>
 	
 	<!-- 구직상세 참여프로젝트 >>> 경일 -->

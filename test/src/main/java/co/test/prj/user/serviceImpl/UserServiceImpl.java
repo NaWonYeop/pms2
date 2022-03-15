@@ -155,4 +155,10 @@ public class UserServiceImpl implements UserService
 		return map.AppUpdate(user_id);
 	}
 
+	@Override
+	public List<UserVO> AdminUserList() {
+		// TODO Auto-generated method stub
+		return map.AdminUserList();
+	}
+
 }

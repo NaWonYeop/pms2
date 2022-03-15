@@ -179,6 +179,10 @@ USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 	UPDATE APPLICATION 
 	SET APP_INVSB=1 WHERE app_id = #{user_id}
 	</update>
+	
+	<select id="AdminUserList" resultType="co.test.prj.user.service.UserVO">
+	SELECT * FROM "user" WHERE USER_ATH != 'MASTER'
+	</select>
 </mapper>
 
 	

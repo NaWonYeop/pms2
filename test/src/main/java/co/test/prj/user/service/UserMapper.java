@@ -51,5 +51,7 @@ public interface UserMapper {
 	
 	//내펀딩리스트
 	List<ProjectVO> MyfundingList(int user_id);
+	//관리자 제외 전체유저뽑기
+	List<UserVO> AdminUserList();
 	
 }

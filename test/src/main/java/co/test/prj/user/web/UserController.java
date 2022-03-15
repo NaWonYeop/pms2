@@ -474,4 +474,42 @@ public class UserController {
 		userDao.AppUpdate(id);
 
 	}
+	
+	//관리자페이지
+	@RequestMapping("/adminUser")
+	public String adminUser(Model model)
+	{
+		model.addAttribute("AdminUser",userDao.AdminUserList());
+		return "admin/adminUser";
+	}
+	
+	@RequestMapping("/adminIce")
+	@ResponseBody
+	public String adminIce(UserVO vo)
+	{
+		
+		UserVO user=userDao.userSelect(vo);
+		String ath=user.getUser_ath();
+		System.out.println(ath);
+		if(ath.equals("ice"))
+		{
+			System.out.println("여기 와야됨!!!!");
+			String job=user.getUser_job_ttl();
+			if(job==null)
+			{
+				ath="user";
+			}
+			else
+			{
+				ath="developer";		
+			}
+		}
+		else
+		{
+			ath="ice";	
+		}
+		user.setUser_ath(ath);
+		userDao.userUpdate(user);
+		return ath;
+	}
 }

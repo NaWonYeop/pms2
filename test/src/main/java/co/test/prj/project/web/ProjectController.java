@@ -365,6 +365,20 @@ public class ProjectController {
 		
 	}
 	
+	//관리자전용
 	
+		@RequestMapping("/adminProject")
+		public String adminProject(Model model) {
+			
+			model.addAttribute("Project",projectDao.projectSelectList());
+	
+			return "admin/adminProject";
+		}
+		@RequestMapping("/adminPrjDelete")
+		@ResponseBody
+		public void adminPrjDelete(ProjectVO vo)
+		{
+			projectDao.projectDelete(vo);
+		}
 	
 }

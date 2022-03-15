@@ -42,6 +42,10 @@
 										<a class="dropdown-item" href="mycheckUserPassword">개인정보 변경</a>
 										<a class="dropdown-item" href="devUpdateForm">개발자 정보변경</a>
 										<a class="dropdown-item" href="myWithdrawal">회원탈퇴</a>
+										<sec:authorize access="hasRole('ROLE_MASTER')">
+											<a class="dropdown-item" href="adminProject">프로젝트 관리(관리자)</a>
+											<a class="dropdown-item" href="adminUser">회원 관리(관리자)</a>
+										</sec:authorize>
 									</div></li>
 									
 							
