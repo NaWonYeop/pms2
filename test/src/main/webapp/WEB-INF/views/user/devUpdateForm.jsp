@@ -34,7 +34,7 @@ body {
 	margin: 0;
 	padding-top: 200px;
 	padding-bottom: 40px;
-	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+	font-family: 'TmoneyRoundWindRegular';
 	background-repeat: no-repeat;
 }
 
@@ -85,6 +85,16 @@ a {
 .check {
 	color: red;
 }
+
+#addBtn {
+	width: 100%;
+	margin-top: 3%;
+}
+
+.card-title {
+	margin-top: 5%;
+	font-family: 'TmoneyRoundWindExtraBold';
+}
 </style>
 </head>
 
@@ -92,17 +102,23 @@ a {
 	width="100%" height="100%" align="center">
 
 	<div class="card align-middle" style="width: 25rem;">
-		<div class="card-title" style="margin-top: 30px;"></div>
+		<div class="card-title">
+			<h2>개발자 정보변경</h2>
+		</div>
 		<form action="devUpdate" onsubmit="return formCheck()"
 			method="post" enctype="multipart/form-data">
 			
 			<div class="card-body">
-				<span><label>자격증</label><input id="cert_name" type="text"
-					class="form-control"
-					placeholder="내용을 입력하세요" ></span>
-				<button type="button" onclick="add()" id="addBtn">추가</button>
 				
-				<ul id="certList">
+				<span>
+					<label>자격증</label>
+					<input id="cert_name" type="text"
+					class="form-control"
+					placeholder="내용을 입력하세요" >
+				</span>
+				<button type="button" onclick="add()" id="addBtn" class="btn_4" >추가</button>
+				
+				<ul id="certList" style="margin-top: 3%">
 				<c:forEach items="${MyCert}" var="certifi">
 				<li>
 					${certifi.cert_name}<span class="close">x</span></li>
@@ -112,12 +128,12 @@ a {
 				<BR>
 				
 				<BR>
-				<label>경력</label><input type="number" class="form-control"
+				<label>경력 연수</label><input type="number" class="form-control"
 					id="user_crr" name="user_crr"><BR> 
 				
-				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+				<input id="btn-Yes" class="btn_1 btn-lg btn-primary btn-block"
 					type="submit" value="수정하기"> <input type="reset"
-					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
+					id="btn-Yes" value="취 소" class="btn_1 btn-lg btn-primary btn-block"
 					onclick="cancel()">
 			</div>
 		</form>

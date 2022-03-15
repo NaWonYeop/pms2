@@ -54,8 +54,15 @@
 }
 
 .insertbtn {
-	margin-bottom: 20px;
-	border-radius: 5px;
+	
+	text-align: center;
+}
+
+.search {
+	width: 57%;
+	text-align: center;
+	margin-top: 2%;
+	margin-left: 21.5%;
 }
 </style>
 </head>
@@ -76,27 +83,8 @@
 			</div>
 		</div>
 	</section>
-
-	<section class="special_cource padding_top">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-xl-5">
-					<div class="section_tittle text-center">
-						<p>Find Project</p>
-						<h2>구..직 리스트</h2>
-					</div>
-				</div>
-			</div>
-			<%-- <form action="">
-				<input type="text" list="ttl" id="list">
-				<datalist id="ttl">
-					<c:forEach items="${jobs }" var="job">
-						<option value="${job.user_job_ttl }" />
-					</c:forEach>
-				</datalist>
-				<button type="submit">검색</button>
-			</form> --%>
-			
+	
+	<div class="search">
 			<!-- 검색기능 -->
 			<form action="projectSearchPage" >
 					<div class="form-group">
@@ -134,9 +122,32 @@
 					<input type="hidden" name="pageNum" value="1"> 
 					<input type="hidden" name="amount" value="5">
 				</form>
+				</div>
+			<div class="insertbtn">
+			<button type="button" id="insertbtn" class="btn_1"
+				onclick="location.href='jobInsertMove'" style="width: 40%;">등록 및 수정</button>
+			</div>
+	
+	<section class="special_cource padding_top">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-5">
+					<div class="section_tittle text-center">
+						<p>Find Project</p>
+						<h2>구..직 리스트</h2>
+					</div>
+				</div>
+			</div>
+			<%-- <form action="">
+				<input type="text" list="ttl" id="list">
+				<datalist id="ttl">
+					<c:forEach items="${jobs }" var="job">
+						<option value="${job.user_job_ttl }" />
+					</c:forEach>
+				</datalist>
+				<button type="submit">검색</button>
+			</form> --%>
 			
-			<button type="button" id="insertbtn" class="btn_4 insertbtn"
-				onclick="location.href='jobInsertMove'">등록 및 수정</button>
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 					<div class="row">

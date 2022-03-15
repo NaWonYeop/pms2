@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.table-row {
+		font-family: 'TmoneyRoundWindRegular';
+	}
+</style>
 </head>
 <body>
 	<section class="contact-section section_padding">
