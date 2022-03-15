@@ -125,6 +125,7 @@ public class UserController {
 	public boolean nomalIdCheck(String user_email) {
 		return userDao.nomalCheck(user_email);
 	}
+	
 
 	// 비밀번호 찾기폼
 	@RequestMapping("/forgotPassword")
@@ -339,7 +340,7 @@ public class UserController {
 
 	// 개발자 정보 업데이트 결과창
 	@PostMapping("/devUpdate")
-	public String devUpdate(UserVO vo, HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
+	public String devUpdate(HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
@@ -366,8 +367,10 @@ public class UserController {
 	public String clientRegister(UserVO user, Model model, RedirectAttributes re) {
 		System.out.println(user);
 		user.setUser_ath("user");
+
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
+
 		int n = userDao.userInsert(user);
 		if (n != 0) {
 			re.addAttribute("message", "회원가입 성공하셨습니다");

@@ -8,11 +8,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
+
 <title>Insert title here</title>
 <style>
-	.progress-table {
-		font-family: 'TmoneyRoundWindRegular';
-	}
+.progress-table {
+	font-family: 'TmoneyRoundWindRegular';
+}
+
 </style>
 </head>
 <body>
@@ -47,54 +51,65 @@
 			</div>
 
 			<div class="section-top-border">
+			
+				<table id="data_list" class="table table-striped table-bordered" >
+					<thead class="table-head">
+						<tr>
+							<th class="">번호</th>
+							<th class=" text-center">제목</th>
+							<th class="">작성자</th>
+							<th class="">등록일</th>
 
-				<div class="progress-table">
-					<div class="progress-table">
-						<div class="table-head">
-							<div class="serial"></div>
-							<div class="visit ">번호</div>
-							<div class="percentage text-center">제목</div>
-							<div class="visit ">작성자</div>
-							<div class="visit ">등록일</div>
-						</div>
+						</tr>
+					</thead>
+					<tbody>
 						<c:forEach var="free" items="${frees }">
-							<c:choose>
-								<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
-									<div class="table-row" style="background-color: #deebff">
-								</c:when>
-								<c:otherwise>
-									<div class="table-row">
-								</c:otherwise>
-							</c:choose>
-
-							<div class="serial"></div>
-							<div class="visit text-center">
+							<tr>
 								<c:choose>
 									<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
-										공지
+									<!-- 	<div class="table-row"
+												style="background-color: #deebff"> -->
 									</c:when>
 									<c:otherwise>
-										${free.brd_id }
+										<!-- <div class="table-row"> -->
 									</c:otherwise>
 								</c:choose>
 
-							</div>
-							<div class="percentage"><a href="freeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a></div>
-						
-									<div class="visit">${free.user_name }</div>
-					
+								<div class=""></div>
+								<div class=" text-center">
+									<c:choose>
+										<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
+											<td>공지</td>
+										</c:when>
+										<c:otherwise>
+											<td>${free.brd_id }</td>
+										</c:otherwise>
+									</c:choose>
 
-							<div class="visit text-center">
-								<fmt:formatDate value="${free.brd_reg_date }"
-									pattern="yyyy-MM-dd" />
+								</div>
+
+								<td>
+									<div class="">
+										<a href="freeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a>
+									</div>
 								</td>
-							</div>
-					</div>
-					</c:forEach>
+								<td>
+									<div class="">${free.user_name }</div>
+								</td>
+								<td>
+									<div class=" text-center">
+										<fmt:formatDate value="${free.brd_reg_date }"
+											pattern="yyyy-MM-dd" />
 
+									</div>
+								</td>
 
-				</div>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
+</div>
 			<div class="row justify-content-center">
 				<div class="col-sm-5">
 					<form action="#">
@@ -124,13 +139,16 @@
 				</div>
 			</div>
 
-            <div class="col-12 text-right">
-                <button class="button button-contactForm btn_1" onclick="logincheck()"> 등록</button>
-            </div>
+			<div class="col-12 text-right">
+				<button class="button button-contactForm btn_1"
+					onclick="logincheck()">등록</button>
+			</div>
 		</div>
-
 	</section>
+	<script
+		src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
 	<script>
+
 	function logincheck(){
 		
 		 location.href="freeboardInsertform"
@@ -144,6 +162,24 @@
 			location.href="freeboardInsertform";
 			<%}%>; --%>
 	}
+
+		jQuery(function($) {
+			$("#data_list").DataTable({
+				lengthChange : false,
+
+				// 검색 기능 숨기기
+				searching : false,
+
+				// 정렬 기능 숨기기
+				ordering : false,
+
+				// 정보 표시 숨기기
+				info : false,
+
+				displayLength : 5
+			});
+		});
+
 	</script>
 </body>
 </html>

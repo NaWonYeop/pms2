@@ -1,8 +1,8 @@
 package co.test.prj.board.web;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+
 import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import co.test.prj.board.service.BoardService;
 import co.test.prj.board.service.BoardVO;
 import co.test.prj.user.service.UserService;
-import co.test.prj.user.service.UserVO;
 
 @Controller
 public class BoardController
@@ -24,9 +24,8 @@ public class BoardController
 	//보드리스트
 	@RequestMapping("/freeBoard")
 	public String freeBoard(Model model) {
-		List<BoardVO> list=boardDao.boardFreeList();
+		List<BoardVO> list= boardDao.boardFreeList();
 		model.addAttribute("frees",list);
-
 		return "board/boardList";
 	}
 	//보드단건
@@ -88,4 +87,8 @@ public class BoardController
 		boardDao.boardDelete(vo);
 		return "redirect:/freeBoard";
 	}
+	
+
+	//검색
+	
 }
