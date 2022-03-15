@@ -147,7 +147,7 @@
  ${sessionScope } --%>
  	<section class="course_details_area section_padding">
         <div class="container">
-        	<input type="hidden" id="">
+        	<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
         	<div class="col-12 Tname">
 	            <h4 class="title_top" style="font-size: 50px;">${project.prj_name}</h4>
 	            조회수 : ${project.prj_hit}<br>
@@ -238,7 +238,7 @@
         			<c:if test="${sessionScope.sessionUser.user_id == project.master_id }">
 			
 						<form action="projectVerUpForm">
-							<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
+							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="submit" value="수정">
 						</form>
 					
