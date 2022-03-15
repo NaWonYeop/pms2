@@ -124,7 +124,7 @@
       </div>
    </section>
 
-   <section class="feature_part" style="padding-top: 0;">
+   <section class="feature_part" style="padding-top: 0; padding-bottom: 5%;">
       <div class="container">
          <div class="row">
 

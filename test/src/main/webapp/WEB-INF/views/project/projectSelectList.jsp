@@ -94,8 +94,11 @@ input {
 								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
 							<div class="input-group-append">
-								<button class="btn" type="submit">
-									<i class="ti-search"></i>
+
+								<button class="btn" type="submit" style="padding: 0">
+									<img alt="search" src="resources/main/img/search.png"
+										height="37px">
+
 								</button>
 							</div>
 						</div>
@@ -252,7 +255,7 @@ input {
 					</c:if>
 
 				</div>
-	<!-- 찜끝 -->
+				<!-- 찜끝 -->
 
 				<div id="list">
 					<c:if test="${empty result.projects }">
