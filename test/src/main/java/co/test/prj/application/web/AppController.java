@@ -69,20 +69,17 @@ public class AppController {
 	}
 	
 	@RequestMapping("/appUpdate")
-	public String appUpdate(HttpSession session, HttpServletRequest request) {
+	public String appUpdate(HttpSession session, AppVO app, Model model) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
-		AppVO app = new AppVO();
 		
 		int user_id = sessionUser.getUser_id();
-		int master_id = Integer.parseInt(request.getParameter("master_id"));
-		int app_id = Integer.parseInt(request.getParameter("app_id"));
-		String app_stt = request.getParameter("app_stt");
-		
-		if(user_id == master_id) {
+		System.out.println("user_id: " + user_id);
+		System.out.println("master_id: " + app.getMaster_id());
+		if(user_id == app.getMaster_id()) {
 			//유저와 마스터가 동일한 사람인경우 수정가능
-			app.setApp_id(app_id);
-			app.setApp_stt(app_stt);
 			appDao.appUpdate(app);
+		} else {
+			model.addAttribute("result", "fail");
 		}
 
 		return "pms/app/app";

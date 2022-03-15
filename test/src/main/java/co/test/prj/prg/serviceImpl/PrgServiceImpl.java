@@ -73,7 +73,7 @@ public class PrgServiceImpl implements PrgService {
 	}
 
 	@Override
-	public int prgCheck(PrgVO prg) {
+	public String prgCheck(PrgVO prg) {
 		// TODO Auto-generated method stub
 		return map.prgCheck(prg);
 	}

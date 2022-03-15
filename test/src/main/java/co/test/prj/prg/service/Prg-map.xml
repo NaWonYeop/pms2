@@ -12,7 +12,7 @@
 		CONNECT BY PRIOR prg_id = prg_manager
 	</select>
 
-	<select id="prgCheck" resultType="int"
+	<select id="prgCheck" resultType="String"
 		parameterType="co.test.prj.prg.service.PrgVO">
 		SELECT SUM(prg_cmp_prop)/COUNT(prg_id) * 100 AS percent
 		FROM PROGRESS

@@ -122,6 +122,7 @@
 						$("#insertTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 					};
 				}).fail(function(xhr, status, message) {
+					alert("1");
 					alert(" status: " + status + " er:" + message);
 				});
 			};
@@ -174,6 +175,7 @@
 				}
 			}
 		}).fail(function () {
+			alert("2");
 			console.log('리스트 출력 실패');
 		});
 	}
@@ -189,10 +191,12 @@
 				prg_manager: prg_manager
 			}
 		}).done(function (result){
-			$("#prgBar"+prg_id).attr("aria-valuenow", result);
-			$("#prgBar"+prg_id).html(result+"%");
-			$("#prgBar"+prg_id).css("width", result+"%");
+			var iresult = parseInt(result);
+			$("#prgBar"+prg_id).attr("aria-valuenow", iresult);
+			$("#prgBar"+prg_id).html(iresult+"%");
+			$("#prgBar"+prg_id).css("width", iresult+"%");
 		}).fail(function(xhr, status, message) {
+			alert("3");
 			alert(" status: " + status + " er:" + message);
 		});
 	}
@@ -210,6 +214,7 @@
 					`);
 		};
 	}).fail(function(xhr, status, message) {
+		alert("4");
 		alert(" status: " + status + " er:" + message);
 	});
 
@@ -231,6 +236,7 @@
 		}).done(function(result) {
 			list();
 		}).fail(function (xhr, status, msg) {
+			alert("5");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -249,6 +255,7 @@
 			$('#exampleModalCenter').modal('hide');
 			list();
 		}).fail(function (xhr, status, msg) {
+			alert("6");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -275,6 +282,7 @@
 			}
 			list();
 		}).fail(function (xhr, status, msg) {
+			alert("7");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -299,6 +307,7 @@
 			console.log(result);
 			list();
 		}).fail(function (xhr, status, msg) {
+			alert("7");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -338,6 +347,7 @@
 				$("#updateTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 			};
 		}).fail(function(xhr, status, message) {
+			alert("8");
 			alert(" status: " + status + " er:" + message);
 		});
 	});
@@ -357,6 +367,7 @@
 			$('#updateModal').modal('hide');
 			list();
 		}).fail(function (xhr, status, msg) {
+			alert("9");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
