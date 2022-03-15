@@ -20,6 +20,14 @@
 	li {
 		font-family: 'TmoneyRoundWindRegular';
 	}
+	
+	.mainText {
+		color: #fff;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #798BF2,
+    0 0 82px #798BF2, 0 0 80px #798BF2, 0 0 80px #798BF2, 0 0 80px #798BF2;
+	}
+	
+	
 </style>
 
 <body>
@@ -34,12 +42,12 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>여기는 메인페이지</h2>
-							<p>
-								나는원엽이라능~
-							</p>
+							<h2 style="float: right;">I AM ONEYEOP</h2>
 						</div>
 					</div>
+						<div>
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -72,8 +80,9 @@
                         placeholder='Search Keyword' onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Search Keyword'">
                      <div class="input-group-append">
-                        <button class="btn" type="submit">
-                           <i class="ti-search"></i>
+                        <button class="btn" type="submit" style="padding: 0">
+                           <!-- <i class="ti-search"></i> -->
+                           <img alt="search" src="resources/main/img/search.png" height="37px" >
                         </button>
                      </div>
                   </div>
@@ -91,7 +100,7 @@
                <div class="row justify-content-center">
                      <div class="section_tittle text-center">
 
-                        <h2>모집중인 프로젝트${SPRING_SECURITY_CONTEXT }</h2>
+                        <h2 class="mainText">모집중인 프로젝트${SPRING_SECURITY_CONTEXT }</h2>
                      </div>
                </div>
                <div class="blog_left_sidebar">
@@ -127,7 +136,7 @@
                <div class="row justify-content-center">
                      <div class="section_tittle text-center">
 
-                        <h2>진행중인 펀딩목록</h2>
+                        <h2 class="mainText">진행중인 펀딩목록</h2>
                      </div>
                </div>
                <div class="blog_right_sidebar">

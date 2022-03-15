@@ -48,7 +48,6 @@
 }
 
 .single_special_cource {
-	border: 1px solid black;
 	border-radius: 15px;
 }
 
@@ -60,6 +59,13 @@ button {
 	width: 85px;
 	border: 1px solid black;
 }
+
+.memberList {
+	border-radius: 10px;
+	
+}
+
+
 </style>
 </head>
 <body>
@@ -80,9 +86,10 @@ button {
 		</div>
 	</section>
 
-	<section class="testimonial_part section_padding">
-		<div class="container-fluid">
-		
+	<section class="special_cource padding_top"
+		style="padding-top: 0; margin-bottom: 10%;">
+		<div class="container">
+			
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
@@ -98,22 +105,27 @@ button {
 					<c:forEach items="${memberList }" var="memberList">
 							<div class="col-sm-12 col-lg-12 list">
 								<div class="single_special_cource">
-									<div class="special_cource_text" style="border: 0;">
+									<div class="special_cource_text memberList" style="border: 0; background-color: #F27457; padding: 10px;">
 										<div class="col-12 author_info"
 											style="border-top: 0; margin-top: 0; padding-top: 0;">
 											<div class="col-8">
-												<div class="author_img">
+												<div class="author_img" style="padding-left: 30%; padding-top: 5%;">
 													<div class="author_info_text">
-														<p>Conduct by:</p>
+														<h5>${memberList.tm_dept }</h5>
 														<h5>
-															<a href="jobDetail?user_id=${memberList.user_id }">${memberList.user_name } | 
+															<a href="jobDetail?user_id=${memberList.user_id }" style="font-size:x-large; ">${memberList.user_name } | 
 															<c:if test="${memberList.user_crr != null}">경력 ${memberList.user_crr }년</c:if>
 															<c:if test="${memberList.user_crr eq null}">경력없음</c:if> | 0${memberList.user_tel }</a>
-															<h5>${memberList.tm_dept }</h5>
+															
 															<input type="hidden" id="uId" value="${memberList.user_id }">
 														</h5>
+														
 													</div>
+														
 												</div>
+											</div>
+											<div class="col-4">
+												<img alt="member" src="resources/main/img/member.png">
 											</div>
 										</div>
 									</div>
@@ -181,9 +193,9 @@ button {
 											</div>
 											<div class="col-4">
 												<div class="button-contactForm">
-													<button type="button" class="joinbtn${ofterList.user_id }"
+													<button type="button" class="joinbtn${ofterList.user_id } btn_4"
 														onclick="projectOfrAccept(${ofterList.user_id}, ${ofterList.app_id })">수락</button>
-													<button type="button" class="nopebtn${ofterList.app_id }" onclick="projectOfrDecline(${ofterList.app_id})">거절</button>
+													<button type="button" class="nopebtn${ofterList.app_id } btn_4" onclick="projectOfrDecline(${ofterList.app_id})">거절</button>
 												</div>
 											</div>
 										</div>
@@ -251,8 +263,8 @@ button {
 
 										<div class="col-4">
 											<div class="button-contactForm">
-												<button type="button" class="joinbtn" onclick="heartAccept(${interest.user_id})">신청</button>
-												<button type="button" class="nopebtn" onclick="heartDelete(${interest.user_id})">삭제</button>
+												<button type="button" class="joinbtn btn_4" onclick="heartAccept(${interest.user_id})">신청</button>
+												<button type="button" class="nopebtn btn_4" onclick="heartDelete(${interest.user_id})">삭제</button>
 											</div>
 										</div>
 									</div>

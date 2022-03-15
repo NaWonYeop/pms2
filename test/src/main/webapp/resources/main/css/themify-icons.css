@@ -72,7 +72,8 @@
 	content: "\e60f";
 }
 .ti-search:before {
-	content: "\e610";
+	/* content: "\e610"; */
+	
 }
 .ti-zoom-in:before {
 	content: "\e611";
