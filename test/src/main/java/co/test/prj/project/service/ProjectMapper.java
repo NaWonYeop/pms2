@@ -2,6 +2,8 @@ package co.test.prj.project.service;
 
 import java.util.List;
 
+import co.test.prj.board.service.BoardVO;
+
 
 public interface ProjectMapper {
 	List<ProjectVO> projectSelectList();
@@ -30,6 +32,8 @@ public interface ProjectMapper {
 	//프로젝트 삭제(보이기만)
 	int projectView(ProjectVO project);
 	
+	
+
 	
 	//원엽
 	//메인페이지 뿌려줄 구인(프로젝트)리스트

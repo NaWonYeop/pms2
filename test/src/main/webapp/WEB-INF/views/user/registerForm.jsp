@@ -92,9 +92,9 @@ a {
 		<form action="register" onsubmit="return formCheck()" method="post">
 
 			<div class="card-body">
-				<input type="text" name="user_email" id="user_email"
-					title="이메일주소에 @가 없습니다" class="form-control col-8" 
-					style="display: inline-block;" placeholder="아이디" check_result = "fail" autofocus required>
+				<input type="email" name="user_email" id="user_email"
+					class="form-control col-8"
+					style="display: inline-block;" placeholder="아이디" pattern="" required>
 				<button type="button" class="button button-contactForm btn_1 col-3"
 					id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
 					onclick="nomalIdCheck()" value="NO">Check</button>
@@ -106,7 +106,7 @@ a {
 					type="text" name="user_name" id="user_name" class="form-control"
 					placeholder="이름" required><br> 
 					<div class="row">
-					<select id="user_tel1" name="user_tel1" class="form-control col-3">
+					<select id="user_tel1" name="user_tel1" class="form-control col-3" required="required">
 					<option value="">::선택::</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -114,11 +114,11 @@ a {
 					<option value="019">019</option>
 					<option value="010">010</option>
 				</select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-3" id="user_tel2" name="user_tel2" maxlength="4" size="4"
-					/>
+					required="required"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="user_tel3" name="user_tel3"  
-					size="4" maxlength="4" class="form-control col-3" /></div><br>
+					size="4" maxlength="4" class="form-control col-3" required="required" /></div><br>
 					
-					<input type="hidden" id="user_tel" name="user_tel">
+					<input type="hidden" id="user_tel" name="user_tel" value="NO">
 			
 					<input
 					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
@@ -129,7 +129,11 @@ a {
 
 
 	<script type="text/javascript">
+	
 		function nomalIdCheck() {
+			
+			var regEmail = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			  
 			if ($("#user_email").val() != '') {
 				$.ajax({
 					url : "nomalIdCheck",
@@ -146,13 +150,12 @@ a {
 							$("#user_email").val('');
 							$("#user_email").focus();
 
-						} else if (result === 'Fail') {
+						} else if (result != regEmail) {
 							alert("@가 포함되어있지 않습니다")
-							$("#idCheck").val('');
-							$("#idCheck").focus();
+							$("#user_email").val('');
+							$("#user_email").focus();
 						}
-
-						else {
+						else {	
 							alert("사용가능한 이메일 입니다.");
 							$("#idCheck").attr("disabled", true);
 							$("#user_email").attr("readonly", true);
@@ -172,6 +175,10 @@ a {
 		function formCheck() {
 			if ($("#idCheck").val() == 'NO') {
 				alert("이메일 중복 체크를 해주세요.")
+				return false;
+			}
+			if($("#user_email").val() != 'NO'){
+				alert("이메이 입력 해주세요")
 				return false;
 			}
 

@@ -9,6 +9,10 @@ public interface BoardService
 	
 	List<BoardVO> boardFreeList();
 	
+	List<BoardVO> boardSearchList(BoardVO vo);
+	
+	int boardSearchPageCount(BoardVO vo);
+	
 	BoardVO boardSelect(BoardVO vo);
 	
 	BoardVO freeSelect(BoardVO vo);

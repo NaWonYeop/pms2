@@ -105,8 +105,9 @@ a {
 				<ul id="certList">
 				<c:forEach items="${MyCert}" var="certifi">
 				<li>
-					${certifi.cert_name}<span class="close">x</span></li>
+					${certifi.cert_name}<span class="close">x</span>
 					<input id="date" name ="cert_name" type="hidden" value = "${certifi.cert_name}" >
+				</li>
 				</c:forEach>	
 				</ul>
 				<BR>

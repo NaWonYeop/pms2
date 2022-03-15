@@ -9,6 +9,7 @@ import co.test.prj.board.service.BoardMapper;
 import co.test.prj.board.service.BoardService;
 import co.test.prj.board.service.BoardVO;
 
+
 @Repository("boardDao")
 public class BoardServiceImpl implements BoardService
 {
@@ -63,5 +64,17 @@ public class BoardServiceImpl implements BoardService
 		// TODO Auto-generated method stub
 		return map.freeSelect(vo);
 	}
+
+	@Override
+	public List<BoardVO> boardSearchList(BoardVO vo) {
+		return map.boardSearchList(vo);
+	}
+
+	@Override
+	public int boardSearchPageCount(BoardVO vo) {
+		return map.boardSearchPageCount(vo);
+	}
+
+	
 
 }

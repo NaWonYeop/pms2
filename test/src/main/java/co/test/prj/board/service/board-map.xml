@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.board.service.BoardMapper">
-	<select id="boardProList" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
-	SELECT * FROM BOARD WHERE PRJ_ID= #{prj_id}
+	<select id="boardProList"
+		resultType="co.test.prj.board.service.BoardVO"
+		parameterType="co.test.prj.board.service.BoardVO">
+		SELECT * FROM BOARD WHERE PRJ_ID= #{prj_id}
 	</select>
 
-	<select id="boardFreeList" resultType="co.test.prj.board.service.BoardVO">
-	SELECT brd_id,brd_ttl,brd_reg_date,U.user_name,b.brd_ntc_prop
-	FROM BOARD B,"user" U  
-	WHERE PRJ_ID IS NULL AND B.USER_ID=U.USER_ID
-	ORDER BY BRD_NTC_PROP DESC
+	<select id="boardFreeList"
+		resultType="co.test.prj.board.service.BoardVO">
+		SELECT brd_id,brd_ttl,brd_reg_date,U.user_name,b.brd_ntc_prop
+		FROM BOARD B,"user" U
+		WHERE PRJ_ID IS NULL AND B.USER_ID=U.USER_ID
+		ORDER BY BRD_NTC_PROP DESC
 	</select>
 
-	<select id="boardSelect" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
-	SELECT * FROM BOARD WHERE BRD_ID= #{brd_id}
+	<select id="boardSelect"
+		resultType="co.test.prj.board.service.BoardVO"
+		parameterType="co.test.prj.board.service.BoardVO">
+		SELECT * FROM BOARD WHERE BRD_ID= #{brd_id}
 	</select>
-	
-	<select id="freeSelect" resultType="co.test.prj.board.service.BoardVO" parameterType="co.test.prj.board.service.BoardVO">
-	SELECT B.BRD_ID,B.BRD_TTL,B.BRD_CNT,B.USER_ID,U.USER_NAME
-	FROM BOARD B,"user" U 
-	WHERE B.PRJ_ID IS NULL AND B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id}
+
+	<select id="freeSelect"
+		resultType="co.test.prj.board.service.BoardVO"
+		parameterType="co.test.prj.board.service.BoardVO">
+		SELECT B.BRD_ID,B.BRD_TTL,B.BRD_CNT,B.USER_ID,U.USER_NAME
+		FROM BOARD B,"user" U
+		WHERE B.PRJ_ID IS NULL AND B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id}
 	</select>
-	
-	
-	<insert id="boardInsert" parameterType="co.test.prj.board.service.BoardVO">
-		<selectKey keyProperty="brd_id" resultType="int" order="BEFORE">
+
+
+	<insert id="boardInsert"
+		parameterType="co.test.prj.board.service.BoardVO">
+		<selectKey keyProperty="brd_id" resultType="int"
+			order="BEFORE">
 			SELECT NVL(MAX(BRD_ID) + 1, 1) AS ID FROM BOARD
 		</selectKey>
-	insert into BOARD
-	VALUES(#{brd_id},#{user_id},#{prj_id},#{brd_ttl},#{brd_cnt},SYSDATE,#{brd_ntc_prop})
+		insert into BOARD
+		VALUES(#{brd_id},#{user_id},#{prj_id},#{brd_ttl},#{brd_cnt},SYSDATE,#{brd_ntc_prop})
 	</insert>
-	
-	<update id="boardUpdate" parameterType="co.test.prj.board.service.BoardVO">
-	UPDATE BOARD
+
+	<update id="boardUpdate"
+		parameterType="co.test.prj.board.service.BoardVO">
+		UPDATE BOARD
 		<set>
 			<if test="prj_id != null"> prj_id = #{prj_id},</if>
 			<if test="brd_ttl != null"> brd_ttl = #{brd_ttl},</if>
@@ -40,12 +50,45 @@
 			brd_ntc_prop = #{brd_ntc_prop},
 			brd_reg_date = sysdate,
 		</set>
-		
+
 		WHERE brd_id = #{brd_id}
 	</update>
-	
-	<delete id="boardDelete" parameterType="co.test.prj.board.service.BoardVO">
-	DELETE FROM BOARD
-	WHERE BRD_ID=#{brd_id}
+
+	<delete id="boardDelete"
+		parameterType="co.test.prj.board.service.BoardVO">
+		DELETE FROM BOARD
+		WHERE BRD_ID=#{brd_id}
 	</delete>
+	<!-- 게시판 검색 -->
+	<select id="boardSearchList"
+		resultType="co.test.prj.board.service.BoardVO"
+		parameterType="co.test.prj.board.service.BoardVO">
+	<![CDATA[
+		SELECT *
+		FROM ( SELECT ROWNUM RN,
+		            A.*
+		                FROM ( ]]>
+		SELECT b.*,U.user_name
+		FROM board b JOIN user u
+		ON(b.user_id = u.user_id)
+		WHERE BRD_NTC_PROP = 0
+		AND brd_ttl LIKE '%'||#{keyword}||'%'
+
+		ORDER BY user_id DESC
+		            <![CDATA[ ) 
+		            A )
+		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="boardSearchPageCount" parameterType="co.test.prj.board.service.BoardVO"
+		resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM board
+		WHERE brd_ttl LIKE '%'||#{keyword}||'%'
+		
+		ORDER BY brd_id DESC
+		
+	</select>
+
 </mapper>

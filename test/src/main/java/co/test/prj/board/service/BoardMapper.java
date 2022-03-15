@@ -7,6 +7,10 @@ public interface BoardMapper
 	List<BoardVO> boardProList(BoardVO vo);
 
 	List<BoardVO> boardFreeList();
+	
+	List<BoardVO> boardSearchList(BoardVO vo);
+	
+	int boardSearchPageCount(BoardVO vo);
 
 	BoardVO freeSelect(BoardVO vo);	
 	
