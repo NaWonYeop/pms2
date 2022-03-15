@@ -162,8 +162,9 @@ public class PrgController {
 		
 		String percent = String.valueOf(prgDao.prgCheck(prg));
 		System.out.println("percent: " + percent);
-		if(percent == null) {
+		if(percent.equals("null")) {
 			percent = "0";
+			System.out.println("percent 변경 후" + percent);
 		}
 		return percent;
 	}

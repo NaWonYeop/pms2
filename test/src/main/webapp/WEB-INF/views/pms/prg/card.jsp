@@ -5,11 +5,12 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<!-- 섹션입력 모달 버튼 -->
-				<button type="button" class="btn btn-primary" data-toggle="modal"
-					data-target="#exampleModalCenter">섹션 입력</button>
-				<br> <br>
-
+				<div class="row">
+					<!-- 섹션입력 모달 버튼 -->
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModalCenter">섹션 입력</button>
+				</div>
+				<div></div>
 				<!-- 섹션Modal창 -->
 				<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -148,6 +149,7 @@
 			for(prg of json) {
 				if(prg.level == 1) {
 					var li = $(`
+							<div class="col">
 							<div class="progress">
 								<div id="prgBar\${prg.prg_id}" class="progress-bar" role="progressbar" style="width: 0%"
 								aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
@@ -166,7 +168,7 @@
 							<button id="smlChk" type="button" data-prg_id="\${prg.prg_id}" class="btn btn-success 1">완료</button>
 							<button id="smlUpBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" class="btn btn-info 2" data-toggle="modal" data-target="#updateModal">수정</button>
 							<button id="smlBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" class="btn btn-danger 3">x</button>
-							</li>`);
+							</li></div>`);
 					ul.append(li2);
 					li.append(ul);
 					if(prg.prg_cmp_prop != 0) {
