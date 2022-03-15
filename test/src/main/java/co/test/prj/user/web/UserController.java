@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -151,7 +152,10 @@ public class UserController {
 			for (int i = 0; i < 6; i++) {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
-			user.setUser_pwd(pw);
+			BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+			user.setUser_pwd(scpwd.encode(pw));
+			
+			
 			userDao.userUpdate(user);
 			try {
 
@@ -342,7 +346,8 @@ public class UserController {
 	public String clientRegister(UserVO user, Model model, RedirectAttributes re) {
 		System.out.println(user);
 		user.setUser_ath("user");
-
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
 		int n = userDao.userInsert(user);
 		if (n != 0) {
 			re.addAttribute("message", "회원가입 성공하셨습니다");

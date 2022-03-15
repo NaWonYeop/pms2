@@ -21,9 +21,7 @@
       <form-login username-parameter="user_email"
               password-parameter="user_pwd" login-processing-url="/login" 
               login-page="/loginForm" default-target-url="/home" />
-		<form-login username-parameter="user_email"
-              password-parameter="user_pwd" login-processing-url="/IsIdCheck" 
-              login-page="/loginForm" default-target-url="/home" />
+	
 		
       <logout logout-url="/logout" logout-success-url="/home"   delete-cookies="" />
        <csrf disabled="true" />
@@ -31,7 +29,7 @@
 
    <authentication-manager>
       <authentication-provider  user-service-ref="cunstomUser">
-     <!--  <password-encoder hash="bcrypt"/> -->
+    <password-encoder hash="bcrypt"/>
       </authentication-provider>
    </authentication-manager>
  <!--  <beans:bean id="userService" class="co.test.prj.security.cunstomUser"/>

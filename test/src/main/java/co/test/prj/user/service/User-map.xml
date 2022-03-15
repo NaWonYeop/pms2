@@ -12,7 +12,7 @@
 		parameterType="co.test.prj.user.service.UserVO">
 		SELECT USER_ID,
 USER_EMAIL,
-'{noop}'||USER_PWD as USER_PWD,
+USER_PWD,
 USER_NAME,
 USER_TEL,
 USER_ATH,
