@@ -153,10 +153,10 @@
 
                      </div>
                         <a class="d-inline-block" href="single-blog.html"> </a>
-                        <h3 class="right"><fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
+                        <h3 class="right"><fmt:formatNumber value="${fnd.total/(fnd.prj_gl_prc*1000)*100 }" pattern="00"/>%</h3>
                         <div class="progress">
                            <div class="progress-bar color-3" role="progressbar"
-                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #1D28F2" aria-valuenow="80" aria-valuemin="0"
+                              style="width: <fmt:formatNumber value="${fnd.total/(fnd.prj_gl_prc*1000)*100 }" pattern="00"/>%;background-color: #1D28F2" aria-valuenow="80" aria-valuemin="0"
                               aria-valuemax="100"></div>
                         </div>
                         <br>

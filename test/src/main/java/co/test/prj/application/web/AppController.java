@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -96,5 +98,27 @@ public class AppController {
 		appDao.appDelete(app);
 		
 		return "";
+	}
+	
+	
+	
+	//은덕 프로젝트에서 구인신청시
+	@GetMapping("/ajaxAppPrjInsertForm")
+	@ResponseBody
+	public int ajaxAppPrjInsertForm(
+			@RequestParam("prj_id") int pId, 
+			@RequestParam("master_id") int mId,
+			@RequestParam("user_id") int uId,
+			AppVO app) {
+		System.out.println("신청 들어오는곳");
+		app.setPrj_id(pId);
+		app.setMaster_id(mId);
+		app.setUser_id(uId);
+		
+		int result = appDao.appPrjInsert(app);
+		
+		System.out.println("가라");
+		
+		return result;
 	}
 }

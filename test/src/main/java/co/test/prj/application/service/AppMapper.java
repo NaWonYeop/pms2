@@ -10,4 +10,7 @@ public interface AppMapper {
 	int appUpdate(AppVO app);
 
 	int appDelete(AppVO app);
+	
+	//은덕 구인할때
+	int appPrjInsert(AppVO app);
 }

@@ -81,4 +81,8 @@ public class ProjectVO
 	private String ctf_usectf_st_course;//저장위치
 	private int total_team_prs;//총 구해진 인원
 	private int total_prs;//총구하는 인원
+	
+	//리스트에 뿌릴것들
+	private int total_count; //총 신청 인원
+	private int total_sum; //총 신청 리워드
 }

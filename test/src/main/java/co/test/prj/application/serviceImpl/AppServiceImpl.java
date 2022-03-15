@@ -40,4 +40,9 @@ public class AppServiceImpl implements AppService {
 		return map.appDelete(app);
 	}
 
+	@Override
+	public int appPrjInsert(AppVO app) {
+		return map.appPrjInsert(app);
+	}
+
 }

@@ -75,6 +75,21 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.mainFndList();
 	}
 
+	@Override
+	public List<ProjectVO> projectAppList(ProjectVO project) {
+		return map.projectAppList(project);
+	}
+
+	@Override
+	public List<ProjectVO> projectRwdList(ProjectVO project) {
+		return map.projectRwdList(project);
+	}
+
+	@Override
+	public int projectHitUpdate(ProjectVO project) {
+		return map.projectHitUpdate(project);
+	}
+
 	
 	
 

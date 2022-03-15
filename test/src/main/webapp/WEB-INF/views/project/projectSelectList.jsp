@@ -130,10 +130,10 @@ input {
 					</div>
 				</div>
 				<!-- 찌이이이임 -->
-				<div id="list">
+				<div>
 					<c:if test="${!empty result.projects }">
 						<c:forEach items="${result.projects }" var="project">
-							<%-- ${result}<br>
+						<%-- ${result}<br>
 						<br>
 						${project}<br> --%>
 							<article class="blog_item">
@@ -156,6 +156,9 @@ input {
 											<c:if test="${project.prj_fnd_prop == 1}">
 												<div class="col-lg-7">
 													<!-- 펀딩 있을시 -->
+													<c:forEach items="${result.rwds }" var="rwd">
+													<c:if test="${project.prj_id == rwd.prj_id}">
+													
 													<div class="blog_item_img">
 														<h3 style="font-weight: bold;">펀딩</h3>
 														<div class="col-12">
@@ -168,9 +171,12 @@ input {
 
 														</div>
 													</div>
+													
+													
+													
 													<a class="d-inline-block" href="single-blog.html"> </a>
 													<h3 class="right">
-														<fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }"
+														<fmt:formatNumber value="${rwd.total_sum/(project.prj_gl_prc*1000)*100 }"
 															pattern="00" />
 														%
 													</h3>
@@ -178,7 +184,7 @@ input {
 														<div class="col-10">
 															<div class="progress">
 																<div class="progress-bar color-3" role="progressbar"
-																	style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359"
+																	style="width: <fmt:formatNumber value="${rwd.total_sum/(project.prj_gl_prc*1000)*100 }" pattern="00"/>%;background-color: #f09359"
 																	aria-valuenow="80" aria-valuemin="0"
 																	aria-valuemax="100"></div>
 															</div>
@@ -196,13 +202,16 @@ input {
 														<li>
 															<h3 stlye="font-weight: bold;">
 																<div class="single_member_counter">
-																	<span class="counter" style="font-size: 25px;">${fnd.total }</span>원
+																	<span class="counter" style="font-size: 25px;">${rwd.total_sum }</span>원
 																</div>
 															</h3>
 														</li>
 													</ul>
 													<p>(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원</p>
 													<br>
+													
+													</c:if>
+													</c:forEach>
 												</div>
 											</c:if>
 
@@ -211,6 +220,9 @@ input {
 											<c:if test="${project.prj_ofr_prop == 1}">
 												<div class="col-lg-5">
 													<!-- 구인 있을시 -->
+													<c:forEach items="${result.apps }" var="app">
+													<c:if test="${project.prj_id == app.prj_id}">
+													
 													<div class="blog_item_img">
 														<h3 style="font-weight: bold;">구인</h3>
 													</div>
@@ -220,14 +232,16 @@ input {
 													<p class="btn_4">${project.prj_cnd}</p>
 
 													<ul class="blog-info-link">
-														<li><i class="far fa-user"></i> 모집인원
-															${ofr.total_team_prs }/ ${project.prj_frn_prs + project.prj_bk_prs + project.prj_db_prs + project.prj_ser_prs }명</a></li>
-														<li><i class="far fa-comments"></i> 모집 기간 <fmt:formatDate
+														<li><i class="far fa-user"></i> 신청인원
+															${app.total_count }/${project.prj_frn_prs + project.prj_bk_prs + project.prj_db_prs + project.prj_ser_prs }명</a></li>
+														<li><i class="far fa-comments"></i> 신청 기간 <fmt:formatDate
 																value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" />
 															~ <fmt:formatDate value="${project.prj_ofr_ed }"
 																pattern="yyyy-MM-dd" /></li>
 													</ul>
-
+													
+													</c:if>
+													</c:forEach>
 												</div>
 											</c:if>
 
@@ -288,80 +302,94 @@ input {
 										<c:if test="${project.prj_fnd_prop == 1}">
 											<div class="col-lg-7">
 												<!-- 펀딩 있을시 -->
-												<div class="blog_item_img">
-													<h3 style="font-weight: bold;">펀딩</h3>
-													<div class="col-12">
-
+												<c:forEach items="${result.rwds }" var="rwd">
+													<c:if test="${project.prj_id == rwd.prj_id}">
+													
+													<div class="blog_item_img">
+														<h3 style="font-weight: bold;">펀딩</h3>
 														<div class="col-12">
-															<img class="card-img rounded-0"
-																src="./resources/upload/images/${project.ctf_st_name }"
-																alt="사진이 없습니다.">
-														</div>
 
-													</div>
-												</div>
-												<a class="d-inline-block" href="single-blog.html"> </a>
-												<h3 class="right">
-													<fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }"
-														pattern="00" />
-													%
-												</h3>
-												<div class="col-12">
-													<div class="col-10">
-														<div class="progress">
-															<div class="progress-bar color-3" role="progressbar"
-																style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359"
-																aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+															<div class="col-12">
+																<img class="card-img rounded-0"
+																	src="./resources/upload/images/${project.ctf_st_name }"
+																	alt="사진이 없습니다.">
 															</div>
+
 														</div>
-
 													</div>
-												</div>
-												<br>
-												<ul class="blog-info-link">
-													<li><i class="far fa-comments"></i> 현재 펀딩금액</li>
-													<li><i class="far fa-comments"></i> 펀딩 기간 <fmt:formatDate
-															value="${project.prj_fnd_str }" pattern="yyyy-MM-dd" />
-														~ <fmt:formatDate value="${project.prj_fnd_ed }"
-															pattern="yyyy-MM-dd" /></li>
-
-													<li>
-														<h3 stlye="font-weight: bold;">
-															<div class="single_member_counter">
-																<span class="counter" style="font-size: 25px;">${fnd.total }</span>원
+													
+													
+													
+													<a class="d-inline-block" href="single-blog.html"> </a>
+													<h3 class="right">
+														<fmt:formatNumber value="${rwd.total_sum/(project.prj_gl_prc*1000)*100 }"
+															pattern="00" />
+														%
+													</h3>
+													<div class="col-12">
+														<div class="col-10">
+															<div class="progress">
+																<div class="progress-bar color-3" role="progressbar"
+																	style="width: <fmt:formatNumber value="${rwd.total_sum/(project.prj_gl_prc*1000)*100 }" pattern="00"/>%;background-color: #f09359"
+																	aria-valuenow="80" aria-valuemin="0"
+																	aria-valuemax="100"></div>
 															</div>
-														</h3>
-													</li>
-												</ul>
-												<p>(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원</p>
-												<br>
-											</div>
-										</c:if>
 
+														</div>
+													</div>
+													<br>
+													<ul class="blog-info-link">
+														<li><i class="far fa-comments"></i> 현재 펀딩금액</li>
+														<li><i class="far fa-comments"></i> 펀딩 기간 <fmt:formatDate
+																value="${project.prj_fnd_str }" pattern="yyyy-MM-dd" />
+															~ <fmt:formatDate value="${project.prj_fnd_ed }"
+																pattern="yyyy-MM-dd" /></li>
 
-
-										<c:if test="${project.prj_ofr_prop == 1}">
-											<div class="col-lg-5">
-												<!-- 구인 있을시 -->
-												<div class="blog_item_img">
-													<h3 style="font-weight: bold;">구인</h3>
+														<li>
+															<h3 stlye="font-weight: bold;">
+																<div class="single_member_counter">
+																	<span class="counter" style="font-size: 25px;">${rwd.total_sum }</span>원
+																</div>
+															</h3>
+														</li>
+													</ul>
+													<p>(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원</p>
+													<br>
+													
+													</c:if>
+													</c:forEach>
 												</div>
+											</c:if>
 
 
-												<p class="btn_4">${project.prj_ar}</p>
-												<p class="btn_4">${project.prj_cnd}</p>
 
-												<ul class="blog-info-link">
-													<li><i class="far fa-user"></i> 모집인원
-														${ofr.total_team_prs }/ ${project.prj_frn_prs + project.prj_bk_prs + project.prj_db_prs + project.prj_ser_prs }명</a></li>
-													<li><i class="far fa-comments"></i> 모집 기간 <fmt:formatDate
-															value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" />
-														~ <fmt:formatDate value="${project.prj_ofr_ed }"
-															pattern="yyyy-MM-dd" /></li>
-												</ul>
+											<c:if test="${project.prj_ofr_prop == 1}">
+												<div class="col-lg-5">
+													<!-- 구인 있을시 -->
+													<c:forEach items="${result.apps }" var="app">
+													<c:if test="${project.prj_id == app.prj_id}">
+													
+													<div class="blog_item_img">
+														<h3 style="font-weight: bold;">구인</h3>
+													</div>
 
-											</div>
-										</c:if>
+
+													<p class="btn_4">${project.prj_ar}</p>
+													<p class="btn_4">${project.prj_cnd}</p>
+
+													<ul class="blog-info-link">
+														<li><i class="far fa-user"></i> 신청인원
+															${app.total_count }/${project.prj_frn_prs + project.prj_bk_prs + project.prj_db_prs + project.prj_ser_prs }명</a></li>
+														<li><i class="far fa-comments"></i> 신청 기간 <fmt:formatDate
+																value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" />
+															~ <fmt:formatDate value="${project.prj_ofr_ed }"
+																pattern="yyyy-MM-dd" /></li>
+													</ul>
+													
+													</c:if>
+													</c:forEach>
+												</div>
+											</c:if>
 
 										<c:if test="${project.prj_fnd_prop == 0}">
 											<div class="col-lg-6">
@@ -480,7 +508,10 @@ input {
 					//나중에 경고창으로 올리기 버튼 삭제는 하지말것
 				}
 				
-			}
+			},
+	        error:function(){
+		          console.log("Insert ajax 통신 실패!!!");
+		    }
 		})
 
 	}

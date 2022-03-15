@@ -169,6 +169,7 @@ public class ProjectController {
 		int totalPage = (int) Math.ceil(totalPage1);
 
 		System.out.println("총 페이지 수 : " + totalPage);
+		
 
 		map.put("projects", projectDao.projectSearchPageList(project));
 		map.put("page", getpageNum);
@@ -177,6 +178,9 @@ public class ProjectController {
 		map.put("keyword", trimkeyword);
 		map.put("amount", getamount);
 				
+		//추가자료
+		map.put("apps", projectDao.projectAppList(project));
+		map.put("rwds", projectDao.projectRwdList(project));
 		
 		model.addAttribute("result", map);
 		
@@ -252,6 +256,10 @@ public class ProjectController {
 		System.out.println("상세페이지");
 		project.setPrj_id(id);
 		
+		//조회수 업
+		projectDao.projectHitUpdate(project);
+		
+		
 		ProjectVO prj = projectDao.projectSelect(project);
 		
 		model.addAttribute("project",prj);
@@ -265,6 +273,7 @@ public class ProjectController {
 			
 			model.addAttribute("rewards", rewardDao.rewardInsertSelect(reward));
 		}
+		
 		
 		
 		return "project/projectSelect";

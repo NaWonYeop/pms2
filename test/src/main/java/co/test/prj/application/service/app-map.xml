@@ -38,4 +38,16 @@
 		DELETE FROM APPLICATION
 		WHERE app_id = #{app_id} AND master_id = #{master_id}
 	</delete>
+	
+	<insert id="appPrjInsert" parameterType="co.test.prj.application.service.AppVO">
+		<selectKey keyProperty="app_id" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(APP_ID) + 1, 1) AS ID FROM APPLICATION
+		</selectKey>
+			INSERT INTO APPLICATION (APP_ID, PRJ_ID, MASTER_ID, USER_ID,
+			APP_CLSFC)
+			VALUES(#{app_id}, #{prj_id}, #{master_id},
+			#{user_id}, 1)
+	
+	</insert>
 </mapper>

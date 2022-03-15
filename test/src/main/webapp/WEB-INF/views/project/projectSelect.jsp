@@ -168,7 +168,7 @@
 							<h3 style="font-weight: bold;">펀딩</h3>
 							<a class="d-inline-block" href="single-blog.html"> </a>
 	                        <h3 class="right">
-	                        <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%</h3>
+	                        <fmt:formatNumber value="${project.total_sum/(project.prj_gl_prc*1000)*100 }" pattern="00"/>%</h3>
 	                        <div class="col-12">
 		                        <div 
 		                        <c:if test="${project.prj_ofr_prop == 0}">
@@ -177,7 +177,7 @@
 		                        >
 			                        <div class="progress">
 			                           <div class="progress-bar color-3" role="progressbar"
-			                              style="width: <fmt:formatNumber value="${fnd.total/fnd.prj_gl_prc*100 }" pattern="00"/>%;background-color: #f09359" 
+			                              style="width: <fmt:formatNumber value="${project.total_sum/(project.prj_gl_prc*1000)*100 }" pattern="00"/>%;background-color: #f09359" 
 			                              aria-valuenow="80" 
 			                              aria-valuemin="0"
 			                              aria-valuemax="100">
@@ -198,7 +198,7 @@
 	                           <li> 
 		                           <h3 stlye="font-weight: bold;"> 
 		                           <div class="single_member_counter">
-		                           <span class="counter" style="font-size:25px;">${fnd.total }</span>원 
+		                           <span class="counter" style="font-size:25px;">${project.total_sum }</span>원 
 		                           </div>
 		                           </h3>
 	                           </li>
@@ -224,8 +224,12 @@
 	                            <fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
 								<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
 	                        </ul> 	
-	                         	
-	                    
+			                    <form id="ajaxAppPrjInsertForm" onsubmit="return false" onclick="ajaxAppPrjInsertForm()">
+									<input type="hidden" name="prj_id" value="${project.prj_id}">
+									<input type="hidden" name="master_id" value="${project.master_id}">
+	                         		<input type="hidden" name="user_id" value="${sessionScope.sessionUser.user_id }">
+									<input type="submit" class="rfnd btn_4" value="참가신청">
+								</form>
 	                        </c:if>
 	           
         			</div>
@@ -239,19 +243,19 @@
 			
 						<form action="projectVerUpForm">
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
-							<input type="submit" value="수정">
+							<input type="submit" class="rfnd btn_4" value="수정">
 						</form>
 					
 						<form action="rewardInsertForm">
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="hidden" id="master_id" name="master_id" value="${project.master_id}">
 							<input type="hidden" id="go" name="go" value="selectPage">
-							<input type="submit" value="리워드 관리">
+							<input type="submit" class="rfnd btn_4" value="리워드 관리">
 						</form>
 							
 						<form action="projectViewDel">
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
-							<input type="submit" value="삭제">
+							<input type="submit" class="rfnd btn_4" value="삭제">
 						</form>
 					
 					</c:if>
@@ -327,6 +331,25 @@
 			}) //ajax
 		
 	});
+	
+	
+	function ajaxAppPrjInsertForm() {
+		console.log("참가신청한다");
+		
+		$.ajax({
+			type : 'GET',
+			url : "/prj/ajaxAppPrjInsertForm",
+			data : $("#ajaxAppPrjInsertForm").serialize(),
+			dataTyep: "json",
+			success : function (result) {
+				console.log("신청하러갔다옴??");
+				console.log(result);
+			},
+	        error:function(){
+		          console.log("Insert ajax 통신 실패!!!");
+		    }
+		});
+	}
 	
 	
 	$(document).ready(function(){

@@ -40,5 +40,14 @@ public interface ProjectMapper {
 	List<ProjectVO> mainOfrList();
 	//메인페이지 뿌려줄 펀딩리스트
 	List<ProjectVO> mainFndList();
+	
+	//리스트 총 신청인
+	List<ProjectVO> projectAppList(ProjectVO project);
+	
+	//리스트 총 리워드신청
+	List<ProjectVO> projectRwdList(ProjectVO project);
+	
+	//조회수
+	int projectHitUpdate(ProjectVO project);
 
 }

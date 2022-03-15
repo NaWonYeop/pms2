@@ -10,4 +10,6 @@ public interface AppService {
 	int appUpdate(AppVO app);
 
 	int appDelete(AppVO app);
+	
+	int appPrjInsert(AppVO app);
 }
