@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 <title>Insert title here</title>
 <style>
 
@@ -64,6 +66,7 @@
 	margin-top: 2%;
 	margin-left: 21.5%;
 }
+
 </style>
 </head>
 <body>
@@ -190,8 +193,16 @@
 					</c:if>
 				</div>
 					<div class="row">
+					<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">
+					<table id="data_list" class="table table-bordered">
+					<thead><tr><th></th></tr></thead>
+					<tbody>
+						
+				
 						<c:forEach items="${jobs }" var="job">
 							<c:if test="${!empty job.user_job_ttl  }">
+							<tr>
+							<td>
 								<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
@@ -234,9 +245,15 @@
 										</div>
 									</div>
 								</div>
+								</td>
+								</tr>
 							</c:if>
+							
 						</c:forEach>
-
+							
+						</tbody>
+					</table>
+					</div>
 						<!-- 여기까지ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ -->
 
 					</div>
@@ -244,14 +261,31 @@
 			</div>
 		</div>
 	</section>
-
+<script
+		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
+	
 		function starAvg(avg) {
 			const insertAvg = avg * 20;
 			return insertAvg + 1.5;
 		}
 		
-		
+		jQuery(function($) {
+			$("#data_list").DataTable({
+				lengthChange : false,
+
+				// 검색 기능 숨기기
+				searching : false,
+
+				// 정렬 기능 숨기기
+				ordering : false,
+
+				// 정보 표시 숨기기
+				info : false,
+
+				displayLength : 3
+			});
+		});
 	</script>
 
 </body>
