@@ -23,12 +23,12 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>구직 등록하기</h2>
-							<p>
-								Home<span>/</span>Course Details
-							</p>
+							<h2 style="float: right;">구직 등록 및 수정</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
 				</div>
 			</div>
 		</div>

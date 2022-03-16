@@ -8,17 +8,22 @@
 <script src="resources/build2/ckeditor.js"></script>
 </head>
 <body>
- <section class="breadcrumb">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2 style="float: right;">게시판 수정페이지</h2>
+						</div>
+					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
     <!-- breadcrumb start-->
 
   <!-- ================ contact section start ================= -->

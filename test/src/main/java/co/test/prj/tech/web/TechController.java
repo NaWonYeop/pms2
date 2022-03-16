@@ -53,7 +53,7 @@ public class TechController {
 	private InterestService interDao;
 	
 	@RequestMapping("/jobSelectList")
-	public String techSelectList(Model model, StarVO star,HttpSession session) {
+	public String techSelectList(Model model, HttpSession session) {
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
 		if(uId!=null)
 		{
@@ -135,7 +135,7 @@ public class TechController {
 	public void requestWork(HttpSession session, AppVO app) {
 		UserVO userId = (UserVO)session.getAttribute("sessionUser");
 		app.setMaster_id(userId.getUser_id());
-		app.setApp_clsfc(0);
+		app.setApp_clsfc(1);
 		app.setApp_stt("ing");
 		appDao.appInsert(app);
 	}

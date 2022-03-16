@@ -75,12 +75,12 @@ button {
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>구..인현..황</h2>
-							<p>
-								Home<span>/</span>${prj_id }
-							</p>
+							<h2 style="float: right;">구인 현황</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
 				</div>
 			</div>
 		</div>

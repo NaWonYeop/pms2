@@ -18,8 +18,27 @@
 }
 
 table {
- width : auto;	
+	width : auto;	
 }
+
+thead {
+	background-color: #F5F7FF;
+}
+
+
+#data_list_paginate {
+	margin-top: 1%;
+}
+
+.section-top-border {
+	border-top: 0;
+}
+
+.table.dataTable.no-footer {
+	border-bottom: 0;
+}
+
+
 </style>
 </head>
 <body>
@@ -29,12 +48,12 @@ table {
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>Our Courses</h2>
-							<p>
-								Home<span>/</span>Courses
-							</p>
+							<h2 style="float: right;">게시판</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -52,17 +71,22 @@ table {
 					</div>
 				</div>
 			</div>
-
+			
+			<div class="insertbtn">
+				<button type="button" id="insertbtn" class="btn_1"
+					onclick="logincheck()">등록</button>
+			</div>
+			
 			<div class="row section-top-border">
 			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">
 
 				<table id="data_list" class="table table-bordered">
 					<thead class="table-head">
 						<tr>
-							<th class="">번호</th>
-							<th class="">제목</th>
-							<th class="">작성자</th>
-							<th class="">등록일</th>
+							<th class="text-center">번호</th>
+							<th class="text-center">제목</th>
+							<th class="text-center">작성자</th>
+							<th class="text-center">등록일</th>
 
 						</tr>
 					</thead>
@@ -82,10 +106,10 @@ table {
 
 								<c:choose>
 									<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
-										<td>공지</td>
+										<td class="text-center">공지</td>
 									</c:when>
 									<c:otherwise>
-										<td>${free.brd_id }</td>
+										<td class="text-center">${free.brd_id }</td>
 									</c:otherwise>
 								</c:choose>
 
@@ -97,10 +121,10 @@ table {
 									</div>
 								</td>
 								<td>
-									<div class="">${free.user_name }</div>
+									<div class="text-center">${free.user_name }</div>
 								</td>
 								<td>
-									<div class=" text-center">
+									<div class="text-center">
 										<fmt:formatDate value="${free.brd_reg_date }"
 											pattern="yyyy-MM-dd" />
 
@@ -145,10 +169,7 @@ table {
 			</div>
 		</div>
 
-		<div class="col-12 text-right">
-			<button class="button button-contactForm btn_1"
-				onclick="logincheck()">등록</button>
-		</div>
+		
 	</section>
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>

@@ -17,18 +17,18 @@
 </style>
 </head>
 <body>
-	<section class="breadcrumb ">
+	<section class="breadcrumb breadcrumb_bg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>Blog Single</h2>
-							<p>
-								Home<span>-</span>Blog Single
-							</p>
+							<h2 style="float: right;">게시판 상세페이지</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
 				</div>
 			</div>
 		</div>
