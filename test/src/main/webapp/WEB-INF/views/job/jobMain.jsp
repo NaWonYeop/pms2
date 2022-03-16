@@ -86,7 +86,7 @@
 	
 	<div class="search">
 			<!-- 검색기능 -->
-			<form action="projectSearchPage" >
+			<form action="jobsearch" >
 					<div class="form-group">
 						<div class="input-group mb-3">
 							<div class="form-select" id="default-select" style="width: 25%;">
@@ -108,7 +108,7 @@
 					<!-- 페이징 1페이지부터 2개씩 보여줄꺼다-->
 					<input type="hidden" name="pageNum" value="1"> 
 					<input type="hidden" name="amount" value="5">
-				</form>
+			</form>
 				</div>
 			
 	

@@ -58,4 +58,10 @@ public interface TechService {
 	
 	//평가 update
 	int AssessUpdate(StarVO star);
+	
+	//검색 2개
+	
+	List<TechVO> jobNameSer(String user_name);
+	List<TechVO> jobTitleSer(String user_job_ttl);
+	
 }
