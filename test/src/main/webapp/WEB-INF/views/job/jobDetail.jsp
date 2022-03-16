@@ -108,7 +108,7 @@
         }
         /* rating end */
 
-        .callbtn , .heartbtn, .updatebtn {
+        .heartbtn, .updatebtn {
             width: 300px;
             height: 45px;
             border-radius: 30px;
@@ -195,8 +195,8 @@
 	                        <c:forEach items="${prjDetail }" var="prjList">
 		                        <div class="content"  style="background-color: #F5F7FF; margin-bottom: 3%; border-radius: 10px;">
 		                            <div class="prjtitle">${prjList.prj_name }</div>
-		                            <span class="btn_4" style="background-color: #F27457;">${prjList.tm_pos }</span>
-		                            <span class="btn_4" style="background-color: #F27457;">${prjList.tm_dept }</span><br>
+		                            <span class="btn_4">${prjList.tm_pos }</span>
+		                            <span class="btn_4">${prjList.tm_dept }</span><br>
 		                            
 		                            <fmt:formatDate value="${prjList.prj_str }" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${prjList.prj_ed }" pattern="yyyy-MM-dd" />
 		                        </div>
@@ -212,9 +212,9 @@
 	                    		<button type="button" id="updatebtn" class="btn_4" onclick="location.href='jobInsertMove'">수정하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
-			                    	<button type="button" id="heartbtn" class="btn_4" onclick="heart()">찜하기</button>
-	                    			<button type="button" id="heartCancelbtn" class="btn_4" onclick="heartCancel()">찜취소</button>
-	                    			<button type="button" id="callbtn" class="btn_4">신청하기</button>
+			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
+	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
+	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청하기</button>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
@@ -388,7 +388,7 @@
         {
             if(!$(e.target).hasClass("content")
             		&& !$(e.target).hasClass("callbtn")
-            		&& !$(e.target).hasClass("btn_4")
+            		/* && !$(e.target).hasClass("btn_4") */
 	                && !$(e.target).hasClass("option") 
 	                && !$(e.target).hasClass("current")) {
                 $('.modaldal').fadeOut();

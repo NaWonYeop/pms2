@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<!-- <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
 	<link rel="stylesheet"
 	href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
 <title>Insert title here</title>
 <style>
 
@@ -53,11 +55,6 @@
 
 .introduce {
 	display: block;
-}
-
-.insertbtn {
-	
-	text-align: center;
 }
 
 .search {
@@ -113,10 +110,7 @@
 					<input type="hidden" name="amount" value="5">
 				</form>
 				</div>
-			<div class="insertbtn">
-			<button type="button" id="insertbtn" class="btn_1"
-				onclick="location.href='jobInsertMove'" style="width: 40%;">등록 및 수정</button>
-			</div>
+			
 	
 	<section class="special_cource padding_top">
 		<div class="container">
@@ -138,12 +132,16 @@
 				<button type="submit">검색</button>
 			</form> --%>
 			
+			<div class="insertbtn">
+				<button type="button" id="insertbtn" class="btn_1"
+					onclick="location.href='jobInsertMove'" style="margin-bottom: 2%;">등록 및 수정</button>
+			</div>
+			
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
 				<div claas="row">
 				
 					<c:if test="${!empty inters}">
-					<h1>찌이이이이임</h1>
 						<c:forEach items="${inters }" var="inter">
 							<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">

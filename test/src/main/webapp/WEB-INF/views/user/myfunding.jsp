@@ -24,17 +24,22 @@
 </head>
 <body>
     <!-- 검은블록-->
-    <section class="breadcrumb">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2>구..직 상세</h2>
+							<p>
+								Home<span>/</span>Course Details
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
     <!-- breadcrumb start-->
 
     <!-- ================ 바디부분 ================= -->

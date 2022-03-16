@@ -17,7 +17,8 @@
    width: 30%;
    height: 60%;
    border-radius: 30px;
-   background-color: tomato;
+   background-color: #fff;
+   border: 3px solid #798BF2;
    position: fixed;
    top: 50%;
    left: 50%;
@@ -66,7 +67,6 @@
 }
 
 .call {
-   background-color: bisque;
    width: 80%;
    height: 10%;
    border-radius: 10px;
@@ -210,11 +210,11 @@
 	                                    </div>
 	                                 </div>
 	                                 <c:if test="${Assess.str_result eq 0  }">
-	                                 <button type="button" class="call" id="insert${Assess.user_id }"
+	                                 <button type="button" class="call btn_4" id="insert${Assess.user_id }"
 	                                    style="line-height: normal;" onclick="Assess(${Assess.user_id },0)">평가하기</button>
 			                         </c:if>
 			                         <c:if test="${Assess.str_result eq 1  }">
-	                                 <button type="button" class="call" id="update"
+	                                 <button type="button" class="call btn_4" id="update"
 	                                    style="line-height: normal;" onclick="Assess(${Assess.user_id },1)">평가하기</button>
 			                         </c:if>
 	                              </div>
