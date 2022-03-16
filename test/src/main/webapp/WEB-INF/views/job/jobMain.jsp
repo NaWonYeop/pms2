@@ -91,26 +91,13 @@
 						<div class="input-group mb-3">
 							<div class="form-select" id="default-select" style="width: 25%;">
 								<select name="type" >
-									<option value="" 
-									<c:if test="${result.type == '' or result.type == null}">
-									selected
-									</c:if>
-									>전체</option>
-									<option value="fnd"
-									<c:if test="${result.type == 'fnd'}">
-									selected
-									</c:if>
-									>펀딩</option>
-									<option value="ofr"
-									<c:if test="${result.type == 'ofr'}">
-									selected
-									</c:if>
-									>구인</option>
+									<option value="nam"	selected>이름</option>
+									<option value="ttl"	>제목</option>
 								</select>
 							</div>
 							<input type="text" name="keyword" class="form-control" 
-								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
+								placeholder='' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = ''">
 							<div class="input-group-append">
 								<button class="btn" type="submit" style="padding: 0">
 									<img alt="search" src="resources/main/img/search.png" height="37px" >

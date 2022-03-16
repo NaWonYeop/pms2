@@ -26,7 +26,7 @@
 	<!-- 구직상세 참여프로젝트 >>> 경일 -->
 	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
 		SELECT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME FROM PROJECT P, "user" U
-		WHERE P.MASTER_ID = #{master_id} AND SYSDATE <![CDATA[<]]> P.PRJ_OFR_ED
+		WHERE P.MASTER_ID = #{master_id} AND SYSDATE <![CDATA[<]]> P.PRJ_OFR_ED AND P.MASTER_ID=U.USER_ID
 	</select>
 	
 	<!-- 구직상세 찜하기 체크 -->

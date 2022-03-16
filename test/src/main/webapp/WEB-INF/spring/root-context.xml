@@ -17,11 +17,12 @@
     <intercept-url pattern="/pms**" access="isAuthenticated()"/>
     <intercept-url pattern="/my**" access="isAuthenticated()"/>
     <intercept-url pattern="/admin**" access="hasAuthority('ROLE_MASTER')"/>
-      <intercept-url pattern="/**" access="permitAll" />
+    <intercept-url pattern="/**" access="permitAll" />
 
       <form-login username-parameter="user_email"
               password-parameter="user_pwd" login-processing-url="/login" 
-              login-page="/loginForm" default-target-url="/home" />
+              login-page="/loginForm" default-target-url="/home"
+              always-use-default-target="true" />
 	
 		
       <logout logout-url="/logout" logout-success-url="/home"   delete-cookies="" />

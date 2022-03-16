@@ -36,11 +36,13 @@ public class HomeController {
 		
 		if(principle !=null)
 		{
-		
-			
-			System.out.println("로그인했음!!!!");
 			UserVO usr =
 					(UserVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(usr.getUser_ath().equals("ice"))
+			{
+				System.out.println("동결이 로그인햇다!!!!");
+			}
 			session.setAttribute("sessionUser",	usr);
 		}
 			

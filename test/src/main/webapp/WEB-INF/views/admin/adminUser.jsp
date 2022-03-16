@@ -53,10 +53,10 @@
 								<div class="visit">
 									<c:choose>
 										<c:when test="${user.user_ath eq 'ice'}">
-											<button class="button button-contactForm btn_1" id="btn${user.user_id }"onclick="ice(${user.user_id},'${user.user_email }')">해제</button>
+											<button class="button button-contactForm btn_1" id="btn${user.user_id }" onclick="ice(${user.user_id},'${user.user_email }')">해제</button>
 										</c:when>
 										<c:otherwise>
-											<button class="button button-contactForm btn_1" onclick="ice(${user.user_id},'${user.user_email }')">동결</button>
+											<button class="button button-contactForm btn_1" id="btn${user.user_id }" onclick="ice(${user.user_id},'${user.user_email }')">동결</button>
 										</c:otherwise>
 									</c:choose>
 									
