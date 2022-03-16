@@ -11,16 +11,16 @@
 		resultType="co.test.prj.user.service.UserVO"
 		parameterType="co.test.prj.user.service.UserVO">
 		SELECT USER_ID,
-USER_EMAIL,
-USER_PWD,
-USER_NAME,
-USER_TEL,
-USER_ATH,
-USER_J_DATE,
-USER_CRR,
-USER_AGE,
-USER_JOB_TTL,
-USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
+		USER_EMAIL,
+		USER_PWD,
+		USER_NAME,
+		USER_TEL,
+		USER_ATH,
+		USER_J_DATE,
+		USER_CRR,
+		USER_AGE,
+		USER_JOB_TTL,
+		USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 		<if test="user_pwd != null">
 			AND user_pwd = #{user_pwd}
 		</if>
@@ -35,8 +35,9 @@ USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 	</select>
 
 	<!-- 개발자등록 -->
-	<insert id="insertDev" parameterType="co.test.prj.certificate.service.CertVO">
-	<selectKey keyProperty="cert_id" resultType="int"
+	<insert id="insertDev"
+		parameterType="co.test.prj.certificate.service.CertVO">
+		<selectKey keyProperty="cert_id" resultType="int"
 			order="BEFORE">
 			SELECT MAX(cert_id) + 1 FROM certificate
 		</selectKey>
@@ -44,8 +45,9 @@ USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 		VALUES(#{cert_id},#{cert_name}, #{user_id})
 	</insert>
 	<!-- 개발자 자격증수정 -->
-	<delete id="deleteDev" parameterType="co.test.prj.certificate.service.CertVO">
-	DELETE FROM CERTIFICATE WHERE USER_ID = #{user_id}
+	<delete id="deleteDev"
+		parameterType="co.test.prj.certificate.service.CertVO">
+		DELETE FROM CERTIFICATE WHERE USER_ID = #{user_id}
 	</delete>
 	<!-- 비번찾기 -->
 	<update id="updatePwd"
@@ -73,7 +75,7 @@ USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 		"user"
 		WHERE USER_EMAIL = #{user_email}
 	</select>
-	
+
 	<!-- 일반 회원가입 아이디 -->
 	<select id="nomalCheck" parameterType="String"
 		resultType="boolean">
@@ -112,7 +114,7 @@ USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 		DELETE FROM "user" WHERE user_id = #{user_id}
 	</delete>
 
-	
+
 	<!-- 경일 -->
 	<select id="jobSelect"
 		resultType="co.test.prj.user.service.UserVO">
@@ -150,38 +152,53 @@ USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
 	<select id="MyApp"
 		resultType="co.test.prj.application.service.AppVO"
 		parameterType="co.test.prj.user.service.UserVO">
-		SELECT P.PRJ_ID, A.APP_CLSFC, P.PRJ_NAME, A.APP_INVSB, A.APP_ID
+		SELECT P.PRJ_ID, A.APP_CLSFC, P.PRJ_NAME, A.APP_INVSB,
+		A.APP_ID
 		FROM APPLICATION A, PROJECT P
 		WHERE A.PRJ_ID = P.PRJ_ID
-		AND A.USER_ID = #{user_id}
+		AND
+		A.USER_ID = #{user_id}
 		and A.APP_INVSB = 0
 	</select>
-	
-	<select id="MyInsertProject" parameterType="int" resultType="co.test.prj.project.service.ProjectVO">
-	SELECT DISTINCT P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,(SELECT  COUNT(*) FROM TEAM WHERE PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
-	FROM PROJECT P,TEAM T
-	WHERE P.MASTER_ID = #{master_id}
+
+	<select id="MyInsertProject" parameterType="int"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT DISTINCT P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,(SELECT COUNT(*) FROM
+		TEAM WHERE PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
+		FROM PROJECT P,TEAM T
+		WHERE P.MASTER_ID = #{master_id}
 	</select>
-	
-	<select id="MyJoinProject" parameterType="int" resultType="co.test.prj.project.service.ProjectVO">
-	SELECT DISTINCT P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,U.USER_NAME,U.USER_TEL,(SELECT  COUNT(*) FROM TEAM WHERE PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
-	FROM PROJECT P,TEAM T,"user" U
-	WHERE T.USER_ID = #{user_id} AND P.PRJ_ID=T.PRJ_ID AND U.USER_ID=P.MASTER_ID
+
+	<select id="MyJoinProject" parameterType="int"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT DISTINCT
+		P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,U.USER_NAME,U.USER_TEL,(SELECT
+		COUNT(*) FROM TEAM WHERE PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
+		FROM PROJECT P,TEAM T,"user" U
+		WHERE T.USER_ID = #{user_id} AND P.PRJ_ID=T.PRJ_ID AND
+		U.USER_ID=P.MASTER_ID
 	</select>
-	
-	<select id="MyfundingList" parameterType="int" resultType="co.test.prj.project.service.ProjectVO">
-	SELECT P.PRJ_NAME,P.PRJ_ID,C.CTF_ST_NAME ,C.CTF_USECTF_ST_COURSE,TRUNC(P.PRJ_FND_ED-SYSDATE) AS PRJ_TIME,P.PRJ_FND_ED,P.PRJ_GL_PRC,(SELECT SUM(RWD_PRC*RWD_COT) FROM REWARD R,PROJECT S WHERE R.PRJ_ID=S.PRJ_ID AND S.PRJ_ID=B.PRJ_ID) AS TOTAL
-	FROM BUY B,PROJECT P,COMTNFILE C
-	WHERE B.USER_ID=#{user_id} AND P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID
+
+	<select id="MyfundingList" parameterType="int"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT P.PRJ_NAME,P.PRJ_ID,C.CTF_ST_NAME
+		,C.CTF_USECTF_ST_COURSE,TRUNC(P.PRJ_FND_ED-SYSDATE) AS
+		PRJ_TIME,P.PRJ_FND_ED,P.PRJ_GL_PRC,(SELECT SUM(RWD_PRC*RWD_COT) FROM
+		REWARD R,PROJECT S WHERE R.PRJ_ID=S.PRJ_ID AND S.PRJ_ID=B.PRJ_ID) AS
+		TOTAL
+		FROM BUY B,PROJECT P,COMTNFILE C
+		WHERE B.USER_ID=#{user_id} AND P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID
 	</select>
-	
-	<update id="AppUpdate" parameterType="co.test.prj.application.service.AppVO">
-	UPDATE APPLICATION 
-	SET APP_INVSB=1 WHERE app_id = #{user_id}
+
+	<update id="AppUpdate"
+		parameterType="co.test.prj.application.service.AppVO">
+		UPDATE APPLICATION
+		SET APP_INVSB=1 WHERE app_id = #{user_id}
 	</update>
-	
-	<select id="AdminUserList" resultType="co.test.prj.user.service.UserVO">
-	SELECT * FROM "user" WHERE USER_ATH != 'MASTER'
+
+	<select id="AdminUserList"
+		resultType="co.test.prj.user.service.UserVO">
+		SELECT * FROM "user" WHERE USER_ATH != 'MASTER'
 	</select>
 </mapper>
 

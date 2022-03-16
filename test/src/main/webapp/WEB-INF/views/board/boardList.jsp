@@ -138,6 +138,15 @@ table {
 									</button>
 								</div>
 
+				<!-- 나중에 확인할것		</select>
+							</div>
+							<input type="text" class="form-control"
+								placeholder='Search Keyword' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Search Keyword'">
+							<div class="input-group-append">
+								<button class="btn" type="submit">
+									<i class="ti-search"></i>
+								</button> -->
 							</div>
 						</div>
 					</div>
@@ -153,21 +162,32 @@ table {
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
-
-	function logincheck(){
-		
-		 location.href="freeboardInsertform"
-	<%-- 	<% UserVO user=(UserVO)session.getAttribute("sessionUser");
-			if(user==null)
-			{%>
-				toastr.warning('로그인이 필요합니다.');
-			<%}
-			else
-			{%>
-			location.href="freeboardInsertform";
-			<%}%>; --%>
-	}
-
+		function logincheck() {
+			toastr.options = {
+				"closeButton" : false,
+				"debug" : false,
+				"newestOnTop" : false,
+				"progressBar" : true,
+				"positionClass" : "toast-top-right",
+				"preventDuplicates" : false,
+				"onclick" : null,
+				"showDuration" : "100",
+				"hideDuration" : "1000",
+				"timeOut" : "1500",
+				"extendedTimeOut" : "1000",
+				"showEasing" : "swing",
+				"hideEasing" : "linear",
+				"showMethod" : "fadeIn",
+				"hideMethod" : "fadeOut"
+			};
+	<%UserVO user = (UserVO) session.getAttribute("sessionUser");
+if (user == null) {%>
+		toastr.warning('로그인이 필요합니다.');
+	<%} else {%>
+		location.href = "freeboardInsertform";
+	<%}%>
+		;
+		}
 		jQuery(function($) {
 			$("#data_list").DataTable({
 				lengthChange : false,
@@ -184,7 +204,6 @@ table {
 				displayLength : 5
 			});
 		});
-
 	</script>
 </body>
 </html>

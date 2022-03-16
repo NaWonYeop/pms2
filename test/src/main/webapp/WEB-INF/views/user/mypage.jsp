@@ -51,23 +51,26 @@
 						<div class="special_cource_text">
 							<a class="btn_4" href="myProject">참여중인 프로젝트 리스트</a>
 							
-							<c:choose>
-								<c:when test="${empty MyProject}">
-									<p>등록된 프로젝트가 없습니다</p>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${MyProject}" var="Project">
-										<p>프로젝트명 : ${Project.prj_name} &nbsp;&nbsp;&nbsp; &nbsp;
-											마감일 : D-${Project.prj_time}</p>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-
+							
+								<c:choose>
+									<c:when test="${empty MyProject}">
+										<p>등록된 프로젝트가 없습니다</p>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${MyProject}" var="Project">
+											<p>프로젝트명 : ${Project.prj_name} &nbsp;&nbsp;&nbsp; &nbsp;
+												마감일 : D-${Project.prj_time}</p>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 
 
 						</div>
 
 					</div>
+
+					<!-- 이까지 테이블 -->
+
 				</div>
 
 				<div class="col-sm-6 col-lg-6">
@@ -75,7 +78,6 @@
 					<div class="single_special_cource">
 						<div class="special_cource_text">
 							<a class="btn_4" href="myfunding">펀딩 리스트</a>
-
 
 							<c:choose>
 								<c:when test="${empty MyFunding}">
@@ -95,6 +97,7 @@
 
 					</div>
 				</div>
+				
 
 				<div class="col-sm-6 col-lg-12">
 					<div class="single_special_cource">
@@ -107,9 +110,9 @@
 										<div id="div${app.app_id}">
 											<a href="">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name }에
 											신청하셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
-										<button type="button" id="show" onclick="div(${app.app_id})">-</button>
+											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
 										</div>
-										
+
 
 									</c:when>
 									<c:otherwise>
@@ -118,7 +121,7 @@
 											협업제의를 받으셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
 										</div>
-									
+
 
 									</c:otherwise>
 								</c:choose>
@@ -128,9 +131,13 @@
 
 					</div>
 				</div>
+				<!-- 테이블 -->
 			</div>
+
 		</div>
+
 	</section>
+
 	<!--::blog_part end::-->
 
 	<script>
@@ -144,6 +151,23 @@
 		})
 		
 	}
+	
+	  jQuery(function($) {
+	      $("#mTable").DataTable({
+	         lengthChange: false,
+
+	          // 검색 기능 숨기기
+	          searching: false,
+
+	          // 정렬 기능 숨기기
+	          ordering: false,
+
+	          // 정보 표시 숨기기
+	          info: false,
+	         
+	          displayLength: 1
+	      });
+	   });
 	</script>
 </body>
 

@@ -3,7 +3,6 @@ package co.test.prj.user.web;
 import java.util.List;
 import java.util.Properties;
 
-import javax.annotation.Nonnull;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -43,7 +42,7 @@ public class UserController {
 	private UserService userDao;
 	@Autowired
 	private cunstomUser cusd;
-	
+
 	@Autowired
 	private CertService certDao;
 
@@ -79,24 +78,22 @@ public class UserController {
 	// 아이디 중복체크
 	@PostMapping("IsIdCheck")
 	@ResponseBody
-	public String IsIdCheck(HttpServletRequest request,String user_email, HttpSession session) {
+	public String IsIdCheck(HttpServletRequest request, String user_email, HttpSession session) {
 
 		System.out.println(user_email);
 		String location = null;
 		if (user_email.indexOf("@") == -1) {
 			location = "Fail";
 		} else if (!userDao.isIdCheck(user_email)) {
-			//카카오 로그인 부분
-			 UserDetails kakaoVO=(UserDetails)cusd.loadUserByUsername(user_email);
-			 Authentication authentication = new
-			 UsernamePasswordAuthenticationToken(kakaoVO, kakaoVO.getPassword(),
-			 kakaoVO.getAuthorities()); SecurityContext securityContext =
-			 SecurityContextHolder.getContext();
-			 securityContext.setAuthentication(authentication); session =
-			 request.getSession(true);
-			 session.setAttribute("SPRING_SECURITY_CONTEXT",securityContext);
-			
-			
+			// 카카오 로그인 부분
+			UserDetails kakaoVO = (UserDetails) cusd.loadUserByUsername(user_email);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(kakaoVO, kakaoVO.getPassword(),
+					kakaoVO.getAuthorities());
+			SecurityContext securityContext = SecurityContextHolder.getContext();
+			securityContext.setAuthentication(authentication);
+			session = request.getSession(true);
+			session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
 			UserVO user = new UserVO();
 			user.setUser_email(user_email);
 			session.setAttribute("sessionUser", userDao.userSelect(user));
@@ -125,7 +122,6 @@ public class UserController {
 	public boolean nomalIdCheck(String user_email) {
 		return userDao.nomalCheck(user_email);
 	}
-	
 
 	// 비밀번호 찾기폼
 	@RequestMapping("/forgotPassword")
@@ -175,8 +171,7 @@ public class UserController {
 			}
 			BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 			user.setUser_pwd(scpwd.encode(pw));
-			
-			
+
 			userDao.userUpdate(user);
 			try {
 
@@ -293,8 +288,8 @@ public class UserController {
 	@RequestMapping("/userUpdateForm")
 	public String userUpdateForm(String user_pwd, Model model, HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
-		System.out.println(user.getPassword());
-		if (user_pwd.equals(user.getUser_pwd())) {
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
+		if (scpwd.matches(user_pwd,user.getUser_pwd())) {
 			return "user/userUpdateForm";
 		} else {
 			model.addAttribute("FailCheckPassword", "1");
@@ -316,10 +311,12 @@ public class UserController {
 	public String userUpdate(UserVO user, Model model, HttpSession session) {
 		System.out.println(user);
 		UserVO vo = new UserVO();
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		vo = (UserVO) session.getAttribute("sessionUser");
 		user.setUser_id(vo.getUser_id());
 		if (user.getUser_pwd() != null) {
 			model.addAttribute("update", "회원수정 성공하였습니다");
+			user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
 			userDao.userUpdate(user);
 		} else {
 			model.addAttribute("update", "회원수정 실패하였습니다");
@@ -401,9 +398,10 @@ public class UserController {
 			return "redirect:/home";
 		}
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		userDao.userSelect(user);
-		if (user_pwd.equals(user.getUser_pwd())) {
-			System.out.println("user_pwd");
+		if (scpwd.matches(user_pwd,user.getUser_pwd())) {
+			System.out.println(scpwd.matches(user_pwd,user.getUser_pwd()));
 			int id = user.getUser_id();
 			model.addAttribute("funding", userDao.MyfundingList(id));
 			return "user/Withdrawal2";
@@ -474,39 +472,31 @@ public class UserController {
 		userDao.AppUpdate(id);
 
 	}
-	
-	//관리자페이지
+
+	// 관리자페이지
 	@RequestMapping("/adminUser")
-	public String adminUser(Model model)
-	{
-		model.addAttribute("AdminUser",userDao.AdminUserList());
+	public String adminUser(Model model) {
+		model.addAttribute("AdminUser", userDao.AdminUserList());
 		return "admin/adminUser";
 	}
-	
+
 	@RequestMapping("/adminIce")
 	@ResponseBody
-	public String adminIce(UserVO vo)
-	{
-		
-		UserVO user=userDao.userSelect(vo);
-		String ath=user.getUser_ath();
+	public String adminIce(UserVO vo) {
+
+		UserVO user = userDao.userSelect(vo);
+		String ath = user.getUser_ath();
 		System.out.println(ath);
-		if(ath.equals("ice"))
-		{
+		if (ath.equals("ice")) {
 			System.out.println("여기 와야됨!!!!");
-			String job=user.getUser_job_ttl();
-			if(job==null)
-			{
-				ath="user";
+			String job = user.getUser_job_ttl();
+			if (job == null) {
+				ath = "user";
+			} else {
+				ath = "developer";
 			}
-			else
-			{
-				ath="developer";		
-			}
-		}
-		else
-		{
-			ath="ice";	
+		} else {
+			ath = "ice";
 		}
 		user.setUser_ath(ath);
 		userDao.userUpdate(user);
