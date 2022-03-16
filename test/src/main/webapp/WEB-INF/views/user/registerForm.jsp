@@ -99,10 +99,10 @@ a {
 					id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
 					onclick="nomalIdCheck()" value="NO">Check</button>
 				<BR> <input type="password" name="user_pwd" id="user_pwd"
-					class="form-control" placeholder="비밀번호" required> <br>
+					class="form-control" placeholder="비밀번호" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" required> <br>
 					
 				<input type="password" name="pw1" id="pw1" class="form-control"
-					placeholder="비밀번호 확인" required> <br> <input
+					placeholder="비밀번호 확인"> <br> <input
 					type="text" name="user_name" id="user_name" class="form-control"
 					placeholder="이름" required><br> 
 					<div class="row">
@@ -150,8 +150,8 @@ a {
 							$("#user_email").val('');
 							$("#user_email").focus();
 
-						} else if (result != regEmail) {
-							alert("@가 포함되어있지 않습니다")
+						} else if (regEmail.test($("#user_email").val()) == false) {
+							alert("이메일을 올바르게 입력해주세요")
 							$("#user_email").val('');
 							$("#user_email").focus();
 						}
@@ -177,10 +177,7 @@ a {
 				alert("이메일 중복 체크를 해주세요.")
 				return false;
 			}
-			if($("#user_email").val() != 'NO'){
-				alert("이메이 입력 해주세요")
-				return false;
-			}
+			
 
 			if ($("#user_pwd").val() != $("#pw1").val()) {
 				alert("패스워드가 일치하지 않습니다.");

@@ -130,7 +130,7 @@ a {
 				
 				<BR>
 				<label>경력 연수</label><input type="number" class="form-control"
-					id="user_crr" name="user_crr"><BR> 
+					id="user_crr" name="user_crr" value="${sessionUser.user_crr}"><BR> 
 				
 				<input id="btn-Yes" class="btn_1 btn-lg btn-primary btn-block"
 					type="submit" value="수정하기"> <input type="reset"

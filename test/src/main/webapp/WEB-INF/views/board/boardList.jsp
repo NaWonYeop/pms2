@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
+	href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 
 <title>Insert title here</title>
 <style>
@@ -17,6 +17,9 @@
 	font-family: 'TmoneyRoundWindRegular';
 }
 
+table {
+ width : auto;	
+}
 </style>
 </head>
 <body>
@@ -50,13 +53,14 @@
 				</div>
 			</div>
 
-			<div class="section-top-border">
-			
-				<table id="data_list" class="table table-striped table-bordered" >
+			<div class="row section-top-border">
+			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">
+
+				<table id="data_list" class="table table-bordered">
 					<thead class="table-head">
 						<tr>
 							<th class="">번호</th>
-							<th class=" text-center">제목</th>
+							<th class="">제목</th>
 							<th class="">작성자</th>
 							<th class="">등록일</th>
 
@@ -67,7 +71,7 @@
 							<tr>
 								<c:choose>
 									<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
-									<!-- 	<div class="table-row"
+										<!-- 	<div class="table-row"
 												style="background-color: #deebff"> -->
 									</c:when>
 									<c:otherwise>
@@ -75,18 +79,17 @@
 									</c:otherwise>
 								</c:choose>
 
-								<div class=""></div>
-								<div class=" text-center">
-									<c:choose>
-										<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
-											<td>공지</td>
-										</c:when>
-										<c:otherwise>
-											<td>${free.brd_id }</td>
-										</c:otherwise>
-									</c:choose>
 
-								</div>
+								<c:choose>
+									<c:when test="${fn:contains(free.brd_ntc_prop,'1')}">
+										<td>공지</td>
+									</c:when>
+									<c:otherwise>
+										<td>${free.brd_id }</td>
+									</c:otherwise>
+								</c:choose>
+
+
 
 								<td>
 									<div class="">
@@ -109,60 +112,71 @@
 					</tbody>
 				</table>
 			</div>
-</div>
-			<div class="row justify-content-center">
-				<div class="col-sm-5">
-					<form action="#">
-						<div class="form-group">
+		</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-sm-5">
+				<form action="#">
+					<div class="form-group">
 
-							<div class="input-group mb-4">
+						<div class="input-group mb-4">
 
 
-								<div class="form-select" id="default-select" style="width: 25%;">
-									<select>
-										<option value="1">제목</option>
-										<option value="1">작성자</option>
+							<div class="form-select" id="default-select" style="width: 25%;">
+								<select>
+									<option value="1">제목</option>
+									<option value="1">작성자</option>
 
-									</select>
-								</div>
-								<input type="text" class="form-control"
-									placeholder='Search Keyword' onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Search Keyword'">
-								<div class="input-group-append">
-									<button class="btn" type="submit" style="padding: 0">
-										<img alt="search" src="resources/main/img/search.png" height="37px" >
-									</button>
-								</div>
+								</select>
+							</div>
+							<input type="text" class="form-control"
+								placeholder='Search Keyword' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Search Keyword'">
+							<div class="input-group-append">
+								<button class="btn" type="submit">
+									<i class="ti-search"></i>
+								</button>
 							</div>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
+		</div>
 
-			<div class="col-12 text-right">
-				<button class="button button-contactForm btn_1"
-					onclick="logincheck()">등록</button>
-			</div>
+		<div class="col-12 text-right">
+			<button class="button button-contactForm btn_1"
+				onclick="logincheck()">등록</button>
 		</div>
 	</section>
 	<script
-		src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
-
-	function logincheck(){
-		
-		 location.href="freeboardInsertform"
-	<%-- 	<% UserVO user=(UserVO)session.getAttribute("sessionUser");
-			if(user==null)
-			{%>
-				toastr.warning('로그인이 필요합니다.');
-			<%}
-			else
-			{%>
-			location.href="freeboardInsertform";
-			<%}%>; --%>
-	}
-
+		function logincheck() {
+			toastr.options = {
+				"closeButton" : false,
+				"debug" : false,
+				"newestOnTop" : false,
+				"progressBar" : true,
+				"positionClass" : "toast-top-right",
+				"preventDuplicates" : false,
+				"onclick" : null,
+				"showDuration" : "100",
+				"hideDuration" : "1000",
+				"timeOut" : "1500",
+				"extendedTimeOut" : "1000",
+				"showEasing" : "swing",
+				"hideEasing" : "linear",
+				"showMethod" : "fadeIn",
+				"hideMethod" : "fadeOut"
+			};
+	<%UserVO user = (UserVO) session.getAttribute("sessionUser");
+if (user == null) {%>
+		toastr.warning('로그인이 필요합니다.');
+	<%} else {%>
+		location.href = "freeboardInsertform";
+	<%}%>
+		;
+		}
 		jQuery(function($) {
 			$("#data_list").DataTable({
 				lengthChange : false,
@@ -179,7 +193,6 @@
 				displayLength : 5
 			});
 		});
-
 	</script>
 </body>
 </html>

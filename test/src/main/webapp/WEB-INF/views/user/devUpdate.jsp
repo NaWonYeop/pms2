@@ -4,16 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="2; url=home">
 <title>Insert title here</title>
 </head>
 <body>
-	<section class="blog_area section_padding">
+	<section class="contact-section section_padding">
 		<div class="container">
-			<div class="row text-center">
-				<!--project-->
-				<h1 id="name" style="color: black;">${message}</h1>
-				
+			<div class="row justify-content-center"></div>
+			<div class="row justify-content-center">
+
+				<div class="col-lg-5">
+					<form class="form-contact contact_form" action="home" method="post"
+						id="contactForm" novalidate="novalidate">
+						<div class="row justify-content-center">
+							<h4 style="font-family: 'MinSans-Medium';">수정되었습니다. 감사합니다</h4>
+
+						</div>
+						<div class="col-sm-12 text-center">
+							<button type="submit"
+								class="button button-contactForm btn_1 w-50">메인페이지</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</section>

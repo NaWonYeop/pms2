@@ -86,20 +86,32 @@ a {
 
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px;"></div>
-		<form action="userUpdate" method="post">
+		<form action="userUpdate" method="post" onsubmit="return formCheck()">
 	
 			<div class="card-body">
 				<input type="password" name="user_pwd" id="user_pwd"
 					class="form-control" placeholder="새로운 비밀번호"  required="required"><br>
+					<input type="password" name="pw1" id="pw1"
+					class="form-control" placeholder="비밀번호 확인"><br>
 				<input type="text" name="user_name" id="user_name"
-					class="form-control" placeholder="이름" required="required"><br><input
+					class="form-control" placeholder="이름" required="required" value="${sessionUser.user_name}"><br><input
 					type="text" name="user_tel" id="user_tel" class="form-control"
-					placeholder="새로운 전화번호" required="required"><br> <input
+					placeholder="새로운 전화번호" required="required" maxlength="11" value="${sessionUser.user_tel }"><br> <input
 					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
 					value="회원수정">
 			</div>
 		</form>
 	</div>
-
+<script type="text/javascript">
+function formCheck(){
+	if ($("#user_pwd").val() != $("#pw1").val()) {
+					alert("패스워드가 일치하지 않습니다.");
+					$("#user_pwd").val('');
+					$("#pw1").val('');
+					$("#user_pwd").focus();
+					return false;
+				}
+}
+</script>
 </body>
 </html>
