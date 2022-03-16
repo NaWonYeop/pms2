@@ -105,7 +105,17 @@
 			</set>
 		WHERE USER_ID=#{user_id} AND PRJ_ID=#{prj_id}
 	</update>
-	
-	
-	
+	<!-- 검색 -->
+	<select id="jobNameSer" parameterType="String" resultType="co.test.prj.user.service.UserVO">
+		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG)
+        FROM 
+		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
+        where user_name like  '%'||#{USER_NAME}||'%'
+	</select>
+	<select id="jobTitleSer" parameterType="String" resultType="co.test.prj.user.service.UserVO">
+		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG)
+        FROM 
+		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
+        where user_job_ttl like  '%'||#{USER_J_DATE}||'%'
+	</select>
 </mapper>

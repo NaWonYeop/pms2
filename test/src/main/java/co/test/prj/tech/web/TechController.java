@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.test.prj.application.service.AppService;
@@ -227,5 +228,26 @@ public class TechController {
 		
 	}
 	
+	//구직 검색
+	@RequestMapping("/jobsearch")
+	public String jobsearch(@RequestParam("type") String type,@RequestParam("keyword") String keyword,Model model,HttpSession session) {
+		
+		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		if(uId!=null)
+		{
+			model.addAttribute("inters",techDao.jobInterList(uId.getUser_id()));
+		}
+		if(type.equals("nam"))
+		{
+			model.addAttribute("jobs", techDao.jobNameSer(keyword));
+		}
+		else
+		{
+			model.addAttribute("jobs", techDao.jobTitleSer(keyword));
+		}
+		model.addAttribute("techs", techDao.techSelectList());
+		
+		return "job/jobMain";
+	}
 	
 }

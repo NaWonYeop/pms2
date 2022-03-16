@@ -75,6 +75,20 @@ public class BoardServiceImpl implements BoardService
 		return map.boardSearchPageCount(vo);
 	}
 
+	@Override
+	public List<BoardVO> boardNameSer(String user_name)
+	{
+		// TODO Auto-generated method stub
+		return map.boardNameSer(user_name);
+	}
+
+	@Override
+	public List<BoardVO> boardTitleSer(String brd_ttl)
+	{
+		// TODO Auto-generated method stub
+		return map.boardTitleSer(brd_ttl);
+	}
+
 	
 
 }
