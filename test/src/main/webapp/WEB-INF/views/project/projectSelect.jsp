@@ -375,7 +375,6 @@
 			var rPrc = document.getElementById('p'+rId).innerHTML;
 			var rCnt = document.getElementById('c'+rId).value;
 			
-			
 			//현금or코인
 			var rCash = document.getElementById('cash').value;
 			var rCoin = document.getElementById('coin').value;

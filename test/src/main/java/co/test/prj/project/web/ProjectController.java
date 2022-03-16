@@ -24,6 +24,8 @@ import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.reward.service.RewardService;
 import co.test.prj.reward.service.RewardVO;
+import co.test.prj.team.service.TeamService;
+import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserVO;
 
 @Controller
@@ -38,6 +40,9 @@ public class ProjectController {
 	@Autowired
 	private RewardService rewardDao;
 	
+	@Autowired
+	private TeamService teamDao;
+	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
 		return "project/projectInsertForm";
@@ -45,8 +50,8 @@ public class ProjectController {
 	
 	@PostMapping("/projectInsert")
 	public String projectInsert (
-			@RequestParam("mul") MultipartFile multi, 
-			ProjectVO project, ComtfVO comtf, 
+			@RequestParam(value="mul", required=false) MultipartFile multi, 
+			ProjectVO project, ComtfVO comtf,
 			HttpSession session, 
 			HttpServletRequest hreq,
 			Model model) {
@@ -98,6 +103,12 @@ public class ProjectController {
 		
 		System.out.println(project.getPrj_name());
 		System.out.println(project.getPrj_fnd_prop());
+		
+		//팀 등록
+		TeamVO team = new TeamVO();
+		team.setPrj_id(pId);
+		team.setUser_id(project.getMaster_id());
+		teamDao.teamMasterInsert(team);
 		
 		//펀딩 유무 ~> 리워드 보냄
 		if (project.getPrj_fnd_prop() == 0) {

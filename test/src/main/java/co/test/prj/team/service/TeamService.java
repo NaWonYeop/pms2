@@ -14,4 +14,6 @@ public interface TeamService {
 	int teamDelete(TeamVO team);
 	
 	List<TeamVO> jobDetailSelect(TeamVO team);
+	
+	int teamMasterInsert(TeamVO team);
 }

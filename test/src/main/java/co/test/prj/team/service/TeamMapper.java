@@ -14,4 +14,7 @@ public interface TeamMapper {
 	int teamDelete(TeamVO team);
 	
 	List<TeamVO> jobDetailSelect(TeamVO team);
+	
+	//은덕 프로젝트 등록시 마스터 등록
+	int teamMasterInsert(TeamVO team);
 }
