@@ -22,4 +22,8 @@ public interface BoardService
 	int boardUpdate(BoardVO vo);
 
 	int boardDelete(BoardVO vo);
+	
+	List<BoardVO> boardNameSer(String user_name);
+	
+	List<BoardVO> boardTitleSer(String brd_ttl);
 }

@@ -116,20 +116,20 @@ table {
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-sm-5">
-				<form action="#">
+				<form action="boardSearch">
 					<div class="form-group">
 
 						<div class="input-group mb-4">
 
 
 							<div class="form-select" id="default-select" style="width: 25%;">
-								<select>
-									<option value="1">제목</option>
-									<option value="1">작성자</option>
+								<select name="type">
+									<option value="ttl">제목</option>
+									<option value="nam">작성자</option>
 
 									</select>
 								</div>
-								<input type="text" class="form-control"
+								<input type="text" class="form-control" name="keyword"
 									placeholder='Search Keyword' onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'Search Keyword'">
 								<div class="input-group-append">
