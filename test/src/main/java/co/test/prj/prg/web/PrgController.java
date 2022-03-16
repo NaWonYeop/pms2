@@ -22,12 +22,12 @@ public class PrgController {
 	@Autowired
 	private PrgService prgDao;
 
-	@RequestMapping("/pmsprogress")
+	@RequestMapping("/msprogress")
 	public String pregress(HttpSession session, Model model) {
 		return "pms/prg/prg";
 	}
 
-	@RequestMapping("/pmscard")
+	@RequestMapping("/mscard")
 	public String card(HttpSession session, Model model) {
 		return "pms/prg/card";
 	}

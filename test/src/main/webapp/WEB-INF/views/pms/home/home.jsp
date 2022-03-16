@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 <div class="content-wrapper">
 	<div class="row">
 		<div class="col-md-12 grid-margin">
@@ -68,5 +68,73 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- team modal -->
+		<div class="modal fade" id="teamSelectModal" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<label>My Project</label>
+					</div>
+					<div class="modal-body">
+						<select id="teamSelect" class="js-example-basic-single w-80">
+							<option selected>프로젝트를 선택하세요</option>
+						</select>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+						<button id="insertTeam" type="button" class="btn btn-primary">선택</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- team modal end -->
 	</div>
 </div>
+
+<script>
+	$(function() {
+		$.ajax({
+			url : "myProjectList",
+			type : "GET",
+			dataType : "json",
+			async : false
+		}).done(function(json) {
+			for(team of json) {
+				debugger
+				$("#teamSelect").append(`
+				<option id="opt" data-master_id="\${team.master_id}" value="\${team.prj_id}">프로젝트명 : \${team.prj_name}</option>
+				`);
+			};
+		}).fail(function(xhr, status, message) {
+			alert("프로젝트 리스트 출력 실패");
+		});
+		if(${sessionScope.myPrj == null}) {
+			$('#teamSelectModal').modal('show');
+		}
+	});
+	
+	$("#insertTeam").on("click", function(event) {
+		var prj_id = $("#teamSelect").val();
+		var master_id = $("#opt").data("master_id");
+
+		console.log('prj_id= ' + prj_id);
+		console.log('master_id= ' + master_id);
+
+		$.ajax({
+			url : "myPrj",
+			type : "GET",
+			data : {
+				prj_id : prj_id,
+				master_id : master_id
+			}
+		}).done(function() {
+			$('#teamSelectModal').modal('hide');
+		}).fail(function(xhr, status, message) {
+			alert("프로젝트 선택실패");
+		});
+	});
+</script>

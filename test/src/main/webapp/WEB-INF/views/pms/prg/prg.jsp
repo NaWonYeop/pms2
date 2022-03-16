@@ -3,11 +3,11 @@
 <link href='resources/fullcalendar/main.css' rel='stylesheet' />
 <script src='resources/fullcalendar/main.js'></script>
 
-<div class="container-scroller">
-	<div class="col-lg-12 grid-margin stretch-card">
-		<div class="card">
-			<div class="card-body">
-				<div id='calendar-container'>
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-lg-12 grid-margin stretch-card">
+				<div class="card">
 					<div id='calendar-container'>
 						<div id='cal'></div>
 					</div>
@@ -80,9 +80,6 @@
 						<!-- /.modal-dialog -->
 					</div>
 					<!-- /.modal -->
-
-
-
 				</div>
 			</div>
 		</div>

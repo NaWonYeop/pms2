@@ -66,7 +66,8 @@
 	<!-- Plugin js for this page -->
 	<script src="resources/pms/vendors/chart.js/Chart.min.js"></script>
 	<script src="resources/pms/vendors/datatables.net/jquery.dataTables.js"></script>
-	<script src="resources/pms/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+	<script
+		src="resources/pms/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
 	<script src="resources/pms/js/dataTables.select.min.js"></script>
 
 	<!-- End plugin js for this page -->
@@ -82,6 +83,6 @@
 	<script src="resources/pms/js/Chart.roundedBarCharts.js"></script>
 	<!-- End custom js for this page-->
 
-	
+
 </body>
 </html>

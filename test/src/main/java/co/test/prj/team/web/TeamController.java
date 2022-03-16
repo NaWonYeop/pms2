@@ -25,7 +25,7 @@ public class TeamController {
 	@Autowired
 	private TeamService teamDao;
 
-	@RequestMapping("/pmsteam")
+	@RequestMapping("/msteam")
 	public String team(HttpSession session) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
 		MyPrjVO prj = (MyPrjVO) session.getAttribute("myPrj");
@@ -47,7 +47,7 @@ public class TeamController {
 		// 기존에 담겨있던 내 프로젝트 번호 삭제
 		if(session.getAttribute("myPrj") != null ) {
 			session.removeAttribute("myPrj");
-		} 
+		}
 		session.setAttribute("myPrj", prj);
 		
 		// 새롭게 받아온 프로젝트번호 삽입
@@ -66,6 +66,7 @@ public class TeamController {
 	}
 	
 	
+	// 
 	@RequestMapping("/teamSelect")
 	@ResponseBody
 	public String teamSelect(HttpSession session, Model model) {

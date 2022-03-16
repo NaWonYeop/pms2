@@ -1,108 +1,233 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="container-scroller">
-	<div class="col-lg-12 grid-margin stretch-card">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<!-- 섹션입력 모달 버튼 -->
-					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#exampleModalCenter">섹션 입력</button>
-				</div>
-				<div></div>
-				<!-- 섹션Modal창 -->
-				<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-					role="dialog" aria-labelledby="exampleModalCenterTitle"
-					aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">섹션 입력</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<!-- Form -->
-								<!-- 섹션 입력 -->
-								<form id="insertForm">
-									<div class="form-group">
-										<label for="prg_content">내용</label> <input type="text"
-											class="form-control" id="prg_content" name="prg_content"
-											placeholder="할 일"> <label for="prg_str">시작일</label> <input
-											type="date" class="form-control" id="prg_str" name="prg_str">
-
-										<label for="prg_ed">종료일</label> <input type="date"
-											class="form-control" id="prg_ed" name="prg_ed"> <label
-											for="insertTeams">담당</label> <select id="insertTeams"
-											class="js-example-basic-single w-100">
-										</select>
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-lg-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							<!-- 섹션입력 모달 버튼 -->
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModalCenter">섹션 입력</button>
+						</div>
+						<div></div>
+						<!-- 섹션Modal창 -->
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalCenterTitle"
+							aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLongTitle">섹션 입력</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
 									</div>
-									<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-								</form>
-								<!-- Form End -->
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">취소</button>
-								<button id="submitBtn" type="button" class="btn btn-primary">저장</button>
+									<div class="modal-body">
+										<!-- Form -->
+										<!-- 섹션 입력 -->
+										<form id="insertForm">
+											<div class="form-group">
+												<label for="prg_content">내용</label> <input type="text"
+													class="form-control" id="prg_content" name="prg_content"
+													placeholder="할 일"> <label for="prg_str">시작일</label>
+												<input type="date" class="form-control" id="prg_str"
+													name="prg_str"> <label for="prg_ed">종료일</label> <input
+													type="date" class="form-control" id="prg_ed" name="prg_ed">
+												<label for="insertTeams">담당</label> <select id="insertTeams"
+													class="js-example-basic-single w-100">
+												</select>
+											</div>
+											<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+										</form>
+										<!-- Form End -->
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">취소</button>
+										<button id="submitBtn" type="button" class="btn btn-primary">저장</button>
+									</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- Card -->
-				<div id='calendar-container'>
-					<ul id="card" class="list-group list-group-flush"></ul>
-				</div>
-				<!-- Card End -->
+						<!-- Card -->
+						<div id='calendar-container'>
+							<ul id="card" class="list-group list-group-flush"></ul>
+						</div>
+						<!-- Card End -->
 
 
-				<!-- 업데이트Modal 창 -->
-				<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">수정</h5>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form id="updateForm">
-									<div class="form-group">
-										<input type="hidden" id="prg_id" name="prg_id"> <label
-											for="prg_content">내용</label> <input type="text"
-											class="form-control" id="prg_content" name="prg_content"
-											placeholder="할 일"> <label for="prg_str">시작일</label> <input
-											type="date" class="form-control" id="prg_str" name="prg_str">
-
-										<label for="prg_ed">종료일</label> <input type="date"
-											class="form-control" id="prg_ed" name="prg_ed"> <label
-											for="updateTeams">담당</label> <select id="updateTeams"
-											class="js-example-basic-single w-100">
-										</select>
+						<!-- 업데이트Modal 창 -->
+						<div class="modal fade" id="updateModal" tabindex="-1"
+							role="dialog" aria-labelledby="exampleModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">수정</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
 									</div>
-									<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-								</form>
+									<div class="modal-body">
+										<form id="updateForm">
+											<div class="form-group">
+												<input type="hidden" id="prg_id" name="prg_id"> <label
+													for="prg_content">내용</label> <input type="text"
+													class="form-control" id="prg_content" name="prg_content"
+													placeholder="할 일"> <label for="prg_str">시작일</label>
+												<input type="date" class="form-control" id="prg_str"
+													name="prg_str"> <label for="prg_ed">종료일</label> <input
+													type="date" class="form-control" id="prg_ed" name="prg_ed">
+												<label for="updateTeams">담당</label> <select id="updateTeams"
+													class="js-example-basic-single w-100">
+												</select>
+											</div>
+											<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+										</form>
 
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">취소</button>
-								<button id="updateSumbitBtn" type="button"
-									class="btn btn-primary">저장</button>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">취소</button>
+										<button id="updateSumbitBtn" type="button"
+											class="btn btn-primary">저장</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
+		<!-- 리스트 -->
+		<div class="list-wrapper px-3">
+			<ul class="d-flex flex-column-reverse todo-list">
+				<li>
+					<div class="form-check">
+						<label class="form-check-label"> <input class="checkbox"
+							type="checkbox"> Team review meeting at 3.00 PM
+						</label>
+					</div> <i class="remove ti-close"></i>
+				</li>
+				<li>
+					<div class="form-check">
+						<label class="form-check-label"> <input class="checkbox"
+							type="checkbox"> Prepare for presentation
+						</label>
+					</div> <i class="remove ti-close"></i>
+				</li>
+				<li>
+					<div class="form-check">
+						<label class="form-check-label"> <input class="checkbox"
+							type="checkbox"> Resolve all the low priority tickets due
+							today
+						</label>
+					</div> <i class="remove ti-close"></i>
+				</li>
+				<li class="completed">
+					<div class="form-check">
+						<label class="form-check-label"> <input class="checkbox"
+							type="checkbox" checked> Schedule meeting for next week
+						</label>
+					</div> <i class="remove ti-close"></i>
+				</li>
+				<li class="completed">
+					<div class="form-check">
+						<label class="form-check-label"> <input class="checkbox"
+							type="checkbox" checked> Project review
+						</label>
+					</div> <i class="remove ti-close"></i>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- To do section tab ends -->
+	<div class="tab-pane fade" id="chats-section" role="tabpanel"
+		aria-labelledby="chats-section">
+		<div
+			class="d-flex align-items-center justify-content-between border-bottom">
+			<p
+				class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+			<small
+				class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See
+				All</small>
+		</div>
+		<ul class="chat-list">
+			<li class="list active">
+				<div class="profile">
+					<img src="resources/pms/images/faces/face1.jpg" alt="image"><span
+						class="online"></span>
+				</div>
+				<div class="info">
+					<p>Thomas Douglas</p>
+					<p>Available</p>
+				</div> <small class="text-muted my-auto">19 min</small>
+			</li>
+			<li class="list">
+				<div class="profile">
+					<img src="resources/pms/images/faces/face2.jpg" alt="image"><span
+						class="offline"></span>
+				</div>
+				<div class="info">
+					<div class="wrapper d-flex">
+						<p>Catherine</p>
+					</div>
+					<p>Away</p>
+				</div>
+				<div class="badge badge-success badge-pill my-auto mx-2">4</div> <small
+				class="text-muted my-auto">23 min</small>
+			</li>
+			<li class="list">
+				<div class="profile">
+					<img src="resources/pms/images/faces/face3.jpg" alt="image"><span
+						class="online"></span>
+				</div>
+				<div class="info">
+					<p>Daniel Russell</p>
+					<p>Available</p>
+				</div> <small class="text-muted my-auto">14 min</small>
+			</li>
+			<li class="list">
+				<div class="profile">
+					<img src="resources/pms/images/faces/face4.jpg" alt="image"><span
+						class="offline"></span>
+				</div>
+				<div class="info">
+					<p>James Richardson</p>
+					<p>Away</p>
+				</div> <small class="text-muted my-auto">2 min</small>
+			</li>
+			<li class="list">
+				<div class="profile">
+					<img src="resources/pms/images/faces/face5.jpg" alt="image"><span
+						class="online"></span>
+				</div>
+				<div class="info">
+					<p>Madeline Kennedy</p>
+					<p>Available</p>
+				</div> <small class="text-muted my-auto">5 min</small>
+			</li>
+			<li class="list">
+				<div class="profile">
+					<img src="resources/pms/images/faces/face6.jpg" alt="image"><span
+						class="online"></span>
+				</div>
+				<div class="info">
+					<p>Sarah Graves</p>
+					<p>Available</p>
+				</div> <small class="text-muted my-auto">47 min</small>
+			</li>
+		</ul>
 	</div>
 </div>
+
 
 <script>
 	$(function() {

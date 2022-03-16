@@ -2,34 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.team.service.TeamMapper">
 
-	<select id="teamSelectList"
+	<select id="myProjectList"
 		resultType="co.test.prj.team.service.TeamVO">
-		SELECT * FROM TEAM ORDER BY USER_ID
-	</select>
-
-	<select id="myProjectList" resultType="co.test.prj.team.service.TeamVO">
-		SELECT * FROM TEAM
+		SELECT t.user_id, t.tm_pos, t.tm_dept, p.prj_name
+		FROM team t JOIN project p
+		ON t.prj_id = p.prj_id
 		WHERE user_id = #{user_id}
 	</select>
 
 	<select id="teamSelect"
 		resultType="co.test.prj.team.service.TeamVO"
 		parameterType="co.test.prj.team.service.TeamVO">
-		SELECT * FROM TEAM
-		WHERE prj_id = #{prj_id} AND master_id = #{master_id}
+		SELECT t.user_id, t.tm_pos, t.tm_dept, u.user_name
+		FROM
+		TEAM t JOIN "user" u
+		ON t.user_id = u.user_id
+		WHERE prj_id = #{prj_id}
 	</select>
 
 	<insert id="teamInsert"
 		parameterType="co.test.prj.team.service.TeamVO">
-		<!-- <selectKey keyProperty="prg_id" resultType="int"
-			order="BEFORE">
-			SELECT NVL(MAX(PRG_ID) + 1, 1) AS ID FROM PROGRESS
-		</selectKey> -->
 		INSERT INTO TEAM(USER_ID, PRJ_ID)
-		VALUES (#{user_id}, #{prj_id})
+		VALUES (#{user_id},
+		#{prj_id})
 	</insert>
-	
-	<update id="teamUpdate" parameterType="co.test.prj.team.service.TeamVO">
+
+	<update id="teamUpdate"
+		parameterType="co.test.prj.team.service.TeamVO">
 		UPDATE TEAM
 		<set>
 			<if test="tm_pos != null"> TM_POS = #{tm_pos},</if>
@@ -38,17 +37,21 @@
 		</set>
 		WHERE user_id = #{user_id} AND prj_id = #{prj_id}
 	</update>
-	
-	<delete id="teamDelete" parameterType="co.test.prj.team.service.TeamVO">
+
+	<delete id="teamDelete"
+		parameterType="co.test.prj.team.service.TeamVO">
 		DELETE FROM TEAM
-		WHERE user_id = #{user_id} AND prj_id = #{prj_id}
+		WHERE user_id = #{user_id} AND prj_id =
+		#{prj_id}
 	</delete>
-	
-	
-	<select id="jobDetailSelect" resultType="co.test.prj.team.service.TeamVO"
+
+
+	<select id="jobDetailSelect"
+		resultType="co.test.prj.team.service.TeamVO"
 		parameterType="co.test.prj.team.service.TeamVO">
 		SELECT * FROM PROJECT P, TEAM T
-		WHERE T.USER_ID = #{user_id} AND P.PRJ_ID = T.PRJ_ID
+		WHERE T.USER_ID =
+		#{user_id} AND P.PRJ_ID = T.PRJ_ID
 	</select>
-	
+
 </mapper>
