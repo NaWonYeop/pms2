@@ -49,5 +49,10 @@ public class TeamServiceImpl implements TeamService {
 	public List<TeamVO> jobDetailSelect(TeamVO team) {
 		return map.jobDetailSelect(team);
 	}
+
+	@Override
+	public int teamMasterInsert(TeamVO team) {
+		return map.teamMasterInsert(team);
+	}
 	
 }

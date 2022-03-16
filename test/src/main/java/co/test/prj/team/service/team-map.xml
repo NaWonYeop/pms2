@@ -54,4 +54,10 @@
 		#{user_id} AND P.PRJ_ID = T.PRJ_ID
 	</select>
 
+	
+	<insert id="teamMasterInsert" parameterType="co.test.prj.team.service.TeamVO">
+		INSERT INTO TEAM(USER_ID, PRJ_ID, TM_POS, MASTER_ID)
+		VALUES (#{user_id}, #{prj_id}, 'master', #{prj_id})
+	</insert>
+	
 </mapper>
