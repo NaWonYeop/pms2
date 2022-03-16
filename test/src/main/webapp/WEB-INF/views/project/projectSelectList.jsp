@@ -32,6 +32,10 @@ input {
 	margin-right: 30px;
 	margin-top: 16px;
 }
+
+.blog_item {
+	background-color: #F5F7FF;
+}
 </style>
 </head>
 <body>
@@ -41,8 +45,24 @@ input {
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>
+							<h2 style="float: right;">
 								<c:if test="${result.type == 'fnd'}">
+								PROJECT FUNDING
+								</c:if>
+
+								<c:if test="${result.type == 'ofr'}">
+								PROJECT OFFER
+								</c:if>
+
+								<c:if test="${result.type == '' or result.type == null}">
+								PROJECT
+								</c:if>
+							</h2>
+						</div>
+					</div>
+					<div >
+						<h4 style="float: right; color: #fff">
+							<c:if test="${result.type == 'fnd'}">
 								펀딩 리스트
 								</c:if>
 
@@ -53,18 +73,14 @@ input {
 								<c:if test="${result.type == '' or result.type == null}">
 								전체 리스트
 								</c:if>
-							</h2>
-							<p>
-								Home<span>/</span>Course Details
-							</p>
-						</div>
+						</h4>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<br>
-
 
 
 	<!-- 검색창 시작 -->
@@ -119,6 +135,7 @@ input {
 					<div class="row justify-content-center">
 						<div class="col-xl-5">
 							<div class="section_tittle text-center">
+								<p>PROJECT</p>
 								<h2>리스트</h2>
 							</div>
 						</div>
@@ -127,9 +144,9 @@ input {
 				<div class="low">
 					<div class="col-12">
 					
-						<div class="prjInsertbtn">
+						<div class="prjInsertbtn" style="margin-bottom: 10%;">
 							<button class="btn_1" type="button"
-								onClick="location.href='projectInsertForm'" style="margin-bottom: 2%;">프로젝트
+								onClick="location.href='projectInsertForm'">프로젝트
 								등록</button>
 							<br>
 						</div>

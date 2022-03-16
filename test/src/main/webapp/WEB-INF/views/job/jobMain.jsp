@@ -64,6 +64,10 @@
 	margin-left: 21.5%;
 }
 
+.table.dataTable, thead, th, table.dataTable.no-footer, .table-bordered, .table-bordered td, 
+	.table-bordered th, .table td, .table th, table.dataTable thead th, table.dataTable thead td {
+	border: 0;
+}
 </style>
 </head>
 <body>
@@ -73,12 +77,12 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>구..직 상세</h2>
-							<p>
-								Home<span>/</span>Course Details
-							</p>
+							<h2 style="float: right;">PROJECT JOB</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">구직 리스트</h4>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -117,8 +121,8 @@
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
-						<p>Find Project</p>
-						<h2>구..직 리스트</h2>
+						<p>JOB</p>
+						<h2>구직 리스트</h2>
 					</div>
 				</div>
 			</div>
@@ -187,7 +191,7 @@
 								</div>
 						
 						</c:forEach>
-					찜끝
+					--------------찜끝
 					</c:if>
 				</div>
 					<div class="row">

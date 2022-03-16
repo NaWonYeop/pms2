@@ -45,7 +45,7 @@
 							<h2 style="float: right;">I AM ONEYEOP</h2>
 						</div>
 					</div>
-						<div>
+						<div >
 							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
 						</div>
 				</div>

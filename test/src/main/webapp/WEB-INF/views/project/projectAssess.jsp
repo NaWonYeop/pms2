@@ -108,21 +108,21 @@
 </head>
 <body>
    <section class="breadcrumb breadcrumb_bg">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-12">
-               <div class="breadcrumb_iner text-center">
-                  <div class="breadcrumb_iner_item">
-                     <h2>평..가</h2>
-                     <p>
-                        Home<span>/</span>Course Details
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2 style="float: right;">평가하기</h2>
+						</div>
+					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
    <section class="feature_part" style="padding-top: 0; padding-bottom: 5%;">
       <div class="container">

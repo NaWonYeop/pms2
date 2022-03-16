@@ -151,19 +151,21 @@
 </head>
 <body>
 	<section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-                        <div class="breadcrumb_iner_item">
-                            <h2>구..직 상세</h2>
-                            <p>Home<span>/</span>Course Details</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2 style="float: right;">구직 상세페이지</h2>
+						</div>
+					</div>
+						<div >
+							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
     <!-- breadcrumb start-->
 
     <!--================ Start Course Details Area =================-->
@@ -209,7 +211,7 @@
 	                <div class="col-lg-4 right-contents">
 	                    <c:choose>
 	                    	<c:when test="${sessionUser.user_id eq jobDetail.user_id }">
-	                    		<button type="button" id="updatebtn" class="btn_4" onclick="location.href='jobInsertMove'">수정하기</button>
+	                    		<button type="button" id="updatebtn" class="btn_4" style="background-color: #F27457;" onclick="location.href='jobInsertMove'">수정하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
 			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
