@@ -27,4 +27,8 @@ public class PrgVO {
 	private Date prg_ed;				// 종료날짜
 	private String prg_user;				// 담당자
 	private int prg_cmp_prop;		// 완료여부 0:진행 , 1:완료
+	
+	private String prj_name;
+	private Date prj_str;
+	private Date prj_ed;
 }

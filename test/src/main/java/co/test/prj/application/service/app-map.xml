@@ -47,7 +47,7 @@
 			INSERT INTO APPLICATION (APP_ID, PRJ_ID, MASTER_ID, USER_ID,
 			APP_CLSFC)
 			VALUES(#{app_id}, #{prj_id}, #{master_id},
-			#{user_id}, 1)
+			#{user_id}, 0)
 	
 	</insert>
 </mapper>

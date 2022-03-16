@@ -6,30 +6,28 @@
 <div class="main-panel">
 	<div class="content-wrapper">
 		<div class="row">
-			<div class="container-scroller">
-				<div class="col-lg-12 grid-margin stretch-card">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Hoverable Table</h4>
-							<p class="card-description">
-								Add class
-								<code>.table-hover</code>
-							</p>
-							<div class="table-responsive">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th>Number</th>
-											<th>UserName</th>
-											<th>Classification</th>
-											<th>Status</th>
-										</tr>
-									</thead>
-									<tbody id="myTbody">
+			<div class="col-lg-12 grid-margin stretch-card">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">Hoverable Table</h4>
+						<p class="card-description">
+							Add class
+							<code>.table-hover</code>
+						</p>
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Number</th>
+										<th>UserName</th>
+										<th>Classification</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody id="myTbody">
 
-									</tbody>
-								</table>
-							</div>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

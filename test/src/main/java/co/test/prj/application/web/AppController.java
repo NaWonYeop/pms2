@@ -26,7 +26,7 @@ public class AppController {
 	@Autowired
 	private AppService appDao;
 
-	@RequestMapping("/pmsapplication")
+	@RequestMapping("/msapplication")
 	public String application() {
 		return "pms/app/app";
 	}
