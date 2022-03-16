@@ -15,6 +15,22 @@
 </style>
 </head>
 <body>
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2>구..직 상세</h2>
+							<p>
+								Home<span>/</span>Course Details
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section class="contact-section section_padding">
 		<div class="row col-12">
 			<div class="col-10" style="display: inline-block;">

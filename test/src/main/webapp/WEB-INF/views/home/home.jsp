@@ -24,7 +24,7 @@
 	.mainText {
 		color: #fff;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #798BF2,
-    0 0 82px #798BF2, 0 0 80px #798BF2, 0 0 80px #798BF2, 0 0 80px #798BF2;
+    0 0 10px #798BF2, 0 0 10px #798BF2, 0 0 10px #798BF2, 0 0 10px #798BF2;
 	}
 	
 	

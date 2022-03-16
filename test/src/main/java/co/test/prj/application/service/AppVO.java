@@ -15,5 +15,4 @@ public class AppVO {
 	private String prj_name;
 	private String app_invsb;
 
-
 }

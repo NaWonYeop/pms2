@@ -293,8 +293,8 @@
 									<div class ="btns">
 									<!-- 버튼들은 클래스 바꾸면 안되요 -->
 										<input type="hidden" name="reward_id" value="${reward.reward_id }">
-										<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매">
-										<input type="button" class="rfnd btn_4" value="환불">
+										<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매"  style="background-color: #F27457;">
+										<input type="button" class="rfnd btn_4" value="환불"  style="background-color: #F27457;">
 									</div>
 		        				</div>
 		        			</article>

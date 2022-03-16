@@ -111,12 +111,7 @@ input {
 		</div>
 	</div>
 	<!-- 검색창 끝 -->
-	<div class="prjInsertbtn">
-		<button class="btn_1" type="button"
-			onClick="location.href='projectInsertForm'" style="width: 40%">프로젝트
-			등록</button>
-		<br>
-	</div>
+	
 	<section class="blog_area section_padding">
 		<div class="container">
 			<div class="row">
@@ -126,6 +121,17 @@ input {
 							<div class="section_tittle text-center">
 								<h2>리스트</h2>
 							</div>
+						</div>
+					</div>
+				</div>
+				<div class="low">
+					<div class="col-12">
+					
+						<div class="prjInsertbtn">
+							<button class="btn_1" type="button"
+								onClick="location.href='projectInsertForm'" style="margin-bottom: 2%;">프로젝트
+								등록</button>
+							<br>
 						</div>
 					</div>
 				</div>
