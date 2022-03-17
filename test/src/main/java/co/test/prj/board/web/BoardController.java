@@ -33,7 +33,7 @@ public class BoardController
 	public String freeboardSelect(BoardVO vo,Model model) {
 	
 		vo=boardDao.freeSelect(vo);
-		if(vo==null)
+		if(vo==null || vo.getBrd_ntc_prop()==1)
 			return "redirect:/freeBoard";
 		model.addAttribute("board",vo);
 		return "board/boardSelect";
@@ -103,14 +103,49 @@ public class BoardController
 	@RequestMapping("/noticeboardSelect")
 	public String noticeBoardSelect(BoardVO vo,Model model) {
 	
-		//vo=boardDao.noticeSelect(vo);
-		if(vo==null)
+		vo=boardDao.freeSelect(vo);
+		System.out.println(vo);
+		if(vo==null || vo.getBrd_ntc_prop()==0)
 			return "redirect:/noticeBoard";
 		model.addAttribute("board",vo);
 		return "notice/noticeSelect";
 	}
-	
-	
+	//일반 공지 인서트폼
+	@RequestMapping("/adminNoticeInsertform")
+	public String adminNoticeInsertform(Model model,HttpSession session)
+	{
+		return "notice/noticeInsertform";
+	}
+	//일반 공지 인서트
+	@RequestMapping("/adminNoticeInsert")
+	public String adminNoticeInsert(BoardVO vo,Model model)
+	{
+		boardDao.boardInsert(vo);
+		return "redirect:/noticeBoard";
+	}
+	//일반 공지 업데이트 화면
+		@RequestMapping("/adminNoticeUpdateform")
+		public String adminNoticeUpdateform(BoardVO vo,Model model,HttpSession session)
+		{
+			vo=boardDao.boardSelect(vo);
+			
+			model.addAttribute("board",vo);
+			return "notice/noticeUpdateform";
+		}
+		//일반 공지 업데이트
+		@RequestMapping("/adminNoticeUpdate")
+		public String adminNoticeUpdate(BoardVO vo,Model model)
+		{
+			boardDao.boardUpdate(vo);
+			return "redirect:/noticeBoard";
+		}
+		//일반 공지 삭제
+		@RequestMapping("/adminNoticeDelete")
+		public String adminNoticeDelete(BoardVO vo,Model model,HttpSession session)
+		{
+			boardDao.boardDelete(vo);
+			return "redirect:/noticeBoard";
+		}
 	
 	
 	//pms 프로젝트 공지사항

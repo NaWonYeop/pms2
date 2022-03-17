@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,12 +72,13 @@ thead {
 					</div>
 				</div>
 			</div>
-			
+			<sec:authorize access="hasRole('ROLE_MASTER')">
 			<div class="insertbtn">
+			
 				<button type="button" id="insertbtn" class="btn_1"
 					onclick="logincheck()">등록</button>
 			</div>
-			
+			</sec:authorize>
 			<div class="row section-top-border">
 			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">
 
@@ -157,7 +159,7 @@ thead {
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
 		function logincheck() {
-		location.href = "freeboardInsertform";
+		location.href = "adminNoticeInsertform";
 		}
 		jQuery(function($) {
 			$("#data_list").DataTable({

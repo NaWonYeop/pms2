@@ -41,9 +41,9 @@
 	<select id="freeSelect"
 		resultType="co.test.prj.board.service.BoardVO"
 		parameterType="co.test.prj.board.service.BoardVO">
-		SELECT B.BRD_ID,B.BRD_TTL,B.BRD_CNT,B.USER_ID,U.USER_NAME
+		SELECT B.BRD_ID,B.BRD_TTL,B.BRD_CNT,B.USER_ID,U.USER_NAME,B.BRD_NTC_PROP
 		FROM BOARD B,"user" U
-		WHERE B.PRJ_ID IS NULL AND B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id} AND BRD_NTC_PROP=0
+		WHERE B.PRJ_ID IS NULL AND B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id}
 	</select>
 	
 	<select id="projectBoardSelect"
@@ -128,6 +128,7 @@
 	FROM BOARD B,"user" U
 	WHERE PRJ_ID IS NULL AND B.USER_ID=U.USER_ID and BRD_TTL like '%'||#{BRD_TTL}||'%'
 	ORDER BY BRD_NTC_PROP DESC
+	
 	</select>
 	<!--  일반 공지 -->
 	

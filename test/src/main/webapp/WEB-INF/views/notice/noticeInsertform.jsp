@@ -37,15 +37,11 @@
         <div class="col-12">
                  <div class="col-12">
          			<h2 class="contact-title col-9" style="display: inline-block;">게시판 등록</h2>
-          			<c:if test="${sessionUser.user_ath eq  'master'}">
-          			<h4 class="col-2" style="display: inline-block;">공지여부<input type="checkbox" id="confirm-checkbox"> <label
-            for="confirm-checkbox"></label></h4>
-          			</c:if>
           			
         </div>
         </div>
         <div class="col-lg-12">
-          <form class="form-contact contact_form" onsubmit="return checkbox()" action="freeboardInsert" method="post" id="contactForm" novalidate="novalidate">
+          <form class="form-contact contact_form" onsubmit="return checkbox()" action="adminNoticeInsert" method="post" id="contactForm" novalidate="novalidate">
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
@@ -61,7 +57,7 @@
               </div>
         
              <input type="hidden" id="user_id" name="user_id" value="${sessionUser.user_id }">
-             <input type="hidden" id="brd_ntc_prop" name="brd_ntc_prop" value="0">
+             <input type="hidden" id="brd_ntc_prop" name="brd_ntc_prop" value="1">
              
             </div>
             <div class="form-group mt-3" style="display: inline-block;" >
@@ -75,10 +71,6 @@
   </section>
   <script type="text/javascript">
   function checkbox() {
-		if ($('input:checkbox').is(':checked') == true)
-			{
-				$("#brd_ntc_prop").val("1");			
-			}
 		var content4 = watchdog._getData();
 		$("#brd_cnt").val(content4.main);
 		return true;
