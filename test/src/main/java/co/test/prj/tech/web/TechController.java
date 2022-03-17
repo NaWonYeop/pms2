@@ -1,5 +1,8 @@
 package co.test.prj.tech.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,6 +161,8 @@ public class TechController {
 		project.setMaster_id(user.getUser_id());
 		model.addAttribute("ofterList", techDao.ofterList(project));
 		
+		model.addAttribute("prjOffer", techDao.offerFromPrj(project));
+		
 		model.addAttribute("prj_id",project.getPrj_id());
 		
 		tech.setUser_id(user.getUser_id());
@@ -168,21 +173,23 @@ public class TechController {
 	
 	//신청수락
 	@RequestMapping("/projectOfrAccept")
-	private String projectOfrAccept(Model model, HttpSession session,TeamVO vo, AppVO appvo) {
+	@ResponseBody
+	private void projectOfrAccept(TeamVO vo, AppVO appvo) {
 		
 		techDao.ofterAcceptInsert(vo);
 		
 		appvo.setApp_stt("ok");
 		techDao.ofterAcceptUpdate(appvo);
-		return "redirect:/projectOfrList";
+		List<UserVO> list = new ArrayList<>();
+		list.add(userDao.userIdSelect(vo));
+		
 	}
 	
 	//신청거절
 	@RequestMapping("/projectOfrDecline")
 	@ResponseBody
-	private String projectOfrDecline(Model model, AppVO appvo) {
+	private void projectOfrDecline(AppVO appvo) {
 		techDao.ofterAcceptUpdate(appvo);
-		return "redirect:/projectOfrList";
 	}
 	
 	//관심 신청

@@ -5,6 +5,7 @@ import java.util.List;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.team.service.TeamVO;
 
 
 
@@ -53,4 +54,6 @@ public interface UserService {
 	List<ProjectVO> MyfundingList(int user_id);
 	
 	List<UserVO> AdminUserList();
+	
+	UserVO userIdSelect(TeamVO vo);
 }

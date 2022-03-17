@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserMapper;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
@@ -159,6 +160,11 @@ public class UserServiceImpl implements UserService
 	public List<UserVO> AdminUserList() {
 		// TODO Auto-generated method stub
 		return map.AdminUserList();
+	}
+
+	@Override
+	public UserVO userIdSelect(TeamVO vo) {
+		return map.userIdSelect(vo);
 	}
 
 }

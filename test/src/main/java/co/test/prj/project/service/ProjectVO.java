@@ -85,4 +85,5 @@ public class ProjectVO
 	//리스트에 뿌릴것들
 	private int total_count; //총 신청 인원
 	private int total_sum; //총 신청 리워드
+	
 }

@@ -24,8 +24,9 @@
 	</select>
 	
 	<!-- 구직상세 참여프로젝트 >>> 경일 -->
-	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
-		SELECT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME FROM PROJECT P, "user" U
+	<select id="jobJoinList" resultType="co.test.prj.tech.service.TechVO">
+		SELECT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME
+		FROM PROJECT P, "user" U, APPLICATION A
 		WHERE P.MASTER_ID = #{master_id} AND SYSDATE <![CDATA[<]]> P.PRJ_OFR_ED AND P.MASTER_ID=U.USER_ID
 	</select>
 	
@@ -41,11 +42,18 @@
 		WHERE PRJ_ID= #{prj_id} AND U.USER_ID=T.USER_ID
 	</select>
 	
-	<!-- 구인현황 신청리스트 -->
+	<!-- 구인현황 참여요청리스트 -->
 	<select id="ofterList" resultType="co.test.prj.user.service.UserVO">
 		SELECT U.USER_ID, U.USER_NAME, U.USER_CRR, U.USER_TEL, A.APP_STT, A.APP_ID
 		FROM "user" U, APPLICATION A
 		WHERE U.USER_ID IN (select user_id from application where master_id=#{master_id} and prj_id = #{prj_id} ) AND U.USER_ID = A.USER_ID AND PRJ_ID = #{prj_id} AND APP_CLSFC = 1
+	</select>
+	
+	<!-- 구인현황 프로젝트신청리스트 -->
+	<select id="offerFromPrj" resultType="co.test.prj.user.service.UserVO">
+		SELECT U.USER_ID, U.USER_NAME, U.USER_CRR, U.USER_TEL, A.APP_STT, A.APP_ID
+		FROM "user" U, APPLICATION A
+		WHERE U.USER_ID = A.USER_ID AND A.PRJ_ID = #{prj_id} AND A.APP_STT = 'ing' AND APP_CLSFC = 0
 	</select>
 	
 	<!-- 구인현황 관심리스트 -->
@@ -55,7 +63,7 @@
 		WHERE U.USER_ID = I.USER_ID2 and i.user_id = #{user_id}
 	</select>
 	
-	<!-- 신청 수락 -->
+	<!-- 신청 업데이트 -->
 	<update id="ofterAcceptUpdate" parameterType="co.test.prj.application.service.AppVO">
 		UPDATE APPLICATION SET
 		<if test="app_stt != null"> APP_STT = #{app_stt} </if>

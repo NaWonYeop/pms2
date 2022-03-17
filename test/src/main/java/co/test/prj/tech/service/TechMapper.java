@@ -34,8 +34,11 @@ public interface TechMapper {
 	// 확정멤버 리스트
 	List<UserVO> memberList(ProjectVO project);
 	
-	// 구인현황 리스트
+	// 구인현황 참여 요청 리스트
 	List<ProjectVO> ofterList(ProjectVO project);
+	
+	// 구인현황 프로젝트 신청 리스트
+	List<ProjectVO> offerFromPrj(ProjectVO project);
 	
 	//관심 리스트
 	List<TechVO> interestList(TechVO tech);
