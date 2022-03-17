@@ -74,7 +74,6 @@ public class TeamController {
 		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
 		TeamVO team = new TeamVO();
 		team.setPrj_id(myPrj.getPrj_id());
-		team.setMaster_id(myPrj.getMaster_id());
 		
 		List<TeamVO> list = teamDao.teamSelect(team);
 		return new Gson().toJson(list);
@@ -82,31 +81,15 @@ public class TeamController {
 
 	@RequestMapping("/teamInsert")
 	@ResponseBody
-	public String teamInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		TeamVO team = new TeamVO();
-
+	public String teamInsert(HttpSession session, TeamVO team) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
-
 		int user_id = sessionUser.getUser_id();
-		int prj_id = Integer.parseInt(request.getParameter("prj_id"));
-		int master_id = 0;
-
-		team.setUser_id(user_id);
-		team.setPrj_id(prj_id);
-		if (user_id == master_id) {
-			team.setTm_pos("master");
-		} else {
-			team.setTm_pos("employee");
-		}
-
+		// 유저번호, 프로젝트번호, (포지션, 급여, 부서), 마스터번호
+		System.out.println(team.getUser_id());
+		System.out.println(team.getPrj_id());
+		System.out.println(team.getMaster_id());
 		teamDao.teamInsert(team);
-
-		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
-
-		if (loginUser != null) {
-
-		} else {
-			return "로그인안됨";
+		if(user_id == team.getMaster_id()) {
 		}
 		return "성공";
 	}

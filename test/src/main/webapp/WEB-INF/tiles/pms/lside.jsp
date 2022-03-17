@@ -6,7 +6,7 @@
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
 	<ul class="nav">
-		<li class="nav-item"><a class="nav-link" href="#"> <i
+		<li class="nav-item"><a class="nav-link" href="tms"> <i
 				class="icon-grid menu-icon"></i> <span class="menu-title">Main</span>
 		</a></li>
 
@@ -15,7 +15,7 @@
 		</a></li>
 
 		<li class="nav-item"><a class="nav-link" href="msapplication">
-				<i class="icon-layout menu-icon"></i> <span class="menu-title">Application</span>
+				<i class="icon-layout menu-icon"></i> <span class="menu-title">Propose</span>
 		</a></li>
 
 		<li class="nav-item"><a class="nav-link" href="msprogress">

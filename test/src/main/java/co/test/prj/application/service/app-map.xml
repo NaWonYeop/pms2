@@ -3,13 +3,16 @@
 <mapper namespace="co.test.prj.application.service.AppMapper">
 
 
-	<!-- <select id="appSelectList" resultType="co.test.prj.application.service.AppVO">
-		SELECT * FROM APPLICATION ORDER BY APP_ID ASC
-	</select> -->
+	<!-- <select id="appSelectList" resultType="co.test.prj.application.service.AppVO"> 
+		SELECT * FROM APPLICATION ORDER BY APP_ID ASC </select> -->
 
-	<select id="appSelect" resultType="co.test.prj.application.service.AppVO">
-		SELECT * FROM APPLICATION
-		WHERE prj_id = #{prj_id} AND master_id = #{master_id} AND app_clsfc = 0
+	<select id="appSelect"
+		resultType="co.test.prj.application.service.AppVO">
+		SELECT a.prj_id, a.app_id, u.user_id, a.master_id, u.user_name, u.user_email, u.user_tel,
+		a.app_clsfc, a.app_stt
+		FROM "user" u JOIN application a
+		ON u.user_id = a.user_id
+		WHERE prj_id = #{prj_id} AND app_clsfc = 0 AND app_stt = 'ing'
 	</select>
 
 	<insert id="appInsert"
@@ -24,8 +27,9 @@
 		#{user_id},
 		#{app_clsfc}, #{app_stt})
 	</insert>
-	
-	<update id="appUpdate" parameterType="co.test.prj.application.service.AppVO">
+
+	<update id="appUpdate"
+		parameterType="co.test.prj.application.service.AppVO">
 		UPDATE APPLICATION
 		<set>
 			<if test="app_clsfc != null">APP_CLSFC = #{app_clsfc},</if>
@@ -33,21 +37,24 @@
 		</set>
 		WHERE app_id = #{app_id}
 	</update>
-	
-	<delete id="appDelete" parameterType="co.test.prj.application.service.AppVO">
+
+	<delete id="appDelete"
+		parameterType="co.test.prj.application.service.AppVO">
 		DELETE FROM APPLICATION
-		WHERE app_id = #{app_id} AND master_id = #{master_id}
+		WHERE app_id = #{app_id} AND
+		master_id = #{master_id}
 	</delete>
-	
-	<insert id="appPrjInsert" parameterType="co.test.prj.application.service.AppVO">
+
+	<insert id="appPrjInsert"
+		parameterType="co.test.prj.application.service.AppVO">
 		<selectKey keyProperty="app_id" resultType="int"
 			order="BEFORE">
 			SELECT NVL(MAX(APP_ID) + 1, 1) AS ID FROM APPLICATION
 		</selectKey>
-			INSERT INTO APPLICATION (APP_ID, PRJ_ID, MASTER_ID, USER_ID,
-			APP_CLSFC)
-			VALUES(#{app_id}, #{prj_id}, #{master_id},
-			#{user_id}, 0)
-	
+		INSERT INTO APPLICATION (APP_ID, PRJ_ID, MASTER_ID, USER_ID,
+		APP_CLSFC)
+		VALUES(#{app_id}, #{prj_id}, #{master_id},
+		#{user_id}, 0)
+
 	</insert>
 </mapper>

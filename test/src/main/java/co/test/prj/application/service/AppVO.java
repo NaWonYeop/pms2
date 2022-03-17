@@ -1,5 +1,7 @@
 package co.test.prj.application.service;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,5 +16,19 @@ public class AppVO {
 	private String user_name;// 유저명
 	private String prj_name;
 	private String app_invsb;
+	
+	private String user_email;
+	private String user_pwd;
+	private int user_tel;
+	private String user_ath;
+	private String user_crr;
+	private String user_age;
+	private String user_job_ttl;
+	private String user_job_cnt;
+	private String user_type;
+	private String tech_name;
+	private double avg;
+	private String tm_dept;
+	private Date user_j_date;
 
 }
