@@ -217,6 +217,7 @@
 			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
 	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
 	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청하기</button>
+	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청중</button>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
@@ -390,7 +391,7 @@
         {
             if(!$(e.target).hasClass("content")
             		&& !$(e.target).hasClass("callbtn")
-            		/* && !$(e.target).hasClass("btn_4") */
+            		&& !$(e.target).hasClass("modalInbtn") //신청하기버튼
 	                && !$(e.target).hasClass("option") 
 	                && !$(e.target).hasClass("current")) {
                 $('.modaldal').fadeOut();
@@ -404,18 +405,6 @@
             $('.modaldal').fadeIn();
         });
         
-        //찜하기 일단 보류
-        /* $("#heartbtn").on("click", function() {
-        	const data = {
-        			user_id : '${jobDetail.user_id}'
-        	}
-        	
-	        $ajax({
-	        	url: "",
-	        	type: "post",
-	        	data: data,
-	        });
-        }) */
         function heart() {
         <% 
         if(user==null)
@@ -468,18 +457,20 @@
         }
         
         function requsetWork() {
+        	console.log(e);
         	$.ajax({
         		url: 'requestWork',
         		type: 'post', 
         		data: {
         			user_id: ${jobDetail.user_id},
         			prj_id: $("#pId").val(),
-        		},
-        		success: function() {
+        		}.done(function() {
         			toastr.success('신청하기 성공!');
-        		}
-        	})
+        			
+        		})
+        	}) 
         }
+        
     </script>
     
 </body>

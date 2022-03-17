@@ -114,22 +114,24 @@ public class TechServiceImpl implements TechService {
 	@Override
 	public List<TechVO> jobInterList(int user_id)
 	{
-		// TODO Auto-generated method stub
 		return map.jobInterList(user_id);
 	}
 
 	@Override
 	public List<TechVO> jobNameSer(String user_name)
 	{
-		// TODO Auto-generated method stub
 		return map.jobNameSer(user_name);
 	}
 
 	@Override
 	public List<TechVO> jobTitleSer(String user_job_ttl)
 	{
-		// TODO Auto-generated method stub
 		return map.jobTitleSer(user_job_ttl);
+	}
+
+	@Override
+	public List<ProjectVO> offerFromPrj(ProjectVO project) {
+		return map.offerFromPrj(project);
 	}
 
 	

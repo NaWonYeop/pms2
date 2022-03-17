@@ -121,9 +121,7 @@
 	<select id="jobSelect"
 		resultType="co.test.prj.user.service.UserVO">
 		SELECT * FROM "user" WHERE USER_ID = ${user_id}
-		<!-- select u.user_name, u.user_crr, u.user_job_ttl, u.user_job_cnt, (select 
-			avg(s.str_avg) from star s where u.user_id = s.user_id group by user_id) 
-			from "user" u; -->
+		
 	</select>
 	<!-- 프로젝트목록 -->
 	<select id="MyProject"
@@ -206,6 +204,12 @@
 	<select id="AdminUserList"
 		resultType="co.test.prj.user.service.UserVO">
 		SELECT * FROM "user" WHERE USER_ATH != 'master'
+	</select>
+	
+	<select id="userIdSelect" resultType="co.test.prj.user.service.UserVO" parameterType="co.test.prj.team.service.TeamVO">
+		SELECT U.USER_NAME, U.USER_CRR, U.USER_TEL, T.TM_DEPT 
+		FROM "user" U, TEAM T 
+		WHERE U.USER_ID = #{user_id} AND U.USER_ID = T.USER_ID and t.prj_id=#{prj_id}
 	</select>
 </mapper>
 

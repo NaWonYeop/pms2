@@ -5,6 +5,7 @@ import java.util.List;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertVO;
 import co.test.prj.project.service.ProjectVO;
+import co.test.prj.team.service.TeamVO;
 
 
 public interface UserMapper {
@@ -54,4 +55,5 @@ public interface UserMapper {
 	//관리자 제외 전체유저뽑기
 	List<UserVO> AdminUserList();
 	
+	UserVO userIdSelect(TeamVO vo);
 }
