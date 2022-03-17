@@ -31,4 +31,6 @@ public interface BoardMapper
 	List<BoardVO> boardNameSer(String user_name);
 	
 	List<BoardVO> boardTitleSer(String brd_ttl);
+	
+	List<BoardVO> boardNoticeList();
 }

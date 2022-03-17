@@ -116,11 +116,19 @@ public class AppController {
 		app.setPrj_id(pId);
 		app.setMaster_id(mId);
 		app.setUser_id(uId);
-		
-		int result = appDao.appPrjInsert(app);
-		
+		AppVO test=appDao.appOvlp(app);
+		int res;
+		if(test==null)
+		{
+			appDao.appPrjInsert(app);
+			res=0;
+		}
+		else
+		{
+			res=1;
+		}
 		System.out.println("가라");
 		
-		return result;
+		return res;
 	}
 }

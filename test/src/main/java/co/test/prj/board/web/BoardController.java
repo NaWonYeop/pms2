@@ -33,7 +33,8 @@ public class BoardController
 	public String freeboardSelect(BoardVO vo,Model model) {
 	
 		vo=boardDao.freeSelect(vo);
-		
+		if(vo==null)
+			return "redirect:/freeBoard";
 		model.addAttribute("board",vo);
 		return "board/boardSelect";
 	}
@@ -87,6 +88,30 @@ public class BoardController
 		boardDao.boardDelete(vo);
 		return "redirect:/freeBoard";
 	}
+	
+	
+	
+	//일반공지
+	@RequestMapping("/noticeBoard")
+	public String noticeBoard(Model model) {
+		List<BoardVO> list= boardDao.boardNoticeList();
+		model.addAttribute("frees",list);
+		
+		return "notice/noticeList";
+	}
+	//일반 공지 상세
+	@RequestMapping("/noticeboardSelect")
+	public String noticeBoardSelect(BoardVO vo,Model model) {
+	
+		//vo=boardDao.noticeSelect(vo);
+		if(vo==null)
+			return "redirect:/noticeBoard";
+		model.addAttribute("board",vo);
+		return "notice/noticeSelect";
+	}
+	
+	
+	
 	
 	//pms 프로젝트 공지사항
 	@RequestMapping("/msboard")

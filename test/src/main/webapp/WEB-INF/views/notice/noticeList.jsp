@@ -93,10 +93,14 @@ thead {
 					<tbody>
 						<c:forEach var="free" items="${frees }">
 							<tr>
+
 										<td class="text-center">${free.brd_id }</td>
+
+
+
 								<td>
 									<div class="">
-										<a href="freeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a>
+										<a href="noticeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a>
 									</div>
 								</td>
 								<td>

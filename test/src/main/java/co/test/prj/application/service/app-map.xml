@@ -8,11 +8,14 @@
 
 	<select id="appSelect"
 		resultType="co.test.prj.application.service.AppVO">
-		SELECT a.prj_id, a.app_id, u.user_id, a.master_id, u.user_name, u.user_email, u.user_tel,
+		SELECT a.prj_id, a.app_id, u.user_id, a.master_id,
+		u.user_name, u.user_email, u.user_tel,
 		a.app_clsfc, a.app_stt
-		FROM "user" u JOIN application a
+		FROM
+		"user" u JOIN application a
 		ON u.user_id = a.user_id
-		WHERE prj_id = #{prj_id} AND app_clsfc = 0 AND app_stt = 'ing'
+		WHERE prj_id =
+		#{prj_id} AND app_clsfc = 0 AND app_stt = 'ing'
 	</select>
 
 	<insert id="appInsert"
@@ -57,4 +60,14 @@
 		#{user_id}, 0)
 
 	</insert>
+
+	<select id="appOvlp"
+		resultType="co.test.prj.application.service.AppVO"
+		parameterType="co.test.prj.application.service.AppVO">
+		SELECT PRJ_ID,USER_ID,APP_STT
+		FROM APPLICATION
+		WHERE PRJ_ID=#{prj_id} AND USER_ID=#{user_id} AND (APP_STT='ing' OR
+		APP_STT='ok')
+
+	</select>
 </mapper>

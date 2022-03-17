@@ -45,4 +45,10 @@ public class AppServiceImpl implements AppService {
 		return map.appPrjInsert(app);
 	}
 
+	@Override
+	public AppVO appOvlp(AppVO app) {
+		// TODO Auto-generated method stub
+		return map.appOvlp(app);
+	}
+
 }

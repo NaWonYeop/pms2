@@ -14,7 +14,7 @@
     <http auto-config="true" use-expressions="true" >
     <intercept-url pattern="/**Insert**" access="isAuthenticated()"/>
     <intercept-url pattern="/**Update**" access="isAuthenticated()"/>
-    <intercept-url pattern="/pms**" access="isAuthenticated()"/>
+    <intercept-url pattern="/ms**" access="isAuthenticated()"/>
     <intercept-url pattern="/my**" access="isAuthenticated()"/>
     <intercept-url pattern="/admin**" access="hasAuthority('ROLE_MASTER')"/>
     <intercept-url pattern="/**" access="permitAll" />

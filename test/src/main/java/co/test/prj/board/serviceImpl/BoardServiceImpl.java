@@ -107,6 +107,12 @@ public class BoardServiceImpl implements BoardService
 		return map.projectBoardSelect(vo);
 	}
 
+	@Override
+	public List<BoardVO> boardNoticeList() {
+		// TODO Auto-generated method stub
+		return map.boardNoticeList();
+	}
+
 	
 
 }

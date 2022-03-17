@@ -32,4 +32,10 @@ public interface BoardService
 	List<BoardVO> boardNameSer(String user_name);
 	
 	List<BoardVO> boardTitleSer(String brd_ttl);
+	
+	//일반공지사항 noticeSelect
+	List<BoardVO> boardNoticeList();
+	
+	
+
 }

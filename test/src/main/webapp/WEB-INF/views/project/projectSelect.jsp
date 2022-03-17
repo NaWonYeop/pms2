@@ -336,7 +336,23 @@ ${project}<br>
 	
 	
 	<script type="text/javascript">
-	
+	 toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-top-center",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "1000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}    
 	$("#dCoin").click(function(e){
 		console.log("가니?")
 		var won = 50000;
@@ -370,8 +386,10 @@ ${project}<br>
 			data : $("#ajaxAppPrjInsertForm").serialize(),
 			dataTyep: "json",
 			success : function (result) {
-				console.log("신청하러갔다옴??");
-				console.log(result);
+				if(result == 0)
+					toastr.success('신청했습니다.');
+				else
+					toastr.warning('이미신청했거나 신청받은 기록이 있습니다.');
 			},
 	        error:function(){
 		          console.log("Insert ajax 통신 실패!!!");
