@@ -278,6 +278,7 @@
 					<target>${java-version}</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
+					<encoding>UTF-8</encoding>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
