@@ -31,6 +31,8 @@ public class UserVO implements UserDetails{
 	private double avg;
 	private String tm_dept;
 	private Date user_j_date;
+	//이더리움 아이디
+	private String ether_id;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities()
 	{

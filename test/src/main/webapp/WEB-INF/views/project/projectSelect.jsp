@@ -5,6 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 페이지 새로고침 명령어 -->
+<!-- <META HTTP-EQUIV="refresh" CONTENT="3"> -->
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
+<script>
+
+
+
+</script>
+
 <style>
         .Tname {
             margin-bottom: 60px;
@@ -145,8 +154,8 @@
 			</div>
 		</div>
 	</section>
-<%-- ${project}<br>
- ${sessionScope } --%>
+${project}<br>
+ ${sessionScope } 
  	<section class="course_details_area section_padding">
         <div class="container">
         	<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
@@ -158,9 +167,18 @@
 				시작일 ~ 마감일 : 
 				<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
 				<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /><br>
-            
 	        </div>
-        
+	            <c:if test="${project.prj_fnd_prop == 1}">
+				<!-- 펀딩 있을시 -->
+	         	<div id="sise">
+	         	현금구입 달러시세 : 가져오는중<br>
+	         	1이더 달러시세 : 가져오는중<br>
+	         	1이더 원화시세 : 가져오는중<br>
+	         	</div>
+	         	<input type="hidden" id="dol">
+	         	<input type="hidden" id="etherDol">
+	         	<input type="hidden" id="etherWon">
+        		</c:if>
         	<div class="row">
         		<div class="col-lg-8 course_details_left">
         		 	<div class="content_wrapper">
@@ -310,10 +328,15 @@
 	<div id="ether">
 	이더리움 들고오자
 	<button id="dCoin">코인</button>
+	<input type="text" id="howMuchEther" value="">
+	
 	</div>
+	
+	<input type="hidden" id="">
 	
 	
 	<script type="text/javascript">
+	
 	$("#dCoin").click(function(e){
 		console.log("가니?")
 		var won = 50000;
@@ -323,10 +346,13 @@
 		        data: {
 		        	"won" : won
 		        },
-		        success: function(res){
+		        success: function(result){
 		        			        	
-					 console.log(res);	
-		        },
+					console.log(result);
+					$("#howMuchEther").val(result);
+					
+					
+				},
 		        error:function(){
 		          console.log("Insert ajax 통신 실패!!!");
 		        }
@@ -359,6 +385,35 @@
 			var IMP = window.IMP;
 			var code = "imp48219552"; //가맹점 식별코드
 			IMP.init(code);
+			
+			//시세
+			$.ajax({
+				url : '/prj/ajaxSise', 
+		        success: function(result){
+		        			        	
+					console.log(result);
+					var dol = result.dol;
+					var etherDol = result.etherDol;
+					var etherWon = result.etherWon;
+					console.log("현금구입 달러시세 : " + dol);
+					console.log("1이더 달러시세 : " + etherDol);
+					console.log("1이더 원화시세 : " + etherWon);
+					$("#dol").val(dol);
+					$("#etherDol").val(etherDol);
+					$("#etherWon").val(etherWon);
+					//클래스는 배열이니 클래스 선언후 foreach 나 for문으로 돌려서
+					// 값 넣어 실시간 코인가격 연동하여 보여주기
+					
+					//금액 인풋에 넣고 난뒤에 String 으로 바꿔 단위 , 넣어주기
+					
+					$("#sise").html("현금구입 달러시세 : " + dol+"<br>"
+							+"1이더 달러시세 : " + etherDol+"<br>"
+							+"1이더 원화시세 : " + etherWon+"<br>");
+		        },
+		        error:function(){
+		          console.log("Insert ajax 통신 실패!!!");
+		        }
+			}) //ajax
 			
 			
 		}); //doc.ready

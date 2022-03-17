@@ -20,8 +20,9 @@
 		USER_CRR,
 		USER_AGE,
 		USER_JOB_TTL,
-		USER_JOB_CNT,USER_TYPE FROM
-		"user" WHERE user_email = #{user_email}
+		ETHER_ID,
+		USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
+
 		<if test="user_pwd != null">
 			AND user_pwd = #{user_pwd}
 		</if>
