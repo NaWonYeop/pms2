@@ -15,6 +15,23 @@
 		ORDER BY BRD_NTC_PROP DESC
 	</select>
 
+	<select id="boardProjectList"
+		resultType="co.test.prj.board.service.BoardVO">
+		SELECT BRD_ID,BRD_TTL,BRD_REG_DATE,U.USER_NAME,B.BRD_NTC_PROP
+		FROM BOARD B,"user" U
+		WHERE PRJ_ID = #{prj_id} AND B.USER_ID=U.USER_ID
+		ORDER BY BRD_NTC_PROP DESC
+	</select>
+	
+	<select id="boardNoticeProjectList"
+		resultType="co.test.prj.board.service.BoardVO">
+		SELECT BRD_ID,BRD_TTL,BRD_REG_DATE,U.USER_NAME,B.BRD_NTC_PROP
+		FROM BOARD B,"user" U
+		WHERE PRJ_ID = #{prj_id} AND B.USER_ID = U.USER_ID AND BRD_NTC_PROP=1
+		ORDER BY BRD_NTC_PROP DESC
+	</select>
+	
+	
 	<select id="boardSelect"
 		resultType="co.test.prj.board.service.BoardVO"
 		parameterType="co.test.prj.board.service.BoardVO">
@@ -28,7 +45,15 @@
 		FROM BOARD B,"user" U
 		WHERE B.PRJ_ID IS NULL AND B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id}
 	</select>
-
+	
+	<select id="projectBoardSelect"
+		resultType="co.test.prj.board.service.BoardVO"
+		parameterType="co.test.prj.board.service.BoardVO">
+		SELECT B.BRD_ID,B.BRD_TTL,B.BRD_CNT,B.USER_ID,U.USER_NAME
+		FROM BOARD B,"user" U
+		WHERE B.USER_ID=U.USER_ID AND B.BRD_ID=#{brd_id}
+	</select>
+	
 
 	<insert id="boardInsert"
 		parameterType="co.test.prj.board.service.BoardVO">

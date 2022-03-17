@@ -10,6 +10,12 @@ public interface BoardMapper
 	
 	List<BoardVO> boardSearchList(BoardVO vo);
 	
+	List<BoardVO> boardProjectList();
+	
+	List<BoardVO> boardNoticeProjectList();
+	
+	BoardVO projectBoardSelect(BoardVO vo);
+	
 	int boardSearchPageCount(BoardVO vo);
 
 	BoardVO freeSelect(BoardVO vo);	

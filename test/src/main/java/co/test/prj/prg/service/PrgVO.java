@@ -31,4 +31,6 @@ public class PrgVO {
 	private String prj_name;
 	private Date prj_str;
 	private Date prj_ed;
+	
+	
 }

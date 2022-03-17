@@ -247,8 +247,9 @@ public class UserController {
 	public String insertDevForm(UserVO vo, HttpSession session, Model model,
 			@RequestParam("cert_name") List<String> list) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
-		userDao.userUpdate(vo);
+		vo.setUser_ath("developer");
 		vo.setUser_id(user.getUser_id());
+		userDao.userUpdate(vo);
 		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
@@ -337,8 +338,11 @@ public class UserController {
 
 	// 개발자 정보 업데이트 결과창
 	@PostMapping("/devUpdate")
-	public String devUpdate(HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
+	public String devUpdate(UserVO vo,HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
+		
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		vo.setUser_id(user.getUser_id());
+		userDao.userUpdate(vo);
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
 		userDao.deleteDev(del);
@@ -419,7 +423,6 @@ public class UserController {
 		user1.setUser_id(user.getUser_id());
 		userDao.userDelete(user);
 		session.invalidate();
-		System.out.println(userDao.userDelete(user));
 		return "user/Withdrawal3";
 	}
 

@@ -20,7 +20,8 @@
 		USER_CRR,
 		USER_AGE,
 		USER_JOB_TTL,
-		USER_JOB_CNT,USER_TYPE FROM "user" WHERE user_email = #{user_email}
+		USER_JOB_CNT,USER_TYPE FROM
+		"user" WHERE user_email = #{user_email}
 		<if test="user_pwd != null">
 			AND user_pwd = #{user_pwd}
 		</if>
@@ -98,7 +99,7 @@
 		<set>
 			<if test="user_pwd != null"> user_pwd = #{user_pwd}, </if>
 			<if test="user_name != null"> user_name = #{user_name}, </if>
-			<if test="user_tel != null"> user_tel = #{user_tel}, </if>
+			<if test="user_tel != 0"> user_tel = #{user_tel}, </if>
 			<if test="user_ath != null"> user_ath = #{user_ath}, </if>
 			<if test="user_crr != null"> user_crr = #{user_crr}, </if>
 			<if test="user_age != null"> user_age = #{user_age}, </if>
@@ -152,21 +153,22 @@
 	<select id="MyApp"
 		resultType="co.test.prj.application.service.AppVO"
 		parameterType="co.test.prj.user.service.UserVO">
-		SELECT P.PRJ_ID, A.APP_CLSFC, P.PRJ_NAME, A.APP_INVSB,
-		A.APP_ID
+		SELECT P.PRJ_ID, A.APP_CLSFC, P.PRJ_NAME,
+		A.APP_INVSB,A.APP_ID
 		FROM APPLICATION A, PROJECT P
-		WHERE A.PRJ_ID = P.PRJ_ID
-		AND
-		A.USER_ID = #{user_id}
-		and A.APP_INVSB = 0
+		WHERE A.PRJ_ID = P.PRJ_ID and((A.USER_ID = #{user_id} and APP_CLSFC=1) or
+		(A.MASTER_ID = #{user_id} and APP_CLSFC=0)) and A.APP_INVSB = 0
 	</select>
 
 	<select id="MyInsertProject" parameterType="int"
 		resultType="co.test.prj.project.service.ProjectVO">
-		SELECT DISTINCT P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,(SELECT COUNT(*) FROM
-		TEAM WHERE PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
+		SELECT DISTINCT
+		P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,(SELECT COUNT(*) FROM
+		TEAM WHERE
+		PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
 		FROM PROJECT P,TEAM T
-		WHERE P.MASTER_ID = #{master_id}
+		WHERE
+		P.MASTER_ID = #{master_id}
 	</select>
 
 	<select id="MyJoinProject" parameterType="int"
@@ -174,8 +176,10 @@
 		SELECT DISTINCT
 		P.PRJ_ID,P.PRJ_NAME,P.PRJ_STR,P.PRJ_ED,U.USER_NAME,U.USER_TEL,(SELECT
 		COUNT(*) FROM TEAM WHERE PRJ_ID=P.PRJ_ID) AS COUNT,PRJ_DEVED_PROP
-		FROM PROJECT P,TEAM T,"user" U
-		WHERE T.USER_ID = #{user_id} AND P.PRJ_ID=T.PRJ_ID AND
+		FROM
+		PROJECT P,TEAM T,"user" U
+		WHERE T.USER_ID = #{user_id} AND
+		P.PRJ_ID=T.PRJ_ID AND
 		U.USER_ID=P.MASTER_ID
 	</select>
 
@@ -187,13 +191,15 @@
 		REWARD R,PROJECT S WHERE R.PRJ_ID=S.PRJ_ID AND S.PRJ_ID=B.PRJ_ID) AS
 		TOTAL
 		FROM BUY B,PROJECT P,COMTNFILE C
-		WHERE B.USER_ID=#{user_id} AND P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID
+		WHERE B.USER_ID=#{user_id} AND
+		P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID
 	</select>
 
 	<update id="AppUpdate"
 		parameterType="co.test.prj.application.service.AppVO">
 		UPDATE APPLICATION
-		SET APP_INVSB=1 WHERE app_id = #{user_id}
+		SET APP_INVSB=1 WHERE app_id =
+		#{user_id}
 	</update>
 
 	<select id="AdminUserList"

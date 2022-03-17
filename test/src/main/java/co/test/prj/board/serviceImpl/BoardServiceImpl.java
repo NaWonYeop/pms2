@@ -89,6 +89,24 @@ public class BoardServiceImpl implements BoardService
 		return map.boardTitleSer(brd_ttl);
 	}
 
+	@Override
+	public List<BoardVO> boardProjectList() {
+		
+		return map.boardProjectList();
+	}
+
+	@Override
+	public List<BoardVO> boardNoticeProjectList() {
+		
+		return map.boardNoticeProjectList();
+	}
+
+	@Override
+	public BoardVO projectBoardSelect(BoardVO vo) {
+		
+		return map.projectBoardSelect(vo);
+	}
+
 	
 
 }

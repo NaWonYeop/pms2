@@ -25,5 +25,14 @@
 		<li class="nav-item"><a class="nav-link" href="mscard"> <i
 				class="icon-columns menu-icon"></i> <span class="menu-title">Card</span>
 		</a></li>
+		<li class="nav-item"><a class="nav-link" href="msboard"> <i
+				class="icon-paper menu-icon"></i> <span class="menu-title">Board</span>
+		</a></li>
+		<li class="nav-item"><a class="nav-link" href="msnotice"> <i
+				class="icon-paper menu-icon"></i> <span class="menu-title">Notice</span>
+		</a></li>
+		
+		
+		
 	</ul>
 </nav>

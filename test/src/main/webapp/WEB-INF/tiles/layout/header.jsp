@@ -37,10 +37,16 @@
 									class="nav-link dropdown-toggle" href="mypage"
 									id="navbarDropdown" >My Page </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									
 										<a class="dropdown-item" href="myProject">프로젝트 관리</a>
 										<a class="dropdown-item" href="myfunding">펀딩내역</a>
 										<a class="dropdown-item" href="mycheckUserPassword">개인정보 변경</a>
+										<sec:authorize access="hasRole('ROLE_USER')">
+										<a class="dropdown-item" href="insertDevForm">개발자 등록</a>
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_DEVELOPER')">
 										<a class="dropdown-item" href="devUpdateForm">개발자 정보변경</a>
+										</sec:authorize>
 										<a class="dropdown-item" href="myWithdrawal">회원탈퇴</a>
 										<sec:authorize access="hasRole('ROLE_MASTER')">
 											<a class="dropdown-item" href="adminProject">프로젝트 관리(관리자)</a>
