@@ -57,6 +57,7 @@ public class UserController {
 	public String login(UserVO user, HttpSession session, HttpServletRequest request, Model model) {
 		System.out.println(user);
 		user = userDao.userSelect(user);
+		session.setAttribute("sessionUser", user);
 		if (user != null) {
 			user = userDao.userSelect(user);
 			session.setAttribute("sessionUser", user);

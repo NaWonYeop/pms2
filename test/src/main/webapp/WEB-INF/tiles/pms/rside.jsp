@@ -26,7 +26,7 @@
 	}).done(function(json) {
 		for(team of json) {
 			$("#mySelect").append(`
-			<option id="mst" data-master_id="\${team.master_id}" value="\${team.prj_id}">\${team.prj_id}</option>
+					<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" data-prj_id="\${team.prj_id}">프로젝트명 : \${team.prj_name}</option>
 			`);
 		};
 	}).fail(function(xhr, status, message) {
@@ -34,9 +34,8 @@
 	});
 	
 	$("#myBtn").on("click", function(event) {
-		var prj_id = $("#mySelect").val();
-		var master_id = $("#mst").data("master_id");
-
+		var prj_id = $("#mst"+team.prj_id).data("prj_id");
+		var master_id = $("#mst"+team.prj_id).data("master_id");
 		console.log('prj_id= ' + prj_id);
 		console.log('master_id= ' + master_id);
 

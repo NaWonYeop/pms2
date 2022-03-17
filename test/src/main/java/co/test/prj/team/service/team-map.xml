@@ -4,7 +4,8 @@
 
 	<select id="myProjectList"
 		resultType="co.test.prj.team.service.TeamVO">
-		SELECT t.user_id, t.tm_pos, t.tm_dept, p.prj_name
+		SELECT p.prj_id, t.user_id, t.master_id, t.tm_pos,
+		t.tm_dept, p.prj_name
 		FROM team t JOIN project p
 		ON t.prj_id = p.prj_id
 		WHERE user_id = #{user_id}
@@ -13,18 +14,17 @@
 	<select id="teamSelect"
 		resultType="co.test.prj.team.service.TeamVO"
 		parameterType="co.test.prj.team.service.TeamVO">
-		SELECT t.user_id, t.tm_pos, t.tm_dept, u.user_name
-		FROM
-		TEAM t JOIN "user" u
+		SELECT t.prj_id, u.user_id, u.user_name, t.tm_pos, t.tm_dept,
+		u.user_email, u.user_tel
+		FROM team t JOIN "user" u
 		ON t.user_id = u.user_id
 		WHERE prj_id = #{prj_id}
 	</select>
 
 	<insert id="teamInsert"
 		parameterType="co.test.prj.team.service.TeamVO">
-		INSERT INTO TEAM(USER_ID, PRJ_ID)
-		VALUES (#{user_id},
-		#{prj_id})
+		INSERT INTO TEAM (user_id, prj_id, tm_pos, master_id)
+		VALUES (#{user_id}, #{prj_id}, 'employees', #{master_id})
 	</insert>
 
 	<update id="teamUpdate"
@@ -54,10 +54,11 @@
 		#{user_id} AND P.PRJ_ID = T.PRJ_ID
 	</select>
 
-	
-	<insert id="teamMasterInsert" parameterType="co.test.prj.team.service.TeamVO">
+
+	<insert id="teamMasterInsert"
+		parameterType="co.test.prj.team.service.TeamVO">
 		INSERT INTO TEAM(USER_ID, PRJ_ID, TM_POS, MASTER_ID)
-		VALUES (#{user_id}, #{prj_id}, 'master', #{prj_id})
+		VALUES (#{user_id}, #{prj_id}, 'master', #{user_id})
 	</insert>
-	
+
 </mapper>

@@ -46,6 +46,7 @@ public class AppController {
 	}
 	
 	@RequestMapping("/appInsert")
+	@ResponseBody
 	public void appInsert(HttpSession session, Model modelm, HttpServletRequest request) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
 		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
@@ -71,6 +72,7 @@ public class AppController {
 	}
 	
 	@RequestMapping("/appUpdate")
+	@ResponseBody
 	public String appUpdate(HttpSession session, AppVO app, Model model) {
 		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
 		

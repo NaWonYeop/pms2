@@ -9,18 +9,16 @@
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Hoverable Table</h4>
-						<p class="card-description">
-							Add class
-							<code>.table-hover</code>
-						</p>
+						<h4 class="card-title">Propose</h4>
 						<div class="table-responsive">
 							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th>Number</th>
-										<th>UserName</th>
-										<th>Classification</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Tel</th>
+										<th>Propose</th>
 										<th>Status</th>
 									</tr>
 								</thead>
@@ -52,16 +50,18 @@
 				<tr id="myTr\${app.app_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
 					<td>\${app.app_id}</td>
 					<td>\${app.user_name}</td>
-					<td>\${app.app_clsfc}</td>
+					<td>\${app.user_email}</td>
+					<td>\${app.user_tel}</td>
+					<td>\${app.app_clsfc == "0" ? "구인" : "구직"}</td>
 					<td>
 						<div class="btn-group">
 							<button id="btn\${app.app_id}" type="button"
 								class="btn btn-outline-secondary btn-sm dropdown-toggle"
 								data-toggle="dropdown">\${app.app_stt}</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" data-user_id="\${app.user_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ing" onclick="appUpdate(this)" >ing</a> 
-								<a class="dropdown-item" data-user_id="\${app.user_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ok" onclick="appUpdate(this)" >ok</a>
-								<a class="dropdown-item" data-user_id="\${app.user_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="no" onclick="appUpdate(this)" >no</a>
+								<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ing" onclick="appUpdate(this)" >ing</a> 
+								<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ok" onclick="appUpdate(this)" >ok</a>
+								<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="no" onclick="appUpdate(this)" >no</a>
 							</div>
 						</div>
 					</td>
@@ -75,222 +75,57 @@
 	
 	function appUpdate(app) {
 		var app_id = $(app).data('app_id');
-		var master_id = $(app).data('master_id');
 		var app_stt = $(app).data('app_stt');
 		var user_id = $(app).data('user_id');
+		var master_id = $(app).data('master_id');
+		var prj_id = $(app).data('prj_id');
 		console.log(app_id);
-		console.log(master_id);
 		console.log(app_stt);
 		console.log(user_id);
-		$('.dropdown-menu').on('click', '.dropdown-item', function () {
-			$.ajax({
-				url: "appUpdate",
-				type: "GET",
-				data : {
-					app_id: app_id,
-					master_id: master_id,
-					app_stt: app_stt,
-					user_id: user_id
-				},
-				dataType: "json"
-			}).done(function (json) {
-				$("#myTbody").empty();
-				getList();
-				console.log("체인지 성공!!");
-				var app_stt = $(ths).text();
-				console.log(app_stt);
-				if(app_stt == 'ok') {
-					var prj_id = $(".myTr").data("prj_id");
-					$.ajax({
-						url: "teamInsert",
-						type: "GET",
-						data : {
-							prj_id: prj_id
-						},
-						dataType: "text"
-					}).done(function (text){
-						console.log(text);
-						console.log("팀추가 성공");
-					}).fail(function (xhr, status, msg) {
-						console.log("상태값 :" + status + " Http에러메시지 :" + msg);
-					});
-				}
-			}).fail(function (xhr, status, msg) {
-				console.log("상태값 :" + status + " Http에러메시지 :" + msg);
-			});
+		console.log(master_id);
+		console.log(prj_id);
+		$.ajax({
+			url: "appUpdate",
+			type: "GET",
+			data : {
+				app_id: app_id,
+				app_stt: app_stt,
+				user_id: user_id,
+				master_id: master_id
+			},
+			dataType: "text"
+		}).done(function (text) {
+			$("#myTbody").empty();
+			getList();
+			console.log("체인지 성공!!");
+			console.log(app_stt);
+			if(app_stt == 'ok') {
+				$.ajax({
+					url: "teamInsert",
+					type: "GET",
+					data: {
+						prj_id: prj_id,
+						user_id: user_id,
+						master_id: master_id
+					},
+					dataType: "text"
+				}).done(function (text){
+					console.log("팀추가 성공");
+				}).fail(function (xhr, status, msg) {
+					console.log("상태값 :" + status + " Http에러메시지 :" + msg);
+				});
+			}
+		}).fail(function (xhr, status, msg) {
+			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
+
 	}
 
 	function chaingeClass() {
 		var btn = $("#btn"+app.app_id).text();
-		if(btn == "ok" || btn == "no") {
+		if(btn != "ing") {
 			$("#btn"+app.app_id).attr('disabled', 'disabled');
 		}
 	}
 	
 </script>
-
-
-<!-- <script>
-	//사용자 삭제 요청
-	function userDelete() {
-		//삭제 버튼 클릭
-		$('body').on('click', '#btnDelete', function () {
-			var userId = $(this).closest('tr').find('#hidden_userId').val();
-			var result = confirm(userId + " 사용자를 정말로 삭제하시겠습니까?");
-			if (!result)
-				return;
-
-			$.ajax({
-				url: conPath + '/userDelete',
-				data: {
-					id: userId
-				},
-				type: 'get',
-				dataType: 'json'
-			}).done(function (xhr) {
-				console.log(xhr.result);
-				userList();
-			}).fail(function (xhr, status, msg) {
-				console.log("상태값 :" + status + " Http에러메시지 :" + msg);
-			});
-		}); //삭제 버튼 클릭
-	} //userDelete
-
-	//사용자 조회 요청
-	function userSelect() {
-		//조회 버튼 클릭
-		$('body').on('click', '#btnSelect', function () {
-			var userId = $(event.target).closest('tr').find('#hidden_userId').val();
-			//특정 사용자 조회
-			$.ajax({
-				url: conPath + '/userSelect',
-				data: {
-					id: userId
-				},
-				type: 'GET',
-				dataType: 'json'
-			}).done(
-				userSelectResult
-			).fail(function (xhr, status, msg) {
-				alert("상태값 :" + status + " Http에러메시지 :" + msg);
-			});
-		}); //조회 버튼 클릭
-	} //userSelect
-
-	//사용자 조회 응답
-	function userSelectResult(user) {
-		$('input:text[name="id"]').val(user.id);
-		$('input:text[name="name"]').val(user.name);
-		$('input:text[name="password"]').val(user.password);
-		$('select[name="role"]').val(user.role).attr("selected", "selected");
-	} //userSelectResult
-
-	//사용자 수정 요청
-	function userUpdate() {
-		//수정 버튼 클릭
-		$('#btnUpdate').on('click', function () {
-			var id = $('input:text[name="id"]').val();
-			var name = $('input:text[name="name"]').val();
-			var password = $('input:text[name="password"]').val();
-			var role = $('select[name="role"]').val();
-			$.ajax({
-				url: conPath + '/userUpdate',
-				type: 'PUT',
-				dataType: 'json',
-				data: JSON.stringify({
-					id: id,
-					name: name,
-					password: password,
-					role: role
-				}),
-				contentType: 'application/json'
-			}).done(function (data) {
-				userList();
-			}).fail(function (xhr, status, message) {
-				alert(" status: " + status + " er:" + message);
-			});
-		}); //수정 버튼 클릭
-	} //userUpdate
-
-	//사용자 등록 요청
-	function userInsert() {
-		//등록 버튼 클릭
-		$('#btnInsert').on('click', function () {
-			var id = $('input:text[name="id"]').val();
-			var name = $('input:text[name="name"]').val();
-			var password = $('input:text[name="password"]').val();
-			var role = $('select[name="role"]').val();
-			$.ajax({
-				url: conPath + '/userInsert',
-				type: 'POST',
-				data: {
-					id: id,
-					name: name,
-					password: password,
-					role: role
-				}
-				dataType: 'json',
-			}).done(function (response) {
-				userList();
-			}).fail(function (xhr, status, message) {
-				alert(" status: " + status + " er:" + message);
-			});
-		}); //등록 버튼 클릭
-	} //userInsert
-
-
-	//사용자 등록 요청
-	function userInsert2() {
-		//등록 버튼 클릭
-		$('#btnInsert').on('click', function () {
-
-			var id = $('input:text[name="id"]').val();
-			var name = $('input:text[name="name"]').val();
-			var passsword = $('input:text[name="password"]').val();
-			var role = $('select[name="role"]').val();
-			$.ajax({
-				url: "users",
-				type: 'POST',
-				dataType: 'json',
-				data: {
-					id: id,
-					name: name,
-					password: password,
-					role: role
-				},
-				success: function (response) {
-					if (response.result == true) {
-						userList();
-					}
-				},
-				error: function (xhr, status, message) {
-					alert(" status: " + status + " er:" + message);
-				}
-			});
-		}); //등록 버튼 클릭
-	} //userInsert
-	//사용자 목록 조회 요청
-	function userList() {
-		$.ajax({
-			url: conPath + '/userSelectAll',
-			type: 'GET',
-			dataType: 'json'
-		}).fail(function (xhr, status, msg) {
-			alert("상태값 :" + status + " Http에러메시지 :" + msg);
-		}).done(function (datas) {
-			$("tbody").empty();
-			$.each(datas, function (idx, item) {
-				$('<tr>')
-					.append($('<td>').html(item.id))
-					.append($('<td>').html(item.name))
-					.append($('<td>').html(item.password))
-					.append($('<td>').html(item.role))
-					.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
-					.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
-					.append($('<input type=\'hidden\' id=\'hidden_userId\'>').val(item.id))
-					.appendTo('tbody');
-			}); //each
-		});
-	} //userList
-</script> -->

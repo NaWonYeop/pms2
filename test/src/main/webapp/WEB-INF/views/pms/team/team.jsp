@@ -9,19 +9,16 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="card-title">Team</h4>
-						<p class="card-description">
-							Add class
-							<code>.table-striped</code>
-						</p>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th>User Number</th>
+										<th>No</th>
 										<th>Name</th>
 										<th>Position</th>
 										<th>Departments</th>
-										<th>Salary</th>
+										<th>Email</th>
+										<th>Tel</th>
 									</tr>
 								</thead>
 								<tbody id="myTbody">
@@ -43,13 +40,13 @@
 			dataType : "json"
 		}).done(function(json) {
 			for(team of json) {
-				debugger
 				$("#myTbody").append(`<tr id="tr">
 				<td class="py-1">\${team.user_id}</td>
-				<td>\${team.prj_id}</td> 
+				<td>\${team.user_name}</td> 
 				<td>\${team.tm_pos}</td>
 				<td>\${team.tm_dept}</td>
-				<td>\${team.tm_sal}</td>
+				<td>\${team.user_email}</td>
+				<td>\${team.user_tel}</td>
 				</tr>`);
 			};
 		}).fail(function(xhr, status, message) {
