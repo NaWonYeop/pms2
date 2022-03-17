@@ -198,7 +198,7 @@
 
 	<select id="AdminUserList"
 		resultType="co.test.prj.user.service.UserVO">
-		SELECT * FROM "user" WHERE USER_ATH != 'MASTER'
+		SELECT * FROM "user" WHERE USER_ATH != 'master'
 	</select>
 </mapper>
 
