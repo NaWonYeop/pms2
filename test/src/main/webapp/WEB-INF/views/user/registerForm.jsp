@@ -98,12 +98,11 @@ a {
 				<button type="button" class="button button-contactForm btn_1 col-3"
 					id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
 					onclick="nomalIdCheck()" value="NO">Check</button>
-				<BR> <input type="password" name="user_pwd" id="user_pwd"
-					class="form-control" placeholder="비밀번호" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" required> <br>
-					
+				<BR><input type="password" name="user_pwd" id="user_pwd"
+					class="form-control" placeholder="8자리부터 16자리까지 특수문자 포함시켜주세요" required><br>
 				<input type="password" name="pw1" id="pw1" class="form-control"
-					placeholder="비밀번호 확인"> <br> <input
-					type="text" name="user_name" id="user_name" class="form-control"
+					placeholder="비밀번호 확인"><br>
+					<input type="text" name="user_name" id="user_name" class="form-control"
 					placeholder="이름" required><br> 
 					<div class="row">
 					<select id="user_tel1" name="user_tel1" class="form-control col-3" required="required">
@@ -171,14 +170,17 @@ a {
 				$("#user_email").focus();
 			}
 		}
-
+		
 		function formCheck() {
+						
+			var regPassword = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,16}$/;
+
 			if ($("#idCheck").val() == 'NO') {
 				alert("이메일 중복 체크를 해주세요.")
 				return false;
 			}
 			
-
+				
 			if ($("#user_pwd").val() != $("#pw1").val()) {
 				alert("패스워드가 일치하지 않습니다.");
 				$("#user_pwd").val('');
@@ -186,6 +188,14 @@ a {
 				$("#user_pwd").focus();
 				return false;
 			}
+			
+			if(regPassword.test($("#user_pwd").val()) == false){
+				alert("조건에 맞게 입력해주세요")
+				$("#user_pwd").val('');
+				$("#user_pwd").focus();
+				return false;
+			}
+			
 			
 			var check1 = document.getElementById('user_tel1').value;
 			var check2 = document.getElementById('user_tel2').value;
@@ -195,8 +205,6 @@ a {
 		
 		}
 		
-		
-	
 	</script>
 </body>
 </html>

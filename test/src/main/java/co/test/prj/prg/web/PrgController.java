@@ -31,7 +31,7 @@ public class PrgController {
 	public String card(HttpSession session, Model model) {
 		return "pms/prg/card";
 	}
-
+	
 	@RequestMapping("/prgSelectList")
 	@ResponseBody
 	public List<PrgVO> prgSelectList(HttpSession session, Model model) {

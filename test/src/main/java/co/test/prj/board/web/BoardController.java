@@ -4,7 +4,6 @@ package co.test.prj.board.web;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import co.test.prj.board.service.BoardService;
 import co.test.prj.board.service.BoardVO;
 import co.test.prj.user.service.UserService;
-import co.test.prj.user.service.UserVO;
 
 @Controller
 public class BoardController
@@ -89,6 +87,130 @@ public class BoardController
 		boardDao.boardDelete(vo);
 		return "redirect:/freeBoard";
 	}
+	
+	//pms 프로젝트 공지사항
+	@RequestMapping("/msboard")
+	public String boardList(Model model) {
+		List<BoardVO> list = boardDao.boardProjectList();
+		model.addAttribute("border", list);
+		return "pms/board/projectboardList";
+	}
+	
+	//프로젝트 단건조회
+	@RequestMapping("/projectBoardSelect")
+	public String projectboardSelect(BoardVO vo,Model model) {
+		vo = boardDao.projectBoardSelect(vo);
+		model.addAttribute("board",vo);
+		return "pms/board/projectSelect";
+	}
+	
+	//프로젝트게시판 입력
+	@RequestMapping("/projectBoardInsertForm")
+	public String projectboardInsertForm() {
+		
+		return "pms/board/projectboardInsertForm";
+	}
+	@RequestMapping("projectBoardInsert")
+	public String projectboardInsert(BoardVO vo, Model model, HttpSession session) {
+		boardDao.boardInsert(vo);
+		return "redirect:/msboard";
+	}
+	//프로젝트게시판 삭제
+	@RequestMapping("projectBoardDelete")
+	public String projectboardDelete(BoardVO vo,Model model,HttpSession session)
+	{
+		if(session.getAttribute("sessionUser")==null)
+		{
+			return "redirect:/msboard";
+		}
+
+		boardDao.boardDelete(vo);
+		return "redirect:/msboard";
+	}
+	
+	//업데이트 화면
+		@RequestMapping("/projectboardUpdateform")
+		public String projectboardUpdateform(BoardVO vo,Model model,HttpSession session)
+		{
+			if(session.getAttribute("sessionUser")==null)
+			{
+				return "redirect:/msboard";
+			}
+			
+			vo=boardDao.boardSelect(vo);
+			
+			model.addAttribute("board",vo);
+			return "pms/board/projectboardUpdateform";
+		}
+	
+	//프로젝트게시판 업데이트
+	@RequestMapping("/projectboardUpdate")
+	public String projectboardUpdate(BoardVO vo,Model model)
+	{
+		boardDao.boardUpdate(vo);
+		return "redirect:/msboard";
+	}
+	
+	//pms 공지사항
+		@RequestMapping("/msnotice")
+		public String noticeList(Model model) {
+			List<BoardVO> list = boardDao.boardNoticeProjectList();
+			model.addAttribute("notice", list);
+			return "pms/board/noticeList";
+		}
+		
+		//프로젝트 단건조회
+		@RequestMapping("/noticeBoardSelect")
+		public String noticeboardSelect(BoardVO vo,Model model) {
+			vo = boardDao.projectBoardSelect(vo);
+			model.addAttribute("board",vo);
+			return "pms/board/noticeSelect";
+		}
+		//입력
+		@RequestMapping("/noticeBoardInsertForm")
+		public String noticeboardInsertForm() {
+			
+			return "pms/board/noticeboardInsertForm";
+		}
+		@RequestMapping("noticeBoardInsert")
+		public String noticeboardInsert(BoardVO vo, Model model, HttpSession session) {
+			boardDao.boardInsert(vo);
+			return "redirect:/msnotice";
+		}
+		//삭제
+		
+		@RequestMapping("noticeBoardDelete")
+		public String noticeboardDelete(BoardVO vo,Model model,HttpSession session)
+		{
+			if(session.getAttribute("sessionUser")==null)
+			{
+				return "redirect:/msnotice";
+			}
+
+			boardDao.boardDelete(vo);
+			return "redirect:/msnotice";
+		}
+		//업데이트
+		@RequestMapping("/noticeboardUpdateform")
+		public String noticeboardUpdateform(BoardVO vo,Model model,HttpSession session)
+		{
+			if(session.getAttribute("sessionUser")==null)
+			{
+				return "redirect:/msnotice";
+			}
+			
+			vo=boardDao.boardSelect(vo);
+			
+			model.addAttribute("board",vo);
+			return "pms/board/noticeboardUpdateform";
+		}
+		//업데이트
+		@RequestMapping("/noticeboardUpdate")
+		public String noticeboardUpdate(BoardVO vo,Model model)
+		{
+			boardDao.boardUpdate(vo);
+			return "redirect:/msnotice";
+		}
 	
 
 	//검색
