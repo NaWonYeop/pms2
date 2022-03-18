@@ -66,7 +66,7 @@
 
 								</div>
 								<div class="col-lg-12" style="margin-top: 5%;">
-								<a class="d-inline-block" href="single-blog.html">
+								<a class="d-inline-block" href="projectSelect?prj_id=${fun.prj_id }">
 									<h3 style="font-weight: bold; font-family: 'MinSans-Medium';">${fun.prj_name }</h3>
 
 								</a> 
@@ -91,7 +91,7 @@
 									<li><h3 class="far fa-comments"></h3> 현재 펀딩금액</li>
 									<li>
 										<h3 stlye="font-weight: bold;">
-											<span class="counter" style="font-size: 20px;">${fun.total }</span>
+											<span class="counter" style="font-size: 20px;">${Integer.parseInt(String.valueOf(Math.round(fun.total/10)))},0</span>
 											원
 										</h3>
 									</li>
@@ -109,7 +109,8 @@
             </div>
         </div>
     </section>
-
+ <script src="resources/main/js/jquery.counterup.min.js"></script>
+<script src="resources/main/js/custom.js"></script>
    
 </body>
 </html>
