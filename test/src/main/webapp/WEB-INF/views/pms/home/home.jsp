@@ -7,11 +7,23 @@
 		<div class="col-md-12 grid-margin">
 			<div class="row">
 				<div class="col-12 col-xl-8 mb-4 mb-xl-0">
-					<h3 class="font-weight-bold">Welcome Aamir</h3>
-					<h6 class="font-weight-normal mb-0">
+					<h3 class="font-weight-bold">전체 진행율</h3>
+					<!-- <h6 class="font-weight-normal mb-0">
 						All systems are running smoothly! You have <span
 							class="text-primary">3 unread alerts!</span>
-					</h6>
+					</h6> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="progress">
+					<div id="allPrgBar" class="progress-bar" role="progressbar"
+						style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+						aria-valuemax="100">0%</div>
 				</div>
 			</div>
 		</div>
@@ -94,7 +106,7 @@
 		<!-- team modal end -->
 	</div>
 </div>
-
+===================${myPrj.getPrj_id()}==========================
 <script>
 	$(function() {
 		$.ajax({
@@ -105,37 +117,68 @@
 		}).done(function(json) {
 			for(team of json) {
 				$("#teamSelect").append(`
-				<option id="opt\${team.prj_id}" data-master_id="\${team.master_id}" data-prj_id="\${team.prj_id}">프로젝트명 : \${team.prj_name}</option>
+				<option id="opt\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
 				`);
 			};
+			$("#teamSelect").val('${myPrj.getPrj_id()}');
+			var a = $("#mySelect").find("[value=${myPrj.prj_id}]").text()
+			$("#title").html(a);
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 리스트 출력 실패");
 		});
 		if(${sessionScope.myPrj == null}) {
 			$('#teamSelectModal').modal('show');
+			
+		} else {
+			$.ajax({
+				url : "allCheck",
+				type : "GET",
+				dataType : "json"
+			}).done(function(result) {
+				console.log(result);
+				$("#allPrgBar").attr("aria-valuenow", result);
+				$("#allPrgBar").html(result+"%");
+				$("#allPrgBar").css("width", result+"%");
+				
+				var pname = $("#teamSelect").find("[value=${myPrj.prj_id}]").text();
+				$("#title").html(" "+pname);
+				$("#teamSelect").val('${myPrj.getPrj_id()}');
+			}).fail(function(xhr, status, message) {
+				alert("프로젝트 리스트 출력 실패");
+			});
 		}
 	});
 	
 	$("#selectModal").on("change", function () { 
 		var prj_id = $(this).find("option:selected").data("prj_id");
 		var master_id = $(this).find("option:selected").data("master_id");
+		var prj_name = $(this).find("option:selected").data("prj_name");
 		console.log(prj_id);
 		console.log(master_id);
-		debugger
+		console.log(prj_name);
 		$.ajax({
 			url : "myPrj",
 			type : "GET",
 			data : {
 				prj_id : prj_id,
-				master_id : master_id
+				master_id : master_id,
+				prj_name: prj_name
 			}
-		}).done(function() {
+		}).done(function(result) {
+			console.log(result);
+			$("#allPrgBar").attr("aria-valuenow", result.percent);
+			$("#allPrgBar").html(result.percent+"%");
+			$("#allPrgBar").css("width", result.percent+"%");
+			
 			$("#teamSelectModal").modal('hide')
 			$("#right-sidebar").attr("class", "settings-panel");
+			
+			$("#title").html(" "+prj_name);
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
 		});
-		
-		
 	});
+	
+	
+	
 </script>

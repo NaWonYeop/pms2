@@ -15,6 +15,7 @@
 			type="button" data-toggle="minimize">
 			<span class="icon-menu"></span>
 		</button>
+		<div id="title">&nbsp;</div>
 		<ul class="navbar-nav navbar-nav-right">
 			<li class="nav-item nav-profile dropdown"><a
 				class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
@@ -25,8 +26,7 @@
 					aria-labelledby="profileDropdown">
 					<a class="dropdown-item" href="logout"> <i
 						class="ti-power-off text-primary"></i> Logout
-					</a>
-					<a class="dropdown-item" href="home"> <i
+					</a> <a class="dropdown-item" href="home"> <i
 						class="ti-home text-primary"></i> Home
 					</a>
 				</div></li>

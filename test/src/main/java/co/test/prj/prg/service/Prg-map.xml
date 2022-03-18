@@ -19,6 +19,15 @@
 		WHERE prg_manager = #{prg_manager}
 	</select>
 
+
+	<select id="allCheck" resultType="String"
+		parameterType="co.test.prj.prg.service.PrgVO">
+		SELECT ROUND(SUM(prg_cmp_prop)/COUNT(prg_id) * 100, 0)
+		AS percent
+		FROM PROGRESS
+		WHERE prj_id = #{prj_id} and prg_manager IS NOT NULL
+	</select>
+
 	<!-- calandar형 조회 -->
 	<select id="calSelectList"
 		resultType="co.test.prj.prg.service.PrgVO">

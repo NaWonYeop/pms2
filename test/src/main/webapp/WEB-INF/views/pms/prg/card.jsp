@@ -135,8 +135,8 @@
 						$("#insertTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 					};
 				}).fail(function(xhr, status, message) {
-					alert("1");
-					alert(" status: " + status + " er:" + message);
+					console.log("1");
+					console.log(" status: " + status + " er:" + message);
 				});
 			};
 		});
@@ -160,13 +160,18 @@
 			$("#card").empty();
 			for(prg of json) {
 				if(prg.level == 1) {
-					$("#ulForm").append(`<li>
+					$("#ulForm").append(`
+						
+					<li>
+						<div class="progress">
+							<div id="prgBar\${prg.prg_id}" class="progress-bar" role="progressbar" style="width: 100%"
+							aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+						</div>
 						<div class="form-check">
 							<label class="form-check-label"> <input class="checkbox"
 								type="checkbox">\${prg.prg_content}
 							</label>
 						</div> 
-						<i class="ti-angle-up"></i>
 						<i id="midBtn" data-prg_id="\${prg.prg_id}" class="remove ti-close"></i>
 					</li>`);
 					
@@ -204,7 +209,6 @@
 				}
 			}
 		}).fail(function () {
-			alert("2");
 			console.log('리스트 출력 실패');
 		});
 	}
@@ -225,8 +229,7 @@
 			$("#prgBar"+prg_id).html(iresult+"%");
 			$("#prgBar"+prg_id).css("width", iresult+"%");
 		}).fail(function(xhr, status, message) {
-			alert("3");
-			alert(" status: " + status + " er:" + message);
+			console.log(" status: " + status + " er:" + message);
 		});
 	}
 </script>
@@ -243,8 +246,7 @@
 					`);
 		};
 	}).fail(function(xhr, status, message) {
-		alert("4");
-		alert(" status: " + status + " er:" + message);
+		console.log(" status: " + status + " er:" + message);
 	});
 
 	// 완료버튼 만들기
@@ -265,7 +267,6 @@
 		}).done(function(result) {
 			list();
 		}).fail(function (xhr, status, msg) {
-			alert("5");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -284,7 +285,6 @@
 			$('#exampleModalCenter').modal('hide');
 			list();
 		}).fail(function (xhr, status, msg) {
-			alert("6");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -308,11 +308,10 @@
 			dataType: "text"
 		}).done(function (result) {
 			if(result == 'fail') {
-				alert("삭제할 수 없습니다.");
+				console.log("삭제할 수 없습니다.");
 			}
 			list();
 		}).fail(function (xhr, status, msg) {
-			alert("7");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -337,7 +336,6 @@
 			console.log(result);
 			list();
 		}).fail(function (xhr, status, msg) {
-			alert("7");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});
@@ -377,15 +375,14 @@
 				$("#updateTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 			};
 		}).fail(function(xhr, status, message) {
-			alert("8");
-			alert(" status: " + status + " er:" + message);
+			console.log(" status: " + status + " er:" + message);
 		});
 	});
 	
 	
 	// 수정 실행하기
 	$(".modal-footer").on("click", "#updateSumbitBtn", function() {
-		alert("수정 실행");
+		console.log("수정 실행");
 		var seriaData = $("#updateForm").serialize();
 		console.log(seriaData);
 		$.ajax({
@@ -397,7 +394,6 @@
 			$('#updateModal').modal('hide');
 			list();
 		}).fail(function (xhr, status, msg) {
-			alert("9");
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
 	});

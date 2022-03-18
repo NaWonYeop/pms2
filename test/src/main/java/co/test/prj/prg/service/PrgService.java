@@ -23,4 +23,6 @@ public interface PrgService {
 	int smlCheck(PrgVO prg);
 
 	String prgCheck(PrgVO prg);
+	
+	String allCheck(PrgVO prg);
 }

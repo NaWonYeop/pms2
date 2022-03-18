@@ -18,8 +18,8 @@
 				<i class="icon-layout menu-icon"></i> <span class="menu-title">Propose</span>
 		</a></li>
 
-		<li class="nav-item"><a class="nav-link" href="msprogress">
-				<i class="icon-paper menu-icon"></i> <span class="menu-title">Calendar</span>
+		<li class="nav-item"><a class="nav-link" href="msprogress"> <i
+				class="icon-paper menu-icon"></i> <span class="menu-title">Calendar</span>
 		</a></li>
 
 		<li class="nav-item"><a class="nav-link" href="mscard"> <i
@@ -31,8 +31,5 @@
 		<li class="nav-item"><a class="nav-link" href="msnotice"> <i
 				class="icon-paper menu-icon"></i> <span class="menu-title">Notice</span>
 		</a></li>
-		
-		
-		
 	</ul>
 </nav>

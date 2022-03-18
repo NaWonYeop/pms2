@@ -31,7 +31,7 @@ public class PrgController {
 	public String card(HttpSession session, Model model) {
 		return "pms/prg/card";
 	}
-	
+
 	@RequestMapping("/prgSelectList")
 	@ResponseBody
 	public List<PrgVO> prgSelectList(HttpSession session, Model model) {
@@ -155,16 +155,30 @@ public class PrgController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("/prgCheck")
 	@ResponseBody
 	public String prgCheck(PrgVO prg) {
-		
-		String percent = String.valueOf(prgDao.prgCheck(prg));
+
+		String percent = prgDao.prgCheck(prg);
 		System.out.println("percent: " + percent);
-		if(percent.equals("null")) {
+		if (percent.equals("null")) {
 			percent = "0";
 			System.out.println("percent 변경 후" + percent);
+		}
+		return percent;
+	}
+
+	@RequestMapping("/allCheck")
+	@ResponseBody
+	public String allCheck(HttpSession session, PrgVO prg) {
+		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
+		prg.setMaster_id(myPrj.getMaster_id());
+		prg.setPrj_id(myPrj.getPrj_id());
+		
+		String percent = prgDao.allCheck(prg);
+		if (percent == null) {
+			percent = "0";
 		}
 		return percent;
 	}
