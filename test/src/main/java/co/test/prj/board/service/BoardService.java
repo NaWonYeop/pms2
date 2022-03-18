@@ -11,9 +11,9 @@ public interface BoardService
 	
 	List<BoardVO> boardSearchList(BoardVO vo);
 	
-	List<BoardVO> boardProjectList();
+	List<BoardVO> boardProjectList(BoardVO vo);
 	
-	List<BoardVO> boardNoticeProjectList();
+	List<BoardVO> boardNoticeProjectList(BoardVO vo);
 	
 	BoardVO projectBoardSelect(BoardVO vo);
 	

@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.test.prj.board.service.BoardService;
 import co.test.prj.board.service.BoardVO;
+import co.test.prj.team.service.MyPrjVO;
 import co.test.prj.user.service.UserService;
 
 @Controller
 public class BoardController
 {
+	private static final BoardVO BoardVO = null;
 	@Autowired BoardService boardDao;
 	@Autowired UserService userDao;
 	//보드리스트
@@ -148,16 +150,19 @@ public class BoardController
 		}
 	
 	
-	//pms 프로젝트 공지사항
+	//pms 프로젝트 게시판
 	@RequestMapping("/msboard")
-	public String boardList(Model model) {
-		List<BoardVO> list = boardDao.boardProjectList();
+	public String boardList(Model model,HttpSession session) {
+		BoardVO vo = new BoardVO(); 
+		MyPrjVO sp =(MyPrjVO)session.getAttribute("myPrj");
+		vo.setPrj_id(String.valueOf(sp.getPrj_id()));
+		List<BoardVO> list = boardDao.boardProjectList(vo);
 		model.addAttribute("border", list);
 		return "pms/board/projectboardList";
 	}
 	
 	//프로젝트 단건조회
-	@RequestMapping("/projectBoardSelect")
+	@RequestMapping("/msprojectBoardSelect")
 	public String projectboardSelect(BoardVO vo,Model model) {
 		vo = boardDao.projectBoardSelect(vo);
 		model.addAttribute("board",vo);
@@ -165,18 +170,20 @@ public class BoardController
 	}
 	
 	//프로젝트게시판 입력
-	@RequestMapping("/projectBoardInsertForm")
+	@RequestMapping("/msprojectBoardInsertForm")
 	public String projectboardInsertForm() {
 		
 		return "pms/board/projectboardInsertForm";
 	}
-	@RequestMapping("projectBoardInsert")
+	//입력2
+	@RequestMapping("/msprojectBoardInsert")
 	public String projectboardInsert(BoardVO vo, Model model, HttpSession session) {
+		session.getAttribute("myPrj");
 		boardDao.boardInsert(vo);
 		return "redirect:/msboard";
 	}
 	//프로젝트게시판 삭제
-	@RequestMapping("projectBoardDelete")
+	@RequestMapping("/msprojectBoardDelete")
 	public String projectboardDelete(BoardVO vo,Model model,HttpSession session)
 	{
 		if(session.getAttribute("sessionUser")==null)
@@ -189,7 +196,7 @@ public class BoardController
 	}
 	
 	//업데이트 화면
-		@RequestMapping("/projectboardUpdateform")
+		@RequestMapping("/msprojectboardUpdateform")
 		public String projectboardUpdateform(BoardVO vo,Model model,HttpSession session)
 		{
 			if(session.getAttribute("sessionUser")==null)
@@ -204,7 +211,7 @@ public class BoardController
 		}
 	
 	//프로젝트게시판 업데이트
-	@RequestMapping("/projectboardUpdate")
+	@RequestMapping("/msprojectboardUpdate")
 	public String projectboardUpdate(BoardVO vo,Model model)
 	{
 		boardDao.boardUpdate(vo);
@@ -213,33 +220,37 @@ public class BoardController
 	
 	//pms 공지사항
 		@RequestMapping("/msnotice")
-		public String noticeList(Model model) {
-			List<BoardVO> list = boardDao.boardNoticeProjectList();
+		public String noticeList(Model model, HttpSession session) {
+			BoardVO vo = new BoardVO();
+			MyPrjVO no = (MyPrjVO)session.getAttribute("myPrj");
+			vo.setPrj_id(String.valueOf(no.getPrj_id()));
+			List<BoardVO> list = boardDao.boardNoticeProjectList(vo);
 			model.addAttribute("notice", list);
 			return "pms/board/noticeList";
 		}
 		
 		//프로젝트 단건조회
-		@RequestMapping("/noticeBoardSelect")
+		@RequestMapping("/msnoticeBoardSelect")
 		public String noticeboardSelect(BoardVO vo,Model model) {
 			vo = boardDao.projectBoardSelect(vo);
 			model.addAttribute("board",vo);
 			return "pms/board/noticeSelect";
 		}
 		//입력
-		@RequestMapping("/noticeBoardInsertForm")
+		@RequestMapping("/msnoticeBoardInsertForm")
 		public String noticeboardInsertForm() {
 			
 			return "pms/board/noticeboardInsertForm";
 		}
-		@RequestMapping("noticeBoardInsert")
+		@RequestMapping("/msnoticeBoardInsert")
 		public String noticeboardInsert(BoardVO vo, Model model, HttpSession session) {
+			session.getAttribute("myPrj");
 			boardDao.boardInsert(vo);
 			return "redirect:/msnotice";
 		}
 		//삭제
 		
-		@RequestMapping("noticeBoardDelete")
+		@RequestMapping("/msnoticeBoardDelete")
 		public String noticeboardDelete(BoardVO vo,Model model,HttpSession session)
 		{
 			if(session.getAttribute("sessionUser")==null)
@@ -251,7 +262,7 @@ public class BoardController
 			return "redirect:/msnotice";
 		}
 		//업데이트
-		@RequestMapping("/noticeboardUpdateform")
+		@RequestMapping("/msnoticeboardUpdateform")
 		public String noticeboardUpdateform(BoardVO vo,Model model,HttpSession session)
 		{
 			if(session.getAttribute("sessionUser")==null)
@@ -265,7 +276,7 @@ public class BoardController
 			return "pms/board/noticeboardUpdateform";
 		}
 		//업데이트
-		@RequestMapping("/noticeboardUpdate")
+		@RequestMapping("/msnoticeboardUpdate")
 		public String noticeboardUpdate(BoardVO vo,Model model)
 		{
 			boardDao.boardUpdate(vo);

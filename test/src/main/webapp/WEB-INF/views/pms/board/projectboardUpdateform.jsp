@@ -14,12 +14,10 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">게시판 수정페이지</h2>
+							<h2 style="text-align: center; position: relative; right: 3%;">게시판 수정페이지</h2>
 						</div>
 					</div>
-						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
-						</div>
+						
 				</div>
 			</div>
 		</div>
@@ -35,7 +33,7 @@
       <div class="row">
         <div class="col-12">
                  <div class="col-12">
-         			<h2 class="contact-title col-9" style="display: inline-block;">게시판 수정</h2>
+         			<h2 class="contact-title col-9" style="display: inline-block; text-align: center; position: relative; left: 10%;">게시판 수정</h2>
           			<c:if test="${sessionUser.user_ath eq  'master'}">
           			<h4 class="col-2" style="display: inline-block;">공지여부<input type="checkbox" id="confirm-checkbox"> <label
             for="confirm-checkbox"></label></h4>
@@ -44,7 +42,7 @@
         </div>
         </div>
         <div class="col-lg-12">
-          <form class="form-contact contact_form" onsubmit="return checkbox()" action="freeboardUpdate" method="post" id="contactForm" novalidate="novalidate">
+          <form class="form-contact contact_form" onsubmit="return checkbox()" action="msprojectboardUpdate" method="post" id="contactForm" novalidate="novalidate">
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
@@ -63,7 +61,7 @@
              <input type="hidden" id="brd_id" name="brd_id" value="${board.brd_id }">
             </div>
             <div class="form-group mt-3" style="display: inline-block;" >
-              <button type="submit" class="button button-contactForm btn_1" >등록</button>
+              <button type="submit" class="btn btn-info" >수정</button>
             </div>
           </form>
         </div>
