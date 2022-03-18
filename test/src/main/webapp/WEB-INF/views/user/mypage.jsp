@@ -113,7 +113,7 @@
 											<c:forEach items="${MyFunding}" var="Funding">
 												<tr>
 													<td>${Funding.prj_name}</td>
-													<td>D-${Funding.rwd_name}</td>
+													<td>${Funding.rwd_name}</td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>

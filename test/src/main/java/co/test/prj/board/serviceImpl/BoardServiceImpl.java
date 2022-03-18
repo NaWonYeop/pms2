@@ -90,15 +90,15 @@ public class BoardServiceImpl implements BoardService
 	}
 
 	@Override
-	public List<BoardVO> boardProjectList() {
+	public List<BoardVO> boardProjectList(BoardVO vo) {
 		
-		return map.boardProjectList();
+		return map.boardProjectList(vo);
 	}
 
 	@Override
-	public List<BoardVO> boardNoticeProjectList() {
+	public List<BoardVO> boardNoticeProjectList(BoardVO vo) {
 		
-		return map.boardNoticeProjectList();
+		return map.boardNoticeProjectList(vo);
 	}
 
 	@Override

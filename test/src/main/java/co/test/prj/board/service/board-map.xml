@@ -19,7 +19,7 @@
 		resultType="co.test.prj.board.service.BoardVO">
 		SELECT BRD_ID,BRD_TTL,BRD_REG_DATE,U.USER_NAME,B.BRD_NTC_PROP
 		FROM BOARD B,"user" U
-		WHERE PRJ_ID = #{prj_id} AND B.USER_ID=U.USER_ID
+		WHERE B.USER_ID=U.USER_ID AND PRJ_ID = #{prj_id} AND BRD_NTC_PROP=0
 		ORDER BY BRD_NTC_PROP DESC
 	</select>
 	

@@ -17,39 +17,25 @@
 </style>
 </head>
 <body>
-	<section class="breadcrumb breadcrumb_bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="breadcrumb_iner text-center">
-						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">게시판 상세페이지</h2>
-						</div>
-					</div>
-						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
-						</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- breadcrumb start-->
+	
 	<!--================Blog Area =================-->
+	<div class="content-wrapper">
 	<section class="blog_area single-post-area section_padding">
+	<div class="row">
 		<div class="container">
-			<div class="row">
+			
 				<div class="col-lg-12 posts-list">
 					<div class="single-post">
 
 						<div class="blog_details">
 							<h2 style="display: inline;">${board.brd_ttl }</h2>
 							<c:if test="${sessionUser.user_id eq board.user_id }">
-							<form action="freeboardUpdateform" class="formbtn">
-								<input type="submit" class="btn_4" value="수정"></button>
+							<form action="msprojectboardUpdateform" class="formbtn">
+								<input type="submit" class="btn btn-info" value="수정"></button>
 								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							</form>
-							<form action="freeboardDelete" class="formbtn">
-								<input type="submit" class="btn_4" value="삭제"></button>
+							<form action="msprojectBoardDelete" class="formbtn">
+								<input type="submit" class="btn btn-danger" value="삭제"></button>
 								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							</form>
 							</c:if>
@@ -102,7 +88,7 @@
 							<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							<input type="hidden" name="user_id" id="user_id" value="${sessionUser.user_id }">
 							<div class="form-group mt-3 text-right">
-								<button type="submit"  class="button btn_1 button-contactForm">add
+								<button type="submit"  class="btn btn-primary todo">add
 									Reply</button>
 							</div>
 					</form>
@@ -161,37 +147,6 @@
 			);//done끝
 		});//ajax끝
 		
-		function loginCheck(){
-			 toastr.options = {
-					  "closeButton": false,
-					  "debug": false,
-					  "newestOnTop": false,
-					  "progressBar": true,
-					  "positionClass": "toast-top-center",
-					  "preventDuplicates": false,
-					  "onclick": null,
-					  "showDuration": "100",
-					  "hideDuration": "1000",
-					  "timeOut": "1500",
-					  "extendedTimeOut": "1000",
-					  "showEasing": "swing",
-					  "hideEasing": "linear",
-					  "showMethod": "fadeIn",
-					  "hideMethod": "fadeOut"
-					}    
-			 return true;
-		<%-- 	<% UserVO user=(UserVO)session.getAttribute("sessionUser");
-				if(user==null)
-				{%>
-					toastr.warning('로그인이 필요합니다.');
-					return false;	
-				<%}
-				else
-				{%>
-					return true;
-					
-				<%}%>; --%>
-		}
 		
 	</script>
 </body>
