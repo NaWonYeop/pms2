@@ -77,7 +77,7 @@
 					<div class="modal-header">
 						<label>My Project</label>
 					</div>
-					<div class="modal-body">
+					<div id="selectModal" class="modal-body">
 						<select id="teamSelect" class="js-example-basic-single w-80">
 							<option selected>프로젝트를 선택하세요</option>
 						</select>
@@ -116,13 +116,12 @@
 		}
 	});
 	
-	$("#insertTeam").on("click", function(event) {
-		var prj_id = $("#opt"+team.prj_id).data("prj_id");
-		var master_id = $("#opt"+team.prj_id).data("master_id");
-		
-		console.log('prj_id= ' + prj_id);
-		console.log('master_id= ' + master_id);
-
+	$("#selectModal").on("change", function () { 
+		var prj_id = $(this).find("option:selected").data("prj_id");
+		var master_id = $(this).find("option:selected").data("master_id");
+		console.log(prj_id);
+		console.log(master_id);
+		debugger
 		$.ajax({
 			url : "myPrj",
 			type : "GET",
@@ -131,9 +130,11 @@
 				master_id : master_id
 			}
 		}).done(function() {
-			$('#teamSelectModal').modal('hide');
+			$("#right-sidebar").attr("class", "settings-panel");
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
 		});
+		
+		
 	});
 </script>
