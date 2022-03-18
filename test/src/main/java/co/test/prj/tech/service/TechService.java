@@ -67,4 +67,5 @@ public interface TechService {
 	List<TechVO> jobNameSer(String user_name);
 	List<TechVO> jobTitleSer(String user_job_ttl);
 	
+	AppVO projectOfrAppend(AppVO app);
 }

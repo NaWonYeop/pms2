@@ -16,6 +16,7 @@ public class TechVO {
 	private int user_tel;
 	private String app_stt;
 	private int user_id;
+	private int app_id;
 	
 	//평가하기
 	private String tm_dept;
