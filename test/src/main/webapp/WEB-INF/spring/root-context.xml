@@ -25,7 +25,7 @@
               always-use-default-target="true" />
 	
 		
-      <logout logout-url="/logout" logout-success-url="/home"   delete-cookies="" />
+      <logout logout-url="/logout" logout-success-url="/home"   delete-cookies="JSESSIONID" invalidate-session="true"/>
        <csrf disabled="true" />
        <access-denied-handler error-page="/home"/>
    </http>
