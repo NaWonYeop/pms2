@@ -24,5 +24,6 @@ public class TechVO {
 	private String prj_name;
 	private double str_avg;
 	private int str_result;
+	private int prj_devEd_prop;
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@
 	<div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="contact-title">등록 및 수정</h2>
+                <h2 class="contact-title">${updateLoadCheck eq 'jobMain' ? '등록 및 수정하기' : '수정하기' }</h2>
             </div>
             <div class="col-lg-8">
             <form class="form-contact contact_form" action="jobInsert" method="post" id="contactForm" novalidate="novalidate">
@@ -50,20 +51,23 @@
                     <input type="hidden" id="user_id" name="user_id" value="${sessionUser.user_id }"> 
                     <div class="col-12">
                         <div class="form-group">
-                        <p>제목</p>
-                        <input class="form-control" name="user_job_ttl" id="user_job_ttl" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Title'" placeholder = 'Enter Title'>
+	                        <p>제목</p>
+	                        <input class="form-control" name="user_job_ttl" id="user_job_ttl" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Title'" placeholder = 'Enter Title' 
+	                        	value="<c:if test="${ttlCheck.user_job_ttl != null}">${ttlCheck.user_job_ttl }</c:if>" >
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
                             <p>내용</p>
-                            <textarea class="form-control w-100" name="user_job_cnt" id="user_job_cnt" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Content'" placeholder = 'Enter Content'></textarea>
+                            <textarea class="form-control w-100" name="user_job_cnt" id="user_job_cnt" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Content'" 
+                            placeholder = 'Enter Content'><c:if test="${ttlCheck.user_job_cnt != null}">${ttlCheck.user_job_cnt }</c:if></textarea>
                         </div>
                     </div>
                     <div class="col-9">
                         <div class="form-group mt-3">
-                            <button type="submit" class="button">등록하기</button>
-                            <button type="button" class="button" onclick="location.href='jobSelectList'">취소하기</button>
+                            <button type="submit" class="button">${updateLoadCheck eq 'jobMain' ? '등록 및 수정하기' : '수정하기' }</button>
+                            <button type="button" class="button" 
+                            onclick="${updateLoadCheck eq 'jobDetail' ? "location.href='jobDetail'" : "location.href='jobSelectList'" }">취소하기</button>
                         </div>
                     </div>
                 </div>

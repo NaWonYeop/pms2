@@ -113,8 +113,8 @@ button {
 													<h5>
 														<a href="jobDetail?user_id=${memberList.user_id }"
 															style="font-size: x-large;">${memberList.user_name }
-															| <c:if test="${memberList.user_crr != null}">경력 ${memberList.user_crr }년</c:if>
-															<c:if test="${memberList.user_crr eq null}">경력없음</c:if> |
+															| <c:if test="${memberList.user_crr != 0}">경력 ${memberList.user_crr }년</c:if>
+															<c:if test="${memberList.user_crr eq 0}">경력없음</c:if> |
 															0${memberList.user_tel }
 														</a> <input type="hidden" id="uId"
 															value="${memberList.user_id }">
@@ -170,8 +170,8 @@ button {
 													<p>Conduct by:</p>
 													<h5>
 														<a href="jobDetail?user_id=${prjOffer.user_id }">${prjOffer.user_name }
-															| <c:if test="${prjOffer.user_crr != null}">경력 ${prjOffer.user_crr }년</c:if>
-															<c:if test="${prjOffer.user_crr eq null}">경력없음</c:if> |
+															| <c:if test="${prjOffer.user_crr != 0}">경력 ${prjOffer.user_crr }년</c:if>
+															<c:if test="${prjOffer.user_crr eq 0}">경력없음</c:if> |
 															0${prjOffer.user_tel }
 														</a> <input type="hidden" id="uId"
 															value="${prjOffer.user_id }">
@@ -244,8 +244,8 @@ button {
 														<p>Conduct by:</p>
 														<h5>
 															<a href="jobDetail?user_id=${ofterList.user_id }">${ofterList.user_name }
-																| <c:if test="${ofterList.user_crr != null}">경력 ${ofterList.user_crr }년</c:if>
-																<c:if test="${ofterList.user_crr eq null}">경력없음</c:if> |
+																| <c:if test="${ofterList.user_crr != 0}">경력 ${ofterList.user_crr }년</c:if>
+																<c:if test="${ofterList.user_crr eq 0}">경력없음</c:if> |
 																0${ofterList.user_tel }
 															</a> <input type="hidden" id="uId"
 																value="${ofterList.user_id }">
@@ -307,7 +307,7 @@ button {
 				<div class="row">
 					<!-- for문 start -->
 					<c:forEach items="${interest }" var="interest">
-						<div class="col-sm-12 col-lg-12 list${interest.user_id }">
+						<div class="col-sm-12 col-lg-12 hList${interest.user_id }">
 							<div class="single_special_cource">
 								<div class="special_cource_text" style="border: 0;">
 									<div class="col-12 author_info"
@@ -318,8 +318,8 @@ button {
 													<p>Conduct by:</p>
 													<h5>
 														<a href="jobDetail?user_id=${interest.user_id }">${interest.user_name }
-															| <c:if test="${interest.user_crr != null}">경력 ${interest.user_crr }년</c:if>
-															<c:if test="${interest.user_crr eq null}">경력없음</c:if> |
+															| <c:if test="${interest.user_crr != 0}">경력 ${interest.user_crr }년</c:if>
+															<c:if test="${interest.user_crr eq 0}">경력없음</c:if> |
 															0${interest.user_tel }
 														</a>
 													</h5>
@@ -424,14 +424,12 @@ button {
 									<div class="col-8">
 										<div class="author_img" style="padding-left: 30%; padding-top: 5%;">
 											<div class="author_info_text">
-												
 												<h5>
 												<a href="jobDetail?user_id="`+e+`" style="font-size:x-large; ">`+nam+` | 
 												`+crr+`  | 0`+tel+`</a>
 												
 												<input type="hidden" id="uId" value="`+e+`">
 												</h5>
-												
 											</div>
 										</div>
 									</div>
@@ -457,11 +455,12 @@ button {
 				},
 				success: function() {
 					toastr.success("거절되었습니다.")
-					$('.nopebtn'+e).remove();
+					$('.list'+e).remove();
 				}
 			})
 		}
 		function heartAccept(e, name, crr, tel) {
+			//app_id값이 있으면 아직스 실행안되게하기
 			$.ajax({
 				url: 'heartAccept',
 				type: 'post',
@@ -473,7 +472,7 @@ button {
 				success: function(result){
 					console.log(result);
 					toastr.success("신청 완료!");
-					$('.list'+e).remove();
+					$('.hList'+e).remove();
 					$('off').append(
 						`<div class="col-sm-12 col-lg-12 list">
 								<div class="single_special_cource">
@@ -524,7 +523,7 @@ button {
 				},
 				success: function() {
 					toastr.success("관심목록에서 삭제되었습니다.");
-					$('.single_special_cource'+e).remove();
+					$('.hList'+e).remove();
 				}
 			})
 		} 

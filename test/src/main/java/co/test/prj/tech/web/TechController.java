@@ -3,6 +3,7 @@ package co.test.prj.tech.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,8 @@ public class TechController {
 	}
 	
 	@RequestMapping("/jobDetail")
-	public String jobDetail(int user_id, Model model, HttpSession session) {
+	public String jobDetail(int user_id, Model model, HttpSession session, HttpServletRequest req) {
+		
 		UserVO vo = new UserVO();
 		vo.setUser_id(user_id);
 		model.addAttribute("jobDetail", userDao.jobSelect(vo));
@@ -121,7 +123,12 @@ public class TechController {
 	}
 	
 	@RequestMapping("/jobInsertMove")
-	public String jobInsertMove() {
+	public String jobInsertMove(String cmd,Model model, HttpSession session) {
+		
+		model.addAttribute("updateLoadCheck", cmd);
+		
+		UserVO userId = (UserVO)session.getAttribute("sessionUser");
+		model.addAttribute("ttlCheck", techDao.ttlCheck(userId));
 		return "job/jobInsert";
 	}
 	
@@ -130,6 +137,7 @@ public class TechController {
 		UserVO userId = (UserVO)session.getAttribute("sessionUser");
 		user.setUser_id(userId.getUser_id());
 		model.addAttribute(userDao.userUpdate(user));
+		
 		return "redirect:/jobSelectList";
 	}
 	

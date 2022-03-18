@@ -68,6 +68,8 @@
 	.table-bordered th, .table td, .table th, table.dataTable thead th, table.dataTable thead td {
 	border: 0;
 }
+
+
 </style>
 </head>
 <body>
@@ -138,7 +140,7 @@
 			
 			<div class="insertbtn">
 				<button type="button" id="insertbtn" class="btn_1"
-					onclick="location.href='jobInsertMove'" style="margin-bottom: 2%;">등록 및 수정</button>
+					onclick="location.href='jobInsertMove?cmd=jobMain'" style="margin-bottom: 2%;">등록 및 수정</button>
 			</div>
 			
 			<div class="textimonial_iner">
@@ -150,16 +152,18 @@
 							<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce">${inter.user_name }| ${inter.user_crr }년</p>
+											<p class="introduce" style="margin-left: 5%">${inter.user_name }| ${inter.user_crr }년</p>
+											<img alt="heart" src="resources/main/img/heart.png" style="float: right">
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${inter.user_id eq tech.user_id2 }">
-													<span class="btn_4">${tech.tech_name }</span>
+													<span class="btn_4" style="margin-bottom: 1%">${tech.tech_name }</span>
 												</c:if>
 											</c:forEach>
+											
 											<a href="jobDetail?user_id=${inter.user_id }">
-												<h3>${inter.user_job_ttl }</h3>
+												<h3 style="margin-left: 5%">${inter.user_job_ttl }</h3>
 											</a>
-											<p>${inter.user_job_cnt }</p>
+											<p style="margin-left: 5%">${inter.user_job_cnt }</p>
 											<div class="author_info">
 												<div class="author_img">
 													<div class="author_info_text">
@@ -208,16 +212,16 @@
 								<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce">${job.user_name }| ${job.user_crr }년</p>
+											<p class="introduce" style="margin-left: 5%">${job.user_name }| ${job.user_crr }년</p>
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${job.user_id eq tech.user_id2 }">
 													<span class="btn_4">${tech.tech_name }</span>
 												</c:if>
 											</c:forEach>
 											<a href="jobDetail?user_id=${job.user_id }">
-												<h3>${job.user_job_ttl }</h3>
+												<h3 style="margin-left: 5%">${job.user_job_ttl }</h3>
 											</a>
-											<p>${job.user_job_cnt }</p>
+											<p style="margin-left: 5%">${job.user_job_cnt }</p>
 											<div class="author_info">
 												<div class="author_img">
 													<div class="author_info_text">

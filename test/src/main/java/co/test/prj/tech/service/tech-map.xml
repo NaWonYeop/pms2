@@ -97,7 +97,7 @@
 	
 	<!-- 평가 -->
 	<select id="AssessList" parameterType="co.test.prj.project.service.ProjectVO" resultType="co.test.prj.tech.service.TechVO">
-		SELECT U.USER_NAME,T.TM_DEPT,U.USER_ID,P.PRJ_NAME,STR_RESULT, P.PRJ_ID
+		SELECT U.USER_NAME,T.TM_DEPT,U.USER_ID,P.PRJ_NAME,STR_RESULT, P.PRJ_ID, P.prj_devEd_prop
 		FROM TEAM T LEFT OUTER JOIN STAR S ON (S.USER_ID=T.USER_ID AND S.PRJ_ID=T.PRJ_ID ),PROJECT P,"user" U
 		WHERE T.PRJ_ID= #{prj_id} AND U.USER_ID=T.USER_ID AND P.PRJ_ID=T.PRJ_ID 
 	</select>
@@ -131,5 +131,9 @@
         FROM 
 		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
         where user_job_ttl like  '%'||#{USER_J_DATE}||'%'
+	</select>
+	
+	<select id="ttlCheck" resultType="co.test.prj.user.service.UserVO">
+		SELECT USER_JOB_TTL, USER_JOB_CNT FROM "user" WHERE USER_ID = #{user_id}
 	</select>
 </mapper>
