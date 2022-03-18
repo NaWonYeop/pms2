@@ -27,28 +27,10 @@
 <!-- swiper CSS -->
 <link rel="stylesheet" href="resources/main/css/slick.css">
 <!-- style CSS -->
-
+ <script src="resources/main/js/jquery-1.12.1.min.js"></script>
  <link rel="stylesheet" href="resources/main/css/nice-select.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
-<title><tiles:getAsString name="title" /></title>
-</head>
-<body>
-	<!--::header part start::-->
-	<tiles:insertAttribute name="header" />
-	<!-- Header part end-->
-
-	<tiles:insertAttribute name="body" />
-
-	<!-- footer part start-->
-	<tiles:insertAttribute name="footer" />
-	<!-- footer part end-->
-
-	<!-- jquery plugins here-->
-	<!-- jquery -->
- <script src="resources/main/js/jquery-1.12.1.min.js"></script>
-<!-- popper js -->
 <script src="resources/main/js/popper.min.js"></script>
 <!-- bootstrap js -->
 <script src="resources/main/js/bootstrap.min.js"></script>
@@ -71,6 +53,25 @@
 
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<title><tiles:getAsString name="title" /></title>
+</head>
+<body>
+	<!--::header part start::-->
+	<tiles:insertAttribute name="header" />
+	<!-- Header part end-->
+
+	<tiles:insertAttribute name="body" />
+
+	<!-- footer part start-->
+	<tiles:insertAttribute name="footer" />
+	<!-- footer part end-->
+
+	<!-- jquery plugins here-->
+	<!-- jquery -->
+
+<!-- popper js -->
+
 
 </body>
 </html>
