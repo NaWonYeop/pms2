@@ -229,7 +229,7 @@ button {
 
 
 			<div class="testimonial_slider">
-				<div class="row">
+				<div class="row off">
 					<!-- for문 start -->
 					<c:forEach items="${ofterList }" var="ofterList">
 						<c:if test="${ofterList.app_stt == 'ing' }">
@@ -307,7 +307,7 @@ button {
 				<div class="row">
 					<!-- for문 start -->
 					<c:forEach items="${interest }" var="interest">
-						<div class="col-sm-12 col-lg-12 list">
+						<div class="col-sm-12 col-lg-12 list${interest.user_id }">
 							<div class="single_special_cource">
 								<div class="special_cource_text" style="border: 0;">
 									<div class="col-12 author_info"
@@ -343,9 +343,19 @@ button {
 
 										<div class="col-4">
 											<div class="button-contactForm">
-												<button type="button"
-													class="joinbtn${interest.user_id} btn_4"
-													onclick="heartAccept(${interest.user_id})">신청</button>
+												<c:choose>
+													<c:when test="${interest.user_crr == null}">
+														<button type="button"
+														class="joinbtn${interest.user_id} btn_4"
+														onclick="heartAccept(${interest.user_id}, '${interest.user_name }', 0, ${interest.user_tel })">신청</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button"
+														class="joinbtn${interest.user_id} btn_4"
+														onclick="heartAccept(${interest.user_id}, '${interest.user_name }', ${interest.user_crr }, ${interest.user_tel })">신청</button>
+													</c:otherwise>
+												</c:choose>
+												
 												<button type="button"
 													class="nopebtn${interest.user_id} btn_4"
 													onclick="heartDelete(${interest.user_id})">삭제</button>
@@ -451,7 +461,7 @@ button {
 				}
 			})
 		}
-		function heartAccept(e) {
+		function heartAccept(e, name, crr, tel) {
 			$.ajax({
 				url: 'heartAccept',
 				type: 'post',
@@ -460,8 +470,46 @@ button {
 					master_id: ${sessionUser.user_id},
 					user_id: e
 				},
-				success: function(){
+				success: function(result){
+					console.log(result);
 					toastr.success("신청 완료!");
+					$('.list'+e).remove();
+					$('off').append(
+						`<div class="col-sm-12 col-lg-12 list">
+								<div class="single_special_cource">
+									<div class="special_cource_text" style="border: 0;">
+										<div class="col-12 author_info"
+											style="border-top: 0; margin-top: 0; padding-top: 0;">
+											<div class="col-8">
+												<div class="author_img">
+													<div class="author_info_text">
+														<p>Conduct by:</p>
+														<h5>
+															<a href="jobDetail?user_id=`+e+`">`+name+` | 
+																<c:if test="`+crr+` != 0}">경력 `+crr+`년</c:if>
+																<c:if test="`+crr+` eq 0}">경력없음</c:if> |
+																0`+tel+`
+															</a> 
+															<input type="hidden" id="uId" value="`+e+`">
+														</h5>
+													</div>
+												</div>
+												
+											</div>
+											<div class="col-4">
+												<div class="button-contactForm">
+													<button type="button" class="joinbtn`+e+` btn_4"
+														onclick="projectOfrAccept(`+e+`, `+result+`)">수락</button>
+													<button type="button"
+														class="nopebtn`+result+` btn_4"
+														onclick="projectOfrDecline(`+result+`)" style="margin-left: 33%;">취소</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>`		
+					);
 				}
 			})
 		}
@@ -476,7 +524,7 @@ button {
 				},
 				success: function() {
 					toastr.success("관심목록에서 삭제되었습니다.");
-					$('.nopebtn'+e).remove();
+					$('.single_special_cource'+e).remove();
 				}
 			})
 		} 

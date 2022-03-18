@@ -25,7 +25,7 @@
 	
 	<!-- 구직상세 참여프로젝트 >>> 경일 -->
 	<select id="jobJoinList" resultType="co.test.prj.tech.service.TechVO">
-		SELECT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME
+		SELECT DISTINCT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME
 		FROM PROJECT P, "user" U, APPLICATION A
 		WHERE P.MASTER_ID = #{master_id} AND SYSDATE <![CDATA[<]]> P.PRJ_OFR_ED AND P.MASTER_ID=U.USER_ID
 	</select>
@@ -84,6 +84,12 @@
 		INSERT INTO APPLICATION(APP_ID, PRJ_ID, MASTER_ID, USER_ID, APP_CLSFC, APP_STT)
 		VALUES(#{app_id}, #{prj_id}, #{master_id}, #{user_id}, 0, 'ing')
 	</insert>
+	
+	<select id="projectOfrAppend" parameterType="co.test.prj.application.service.AppVO" resultType="co.test.prj.application.service.AppVO">
+		SELECT APP_ID
+		FROM APPLICATION 
+		WHERE USER_ID = #{user_id} AND MASTER_ID = #{master_id} AND PRJ_ID = #{prj_id} AND APP_CLSFC = 1 AND APP_STT = 'ing'
+	</select>
 	
 	<delete id="heartDelete" parameterType="co.test.prj.interest.service.InterestVO">
 		DELETE FROM INTEREST WHERE USER_ID = #{user_id} AND USER_ID2 = #{user_id2}

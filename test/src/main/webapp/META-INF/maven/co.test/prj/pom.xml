@@ -252,6 +252,7 @@
 
 	</dependencies>
 	<build>
+		<resources> <resource> <directory>src/main/resources</directory> </resource> <resource> <directory>src/main/java</directory> <includes> <include>**/*.xml</include> </includes> </resource> </resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -278,6 +279,7 @@
 					<target>${java-version}</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
+					<encoding>UTF-8</encoding>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>

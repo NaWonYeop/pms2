@@ -134,6 +134,11 @@ public class TechServiceImpl implements TechService {
 		return map.offerFromPrj(project);
 	}
 
+	@Override
+	public AppVO projectOfrAppend(AppVO app) {
+		return map.projectOfrAppend(app);
+	}
+
 	
 	
 	

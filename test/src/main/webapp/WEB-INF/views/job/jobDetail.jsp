@@ -217,7 +217,7 @@
 			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
 	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
 	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청하기</button>
-	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청중</button>
+								</form>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
@@ -457,19 +457,24 @@
         }
         
         function requsetWork() {
-        	console.log(e);
         	$.ajax({
         		url: 'requestWork',
         		type: 'post', 
         		data: {
         			user_id: ${jobDetail.user_id},
         			prj_id: $("#pId").val(),
-        		}.done(function() {
-        			toastr.success('신청하기 성공!');
+        		},
+        		success: function(result) {
+        			if(result == 0) {
+ 	       				toastr.success('신청하기 성공!');
+ 	       				$('.modaldal').fadeOut();
+        			} else {
+        				toastr.warning('이미신청했거나 신청받은 기록이 있습니다.');
+        			}
         			
-        		})
+        		}
         	}) 
-        }
+        };
         
     </script>
     

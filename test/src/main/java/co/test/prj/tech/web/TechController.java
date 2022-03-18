@@ -136,12 +136,22 @@ public class TechController {
 	//구인 신청하기
 	@RequestMapping("/requestWork")
 	@ResponseBody
-	public void requestWork(HttpSession session, AppVO app) {
+	public int requestWork(HttpSession session, AppVO app) {
 		UserVO userId = (UserVO)session.getAttribute("sessionUser");
 		app.setMaster_id(userId.getUser_id());
 		app.setApp_clsfc(1);
 		app.setApp_stt("ing");
-		appDao.appInsert(app);
+		
+		AppVO test = appDao.appOvlp(app);
+		
+		int res;
+		if(test == null) {
+			appDao.appInsert(app);
+			res = 0;
+		} else {
+			res = 1;
+		}
+		return res;
 	}
 	
 	//찜하기
@@ -195,10 +205,13 @@ public class TechController {
 	//관심 신청
 	@RequestMapping("/heartAccept")
 	@ResponseBody
-	private void heartAccept(Model model, AppVO app, HttpSession session) {
+	private int heartAccept(Model model, AppVO app, HttpSession session, ProjectVO project) {
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
 		app.setMaster_id(uId.getUser_id());
-		model.addAttribute(techDao.heartAccept(app));
+		techDao.heartAccept(app);
+		
+		AppVO res= techDao.projectOfrAppend(app);
+		return res.getApp_id();
 	}
 	//관심삭제
 	@RequestMapping("/heartDelete")

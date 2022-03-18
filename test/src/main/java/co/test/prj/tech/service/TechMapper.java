@@ -65,4 +65,6 @@ public interface TechMapper {
 	//검색 2개
 	List<TechVO> jobNameSer(String user_name);
 	List<TechVO> jobTitleSer(String user_job_ttl);
+	
+	AppVO projectOfrAppend(AppVO app);
 }
