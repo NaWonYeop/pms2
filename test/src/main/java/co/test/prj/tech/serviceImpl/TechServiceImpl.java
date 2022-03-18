@@ -139,6 +139,11 @@ public class TechServiceImpl implements TechService {
 		return map.projectOfrAppend(app);
 	}
 
+	@Override
+	public UserVO ttlCheck(UserVO user) {
+		return map.ttlCheck(user);
+	}
+
 	
 	
 	

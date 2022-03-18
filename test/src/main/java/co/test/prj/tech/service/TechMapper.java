@@ -67,4 +67,7 @@ public interface TechMapper {
 	List<TechVO> jobTitleSer(String user_job_ttl);
 	
 	AppVO projectOfrAppend(AppVO app);
+	
+	//InsertPage title Check
+	UserVO ttlCheck(UserVO user);
 }

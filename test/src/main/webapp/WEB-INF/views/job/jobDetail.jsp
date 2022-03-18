@@ -180,7 +180,7 @@
 	            	<c:forEach items="${certDetail }" var="certList">
 				        <span class="btn_4">${certList.cert_name }</span>
 			        </c:forEach>
-	            <div class="row">
+	            <div class="row" style="margin-top: 5%;">
 	                <div class="col-lg-8 course_details_left">
 	                    <!-- <div class="main_image">
 	                        <img class="img-fluid" src="img/single_cource.png" alt="">
@@ -211,13 +211,12 @@
 	                <div class="col-lg-4 right-contents">
 	                    <c:choose>
 	                    	<c:when test="${sessionUser.user_id eq jobDetail.user_id }">
-	                    		<button type="button" id="updatebtn" class="btn_4" style="background-color: #F27457;" onclick="location.href='jobInsertMove'">수정하기</button>
+	                    		<button type="button" id="updatebtn" class="btn_4" style="background-color: #F27457;" onclick="location.href='jobInsertMove?cmd=jobDetail'">수정하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
 			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
 	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
 	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청하기</button>
-								</form>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
