@@ -26,6 +26,9 @@
 					<a class="dropdown-item" href="logout"> <i
 						class="ti-power-off text-primary"></i> Logout
 					</a>
+					<a class="dropdown-item" href="home"> <i
+						class="ti-home text-primary"></i> Home
+					</a>
 				</div></li>
 			<li class="nav-item nav-settings d-none d-lg-flex"><a
 				class="nav-link" href="#"> <i class="icon-ellipsis"></i>
