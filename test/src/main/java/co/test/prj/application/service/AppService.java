@@ -13,5 +13,7 @@ public interface AppService {
 	
 	int appPrjInsert(AppVO app);
 	
+	AppVO appliSelect(AppVO app);
+	
 	AppVO appOvlp(AppVO app);
 }

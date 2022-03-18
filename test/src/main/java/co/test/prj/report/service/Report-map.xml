@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.report.service.ReportMapper">
+<select id="reportList" resultType="co.test.prj.report.service.ReportVO">
+SELECT REPORT_ID,RPR_CNT,RPR_PRG_RT,U.USER_NAME, RPR_REG_DATE, CTF_ID
+		FROM REPORT R,"user" U
+		R.PRJ_ID=U.PRJ_ID
+		ORDER BY REPORT_ID DESC
+</select>
+
+<select id="reportSelect" resultType="co.test.prj.report.service.ReportVO"
+parameterType="co.test.prj.report.service.ReportVO">
+SELECT REPORT_ID,RPR_CNT,RPR_PRG_RT,U.USER_NAME, RPR_REG_DATE, CTF_ID
+		FROM REPORT R,"user" U
+		R.PRJ_ID=U.PRJ_ID AND R.PRJ_ID=#{prj_id}
+</select>
+
+<insert id="reportInsert" parameterType="co.test.prj.report.service.ReportVO">
+<selectKey keyProperty="report_id" resultType="int"
+			order="BEFORE">
+			SELECT MAX(report_id) + 1 FROM report
+		</selectKey>
+
+</insert>
+</mapper>

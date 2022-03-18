@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,31 +87,44 @@ a {
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<form action="userUpdate" method="post" onsubmit="return formCheck()">
-	
+			<h4 style="text-align: center;">개인정보 업데이트</h4>
 			<div class="card-body">
 				<input type="password" name="user_pwd" id="user_pwd"
-					class="form-control" placeholder="새로운 비밀번호"  required="required"><br>
-					<input type="password" name="pw1" id="pw1"
-					class="form-control" placeholder="비밀번호 확인"><br>
-				<input type="text" name="user_name" id="user_name"
-					class="form-control" placeholder="이름" required="required" value="${sessionUser.user_name}"><br><input
-					type="text" name="user_tel" id="user_tel" class="form-control"
-					placeholder="새로운 전화번호" required="required" maxlength="11" value="${sessionUser.user_tel }"><br> <input
-					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
+					class="form-control" placeholder="8자리부터 16자리까지 특수문자 포함시켜주세요" required="required"><br>
+				<input type="password" name="pw1" id="pw1" class="form-control"
+					placeholder="비밀번호 확인"><br> <input type="text"
+					name="user_name" id="user_name" class="form-control"
+					placeholder="이름" required="required"
+					value="${sessionUser.user_name}"><br>
+				<input type="text" name="user_tel" id="user_tel"
+					class="form-control" placeholder="새로운 전화번호" required="required"
+					maxlength="11" value="${sessionUser.user_tel }"><br> <input
+					id="btn-Yes" class="btn_1" type="submit" style="width: 100%;"
 					value="회원수정">
 			</div>
 		</form>
 	</div>
-<script type="text/javascript">
-function formCheck(){
-	if ($("#user_pwd").val() != $("#pw1").val()) {
-					alert("패스워드가 일치하지 않습니다.");
-					$("#user_pwd").val('');
-					$("#pw1").val('');
-					$("#user_pwd").focus();
-					return false;
-				}
-}
-</script>
+	<script type="text/javascript">
+		function formCheck() {
+
+			var regPassword = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,16}$/;
+
+			if ($("#user_pwd").val() != $("#pw1").val()) {
+				alert("패스워드가 일치하지 않습니다.");
+				$("#user_pwd").val('');
+				$("#pw1").val('');
+				$("#user_pwd").focus();
+				return false;
+			}
+
+			if (regPassword.test($("#user_pwd").val()) == false) {
+				alert("조건에 맞게 입력해주세요")
+				$("#user_pwd").val('');
+				$("#user_pwd").focus();
+				return false;
+			}
+
+		}
+	</script>
 </body>
 </html>
