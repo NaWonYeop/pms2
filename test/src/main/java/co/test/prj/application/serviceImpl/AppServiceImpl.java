@@ -51,4 +51,9 @@ public class AppServiceImpl implements AppService {
 		return map.appOvlp(app);
 	}
 
+	@Override
+	public AppVO appliSelect(AppVO app) {
+		return map.appliSelect(app);
+	}
+
 }

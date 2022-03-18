@@ -108,10 +108,10 @@ a {
 				
 				<BR>
 				<label>경력</label><input type="number" class="form-control"
-					id="user_crr" name="user_crr"><BR> 
+					id="user_crr" name="user_crr" required="required"><BR> 
 				
-				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="등록하기" onclick=""> <input type="reset"
+				<input id="btn-Yes" class="btn_1" style="width: 100%;"
+					type="submit" value="등록하기"> <input type="reset"
 					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
 					onclick="cancel()">
 			</div>

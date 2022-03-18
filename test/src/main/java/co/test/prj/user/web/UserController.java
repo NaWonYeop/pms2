@@ -27,11 +27,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.test.prj.application.service.AppService;
 import co.test.prj.application.service.AppVO;
 import co.test.prj.certificate.service.CertService;
 import co.test.prj.certificate.service.CertVO;
+import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.security.cunstomUser;
+import co.test.prj.team.service.TeamService;
+import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -45,7 +49,15 @@ public class UserController {
 
 	@Autowired
 	private CertService certDao;
-
+	
+	@Autowired
+	private ProjectService projectDao;
+	
+	@Autowired 
+	private AppService appDao;
+	
+	@Autowired 
+	private TeamService teamDao;
 	// 로그인폼
 	@RequestMapping("/loginForm")
 	public String loginForm() {
@@ -483,6 +495,39 @@ public class UserController {
 		model.addAttribute("AdminUser", userDao.AdminUserList());
 		return "admin/adminUser";
 	}
+	//프로젝트 상세페이지
+	@RequestMapping("/conFirmSelect")
+	public String conFirm(int prj_id,int app_id, Model model, ProjectVO project) {
+		project.setPrj_id(prj_id);
+		ProjectVO prj = projectDao.projectSelect(project);
+		model.addAttribute("App", app_id);
+		model.addAttribute("project", prj);
+		return "user/projectSelect";
+	}
+	//프로젝트 수락 
+	@RequestMapping("/conFirm")
+	public String confirm(int app_id, Model model, AppVO vo, HttpSession session) {
+		UserVO user = (UserVO) session.getAttribute("sessionUser");
+		vo.setApp_id(app_id);
+		vo.setApp_stt("ok");
+		appDao.appUpdate(vo);
+		vo = appDao.appliSelect(vo);
+		TeamVO team = new TeamVO();
+		team.setUser_id(user.getUser_id());
+		team.setMaster_id(vo.getMaster_id());
+		team.setPrj_id(vo.getPrj_id());
+		teamDao.teamInsert(team);
+		return "redirect:/mypage";
+	}
+	@RequestMapping("/refuse")
+	public String refuse(int app_id, Model model, AppVO vo) {
+		vo.setApp_id(app_id);
+		vo.setApp_stt("no");
+		appDao.appUpdate(vo);
+		vo = appDao.appliSelect(vo);
+		return "redirect:/home";
+	}
+	
 
 	@RequestMapping("/adminIce")
 	@ResponseBody
