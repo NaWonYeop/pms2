@@ -63,32 +63,32 @@
    <div class="row justify-content-center">
       <div class="col-sm-7">
          <aside class="single_sidebar_widget search_widget">
-            <form action="#">
-               <div class="form-group">
+            <form action="projectSearchPage">
+					<div class="form-group">
+						<div class="input-group mb-3">
+							<div class="form-select" id="default-select" style="width: 25%;">
+								<select name="type">
+									<option value="fnd">펀딩</option>
+									<option value="ofr">구인</option>
+								</select>
+							</div>
+							<input type="text" name="keyword" class="form-control"
+								placeholder='프로젝트명을 입력해 주세요' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '프로젝트명을 입력해 주세요'">
+							<div class="input-group-append">
 
-                  <div class="input-group mb-3">
+								<button class="btn" type="submit" style="padding: 0">
+									<img alt="search" src="resources/main/img/search.png"
+										height="37px">
 
-
-                     <div class="form-select" id="default-select" style="width: 25%;">
-                        <select>
-                           <option value=" 1">프로젝트 </option>
-                           <option value="1">펀딩</option>
-
-                        </select>
-                     </div>
-                     <input type="text" class="form-control"
-                        placeholder='Search Keyword' onfocus="this.placeholder = ''"
-                        onblur="this.placeholder = 'Search Keyword'">
-                     <div class="input-group-append">
-                        <button class="btn" type="submit" style="padding: 0">
-                           <!-- <i class="ti-search"></i> -->
-                           <img alt="search" src="resources/main/img/search.png" height="37px" >
-                        </button>
-                     </div>
-                  </div>
-               </div>
-              
-            </form>
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- 페이징 1페이지부터 2개씩 보여줄꺼다-->
+					<input type="hidden" name="pageNum" value="1"> <input
+						type="hidden" name="amount" value="5">
+				</form>
          </aside>
       </div>
    </div>
@@ -164,7 +164,7 @@
                         <ul class="blog-info-link">
                            <li><i class="far fa-comments"></i> 현재 펀딩금액</li>
                          
-                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">${fnd.total },</span>원 </div></h3></li>
+                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">${Integer.parseInt(String.valueOf(Math.round(fnd.total/10)))},0</span>원 </div></h3></li>
                           
                         </ul>
                      </div>
@@ -176,6 +176,7 @@
       </div>
    </section>
 	 <script src="resources/main/js/jquery.counterup.min.js"></script>
+<script src="resources/main/js/custom.js"></script>
 	 
 </body>
 </html>

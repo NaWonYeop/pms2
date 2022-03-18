@@ -218,7 +218,7 @@ ${project}<br>
 	                           <li> 
 		                           <h3 stlye="font-weight: bold;"> 
 		                           <div class="single_member_counter">
-		                           <span class="counter" style="font-size:25px;">${project.total_sum }</span>원 
+		                           <span class="counter" style="font-size:25px;">${Integer.parseInt(String.valueOf(Math.round(project.total_sum/10)))},0</span>원 
 		                           </div>
 		                           </h3>
 	                           </li>
@@ -357,7 +357,7 @@ ${project}<br>
 		console.log("가니?")
 		var won = 50000;
 		 $.ajax({
-				url : '/prj/ajaxCoin', 
+				url : 'ajaxCoin', 
 		        type :'POST',
 		        data: {
 		        	"won" : won
@@ -382,7 +382,7 @@ ${project}<br>
 		
 		$.ajax({
 			type : 'GET',
-			url : "/prj/ajaxAppPrjInsertForm",
+			url : "ajaxAppPrjInsertForm",
 			data : $("#ajaxAppPrjInsertForm").serialize(),
 			dataTyep: "json",
 			success : function (result) {
@@ -406,7 +406,7 @@ ${project}<br>
 			
 			//시세
 			$.ajax({
-				url : '/prj/ajaxSise', 
+				url : 'ajaxSise', 
 		        success: function(result){
 		        			        	
 					console.log(result);
@@ -531,7 +531,7 @@ ${project}<br>
 					
 					
 					 $.ajax({
-						url : '/prj/ajaxCashBuy', 
+						url : 'ajaxCashBuy', 
 				        type :'POST',
 				        data : JSON.stringify(save,
 				        		['user_id', 'buy_way', 'reward_id', 
@@ -593,6 +593,7 @@ ${project}<br>
 		}); //check2 클릭
 	
 	</script>
-	
+	<script src="resources/main/js/jquery.counterup.min.js"></script>
+<script src="resources/main/js/custom.js"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">게시판 수정페이지</h2>
+							<h2 style="float: right;">공지 수정페이지</h2>
 						</div>
 					</div>
 						<div >
@@ -35,7 +35,7 @@
       <div class="row">
         <div class="col-12">
                  <div class="col-12">
-         			<h2 class="contact-title col-9" style="display: inline-block;">게시판 수정</h2>		
+         			<h2 class="contact-title col-9" style="display: inline-block;">공지 수정</h2>		
         </div>
         </div>
         <div class="col-lg-12">

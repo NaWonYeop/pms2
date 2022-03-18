@@ -45,14 +45,18 @@
 <script src="resources/main/js/jquery.nice-select.min.js"></script>
 <!-- swiper js -->
 <script src="resources/main/js/slick.min.js"></script>
-<script src="resources/main/js/jquery.counterup.min.js"></script>
+
 <script src="resources/main/js/waypoints.min.js"></script>
 <!-- custom js -->
-<script src="resources/main/js/custom.js"></script>
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<!-- 숫자 세는거 -->
+<script src="resources/main/js/jquery.counterup.min.js"></script>
+<script src="resources/main/js/custom.js"></script>
 
 <title><tiles:getAsString name="title" /></title>
 </head>

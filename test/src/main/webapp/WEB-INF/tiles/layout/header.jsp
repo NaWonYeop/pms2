@@ -36,7 +36,7 @@
 							
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="mypage"
-									id="navbarDropdown" >My Page </a>
+									id="navbarDropdown" >${sessionUser.user_name } </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									
 										<a class="dropdown-item" href="myProject">프로젝트 관리</a>

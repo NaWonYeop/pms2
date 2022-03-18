@@ -225,7 +225,8 @@ input {
 														<li>
 															<h3 stlye="font-weight: bold;">
 																<div class="single_member_counter">
-																	<span class="counter" style="font-size: 25px;">${rwd.total_sum }</span>원
+																	<span class="counter" style="font-size: 25px;">
+																	${Integer.parseInt(String.valueOf(Math.round(rwd.total_sum/10)))},0</span>원
 																</div>
 															</h3>
 														</li>
@@ -371,7 +372,8 @@ input {
 														<li>
 															<h3 stlye="font-weight: bold;">
 																<div class="single_member_counter">
-																	<span class="counter" style="font-size: 25px;">${rwd.total_sum }</span>원
+																	<span class="counter" style="font-size: 25px;">
+																	${Integer.parseInt(String.valueOf(Math.round(rwd.total_sum/10)))},0</span>원
 																</div>
 															</h3>
 														</li>
@@ -462,7 +464,7 @@ input {
 		
 		$.ajax({
 			type : 'GET',
-			url : "/prj/ajaxMorePage",
+			url : "ajaxMorePage",
 			data : $("#morePage").serialize(),
 			dataTyep: "json",
 			success : function (result) {
@@ -541,7 +543,8 @@ input {
 	
 	</script>
 
-
+<script src="resources/main/js/jquery.counterup.min.js"></script>
+<script src="resources/main/js/custom.js"></script>
 
 
 </body>
