@@ -33,7 +33,10 @@ public class BoardController
 	public String freeboardSelect(BoardVO vo,Model model) {
 	
 		vo=boardDao.freeSelect(vo);
-		if(vo==null || vo.getBrd_ntc_prop()==1)
+		
+		int test=vo.getBrd_ntc_prop();
+		System.out.println(test);
+		if(vo==null || test==49)
 			return "redirect:/freeBoard";
 		model.addAttribute("board",vo);
 		return "board/boardSelect";
@@ -105,7 +108,7 @@ public class BoardController
 	
 		vo=boardDao.freeSelect(vo);
 		System.out.println(vo);
-		if(vo==null || vo.getBrd_ntc_prop()==0)
+		if(vo==null || vo.getBrd_ntc_prop()==48)
 			return "redirect:/noticeBoard";
 		model.addAttribute("board",vo);
 		return "notice/noticeSelect";

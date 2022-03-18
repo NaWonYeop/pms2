@@ -101,6 +101,7 @@
 							</div>
 							<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							<input type="hidden" name="user_id" id="user_id" value="${sessionUser.user_id }">
+							<input type="hidden" name="url" value="freeBoard">
 							<div class="form-group mt-3 text-right">
 								<button type="submit"  class="button btn_1 button-contactForm">add
 									Reply</button>
@@ -127,7 +128,7 @@
 					var date=result[i].rpl_reg_date;
 						
 						$(".comin").append(`
-								<div class="single-comment justify-content-between d-flex">
+								<div class="single-comment justify-content-between d-flex" id="reply\${result[i].rpl_id}">
 								<div class="user justify-content-between d-flex">
 									<div class="desc">
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
@@ -152,7 +153,7 @@
 			}).done(function(){$(".idd[name='${sessionUser.user_id}']").each(function(index,item){
 					console.log(item);
 					console.log($(item).attr('value'));
-					var obj="<a href='rplDelete?id="+$(item).attr('value')+"'>삭제<a>"
+					var obj="<a href='javascript:delrepl("+$(item).attr('value')+")'>삭제<a>"
 					
 					
 					$(item).append(obj)
@@ -192,7 +193,18 @@
 					
 				<%}%>; --%>
 		}
-		
+		function delrepl(id)
+		{
+			$('#reply'+id).remove();		
+			$.ajax({
+				url : "rplDelete",
+				type : "GET",
+				data : {
+					id : id
+				}})
+			console.log('여기까지옴');
+			
+		}
 	</script>
 </body>
 </html>

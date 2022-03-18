@@ -44,11 +44,11 @@
 						<div class="blog_details">
 							<h2 style="display: inline;">${board.brd_ttl }</h2>
 							<c:if test="${sessionUser.user_id eq board.user_id }">
-							<form action="freeboardUpdateform" class="formbtn">
+							<form action="adminNoticeUpdateform" class="formbtn">
 								<input type="submit" class="btn_4" value="수정"></button>
 								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							</form>
-							<form action="freeboardDelete" class="formbtn">
+							<form action="adminNoticeDelete" class="formbtn">
 								<input type="submit" class="btn_4" value="삭제"></button>
 								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							</form>
@@ -101,9 +101,11 @@
 							</div>
 							<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							<input type="hidden" name="user_id" id="user_id" value="${sessionUser.user_id }">
+							<input type="hidden" name="url" value="noticeBoard">
 							<div class="form-group mt-3 text-right">
 								<button type="submit"  class="button btn_1 button-contactForm">add
 									Reply</button>
+									
 							</div>
 					</form>
 				</div>
@@ -127,7 +129,7 @@
 					var date=result[i].rpl_reg_date;
 						
 						$(".comin").append(`
-								<div class="single-comment justify-content-between d-flex">
+								<div class="single-comment justify-content-between d-flex" id="reply\${result[i].rpl_id}">
 								<div class="user justify-content-between d-flex">
 									<div class="desc">
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
@@ -152,7 +154,7 @@
 			}).done(function(){$(".idd[name='${sessionUser.user_id}']").each(function(index,item){
 					console.log(item);
 					console.log($(item).attr('value'));
-					var obj="<a href='rplDelete?id="+$(item).attr('value')+"'>삭제<a>"
+					var obj="<a href='javascript:delrepl("+$(item).attr('value')+")'>삭제<a>"
 					
 					
 					$(item).append(obj)
@@ -192,7 +194,18 @@
 					
 				<%}%>; --%>
 		}
-		
+		function delrepl(id)
+		{
+			$('#reply'+id).remove();		
+			$.ajax({
+				url : "rplDelete",
+				type : "GET",
+				data : {
+					id : id
+				}})
+			console.log('여기까지옴');
+			
+		}
 	</script>
 </body>
 </html>

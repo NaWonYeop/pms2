@@ -203,7 +203,7 @@
 
 	<select id="AdminUserList"
 		resultType="co.test.prj.user.service.UserVO">
-		SELECT * FROM "user" WHERE USER_ATH != 'master'
+		SELECT * FROM "user" WHERE USER_ATH != 'MASTER'
 	</select>
 	
 	<select id="userIdSelect" resultType="co.test.prj.user.service.UserVO" parameterType="co.test.prj.team.service.TeamVO">

@@ -109,7 +109,7 @@
 
 
                      <div class="blog_details">
-                        <a class="d-inline-block" href="single-blog.html"><!-- 여기 주소 -->
+                        <a class="d-inline-block" href="projectSelect?prj_id=${ofr.prj_id }"><!-- 여기 주소 -->
                            <h2>${ofr.prj_name }</h2>
                         </a> <br>
                         <c:if test="${!empty ofr.prj_ar }"><p class="btn_4">${ofr.prj_ar }</p></c:if>
@@ -148,11 +148,12 @@
                      <div class="blog_details">
                           <div class="blog_item_img">
                      	<h3 style="font-weight: bold;">${fnd.prj_name }</h3>
+                        <a class="d-inline-block" href="projectSelect?prj_id=${fnd.prj_id }">
                         <img class="card-img rounded-0"
                            src="./resources/upload/images/${fnd.ctf_st_name }" alt="">
-
+						</a>
                      </div>
-                        <a class="d-inline-block" href="single-blog.html"> </a>
+                         
                         <h3 class="right"><fmt:formatNumber value="${fnd.total/(fnd.prj_gl_prc*1000)*100 }" pattern="00"/>%</h3>
                         <div class="progress">
                            <div class="progress-bar color-3" role="progressbar"
@@ -163,7 +164,7 @@
                         <ul class="blog-info-link">
                            <li><i class="far fa-comments"></i> 현재 펀딩금액</li>
                          
-                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">${fnd.total }</span>원 </div></h3></li>
+                           <li> <h3 stlye="font-weight: bold;"> <div class="single_member_counter"><span class="counter" style="font-size:25px;">${fnd.total },</span>원 </div></h3></li>
                           
                         </ul>
                      </div>
@@ -174,7 +175,7 @@
          </div>
       </div>
    </section>
-	 <script src="js/jquery.counterup.min.js"></script>
+	 <script src="resources/main/js/jquery.counterup.min.js"></script>
 	 
 </body>
 </html>
