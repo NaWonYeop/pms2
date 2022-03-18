@@ -45,6 +45,9 @@
 			dataType: "json",
 			async : false
 		}).done(function (json) {
+			if(json.length == 0) {
+				$(".table-responsive").append(`<div style="text-align: center;">신청한 유저가 없습니다.</div>`);
+			}
 			for (app of json) {
 				$("#myTbody").append(`
 				<tr id="myTr\${app.app_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">

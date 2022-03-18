@@ -7,7 +7,7 @@
 		<div class="card-body">
 			<div id="selectDiv" class="form-group">
 				<label>My Project</label> <select id="mySelect"
-					class="js-example-basic-single w-100">
+					class="js-example-basic-single w-100" size="10">
 					<option selected>프로젝트를 선택하세요</option>
 
 				</select>
@@ -23,17 +23,31 @@
 	$("#selectDiv").on("change", function () { 
 		var prj_id = $(this).find("option:selected").data("prj_id");
 		var master_id = $(this).find("option:selected").data("master_id");
+		var prj_name = $(this).find("option:selected").data("prj_name");
 		console.log(prj_id);
 		console.log(master_id);
+		console.log(prj_name);
 		$.ajax({
 			url : "myPrj",
 			type : "GET",
 			data : {
 				prj_id : prj_id,
-				master_id : master_id
+				master_id : master_id,
+				prj_name: prj_name
 			}
-		}).done(function() {
+		}).done(function(result) {
+			console.log(result);
+			$("#allPrgBar").attr("aria-valuenow", result.percent);
+			$("#allPrgBar").html(result.percent+"%");
+			$("#allPrgBar").css("width", result.percent+"%");
+			
+			$("#teamSelectModal").modal('hide')
 			$("#right-sidebar").attr("class", "settings-panel");
+			
+			
+			
+			//var pname = $("#mySelect").find("[value=${myPrj.prj_id}]").text();
+			$("#title").html(" "+prj_name);
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
 		});
@@ -47,9 +61,11 @@
 	}).done(function(json) {
 		for(team of json) {
 			$("#mySelect").append(`
-					<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" data-prj_id="\${team.prj_id}">프로젝트명 : \${team.prj_name}</option>
+					<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
 			`);
 		};
+		$("#mySelect").val('${myPrj.getPrj_id()}');
+		$("#title").html($("#mySelect").text());
 	}).fail(function(xhr, status, message) {
 		alert("프로젝트 리스트 출력 실패");
 	});

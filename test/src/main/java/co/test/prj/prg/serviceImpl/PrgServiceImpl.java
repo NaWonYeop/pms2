@@ -78,6 +78,12 @@ public class PrgServiceImpl implements PrgService {
 		return map.prgCheck(prg);
 	}
 
+	@Override
+	public String allCheck(PrgVO prg) {
+		// TODO Auto-generated method stub
+		return map.allCheck(prg);
+	}
+
 	
 
 }

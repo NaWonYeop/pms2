@@ -24,4 +24,6 @@ public interface PrgMapper {
 	
 	String prgCheck(PrgVO prg);
 	
+	String allCheck(PrgVO prg);
+	
 }
