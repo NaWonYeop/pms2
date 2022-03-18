@@ -10,7 +10,7 @@
 				data-target="#exampleModalCenter">섹션 입력</button>
 		</div>
 		<ul id="ulForm" class="d-flex flex-column-reverse todo-list">
-			<li>
+			<!-- <li>
 				<div class="form-check">
 					<label class="form-check-label"> <input class="checkbox"
 						type="checkbox"> Resolve all the low priority tickets due
@@ -25,7 +25,7 @@
 						type="checkbox" checked> Project review
 					</label>
 				</div> <i class="remove ti-close"></i>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 	<!-- 섹션Modal창 -->

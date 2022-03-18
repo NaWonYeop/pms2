@@ -130,6 +130,7 @@
 				master_id : master_id
 			}
 		}).done(function() {
+			$("#teamSelectModal").modal('hide')
 			$("#right-sidebar").attr("class", "settings-panel");
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
