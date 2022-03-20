@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="co.test.prj.user.service.UserVO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,8 +153,10 @@
 							<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce" style="margin-left: 5%">${inter.user_name }| ${inter.user_crr }년</p>
-											<img alt="heart" src="resources/main/img/heart.png" style="float: right">
+											<p class="introduce">${inter.user_name }| ${inter.user_crr }년</p>
+											<img id="heartbtn${inter.user_id}" class="heartbtn" onclick="heart(${inter.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
+											<img id="heartCancelbtn${inter.user_id}" class="heartCancelbtn" onclick="heartCancel(${inter.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
+	                    					
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${inter.user_id eq tech.user_id2 }">
 													<span class="btn_4" style="margin-bottom: 1%">${tech.tech_name }</span>
@@ -167,12 +170,14 @@
 											<div class="author_info">
 												<div class="author_img">
 													<div class="author_info_text">
-														<p>수행 프로젝트</p>
-														<%-- <c:forEach items="" var=""> --%>
+														<p>보유 자격증</p>
 														<h5>
-															<a href="#">James Well</a>
+															<c:forEach items="${certs }" var="cert">
+															<c:if test="${inter.user_id eq cert.user_id }">
+																<a class="btn btn-outline-primary btn-fw" style="margin-bottom: 1%">${cert.cert_name }</a>
+															</c:if>
+															</c:forEach> 
 														</h5>
-														<%-- </c:forEach> --%>
 													</div>
 												</div>
 												<div class="author_rating">
@@ -188,6 +193,9 @@
 														</div>
 														<p>평균 ${inter.avg } 점</p>
 													</div>
+													<!-- <div>
+														<span class="btn_4" style="padding-left: 5px; padding-right: 5px; font-size: small;">마감 12일전</span>
+													</div> -->
 												</div>
 											</div>
 										</div>
@@ -212,10 +220,12 @@
 								<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
 										<div class="special_cource_text">
-											<p class="introduce" style="margin-left: 5%">${job.user_name }| ${job.user_crr }년</p>
+											<p class="introduce">${job.user_name }| ${job.user_crr }년</p>
+											<img id="heartbtn${job.user_id}" class="heartbtn" onclick="heart(${job.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
+											<img id="heartCancelbtn${job.user_id}" class="heartCancelbtn" onclick="heartCancel(${job.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${job.user_id eq tech.user_id2 }">
-													<span class="btn_4">${tech.tech_name }</span>
+													<span class="btn_4" style="margin-bottom: 1%">${tech.tech_name }</span>
 												</c:if>
 											</c:forEach>
 											<a href="jobDetail?user_id=${job.user_id }">
@@ -225,12 +235,12 @@
 											<div class="author_info">
 												<div class="author_img">
 													<div class="author_info_text">
-														<p>수행 프로젝트</p>
-														<%-- <c:forEach items="" var=""> --%>
-														<h5>
-															<a href="#">James Well</a>
-														</h5>
-														<%-- </c:forEach> --%>
+														<p>보유 자격증</p>
+														<c:forEach items="${certs }" var="cert">
+															<c:if test="${job.user_id eq cert.user_id }">
+																<p class="btn btn-outline-primary btn-fw" style="margin-bottom: 1%">${cert.cert_name }</p>
+															</c:if>
+														</c:forEach> 
 													</div>
 												</div>
 												<div class="author_rating">
@@ -246,6 +256,9 @@
 														</div>
 														<p>평균 ${job.avg } 점</p>
 													</div>
+													<!-- <div>
+														<span class="btn_4" style="padding-left: 5px; padding-right: 5px; font-size: small;">마감 12일전</span>
+													</div> -->
 												</div>
 											</div>
 										</div>
@@ -292,6 +305,74 @@
 				displayLength : 3
 			});
 		});
+		
+		<% UserVO user=(UserVO)session.getAttribute("sessionUser");%>
+	    $(document).ready(function(){
+		    <%if(user==null)
+		    {%>
+		       $('.heartbtn').hide();
+		       $('.heartCancelbtn').hide();
+		    <%}
+		    else
+		    {%>
+		    if("${heartCheck}" != "no") {
+		    	$('.heartbtn').hide();
+		    } else {
+		    	$('.heartCancelbtn').hide();
+		    }
+		    <%}%>
+	    })
+	    
+	    function heart(e) {
+        <% 
+        if(user==null)
+        {%>
+           toastr.warning('로그인이 필요합니다.');
+           
+        <%}
+        else
+        {%>
+        $.ajax({
+    		url: 'heartInsert',
+    		type: 'post',
+    		data: {
+    			user_id: ${sessionUser.user_id},
+    			user_id2: e
+    		},
+    		success: function() {
+    			toastr.success('찜하기 성공!');
+    			$('#heartbtn'+e).hide();
+        		$('#heartCancelbtn'+e).show();	
+    		}
+    	})
+    	
+        <%}%>;
+  		}
+        
+        function heartCancel(e) {
+        	<% 
+            if(user==null)
+            {%>
+               toastr.warning('로그인이 필요합니다.');
+               
+            <%}
+            else
+            {%>
+        	$.ajax({
+        		url: 'heartCancel',
+        		type: 'post',
+        		data: {
+        			user_id: ${sessionUser.user_id},
+        			user_id2: e
+        		}
+        	}).done(function() {
+        		toastr.success('찜하기 취소되었습니다.');
+        		$('#heartbtn'+e).show();
+    			$('#heartCancelbtn'+e).hide();
+    			
+        	})
+        	<%}%>;
+        }
 	</script>
 
 </body>

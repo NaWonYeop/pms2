@@ -86,7 +86,7 @@ button {
 	<section class="special_cource padding_top"
 		style="padding-top: 0; margin-bottom: 10%;">
 		<div class="container">
-
+			<h1>${prj_name.prj_name }</h1>
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
@@ -159,7 +159,7 @@ button {
 					<!-- for문 start -->
 					<c:forEach items="${prjOffer }" var="prjOffer">
 						<%-- <c:if test="${prjOffer.app_stt == 'ing' }"> --%>
-						<div class="col-sm-12 col-lg-12 list list${prjOffer.user_id }">
+						<div class="col-sm-12 col-lg-12 list slist${prjOffer.user_id }">
 							<div class="single_special_cource">
 								<div class="special_cource_text" style="border: 0;">
 									<div class="col-12 author_info"
@@ -233,7 +233,7 @@ button {
 					<!-- for문 start -->
 					<c:forEach items="${ofterList }" var="ofterList">
 						<c:if test="${ofterList.app_stt == 'ing' }">
-							<div class="col-sm-12 col-lg-12 list">
+							<div class="col-sm-12 col-lg-12 clist${ofterList.user_id }">
 								<div class="single_special_cource">
 									<div class="special_cource_text" style="border: 0;">
 										<div class="col-12 author_info"
@@ -272,8 +272,8 @@ button {
 													<%-- <button type="button" class="joinbtn${ofterList.user_id } btn_4"
 														onclick="projectOfrAccept(${ofterList.user_id}, ${ofterList.app_id })">수락</button> --%>
 													<button type="button"
-														class="nopebtn${ofterList.app_id } btn_4"
-														onclick="projectOfrDecline(${ofterList.app_id})" style="margin-left: 33%;">취소</button>
+														class="nopebtn${ofterList.user_id } btn_4"
+														onclick="requestDecline(${ofterList.user_id })" style="margin-left: 33%;">취소</button>
 												</div>
 											</div>
 										</div>
@@ -355,7 +355,6 @@ button {
 														onclick="heartAccept(${interest.user_id}, '${interest.user_name }', ${interest.user_crr }, ${interest.user_tel })">신청</button>
 													</c:otherwise>
 												</c:choose>
-												
 												<button type="button"
 													class="nopebtn${interest.user_id} btn_4"
 													onclick="heartDelete(${interest.user_id})">삭제</button>
@@ -413,10 +412,10 @@ button {
 				
             }).done(function(result) {
                 toastr.success("수락 성공!")
-                $('.list'+e).remove();
+                $('.slist'+e).remove();
                  $('.member')
                 	.append(`
-						<div class="col-sm-12 col-lg-12 list">
+						<div class="col-sm-12 col-lg-12 list`+e+`">
 						<div class="single_special_cource">
 							<div class="special_cource_text memberList" style="border: 0; background-color: #F27457; padding: 10px;">
 								<div class="col-12 author_info"
@@ -425,7 +424,7 @@ button {
 										<div class="author_img" style="padding-left: 30%; padding-top: 5%;">
 											<div class="author_info_text">
 												<h5>
-												<a href="jobDetail?user_id="`+e+`" style="font-size:x-large; ">`+nam+` | 
+												<a href="jobDetail?user_id=`+e+`" style="font-size:x-large; ">`+nam+` | 
 												`+crr+`  | 0`+tel+`</a>
 												
 												<input type="hidden" id="uId" value="`+e+`">
@@ -455,10 +454,27 @@ button {
 				},
 				success: function() {
 					toastr.success("거절되었습니다.")
-					$('.list'+e).remove();
+					$('.slist'+e).remove();
 				}
 			})
 		}
+		
+		function requestDecline(e) {
+			console.log(e);
+			$.ajax({
+				url: 'requestDecline',
+				type: 'post',
+				data: {
+					master_id: ${sessionUser.user_id},
+					app_id: e
+				},
+				success: function() {
+					toastr.success("거절되었습니다.")
+					$('.clist'+e).remove();
+				}
+			})
+		}
+		
 		function heartAccept(e, name, crr, tel) {
 			//app_id값이 있으면 아직스 실행안되게하기
 			$.ajax({
@@ -469,12 +485,11 @@ button {
 					master_id: ${sessionUser.user_id},
 					user_id: e
 				},
-				success: function(result){
-					console.log(result);
+				success: function(){
 					toastr.success("신청 완료!");
 					$('.hList'+e).remove();
-					$('off').append(
-						`<div class="col-sm-12 col-lg-12 list">
+					$('.off').append(
+						`<div class="col-sm-12 col-lg-12 clist`+e+`">
 								<div class="single_special_cource">
 									<div class="special_cource_text" style="border: 0;">
 										<div class="col-12 author_info"
@@ -484,10 +499,7 @@ button {
 													<div class="author_info_text">
 														<p>Conduct by:</p>
 														<h5>
-															<a href="jobDetail?user_id=`+e+`">`+name+` | 
-																<c:if test="`+crr+` != 0}">경력 `+crr+`년</c:if>
-																<c:if test="`+crr+` eq 0}">경력없음</c:if> |
-																0`+tel+`
+															<a href="jobDetail?user_id=`+e+`">`+name+` | 경력 `+crr+`년 | 0`+tel+`
 															</a> 
 															<input type="hidden" id="uId" value="`+e+`">
 														</h5>
@@ -497,11 +509,9 @@ button {
 											</div>
 											<div class="col-4">
 												<div class="button-contactForm">
-													<button type="button" class="joinbtn`+e+` btn_4"
-														onclick="projectOfrAccept(`+e+`, `+result+`)">수락</button>
 													<button type="button"
-														class="nopebtn`+result+` btn_4"
-														onclick="projectOfrDecline(`+result+`)" style="margin-left: 33%;">취소</button>
+														class="nopebtn`+e+` btn_4"
+														onclick="projectOfrDecline(`+e+`)" style="margin-left: 33%;">취소</button>
 												</div>
 											</div>
 										</div>
