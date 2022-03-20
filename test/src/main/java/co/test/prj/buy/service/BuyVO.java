@@ -12,8 +12,8 @@ import lombok.Data;
 public class BuyVO {
 	private int buy_id;
 	private int user_id; //구매자
-	private String buy_way; //구매방법 돈, 코인
-	private String buy_stt; //입금확인중, 입금확인, 환불진행중, 환불확인
+	private String buy_way; //구매방법 cash, coin
+	private String buy_stt; //상태 보관, 전달, 환불
 	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date buy_date;
