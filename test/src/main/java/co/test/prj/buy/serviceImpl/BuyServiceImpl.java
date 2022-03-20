@@ -1,5 +1,7 @@
 package co.test.prj.buy.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,11 @@ public class BuyServiceImpl implements BuyService {
 	private BuyMapper map;
 	
 	@Override
+	public List<BuyVO> buySelectList() {
+		return map.buySelectList();
+	}
+	
+	@Override
 	public int buyInsert(BuyVO buy) {
 		return map.buyInsert(buy);
 	}
@@ -21,5 +28,6 @@ public class BuyServiceImpl implements BuyService {
 	public int buyMaxId() {
 		return map.buyMaxId();
 	}
+
 
 }
