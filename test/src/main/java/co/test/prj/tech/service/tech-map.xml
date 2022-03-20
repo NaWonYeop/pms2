@@ -63,6 +63,11 @@
 		WHERE U.USER_ID = I.USER_ID2 and i.user_id = #{user_id}
 	</select>
 	
+	<!-- 구인현황 프로젝트 이름 
+	<select id="offerPrjName" resultType="">
+		SELECT PRJ_NAME FROM PROJECT WHERE PRJ_ID = #{prj_id}
+	</select> -->
+	
 	<!-- 신청 업데이트 -->
 	<update id="ofterAcceptUpdate" parameterType="co.test.prj.application.service.AppVO">
 		UPDATE APPLICATION SET

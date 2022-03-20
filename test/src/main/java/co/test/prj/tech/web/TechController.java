@@ -1,7 +1,9 @@
 package co.test.prj.tech.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -66,6 +68,26 @@ public class TechController {
 		}
 		model.addAttribute("jobs", techDao.jobSelectList());
 		model.addAttribute("techs", techDao.techSelectList());
+		model.addAttribute("certs", certDao.certSelectList());
+		
+//		ProjectVO vo6 = new ProjectVO();
+//		if(uId!=null) {
+//			vo6.setMaster_id(uId.getUser_id()); 
+//			model.addAttribute("prjList", techDao.jobJoinList(vo6));
+//			
+//			InterestVO vo7 = new InterestVO();
+//			vo7.setUser_id(uId.getUser_id()); //세션아이디
+//			
+//			vo7.setUser_id2(techDao.jobSelectList().get(0).getUser_id2()); // user_id2 이게문제다문제 
+//			
+//			vo7=techDao.heartbtnCheck(vo7);
+//			if(vo7 != null)	{
+//				model.addAttribute("heartCheck", vo7.getUser_id());
+//			} else {
+//				model.addAttribute("heartCheck", "no");
+//			}
+//		
+//		}
 		
 		return "job/jobMain";
 	}
@@ -171,7 +193,7 @@ public class TechController {
 	
 	//구인현황
 	@RequestMapping("/projectOfrList")
-	private String projectOfrList(Model model, ProjectVO project, TechVO tech, HttpSession session) {
+	private String projectOfrList(Model model, ProjectVO project, TechVO tech, HttpSession session, String pName) {
 		
 		model.addAttribute("memberList", techDao.memberList(project));
 		
@@ -181,7 +203,7 @@ public class TechController {
 		
 		model.addAttribute("prjOffer", techDao.offerFromPrj(project));
 		
-		model.addAttribute("prj_id",project.getPrj_id());
+		model.addAttribute("prj_id", project.getPrj_id());
 		
 		tech.setUser_id(user.getUser_id());
 		model.addAttribute("interest", techDao.interestList(tech));
@@ -210,16 +232,27 @@ public class TechController {
 		techDao.ofterAcceptUpdate(appvo);
 	}
 	
+	//참여 요청 거절
+	@RequestMapping("/requestDecline")
+	@ResponseBody
+	private void requestDecline(AppVO app) {
+		appDao.appDelete(app);
+	}
+	
 	//관심 신청
 	@RequestMapping("/heartAccept")
 	@ResponseBody
-	private int heartAccept(Model model, AppVO app, HttpSession session, ProjectVO project) {
+	private void heartAccept(Model model, AppVO app, HttpSession session, InterestVO interest,
+			@RequestParam("master_id") int master_id, @RequestParam("user_id") int user_id) {
+		
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
 		app.setMaster_id(uId.getUser_id());
 		techDao.heartAccept(app);
 		
-		AppVO res= techDao.projectOfrAppend(app);
-		return res.getApp_id();
+		interest.setUser_id(master_id);
+		interest.setUser_id2(user_id);
+		techDao.heartDelete(interest);
+
 	}
 	//관심삭제
 	@RequestMapping("/heartDelete")
