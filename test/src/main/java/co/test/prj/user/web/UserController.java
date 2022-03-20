@@ -34,6 +34,7 @@ import co.test.prj.certificate.service.CertVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.security.cunstomUser;
+import co.test.prj.team.service.MyPrjVO;
 import co.test.prj.team.service.TeamService;
 import co.test.prj.team.service.TeamVO;
 import co.test.prj.user.service.UserService;
@@ -333,6 +334,7 @@ public class UserController {
 			model.addAttribute("update", "회원수정 성공하였습니다");
 			user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
 			userDao.userUpdate(user);
+			session.invalidate();
 		} else {
 			model.addAttribute("update", "회원수정 실패하였습니다");
 		}
@@ -503,6 +505,7 @@ public class UserController {
 		ProjectVO prj = projectDao.projectSelect(project);
 		model.addAttribute("App", app_id);
 		model.addAttribute("project", prj);
+		System.out.println(app_id);
 		return "user/projectSelect";
 	}
 	//프로젝트 수락 
@@ -526,7 +529,7 @@ public class UserController {
 		vo.setApp_stt("no");
 		appDao.appUpdate(vo);
 		vo = appDao.appliSelect(vo);
-		return "redirect:/home";
+		return "redirect:/mypage";
 	}
 	
 

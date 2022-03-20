@@ -38,7 +38,7 @@ left: 25%;
                 </div>
           <c:choose>
 					<c:when test="${empty funding}">
-						<p>구매한 펀딩이 없습니다</p>
+						<p style="position: relative; left: 2%;">구매한 펀딩이 없습니다</p>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${ funding}" var="fun">

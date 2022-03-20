@@ -71,11 +71,12 @@
 
 	</select>
 	<select id="appliSelect" resultType="co.test.prj.application.service.AppVO" parameterType="co.test.prj.application.service.AppVO">
-	select master_id
-	 prj_id			
-	 user_id		
-	 app_clsfc		
+	select master_id,
+	 prj_id,			
+	 user_id,		
+	 app_clsfc,		
 	 app_stt
+	 from APPLICATION
 	 where  app_id	= #{app_id}
 	</select>
 </mapper>

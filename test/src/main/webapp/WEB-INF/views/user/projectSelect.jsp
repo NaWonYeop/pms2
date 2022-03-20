@@ -147,8 +147,7 @@
 			</div>
 		</div>
 	</section>
-	${project}
-	<br> ${sessionScope }
+	<br>
 	<section class="course_details_area section_padding">
 		<div class="container">
 			<input type="hidden" id="prj_id" name="prj_id"
@@ -166,10 +165,7 @@
 			</div>
 			<c:if test="${project.prj_fnd_prop == 1}">
 				<!-- 펀딩 있을시 -->
-				<div id="sise">
-					현금구입 달러시세 : 가져오는중<br> 1이더 달러시세 : 가져오는중<br> 1이더 원화시세 :
-					가져오는중<br>
-				</div>
+
 				<input type="hidden" id="dol">
 				<input type="hidden" id="etherDol">
 				<input type="hidden" id="etherWon">
@@ -242,13 +238,13 @@
 										value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
 							</ul>
 							<form action="conFirm">
-								<input type="hidden" id="app_id" name="app_id" value="${app_id}">
-								<button type="submit" class="rfnd btn_4" value="수락"></button>
-								</form>
-								<form action="refuse">
-								<input type="hidden" id="app_id" name="app_id" value="${app_id}">
-								<button type="submit"class="rfnd btn_4" value="거절"></button>
-								</form>
+								<input type="hidden" id="app_id" name="app_id" value="${App}">
+								<input type="submit" class="rfnd btn_4" value="수락">
+							</form>
+							<form action="refuse">
+								<input type="hidden" id="app_id" name="app_id" value="${App}">
+								<input type="submit" class="rfnd btn_4" value="거절">
+							</form>
 						</c:if>
 
 					</div>
@@ -270,7 +266,7 @@
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="hidden" id="master_id" name="master_id"
 								value="${project.master_id}"> <input type="hidden"
-								id="go" name="go" value="selectPage"> 
+								id="go" name="go" value="selectPage">
 						</form>
 
 						<form action="projectViewDel">
@@ -298,9 +294,10 @@
 		</div>
 	</section>
 
-	
+
 
 	<script type="text/javascript">
+		
 	</script>
 
 </body>

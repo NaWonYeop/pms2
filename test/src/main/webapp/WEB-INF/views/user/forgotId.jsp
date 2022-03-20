@@ -88,7 +88,7 @@
       <form action="searchId" class="form-signin" method="POST">
         <input type="text" name="user_name" id="user_name" class="form-control" placeholder="이름" required><BR>
         <input type="text" pattern="[0-9]+" name="user_tel" id="user_tel" class="form-control" placeholder="연락처" required><br>
-        <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
+        <button id="btn-Yes" class="btn_1" style="width: 100%;" type="submit">아이디 찾기</button>
       </form>
       
 		</div>

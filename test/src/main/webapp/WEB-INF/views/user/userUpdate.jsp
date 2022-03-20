@@ -18,11 +18,12 @@
 	</section>
 </body>
 <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
 	console.log("로그인 결과");
-	console.log('${update}');
-	if ('${update}' == '') {
-		var message = '${update}';
+	console.log('${message}');
+	if ('${message}' == '') {
+		var message = '${message}';
 		/* alert(message); */
 		toastr.options = {
 			"closeButton" : false,
@@ -41,8 +42,7 @@ $(document).ready(function() {
 			"showMethod" : "fadeIn",
 			"hideMethod" : "fadeOut"
 		}
-		toastr.success('회원수정 성공하셨습니다');
+		toastr.success('성공적으로 수정하였습니다');
 	}
-});
 </script>
 </html>

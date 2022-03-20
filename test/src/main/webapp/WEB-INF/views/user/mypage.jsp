@@ -136,7 +136,7 @@
 								<c:choose>
 								<c:when test="${fn:contains(app.app_clsfc,'1')}">
 										<div id="div${app.app_id}">
-											<a href="projectSelect">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에
+											<a href="">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에
 											신청하셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
 										</div>

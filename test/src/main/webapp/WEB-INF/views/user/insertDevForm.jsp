@@ -92,10 +92,11 @@ a {
 	width="100%" height="100%" align="center">
 
 	<div class="card align-middle" style="width: 25rem;">
+	
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<form action="insertDev" onsubmit="return formCheck()"
 			method="post" enctype="multipart/form-data">
-
+					<h2 style="text-align: center;">개발자 등록</h2>
 			<div class="card-body">
 				<span><label>자격증</label><input id="cert_name" type="text"
 					class="form-control"
@@ -106,13 +107,14 @@ a {
 				</ul>
 				<BR>
 				
-				<BR>
+				
 				<label>경력</label><input type="number" class="form-control"
 					id="user_crr" name="user_crr" required="required"><BR> 
 				
 				<input id="btn-Yes" class="btn_1" style="width: 100%;"
-					type="submit" value="등록하기"> <input type="reset"
-					id="btn-Yes" value="취 소" class="btn btn-lg btn-primary btn-block"
+					type="submit" value="등록하기"><BR><br>
+					<input type="reset"
+					id="btn-Yes" value="취 소" class="btn_1" style="width: 100%;"
 					onclick="cancel()">
 			</div>
 		</form>

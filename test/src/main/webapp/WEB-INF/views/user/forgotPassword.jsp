@@ -92,7 +92,7 @@ a {
 					placeholder="이름" required><BR> <input type="email"
 					name="user_email" id="user_email" class="form-control" placeholder="이메일"
 					required><br>
-				<button id="btn-Yes" class="btn btn-lg btn-primary btn-block"
+				<button id="btn-Yes" class="btn_1" style="width: 100%;"
 					type="submit">비밀번호 찾기</button>
 			</form>
 

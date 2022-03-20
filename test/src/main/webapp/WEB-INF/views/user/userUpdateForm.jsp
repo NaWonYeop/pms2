@@ -87,7 +87,7 @@ a {
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<form action="userUpdate" method="post" onsubmit="return formCheck()">
-			<h4 style="text-align: center;">개인정보 업데이트</h4>
+			<h4 style="text-align: center;">개인정보 수정</h4>
 			<div class="card-body">
 				<input type="password" name="user_pwd" id="user_pwd"
 					class="form-control" placeholder="8자리부터 16자리까지 특수문자 포함시켜주세요" required="required"><br>
