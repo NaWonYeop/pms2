@@ -272,7 +272,7 @@ button {
 													
 													<button type="button"
 														class="nopebtn${ofterList.user_id } btn_4"
-														onclick="requestDecline(${ofterList.app_id }, ${ofterList.user_id }, '${ofterList.user_name }', ${ofterList.user_crr }, ${ofterList.user_tel })" style="margin-left: 33%;">취소</button>
+														onclick="requestDecline(${ofterList.app_id }, ${ofterList.user_id })" style="margin-left: 33%;">취소</button>
 												</div>
 											</div>
 										</div>
@@ -461,23 +461,24 @@ button {
 			});
 		}
 		
-		function requestDecline(aId, uId, name, crr, tel) {
+		function requestDecline(aId, uId) {
 			$.ajax({
 				url: 'requestDecline',
 				type: 'post',
 				data: {
+					user_id: uId,
 					app_id: aId
 				},
 				success: function(result) {
+					console.log(result);
+					$('.clist'+result).remove();
 					toastr.success("거절되었습니다.");
-					$('.clist'+result.user_id).remove();
 					
 				}
 			})
 		}
 		
 		function heartAccept(e, name, crr, tel) {
-			console.log($('.clist'+e))
 			if($('.clist'+e).length || $('.slist'+e).length || $('.mlist'+e).length) {
 				
 				toastr.warning('이미 신청되었거나 확정된 멤버입니다.')
@@ -519,7 +520,7 @@ button {
 		                                    <div class="button-contactForm">
 		                                       <button type="button"
 		                                          class="nopebtn`+e+` btn_4"
-		                                          onclick="requestDecline(\${result})" style="margin-left: 33%;">취소</button>
+		                                          onclick="requestDecline(\${result}, `+e+`)" style="margin-left: 33%;">취소</button>
 		                                    </div>
 		                                 </div>
 		                              </div>

@@ -122,7 +122,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<section class="feature_part"
 		style="padding-top: 0; padding-bottom: 5%;">
 		<div class="container">
@@ -134,121 +134,114 @@
 						<p>${AssessList[0].prj_name }</p>
 					</div>
 				</div>
-				
-				<c:choose>
-					<c:when test="${AssessList[0].prj_devEd_prop == 1 }">
-						<c:forEach items="${AssessList }" var="Assess" varStatus="status">
-							<c:if test="${sessionUser.user_id != Assess.user_id } ">
-								<div class="col-sm-6 col-xl-3">
-									<div class="single_feature">
-										<div class="single_feature_part">
-											<span id="ti-layers${status.index }"
-												class="single_feature_icon" onclick="modalFadeSelect(this);"
-												style="position: static;"> <i
-												id="ti-layers${status.index }" class="ti-layers"></i>
 
-												<div class="modaldal content">
-													<input type="hidden" id="aId${Assess.user_id }"
-														value="${Assess.user_id }">
-													<div class="content modalcontent">
-														<div class="justify-content-center">
-															<h2 class="content prjtitle" style="text-align: center;">${Assess.user_name }</h2>
-															<div class="flexbox">
-																<p class="content prj" style="">전문성</p>
-																<div class="default-select" id="default-select">
-																	<select id="str_prfsn${Assess.user_id }">
-																		<option value="5">5</option>
-																		<option value="4">4</option>
-																		<option value="3">3</option>
-																		<option value="2">2</option>
-																		<option value="1">1</option>
-																	</select>
-																</div>
-															</div>
-															<div class="flexbox">
-																<p class="content prj">일정준수</p>
-																<div class="default-select" id="default-select">
-																	<select id="str_obs${Assess.user_id }">
-																		<option value="5">5</option>
-																		<option value="4">4</option>
-																		<option value="3">3</option>
-																		<option value="2">2</option>
-																		<option value="1">1</option>
-																	</select>
-																</div>
-															</div>
-															<div class="flexbox">
-																<p class="content prj">적극성</p>
-																<div class="default-select" id="default-select">
-																	<select id="str_pos${Assess.user_id }">
-																		<option value="5">5</option>
-																		<option value="4">4</option>
-																		<option value="3">3</option>
-																		<option value="2">2</option>
-																		<option value="1">1</option>
-																	</select>
-																</div>
-															</div>
-															<div class="flexbox">
-																<p class="content prj">의사소통</p>
-																<div class="default-select" id="default-select">
-																	<select id="str_comm${Assess.user_id }">
-																		<option value="5">5</option>
-																		<option value="4">4</option>
-																		<option value="3">3</option>
-																		<option value="2">2</option>
-																		<option value="1">1</option>
-																	</select>
-																</div>
-															</div>
-															<div class="flexbox">
-																<p class="content prj">재고용 의사</p>
-																<div class="default-select" id="default-select">
-																	<select id="str_re_empl${Assess.user_id }">
-																		<option value="5">5</option>
-																		<option value="4">4</option>
-																		<option value="3">3</option>
-																		<option value="2">2</option>
-																		<option value="1">1</option>
-																	</select>
-																</div>
-															</div>
+
+				<c:forEach items="${AssessList }" var="Assess" varStatus="status">
+						<div class="col-sm-6 col-xl-3 list${Assess.user_id }">
+							<div class="single_feature">
+								<div class="single_feature_part">
+									<span id="ti-layers${status.index }"
+										class="single_feature_icon" onclick="modalFadeSelect(this);"
+										style="position: static;"> <i
+										id="ti-layers${status.index }" class="ti-layers"></i>
+
+										<div class="modaldal content">
+											<input type="hidden" id="aId${Assess.user_id }"
+												value="${Assess.user_id }">
+											<div class="content modalcontent">
+												<div class="justify-content-center">
+													<h2 class="content prjtitle" style="text-align: center;">${Assess.user_name }</h2>
+													<div class="flexbox">
+														<p class="content prj" style="">전문성</p>
+														<div class="default-select" id="default-select">
+															<select id="str_prfsn${Assess.user_id }">
+																<option value="5">5</option>
+																<option value="4">4</option>
+																<option value="3">3</option>
+																<option value="2">2</option>
+																<option value="1">1</option>
+															</select>
 														</div>
-														<c:if test="${Assess.str_result eq 0  }">
-															<button type="button" class="call btn_4"
-																id="insert${Assess.user_id }"
-																style="line-height: normal;"
-																onclick="Assess(${Assess.user_id },0)">평가하기</button>
-														</c:if>
-														<c:if test="${Assess.str_result eq 1  }">
-															<button type="button" class="call btn_4" id="update"
-																style="line-height: normal;"
-																onclick="Assess(${Assess.user_id },1)">평가하기</button>
-														</c:if>
+													</div>
+													<div class="flexbox">
+														<p class="content prj">일정준수</p>
+														<div class="default-select" id="default-select">
+															<select id="str_obs${Assess.user_id }">
+																<option value="5">5</option>
+																<option value="4">4</option>
+																<option value="3">3</option>
+																<option value="2">2</option>
+																<option value="1">1</option>
+															</select>
+														</div>
+													</div>
+													<div class="flexbox">
+														<p class="content prj">적극성</p>
+														<div class="default-select" id="default-select">
+															<select id="str_pos${Assess.user_id }">
+																<option value="5">5</option>
+																<option value="4">4</option>
+																<option value="3">3</option>
+																<option value="2">2</option>
+																<option value="1">1</option>
+															</select>
+														</div>
+													</div>
+													<div class="flexbox">
+														<p class="content prj">의사소통</p>
+														<div class="default-select" id="default-select">
+															<select id="str_comm${Assess.user_id }">
+																<option value="5">5</option>
+																<option value="4">4</option>
+																<option value="3">3</option>
+																<option value="2">2</option>
+																<option value="1">1</option>
+															</select>
+														</div>
+													</div>
+													<div class="flexbox">
+														<p class="content prj">재고용 의사</p>
+														<div class="default-select" id="default-select">
+															<select id="str_re_empl${Assess.user_id }">
+																<option value="5">5</option>
+																<option value="4">4</option>
+																<option value="3">3</option>
+																<option value="2">2</option>
+																<option value="1">1</option>
+															</select>
+														</div>
 													</div>
 												</div>
-											</span>
-											<h4>${Assess.user_name }</h4>
-											<p>${Assess.tm_dept }</p>
-											<c:choose>
-												<c:when test="${Assess.str_result eq 1 }">
-													<h3 id="success">평가완료</h3>
-												</c:when>
-												<c:otherwise>
-													<h3 id="error${Assess.user_id }">평가 미완료</h3>
-												</c:otherwise>
-											</c:choose>
-
+												<c:if test="${Assess.str_result eq 0  }">
+													<button type="button" class="call btn_4"
+														id="insert${Assess.user_id }" style="line-height: normal;"
+														onclick="Assess(${Assess.user_id },0)">평가하기</button>
+												</c:if>
+												<c:if test="${Assess.str_result eq 1  }">
+													<button type="button" class="call btn_4" id="update"
+														style="line-height: normal;"
+														onclick="Assess(${Assess.user_id },1)">평가하기</button>
+												</c:if>
+											</div>
 										</div>
-									</div>
+									</span>
+									
+									<h4>${Assess.user_name }</h4>
+									<p>${Assess.tm_dept }</p>
+									<c:choose>
+										<c:when test="${Assess.str_result eq 1 }">
+											<h3 id="success">평가완료</h3>
+										</c:when>
+										<c:otherwise>
+											<h3 id="error${Assess.user_id }">평가 미완료</h3>
+										</c:otherwise>
+									</c:choose>
+
 								</div>
-							</c:if>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<span>개발이 마감되지 않은 프로젝트 입니다.</span>
-					</c:otherwise>
-				</c:choose>
+							</div>
+						</div>
+				</c:forEach>
+
 
 
 
@@ -257,6 +250,9 @@
 	</section>
 
 	<script>
+	// 본인평가 remove
+	$('.list'+${sessionUser.user_id}).remove();
+
       function check(e) {
          if (!$(e.target).hasClass("content")
                && !$(e.target).hasClass("default-select")

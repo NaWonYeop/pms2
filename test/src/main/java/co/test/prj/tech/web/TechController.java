@@ -71,24 +71,20 @@ public class TechController {
 		model.addAttribute("techs", techDao.techSelectList());
 		model.addAttribute("certs", certDao.certSelectList());
 		
-//		ProjectVO vo6 = new ProjectVO();
-//		if(uId!=null) {
-//			vo6.setMaster_id(uId.getUser_id()); 
-//			model.addAttribute("prjList", techDao.jobJoinList(vo6));
+
+//		InterestVO vo7 = new InterestVO();
+//		vo7.setUser_id(uId.getUser_id()); //세션아이디
 //			
-//			InterestVO vo7 = new InterestVO();
-//			vo7.setUser_id(uId.getUser_id()); //세션아이디
+//		vo7.setUser_id2(techDao.jobSelectList().get(0).getUser_id2()); // user_id2 이게문제다문제 
 //			
-//			vo7.setUser_id2(techDao.jobSelectList().get(0).getUser_id2()); // user_id2 이게문제다문제 
-//			
-//			vo7=techDao.heartbtnCheck(vo7);
-//			if(vo7 != null)	{
-//				model.addAttribute("heartCheck", vo7.getUser_id());
-//			} else {
-//				model.addAttribute("heartCheck", "no");
-//			}
-//		
+//		vo7=techDao.heartbtnCheck(vo7);
+//		if(vo7 != null)	{
+//			model.addAttribute("heartCheck", vo7.getUser_id());
+//		} else {
+//			model.addAttribute("heartCheck", "no");
 //		}
+//		
+
 		
 		return "job/jobMain";
 	}
@@ -238,12 +234,12 @@ public class TechController {
 	//참여 요청 거절
 	@RequestMapping("/requestDecline")
 	@ResponseBody
-	private UserVO requestDecline(AppVO app, HttpSession session) {
+	private int requestDecline(AppVO app, HttpSession session) {
+		System.out.println(app);
 		techDao.ofterDelete(app);
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
-		userDao.jobSelect(uId);
 		
-		return userDao.jobSelect(uId);
+		return app.getUser_id();
 	}
 	
 	//관심 신청

@@ -129,17 +129,8 @@
 					</div>
 				</div>
 			</div>
-			<%-- <form action="">
-				<input type="text" list="ttl" id="list">
-				<datalist id="ttl">
-					<c:forEach items="${jobs }" var="job">
-						<option value="${job.user_job_ttl }" />
-					</c:forEach>
-				</datalist>
-				<button type="submit">검색</button>
-			</form> --%>
 			
-			<c:if test="${btnCheck.user_ath != user && btnCheck.user_ath != null}">
+			<c:if test="${btnCheck.user_ath != 'user' && btnCheck.user_ath != null}">
 				<div class="insertbtn">
 					<button type="button" id="insertbtn" class="btn_1"
 						onclick="location.href='jobInsertMove?cmd=jobMain'" style="margin-bottom: 2%;">등록 및 수정</button>
@@ -258,9 +249,7 @@
 														</div>
 														<p>평균 ${job.avg } 점</p>
 													</div>
-													<!-- <div>
-														<span class="btn_4" style="padding-left: 5px; padding-right: 5px; font-size: small;">마감 12일전</span>
-													</div> -->
+													
 												</div>
 											</div>
 										</div>
