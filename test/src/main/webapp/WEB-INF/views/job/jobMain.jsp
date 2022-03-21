@@ -139,10 +139,12 @@
 				<button type="submit">검색</button>
 			</form> --%>
 			
-			<div class="insertbtn">
-				<button type="button" id="insertbtn" class="btn_1"
-					onclick="location.href='jobInsertMove?cmd=jobMain'" style="margin-bottom: 2%;">등록 및 수정</button>
-			</div>
+			<c:if test="${btnCheck.user_ath != user && btnCheck.user_ath != null}">
+				<div class="insertbtn">
+					<button type="button" id="insertbtn" class="btn_1"
+						onclick="location.href='jobInsertMove?cmd=jobMain'" style="margin-bottom: 2%;">등록 및 수정</button>
+				</div>
+			</c:if>
 			
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">

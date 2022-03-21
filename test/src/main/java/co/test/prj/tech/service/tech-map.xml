@@ -5,6 +5,11 @@
 		SELECT * FROM TECH
 	</select>
 	
+	<!-- 등록 및 수정 버튼 권한 체크 -->
+	<select id="insertUpdatebtnCheck" resultType="co.test.prj.user.service.UserVO">
+		SELECT USER_ATH FROM "user" WHERE USER_ID = #{user_id}
+	</select>
+	
 	<select id="jobSelectList" resultType="co.test.prj.user.service.UserVO">
 		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 
 		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
@@ -23,7 +28,7 @@
 		SELECT * FROM TECH WHERE USER_ID2 = #{user_id2}
 	</select>
 	
-	<!-- 구직상세 참여프로젝트 >>> 경일 -->
+	<!-- 구직상세 참여프로젝트 -->
 	<select id="jobJoinList" resultType="co.test.prj.tech.service.TechVO">
 		SELECT DISTINCT P.PRJ_NAME, P.PRJ_ID, U.USER_NAME
 		FROM PROJECT P, "user" U, APPLICATION A
@@ -37,7 +42,7 @@
 	
 	<!-- 구인현황 확정멤버리스트 -->
 	<select id="memberList" resultType="co.test.prj.user.service.UserVO">
-		SELECT USER_NAME, USER_CRR, USER_TEL, TM_DEPT
+		SELECT U.USER_NAME, U.USER_CRR, U.USER_TEL, T.TM_DEPT, U.USER_ID
 		FROM "user" U, TEAM T
 		WHERE PRJ_ID= #{prj_id} AND U.USER_ID=T.USER_ID
 	</select>
@@ -46,8 +51,15 @@
 	<select id="ofterList" resultType="co.test.prj.user.service.UserVO">
 		SELECT U.USER_ID, U.USER_NAME, U.USER_CRR, U.USER_TEL, A.APP_STT, A.APP_ID
 		FROM "user" U, APPLICATION A
-		WHERE U.USER_ID IN (select user_id from application where master_id=#{master_id} and prj_id = #{prj_id} ) AND U.USER_ID = A.USER_ID AND PRJ_ID = #{prj_id} AND APP_CLSFC = 1
+		WHERE U.USER_ID IN (select user_id from application where master_id=#{master_id} and prj_id = #{prj_id} ) 
+				AND U.USER_ID = A.USER_ID AND PRJ_ID = #{prj_id} AND APP_CLSFC = 1
 	</select>
+	
+	<!-- 구인현황 참여요청삭제 -->
+	<delete id="ofterDelete" parameterType="co.test.prj.application.service.AppVO">
+		DELETE FROM APPLICATION
+		WHERE APP_ID = #{app_id}
+	</delete>
 	
 	<!-- 구인현황 프로젝트신청리스트 -->
 	<select id="offerFromPrj" resultType="co.test.prj.user.service.UserVO">
@@ -81,14 +93,20 @@
 	</insert>
 	
 	<!-- 관심 -->
+	<!-- 관심신청 -->
 	<insert id="heartAccept" parameterType="co.test.prj.application.service.AppVO">
 		<selectKey keyProperty="app_id" resultType="int"
 			order="BEFORE">
 			SELECT NVL(MAX(APP_ID) + 1, 1) AS ID FROM APPLICATION
 		</selectKey>
 		INSERT INTO APPLICATION(APP_ID, PRJ_ID, MASTER_ID, USER_ID, APP_CLSFC, APP_STT)
-		VALUES(#{app_id}, #{prj_id}, #{master_id}, #{user_id}, 0, 'ing')
+		VALUES(#{app_id}, #{prj_id}, #{master_id}, #{user_id}, 1, 'ing')
 	</insert>
+	
+	<!-- 관심 신청후 app_id 조회 -->
+	<select id="heartafterSelect" resultType="co.test.prj.application.service.AppVO">
+		SELECT APP_ID FROM APPLICATION WHERE USER_ID = #{user_id} AND MASTER_ID = #{master_id} AND PRJ_ID = #{prj_id} AND APP_STT= 'ing'
+	</select>
 	
 	<select id="projectOfrAppend" parameterType="co.test.prj.application.service.AppVO" resultType="co.test.prj.application.service.AppVO">
 		SELECT APP_ID
@@ -139,6 +157,6 @@
 	</select>
 	
 	<select id="ttlCheck" resultType="co.test.prj.user.service.UserVO">
-		SELECT USER_JOB_TTL, USER_JOB_CNT FROM "user" WHERE USER_ID = #{user_id}
+		SELECT USER_ID, USER_JOB_TTL, USER_JOB_CNT FROM "user" WHERE USER_ID = #{user_id}
 	</select>
 </mapper>

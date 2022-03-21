@@ -5,6 +5,7 @@
 <%@page import="co.test.prj.user.service.UserVO"%>
 <%@page import="co.test.prj.interest.service.InterestVO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -216,7 +217,9 @@
 	                    	<c:otherwise>
 			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
 	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
-	                    			<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청하기</button>
+	                    			<sec:authorize access="isAuthenticated()">
+	                    				<button type="button" id="callbtn" class="btn_4 callbtn" style="background-color: #F27457;">신청하기</button>
+	                    			</sec:authorize>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                    
@@ -227,17 +230,30 @@
 	                            <div class="justify-content-center">
 	                                <h2 class="content prjtitle" style="text-align: center;">진행중인 프로젝트</h2>
 	                                <p class="content prj">프로젝트</p>
-	                                
 	                                <div class="content form-select" id="dropdown">
 	                                    <select class="content prjlist" id="pId">
-	                                    	<c:forEach items="${prjList }" var="prjList">
-		                                        <option value="${prjList.prj_id }">${prjList.prj_name }</option>
-	                                    	</c:forEach>
+	                                    	<c:choose>
+			                                	<c:when test="${prjList[0].prj_name eq null }">
+			                                    	<option value="">진행중인 프로젝트가 없습니다.</option>
+			                                	</c:when>
+			                                	<c:otherwise>
+			                                    	<c:forEach items="${prjList }" var="prjList">
+				                                        <option value="${prjList.prj_id }">${prjList.prj_name }</option>
+			                                    	</c:forEach>
+			                                    </c:otherwise>
+			                                </c:choose>
 	                                    </select>
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <button type="button" class="btn_4 modalInbtn" onclick="requsetWork()">신청하기</button>
+	                        <c:choose>
+	                        	<c:when test="${prjList[0].prj_name eq null }">
+	                        		<button type="button" class="btn_4 modalInbtn" onclick="requestFail()">신청하기</button>			
+	                        	</c:when>
+	                        	<c:otherwise>
+	                        		<button type="button" class="btn_4 modalInbtn" onclick="requsetWork()">신청하기</button>
+	                        	</c:otherwise>
+	                        </c:choose>
 	                    </div>
 	                    
 	                    <div class="">
@@ -475,6 +491,10 @@
         	}) 
         };
         
+        function requestFail() {
+        	toastr.warning('진행중인 프로젝트가 없습니다.');
+        	$('.modaldal').fadeOut();
+        }
     </script>
     
 </body>

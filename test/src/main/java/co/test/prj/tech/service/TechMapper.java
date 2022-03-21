@@ -37,6 +37,9 @@ public interface TechMapper {
 	// 구인현황 참여 요청 리스트
 	List<ProjectVO> ofterList(ProjectVO project);
 	
+	//구인현황 참여요청 삭제
+	int ofterDelete(AppVO app);
+	
 	// 구인현황 프로젝트 신청 리스트
 	List<ProjectVO> offerFromPrj(ProjectVO project);
 	
@@ -49,6 +52,9 @@ public interface TechMapper {
 	
 	//관심수락
 	int heartAccept(AppVO app);
+	
+	//관심수락 후 app_id 조회
+	AppVO heartafterSelect(AppVO app);
 	
 	//관심거절
 	int heartDelete(InterestVO interest);
@@ -70,4 +76,7 @@ public interface TechMapper {
 	
 	//InsertPage title Check
 	UserVO ttlCheck(UserVO user);
+	
+	//등록 및 수정 버튼 체크
+	UserVO insertUpdatebtnCheck(UserVO user);
 }
