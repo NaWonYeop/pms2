@@ -191,11 +191,11 @@ public class BuyController {
 		return map;
 	}
 	
-	@RequestMapping("/buySelectList")
-	public String buySelectList(Model model) {
-		model.addAttribute("buys", buyDao.buySelectList());
-		return "buy/buySelectList";
-	}
+//	@RequestMapping("/buySelectList")
+//	public String buySelectList(Model model) {
+//		model.addAttribute("buys", buyDao.buySelectList());
+//		return "buy/buySelectList";
+//	}
 
 	
 
