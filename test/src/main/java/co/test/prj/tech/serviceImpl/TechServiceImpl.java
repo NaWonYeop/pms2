@@ -144,6 +144,21 @@ public class TechServiceImpl implements TechService {
 		return map.ttlCheck(user);
 	}
 
+	@Override
+	public UserVO insertUpdatebtnCheck(UserVO user) {
+		return map.insertUpdatebtnCheck(user);
+	}
+
+	@Override
+	public int ofterDelete(AppVO app) {
+		return map.ofterDelete(app);
+	}
+
+	@Override
+	public AppVO heartafterSelect(AppVO app) {
+		return map.heartafterSelect(app);
+	}
+
 	
 	
 	

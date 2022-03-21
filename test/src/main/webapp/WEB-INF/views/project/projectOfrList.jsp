@@ -99,7 +99,7 @@ button {
 				<div class="row member">
 					<!-- for문 start -->
 					<c:forEach items="${memberList }" var="memberList">
-						<div class="col-sm-12 col-lg-12 list">
+						<div class="col-sm-12 col-lg-12 mlist${memberList.user_id }">
 							<div class="single_special_cource">
 								<div class="special_cource_text memberList"
 									style="border: 0; background-color: #F27457; padding: 10px;">
@@ -200,7 +200,7 @@ button {
 													onclick="projectOfrAccept(${prjOffer.user_id}, ${prjOffer.app_id },'${prjOffer.user_name }',${prjOffer.user_crr },${prjOffer.user_tel })">수락</button>
 												<button type="button" id="nopebtn"
 													class="nopebtn${prjOffer.app_id } btn_4"
-													onclick="projectOfrDecline(${prjOffer.app_id})">거절</button>
+													onclick="projectOfrDecline(${prjOffer.app_id}, ${prjOffer.user_id })">거절</button>
 											</div>
 										</div>
 									</div>
@@ -269,11 +269,10 @@ button {
 											</div>
 											<div class="col-4">
 												<div class="button-contactForm">
-													<%-- <button type="button" class="joinbtn${ofterList.user_id } btn_4"
-														onclick="projectOfrAccept(${ofterList.user_id}, ${ofterList.app_id })">수락</button> --%>
+													
 													<button type="button"
 														class="nopebtn${ofterList.user_id } btn_4"
-														onclick="requestDecline(${ofterList.user_id })" style="margin-left: 33%;">취소</button>
+														onclick="requestDecline(${ofterList.app_id }, ${ofterList.user_id }, '${ofterList.user_name }', ${ofterList.user_crr }, ${ofterList.user_tel })" style="margin-left: 33%;">취소</button>
 												</div>
 											</div>
 										</div>
@@ -304,7 +303,7 @@ button {
 			</div>
 
 			<div class="testimonial_slider">
-				<div class="row">
+				<div class="row heart">
 					<!-- for문 start -->
 					<c:forEach items="${interest }" var="interest">
 						<div class="col-sm-12 col-lg-12 hList${interest.user_id }">
@@ -325,20 +324,6 @@ button {
 													</h5>
 												</div>
 											</div>
-											<!-- <div class="author_rating">
-	                                            <div class="rating avg">
-	                                                <div class="star-ratings">
-	                                                    <div 
-	                                                    class="star-ratings-fill" style=" width: 70% ">
-	                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-	                                                </div>
-	                                                <div class="star-ratings-base">
-	                                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-	                                                </div>
-	                                            </div>
-	                                                <p>3.8 Ratings</p>
-	                                            </div>
-	                                        </div> -->
 										</div>
 
 										<div class="col-4">
@@ -347,7 +332,7 @@ button {
 													<c:when test="${interest.user_crr == null}">
 														<button type="button"
 														class="joinbtn${interest.user_id} btn_4"
-														onclick="heartAccept(${interest.user_id}, '${interest.user_name }', 0, ${interest.user_tel })">신청</button>
+														onclick="heartAccept(${interest.user_id}, '${interest.user_name }', ${interest.user_crr }, ${interest.user_tel })">신청</button>
 													</c:when>
 													<c:otherwise>
 														<button type="button"
@@ -443,84 +428,109 @@ button {
             })
 		}
 		
-		function projectOfrDecline(e) {
+		function projectOfrDecline(e, uId) {
 			console.log(e);
 			$.ajax({
 				url: 'projectOfrDecline',
 				type: 'post',
 				data: {
-					app_stt: "no",
-					app_id: e
-				},
-				success: function() {
-					toastr.success("거절되었습니다.")
-					$('.slist'+e).remove();
-				}
-			})
-		}
-		
-		function requestDecline(e) {
-			console.log(e);
-			$.ajax({
-				url: 'requestDecline',
-				type: 'post',
-				data: {
 					master_id: ${sessionUser.user_id},
 					app_id: e
 				},
 				success: function() {
 					toastr.success("거절되었습니다.")
+					$('.slist'+uId).remove();
+				}
+			})
+		}
+		
+		function requestAccept(e, aId) {
+			$.ajax({
+				url: 'requestAccept',
+				type: 'post',
+				data: {
+					user_id: ${sessionUser.user_id},
+					user_id2: e,
+					app_id: aId
+				},
+				success: function() {
+					toastr.success("수락되었습니다.");
 					$('.clist'+e).remove();
+					//member리스트 추가 append 해줘야됨
+				}
+			});
+		}
+		
+		function requestDecline(aId, uId, name, crr, tel) {
+			$.ajax({
+				url: 'requestDecline',
+				type: 'post',
+				data: {
+					app_id: aId
+				},
+				success: function(result) {
+					toastr.success("거절되었습니다.");
+					$('.clist'+result.user_id).remove();
+					
 				}
 			})
 		}
 		
 		function heartAccept(e, name, crr, tel) {
-			//app_id값이 있으면 아직스 실행안되게하기
-			$.ajax({
-				url: 'heartAccept',
-				type: 'post',
-				data: {
-					prj_id: ${prj_id},
-					master_id: ${sessionUser.user_id},
-					user_id: e
-				},
-				success: function(){
-					toastr.success("신청 완료!");
-					$('.hList'+e).remove();
-					$('.off').append(
-						`<div class="col-sm-12 col-lg-12 clist`+e+`">
-								<div class="single_special_cource">
-									<div class="special_cource_text" style="border: 0;">
-										<div class="col-12 author_info"
-											style="border-top: 0; margin-top: 0; padding-top: 0;">
-											<div class="col-8">
-												<div class="author_img">
-													<div class="author_info_text">
-														<p>Conduct by:</p>
-														<h5>
-															<a href="jobDetail?user_id=`+e+`">`+name+` | 경력 `+crr+`년 | 0`+tel+`
-															</a> 
-															<input type="hidden" id="uId" value="`+e+`">
-														</h5>
-													</div>
-												</div>
-												
-											</div>
-											<div class="col-4">
-												<div class="button-contactForm">
-													<button type="button"
-														class="nopebtn`+e+` btn_4"
-														onclick="projectOfrDecline(`+e+`)" style="margin-left: 33%;">취소</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>`		
-					);
-				}
-			})
+			console.log($('.clist'+e))
+			if($('.clist'+e).length || $('.slist'+e).length || $('.mlist'+e).length) {
+				
+				toastr.warning('이미 신청되었거나 확정된 멤버입니다.')
+				
+			} else {
+				$.ajax({
+					url: 'heartAccept',
+					type: 'post',
+					data: {
+						prj_id: ${prj_id},
+						master_id: ${sessionUser.user_id},
+						user_id: e
+						
+					},
+					success: function(result){
+						console.log(result);
+						toastr.success("신청 완료!");
+						/* $('.hList'+e).remove(); */
+						$('.off').append(
+								`<div class="col-sm-12 col-lg-12 clist`+e+`">
+		                        <div class="single_special_cource">
+		                           <div class="special_cource_text" style="border: 0;">
+		                              <div class="col-12 author_info"
+		                                 style="border-top: 0; margin-top: 0; padding-top: 0;">
+		                                 <div class="col-8">
+		                                    <div class="author_img">
+		                                       <div class="author_info_text">
+		                                          <p>Conduct by:</p>
+		                                          <h5>
+		                                             <a href="jobDetail?user_id=`+e+`">`+name+` | 경력 `+crr+`년 | 0`+tel+`
+		                                             </a> 
+		                                             <input type="hidden" id="uId" value="`+e+`">
+		                                          </h5>
+		                                       </div>
+		                                    </div>
+		                                    
+		                                 </div>
+		                                 <div class="col-4">
+		                                    <div class="button-contactForm">
+		                                       <button type="button"
+		                                          class="nopebtn`+e+` btn_4"
+		                                          onclick="requestDecline(\${result})" style="margin-left: 33%;">취소</button>
+		                                    </div>
+		                                 </div>
+		                              </div>
+		                           </div>
+		                        </div>
+		                     </div>`      	
+						);
+					}
+				})
+			}
+			
 		}
 		
 		function heartDelete(e) {

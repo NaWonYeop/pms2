@@ -66,6 +66,7 @@ public class TechController {
 		{
 			model.addAttribute("inters",techDao.jobInterList(uId.getUser_id()));
 		}
+		model.addAttribute("btnCheck", techDao.insertUpdatebtnCheck(uId));
 		model.addAttribute("jobs", techDao.jobSelectList());
 		model.addAttribute("techs", techDao.techSelectList());
 		model.addAttribute("certs", certDao.certSelectList());
@@ -229,30 +230,35 @@ public class TechController {
 	@RequestMapping("/projectOfrDecline")
 	@ResponseBody
 	private void projectOfrDecline(AppVO appvo) {
+		appvo.setApp_stt("no");
 		techDao.ofterAcceptUpdate(appvo);
 	}
+	
 	
 	//참여 요청 거절
 	@RequestMapping("/requestDecline")
 	@ResponseBody
-	private void requestDecline(AppVO app) {
-		appDao.appDelete(app);
+	private UserVO requestDecline(AppVO app, HttpSession session) {
+		techDao.ofterDelete(app);
+		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		userDao.jobSelect(uId);
+		
+		return userDao.jobSelect(uId);
 	}
 	
 	//관심 신청
 	@RequestMapping("/heartAccept")
 	@ResponseBody
-	private void heartAccept(Model model, AppVO app, HttpSession session, InterestVO interest,
+	private int heartAccept(Model model, AppVO app, HttpSession session, InterestVO interest, UserVO user,
 			@RequestParam("master_id") int master_id, @RequestParam("user_id") int user_id) {
 		
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
 		app.setMaster_id(uId.getUser_id());
-		techDao.heartAccept(app);
+		techDao.heartAccept(app); //insert
 		
-		interest.setUser_id(master_id);
-		interest.setUser_id2(user_id);
-		techDao.heartDelete(interest);
-
+		//세션id, 해당user_id, prj_id로 조회해서 app_id 리턴해줘야됨
+		AppVO result = techDao.heartafterSelect(app);
+		return result.getApp_id() ;
 	}
 	//관심삭제
 	@RequestMapping("/heartDelete")
