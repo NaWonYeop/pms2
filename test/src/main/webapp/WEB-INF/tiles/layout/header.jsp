@@ -63,7 +63,7 @@
 							<!--<c:if test="${sessionUser eq null }">-->
 								<li class="d-none d-lg-block"><a class="genric-btn primary-border radius"
 									href="loginForm">Sign in</a></li>
-							<!-- </c:if> -->	
+							<!-- </c:if> -->
 							</sec:authorize>
 							
 						</ul>

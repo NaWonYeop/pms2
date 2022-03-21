@@ -19,7 +19,7 @@
 
 
 <script>
-
+	
 	$("#selectDiv").on("change", function () { 
 		var prj_id = $(this).find("option:selected").data("prj_id");
 		var master_id = $(this).find("option:selected").data("master_id");
