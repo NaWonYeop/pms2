@@ -8,12 +8,7 @@
 <!-- 페이지 새로고침 명령어 -->
 <!-- <META HTTP-EQUIV="refresh" CONTENT="3"> -->
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
-<script>
-
-
-
-</script>
-
+<script src="resources/js/rewardFnc.js"></script>
 <style>
         .Tname {
             margin-bottom: 60px;
@@ -182,6 +177,31 @@ ${project}<br>
         	<div class="row">
         		<div class="col-lg-8 course_details_left">
         		 	<div class="content_wrapper">
+        		 	
+        		 			<c:if test="${project.prj_ofr_prop == 1}">
+		                    <!-- 구인 있을시 -->
+		                        <h3 style="font-weight: bold;">구인</h3>
+		                        <p class="btn_4">${project.prj_ar}</p>
+			                    <p class="btn_4">${project.prj_cnd}</p>
+								<br>
+								
+		                         <ul class="blog-info-link">
+		                           <li><i class="far fa-user"></i> 프론트 ${ofr.total_team_prs }/ ${project.prj_frn_prs }명</a></li>
+		                           <li><i class="far fa-user"></i> 백 ${ofr.total_team_prs }/ ${project.prj_bk_prs }명</a></li>
+		                           <li><i class="far fa-user"></i> DB ${ofr.total_team_prs }/ ${project.prj_db_prs }명</a></li>
+		                           <li><i class="far fa-user"></i> 서버 ${ofr.total_team_prs }/ ${project.prj_ser_prs }명</a></li>
+		                           <li><i class="far fa-comments"></i> 모집 기간
+		                            <fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
+									<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
+		                        </ul> 	
+				                    <form id="ajaxAppPrjInsertForm" onsubmit="return false" onclick="ajaxAppPrjInsertForm()">
+										<input type="hidden" name="prj_id" value="${project.prj_id}">
+										<input type="hidden" name="master_id" value="${project.master_id}">
+		                         		<input type="hidden" name="user_id" value="${sessionScope.sessionUser.user_id }">
+										<input type="submit" class="rfnd btn_4" value="참가신청">
+									</form>
+	                        </c:if>
+        		 	
 	                        
 	                         <c:if test="${project.prj_fnd_prop == 1}">
 							<!-- 펀딩 있을시 -->
@@ -228,37 +248,17 @@ ${project}<br>
 							</c:if>
 	                        
 	                        <br>
-	                        <c:if test="${project.prj_ofr_prop == 1}">
-	                        <!-- 구인 있을시 -->
-	                        <h3 style="font-weight: bold;">구인</h3>
-	                        <p class="btn_4">${project.prj_ar}</p>
-		                    <p class="btn_4">${project.prj_cnd}</p>
-							<br>
-							
-	                         <ul class="blog-info-link">
-	                           <li><i class="far fa-user"></i> 프론트 ${ofr.total_team_prs }/ ${project.prj_frn_prs }명</a></li>
-	                           <li><i class="far fa-user"></i> 백 ${ofr.total_team_prs }/ ${project.prj_bk_prs }명</a></li>
-	                           <li><i class="far fa-user"></i> DB ${ofr.total_team_prs }/ ${project.prj_db_prs }명</a></li>
-	                           <li><i class="far fa-user"></i> 서버 ${ofr.total_team_prs }/ ${project.prj_ser_prs }명</a></li>
-	                           <li><i class="far fa-comments"></i> 모집 기간
-	                            <fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
-								<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
-	                        </ul> 	
-			                    <form id="ajaxAppPrjInsertForm" onsubmit="return false" onclick="ajaxAppPrjInsertForm()">
-									<input type="hidden" name="prj_id" value="${project.prj_id}">
-									<input type="hidden" name="master_id" value="${project.master_id}">
-	                         		<input type="hidden" name="user_id" value="${sessionScope.sessionUser.user_id }">
-									<input type="submit" class="rfnd btn_4" value="참가신청">
-								</form>
-	                        </c:if>
+	                        
 	           
         			</div>
         			<br>
-        			<div id="list">
-					<h3 style="font-weight: bold;">기획안</h3>
-					
-					${project.prj_cnt}
-					</div>
+        			<c:if test="${project.prj_cnt != null}">
+	        			<div id="list">
+							<h3 style="font-weight: bold;">기획안</h3>
+							
+							${project.prj_cnt}
+						</div>
+        			</c:if>
         			<c:if test="${sessionScope.sessionUser.user_id == project.master_id }">
 			
 						<form action="projectVerUpForm">
@@ -268,7 +268,7 @@ ${project}<br>
 					
 						<form action="rewardInsertForm">
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
-							<input type="hidden" id="master_id" name="master_id" value="${project.master_id}">
+							<input type="hidden" name="master_id" value="${project.master_id}">
 							<input type="hidden" id="go" name="go" value="selectPage">
 							<input type="submit" class="rfnd btn_4" value="리워드 관리">
 						</form>
@@ -287,10 +287,9 @@ ${project}<br>
         		<input type="hidden" id="user_name" name="user_name" value="${sessionScope.sessionUser.user_name }">
         		<input type="hidden" id="user_email" name="user_email" value="${sessionScope.sessionUser.user_email }">
         		<input type="hidden" id="user_tel" name="user_tel" value="${sessionScope.sessionUser.user_tel }">
-        		<input type="hidden" id="cash" name="buy_way" value="cash">
-        		<input type="hidden" id="coin" name="buy_way" value="coin">
-        		
-        		
+        		<input type="hidden" id="ether_id" name="ether_id" value="${sessionScope.sessionUser.ether_id }">
+        		<input type="hidden" id="master_id" name="master_id" value="${project.master_id}">
+        		<input type="hidden" id="masterAcc" value="${masterAcc}">
         		
         		<div class="col-lg-4 right-contents">
         			<c:if test="${rewards != null}">
@@ -303,8 +302,9 @@ ${project}<br>
 		        				<div class="blog_details">
 		        				<!-- 이거 아이디 값으로 찾는거 라 딴건 바꿔도 괜찮아요-->
 		                           	<h3 id="n${reward.reward_id }">${reward.rwd_name}</h3>
-		                           	<h2 id="p${reward.reward_id }">${reward.rwd_prc}</h2>
-									
+		                           	원화<h2 id="p${reward.reward_id }">${reward.rwd_prc}</h2>
+									ETHER<h2>${ String.format("%.6f",(reward.rwd_prc / Rether))}</h2>
+									<input type="hidden" id="e${reward.reward_id }" value="${reward.rwd_prc / Rether}">
 									내용 : ${reward.rwd_cnt}<br>
 									구입수량 : ${reward.rwd_cot}<br>
 									판매수량 : ${reward.rwd_goal}<br>
@@ -313,8 +313,8 @@ ${project}<br>
 									<div class ="btns">
 									<!-- 버튼들은 클래스 바꾸면 안되요 -->
 										<input type="hidden" name="reward_id" value="${reward.reward_id }">
-										<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="구매"  style="background-color: #F27457;">
-										<input type="button" class="rfnd btn_4" value="환불"  style="background-color: #F27457;">
+										<input type="button" class="wBuy btn_4" id="${reward.reward_id }" value="현금구매"  style="background-color: #F27457;">
+										<input type="button" class="rfnd btn_4" id="${reward.reward_id }" value="코인구매"  style="background-color: #F27457;">
 									</div>
 		        				</div>
 		        			</article>
@@ -325,14 +325,7 @@ ${project}<br>
 		</div>
 	</section>	
 	
-	<div id="ether">
-	이더리움 들고오자
-	<button id="dCoin">코인</button>
-	<input type="text" id="howMuchEther" value="">
-	
-	</div>
-	
-	<input type="hidden" id="">
+
 	
 	
 	<script type="text/javascript">
@@ -353,7 +346,7 @@ ${project}<br>
 			  "showMethod": "fadeIn",
 			  "hideMethod": "fadeOut"
 			}    
-	$("#dCoin").click(function(e){
+/* 	$("#dCoin").click(function(e){
 		console.log("가니?")
 		var won = 50000;
 		 $.ajax({
@@ -374,7 +367,16 @@ ${project}<br>
 		        }
 			}) //ajax
 		
-	});
+	}); */
+	
+	function getToday(){
+	    var date = new Date();
+	    var year = date.getFullYear();
+	    var month = ("0" + (1 + date.getMonth())).slice(-2);
+	    var day = ("0" + date.getDate()).slice(-2);
+
+	    return year + month + day;
+	}
 	
 	
 	function ajaxAppPrjInsertForm() {
@@ -432,29 +434,36 @@ ${project}<br>
 		          console.log("Insert ajax 통신 실패!!!");
 		        }
 			}) //ajax
-			
-			
+
 		}); //doc.ready
 	
+		//현금 구매
 		$(".wBuy").click(function(e){
-			console.log('구매 클릭');
+			console.log('현금구매 클릭');
 			
 			//debugger
 			var uId = document.getElementById('user_id').value;
+			console.log("구매자 아이디 : "+ uId);
 			var uName = document.getElementById('user_name').value;
+			console.log("구매자 이름 : "+ uName);
 			var uEmail = document.getElementById('user_email').value;
+			console.log("구매자 메일 : "+ uEmail);
 			var uTel = document.getElementById('user_tel').value;
+			console.log("구매자 연락처 : "+ uTel);
 			
 			var rId = $(".wBuy").prevObject.context.activeElement.id;
+			console.log("리워드 아이디 : "+ rId);
 			var rName = document.getElementById('n'+rId).innerHTML;
+			console.log("리워드 이름 : "+ rName);
 			var rPrc = document.getElementById('p'+rId).innerHTML;
+			console.log("리워드 금액 : "+ rPrc);
 			var rCnt = document.getElementById('c'+rId).value;
+			console.log("리워드 구매수 : "+ rCnt);
 			
-			//현금or코인
-			var rCash = document.getElementById('cash').value;
-			var rCoin = document.getElementById('coin').value;
+
 			
 			var pId = document.getElementById('prj_id').value;
+			console.log("프로젝트 아이디 : "+ pId);
 			
 			if (!document.getElementById('c'+rId).checkValidity()) {
 				 console.log("기본값 1 넣는곳");
@@ -462,22 +471,9 @@ ${project}<br>
 			}
 			
 			var rPay = parseInt(rCnt) * parseInt(rPrc);
-			console.log("구매자 아이디 : "+ uId);
-			console.log("구매자 이름 : "+ uName);
-			console.log("구매자 메일 : "+ uEmail);
-			console.log("구매자 연락처 : "+ uTel);
+			console.log("현금 결제액 : "+ rPay);
 			
-			console.log("리워드 아이디 : "+ rId);
-			console.log("리워드 이름 : "+ rName);
-			console.log("리워드 금액 : "+ rPrc);
-			console.log("리워드 구매수 : "+ rCnt);
-			console.log("결제액 : "+ rPay);
-			
-			
-			console.log("리워드 구매법 : "+ rCash);
-			console.log("리워드 구매법 : "+ rCoin);
-			
-			console.log("프로젝트 아이디 : "+ pId);
+
 			
 			//debugger;
 			console.log("구매시작");
@@ -521,7 +517,7 @@ ${project}<br>
 					//데이터 저장시 필요한 데이터
 					var save ={
 						"user_id" : uId,
-						"buy_way" : rCash,
+						"buy_way" : "cash",
 						"reward_id" : rId,
 						"prj_id" : pId,
 						"buy_count" : rCnt,
@@ -547,6 +543,8 @@ ${project}<br>
 				          }else{
 				             console.log("Insert Fail!!!");
 				          } 
+				          
+				          location.reload();
 				        },
 				        error:function(){
 				          console.log("Insert ajax 통신 실패!!!");
@@ -562,6 +560,141 @@ ${project}<br>
 			});//pay
 		}); //check1 클릭 이벤트
 		 
+		//코인구매
+		$(".rfnd").click(function(e){
+			console.log('코인구매 클릭');
+			
+			//debugger
+			var uId = document.getElementById('user_id').value;
+			console.log("구매자 아이디 : "+ uId);
+			var uEtherId = document.getElementById('ether_id').value;
+			console.log("구매자 이더리움 어카운트 : "+ uEtherId);
+
+			var rId = $(".rfnd").prevObject.context.activeElement.id;
+			console.log("리워드 아이디 : "+ rId);
+			//var rName = document.getElementById('n'+rId).innerHTML;
+			//console.log("리워드 이름 : "+ rName);
+			var rEPrc = document.getElementById('e'+rId).value;
+			console.log("리워드 이더 금액 : "+ rEPrc);
+			var rWPrc = rEPrc * (10**18);
+			console.log("리워드 웨이 금액 : "+ rWPrc);
+			var rCnt = document.getElementById('c'+rId).value;
+			console.log("리워드 구매수 : "+ rCnt);
+			
+			var pId = document.getElementById('prj_id').value;
+			console.log("프로젝트 아이디 : "+ pId);
+			
+			if (!document.getElementById('c'+rId).checkValidity()) {
+				 console.log("기본값 1 넣는곳");
+				 rCnt = 1;
+			}
+			
+			var rPay = parseInt(parseInt(rCnt) * rWPrc);
+			console.log("현금 결제액 : "+ rPay);
+			
+			var today = getToday();
+			console.log("오늘 년월일 : "+ today);
+			
+			var mId = document.getElementById('master_id').value;
+			console.log("담당자 아이디 : "+ mId);
+			
+			
+			var mAc = document.getElementById('masterAcc').value;
+			console.log("담당자 어카운트 : "+ mAc);
+			
+			var cId = parseInt(mId + today) ;
+			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
+			
+			//debugger;
+			console.log("구매시작");
+			
+			
+			solidityRewardFnc.methods
+								.buyAry(cId, mAc)
+								.send({from: mAc, value: })
+         						.then(function(result){console.log(result);});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	/*	
+			
+			//결제요청
+			IMP.request_pay({
+				//name과 amout만있어도 결제 진행가능
+				//pg : 'kakao', //pg사 선택 (kakao, kakaopay 둘다 가능)
+				pg: "html5_inicis",
+				pay_method: 'card',
+				merchant_uid : 'merchant_' + new Date().getTime(),
+				name : rName, // 상품명
+				amount : rPay,
+				buyer_email : uEmail,
+				buyer_name : uName,
+				buyer_tel : uTel,  //필수항목
+				//결제완료후 이동할 페이지 kko나 kkopay는 생략 가능
+				//m_redirect_url : 'https://localhost:8080/payments/complete'
+			}, function(rsp){
+				if(rsp.success){//결제 성공시
+					var msg = '결제가 완료되었습니다';
+					
+					
+					//데이터 저장시 필요한 데이터
+					var save ={
+						"user_id" : uId,
+						"buy_way" : "coin",
+						"reward_id" : rId,
+						"prj_id" : pId,
+						"buy_count" : rCnt,
+						"buy_muid" : rsp.merchant_uid
+							
+					}
+					
+					
+					 $.ajax({
+						url : 'ajaxCoinBuy', 
+				        type :'POST',
+				        data : JSON.stringify(save,
+				        		['user_id', 'buy_way', 'reward_id', 
+				        			'prj_id', 'buy_count', 'buy_muid']),
+				        contentType:'application/json;charset=utf-8',
+				        dataType: 'json', //서버에서 보내줄 데이터 타입
+				        success: function(res){
+				        			        	
+				          if(res == 1){
+							 console.log("추가성공");	
+							 //pay += 5;
+							 //$('#pay_coupon').html(pay);			           
+				          }else{
+				             console.log("Insert Fail!!!");
+				          } 
+				          
+				          location.reload();
+				        },
+				        error:function(){
+				          console.log("Insert ajax 통신 실패!!!");
+				        }
+					}) //ajax
+					
+				}
+				else{//결제 실패시
+					var msg = '결제에 실패했습니다';
+					msg += '에러 : ' + rsp.error_msg
+				}
+				console.log(msg);
+			});//pay
+			
+			
+			*/
+		
+		}); //check2 클릭 이벤트
 		
 		//환불은 다른데서 사용할것
 		$("#check2").click(function(e){

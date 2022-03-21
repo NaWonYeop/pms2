@@ -60,49 +60,49 @@ public class BuyController {
 		return result;
 	}
 	
-	//사용용도 변경예정
-	@RequestMapping("/ajaxCoin")
-	@ResponseBody
-	public double ajaxCoin(@RequestParam("won") int won) {
-		System.out.println("오니?");
-
-		System.out.println("이더리움 시세 가져오기 시작");
-		String etherURL = "https://kr.investing.com/crypto/ethereum/eth-krw-converter";
-		String select = "#last_last";
-		Document doc = null;
-		
-		try {
-			System.out.println("접속?");
-			doc = Jsoup.connect(etherURL).get();
-			System.out.println("됨?");
-			
-		} catch (IOException e) {
-			System.out.println("접속?????");
-			e.printStackTrace();
-		}
-		
-		Elements etherGO = doc.select(select);
-		System.out.println(etherGO.text());
-		//이더리움 
-		double ether = Double.parseDouble(etherGO.text().replace(",", ""));
-		
-//		System.out.println("1달러 원가격 : " + cashWD);
-//		System.out.println("1 이더 달러가격 : " + ether );
-		System.out.println("1 이더 원화가격 : " + ether );
-		
-		//int totalWon = (int) Math.round(ether* cashWD);
-//		double totalWon = ether* cashWD;
-		
-		
-//		System.out.println("1이더 현금가격 : "+ totalWon);
-		System.out.println("현금가격 : "+ won);
-		
-		System.out.println(won/ether);
-		
-		return won/ether;
-		
-		
-	}
+//	//사용용도 변경예정
+//	@RequestMapping("/ajaxCoin")
+//	@ResponseBody
+//	public double ajaxCoin(@RequestParam("won") int won) {
+//		System.out.println("오니?");
+//
+//		System.out.println("이더리움 시세 가져오기 시작");
+//		String etherURL = "https://kr.investing.com/crypto/ethereum/eth-krw-converter";
+//		String select = "#last_last";
+//		Document doc = null;
+//		
+//		try {
+//			System.out.println("접속?");
+//			doc = Jsoup.connect(etherURL).get();
+//			System.out.println("됨?");
+//			
+//		} catch (IOException e) {
+//			System.out.println("접속?????");
+//			e.printStackTrace();
+//		}
+//		
+//		Elements etherGO = doc.select(select);
+//		System.out.println(etherGO.text());
+//		//이더리움 
+//		double ether = Double.parseDouble(etherGO.text().replace(",", ""));
+//		
+////		System.out.println("1달러 원가격 : " + cashWD);
+////		System.out.println("1 이더 달러가격 : " + ether );
+//		System.out.println("1 이더 원화가격 : " + ether );
+//		
+//		//int totalWon = (int) Math.round(ether* cashWD);
+////		double totalWon = ether* cashWD;
+//		
+//		
+////		System.out.println("1이더 현금가격 : "+ totalWon);
+//		System.out.println("현금가격 : "+ won);
+//		
+//		System.out.println(won/ether);
+//		
+//		return won/ether;
+//		
+//		
+//	}
 	
 	@RequestMapping("/ajaxSise")
 	@ResponseBody
