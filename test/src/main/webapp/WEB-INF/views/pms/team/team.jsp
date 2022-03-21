@@ -8,7 +8,7 @@
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Team</h4>
+						<h4 class="card-title">Team Member</h4>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<thead>
@@ -37,20 +37,31 @@
 		$.ajax({
 			url : "teamSelect",
 			type : "GET",
-			dataType : "json"
+			dataType : "json",
+			async: false
 		}).done(function(json) {
 			for(team of json) {
-				$("#myTbody").append(`<tr id="tr">
-				<td class="py-1">\${team.user_id}</td>
-				<td>\${team.user_name}</td> 
-				<td>\${team.tm_pos}</td>
-				<td>\${team.tm_dept}</td>
-				<td>\${team.user_email}</td>
-				<td>\${team.user_tel}</td>
+				$("#myTbody").append(`
+				<tr id="tr\${team.user_id}">
+					<td class="py-1">\${team.user_id}</td>
+					<td>\${team.user_name}</td> 
+					<td>\${team.tm_pos}</td>
+					<td id="dept">\${team.tm_dept}</td>
+					<td>\${team.user_email}</td>
+					<td>\${team.user_tel}</td>
+					<td><button id="deptUpdate" type="button">부서 수정</button></td>
 				</tr>`);
 			};
+			
+			$("#deptUpdate").on("click", function(e){
+				alert("버튼 클릭");
+				console.log(e);
+			});
 		}).fail(function(xhr, status, message) {
 			alert(" status: " + status + " er:" + message);
 		});
 	});
+	
+	
+	
 </script>
