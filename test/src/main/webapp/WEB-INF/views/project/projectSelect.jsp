@@ -608,22 +608,11 @@ ${project}<br>
 			//debugger;
 			console.log("구매시작");
 			
-			
 			solidityRewardFnc.methods
-								.buyAry(cId, mAc)
-								.send({from: mAc, value: })
-         						.then(function(result){console.log(result);});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			.buyAry(cId, mAc)
+			.send({from: uEtherId, value: rPay })
+			.then(function(result){console.log(result);});
+
 			
 	/*	
 			
