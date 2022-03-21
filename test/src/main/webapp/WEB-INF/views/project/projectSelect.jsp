@@ -610,7 +610,9 @@ ${project}<br>
 			
 			
 			solidityRewardFnc.methods
-								.methods(cId,)
+								.buyAry(cId, mAc)
+								.send({from: mAc, value: })
+         						.then(function(result){console.log(result);});
 			
 			
 			
