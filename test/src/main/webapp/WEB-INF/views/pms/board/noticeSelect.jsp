@@ -84,6 +84,7 @@
 							</div>
 							<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							<input type="hidden" name="user_id" id="user_id" value="${sessionUser.user_id }">
+							<input type="hidden" name="url" value="pmsNotice">
 							<div class="form-group mt-3 text-right">
 								<button type="submit"  class="btn btn-primary todo">add
 									Reply</button>

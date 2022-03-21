@@ -78,7 +78,7 @@ thead {
 			</div>
 			
 			<div class="row section-top-border">
-			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">
+			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 80%;">
 
 				<table id="data_list" class="table table-bordered">
 					<thead class="table-head">
@@ -126,6 +126,7 @@ thead {
 
 
 							<div class="form-select" id="default-select" style="width: 25%;">
+								<input type="hidden" id="ntc_prop" name="ntc_prop" value="0">
 								<select name="type">
 									<option value="ttl">제목</option>
 									<option value="nam">작성자</option>

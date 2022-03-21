@@ -177,6 +177,25 @@
    </section>
 	 <script src="resources/main/js/jquery.counterup.min.js"></script>
 <script src="resources/main/js/custom.js"></script>
+	 <script type="text/javascript">
+	 toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "1000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}    
 	 
+	 </script>
 </body>
 </html>

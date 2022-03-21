@@ -3,6 +3,9 @@ package co.test.prj.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,7 +24,7 @@ public class cunstomUser implements UserDetailsService
 	//@Setter(onMethod_ ={@Autowired} )
 	@Autowired
 	private UserService userDao;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
@@ -34,8 +37,6 @@ public class cunstomUser implements UserDetailsService
 		if(vo==null) {
 			throw new UsernameNotFoundException("no user");
 		}
-		
-		
 		return vo;
 	}
 

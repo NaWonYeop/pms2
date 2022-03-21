@@ -76,17 +76,17 @@ public class BoardServiceImpl implements BoardService
 	}
 
 	@Override
-	public List<BoardVO> boardNameSer(String user_name)
+	public List<BoardVO> boardNameSer(BoardVO vo)
 	{
 		// TODO Auto-generated method stub
-		return map.boardNameSer(user_name);
+		return map.boardNameSer(vo);
 	}
 
 	@Override
-	public List<BoardVO> boardTitleSer(String brd_ttl)
+	public List<BoardVO> boardTitleSer(BoardVO vo)
 	{
 		// TODO Auto-generated method stub
-		return map.boardTitleSer(brd_ttl);
+		return map.boardTitleSer(vo);
 	}
 
 	@Override
@@ -111,6 +111,20 @@ public class BoardServiceImpl implements BoardService
 	public List<BoardVO> boardNoticeList() {
 		// TODO Auto-generated method stub
 		return map.boardNoticeList();
+	}
+
+	@Override
+	public List<BoardVO> pmsNameSer(BoardVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.pmsNameSer(vo);
+	}
+
+	@Override
+	public List<BoardVO> pmsTitleSer(BoardVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.pmsTitleSer(vo);
 	}
 
 	

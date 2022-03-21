@@ -40,6 +40,10 @@ public class ReplyController
 			return "redirect:/freeboardSelect?brd_id="+vo.getBrd_id();
 		case "noticeBoard":
 			return "redirect:/noticeboardSelect?brd_id="+vo.getBrd_id();
+		case "pmsNotice":
+			return "redirect:/msnoticeBoardSelect?brd_id="+vo.getBrd_id();
+		case "pmsBoard":
+			return "redirect:/msprojectBoardSelect?brd_id="+vo.getBrd_id();
 		}
 		return "retirect:/home";
 		

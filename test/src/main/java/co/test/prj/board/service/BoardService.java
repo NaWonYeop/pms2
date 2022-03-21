@@ -29,9 +29,14 @@ public interface BoardService
 
 	int boardDelete(BoardVO vo);
 	
-	List<BoardVO> boardNameSer(String user_name);
+	List<BoardVO> boardNameSer(BoardVO vo);
 	
-	List<BoardVO> boardTitleSer(String brd_ttl);
+	List<BoardVO> boardTitleSer(BoardVO vo);
+	
+	List<BoardVO> pmsNameSer(BoardVO vo);
+	
+	List<BoardVO> pmsTitleSer(BoardVO vo);
+	
 	
 	//일반공지사항 noticeSelect
 	List<BoardVO> boardNoticeList();

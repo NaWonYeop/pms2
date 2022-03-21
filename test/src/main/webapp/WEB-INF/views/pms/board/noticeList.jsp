@@ -1,3 +1,4 @@
+<%@page import="co.test.prj.team.service.MyPrjVO"%>
 <%@page import="co.test.prj.user.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -55,8 +56,10 @@ thead {
 					</div>
 
 					<div class="insertbtn">
+					<c:if test="${sessionUser.user_id eq myPrj.master_id }">
 						<button type="button" id="insertbtn" class="btn btn-primary todo"
 							onclick="logincheck()">등록</button>
+					</c:if>
 					</div>
 
 					<div class="row section-top-border">
@@ -125,12 +128,13 @@ thead {
 	</div>
 	<div class="row justify-content-center">
 		<div class="col-sm-5">
-			<form action="boardSearch">
+			<form action="pmsBoardSearch">
 				<div class="form-group">
 
 					<div class="input-group mb-4">
-
-
+				
+						<input type="hidden" id="prj_id" name="prj_id" value="${sessionScope.myPrj.prj_id}">
+						<input type="hidden" id="ntc_prop" name="ntc_prop" value="1">
 						<div class="form-select" id="default-select" style="width: 25%;">
 							<select name="type">
 								<option value="ttl">제목</option>
@@ -162,11 +166,7 @@ thead {
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
 		function logincheck() {
-	<%UserVO user = (UserVO) session.getAttribute("sessionUser");
-if (user != null) {%>
-		location.href = "msnoticeBoardInsertForm";
-	<%} else%>
-		;
+			location.href = "msnoticeBoardInsertForm";
 		}
 		jQuery(function($) {
 			$("#data_list").DataTable({

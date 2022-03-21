@@ -4,7 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,13 +20,12 @@
 }
 
 table {
-	width : auto;	
+	width: auto;
 }
 
 thead {
 	background-color: #F5F7FF;
 }
-
 
 #data_list_paginate {
 	margin-top: 1%;
@@ -38,8 +38,6 @@ thead {
 .table.dataTable.no-footer {
 	border-bottom: 0;
 }
-
-
 </style>
 </head>
 <body>
@@ -52,9 +50,9 @@ thead {
 							<h2 style="float: right;">게시판</h2>
 						</div>
 					</div>
-						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
-						</div>
+					<div>
+						<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -73,55 +71,56 @@ thead {
 				</div>
 			</div>
 			<sec:authorize access="hasRole('ROLE_MASTER')">
-			<div class="insertbtn">
-			
-				<button type="button" id="insertbtn" class="btn_1"
-					onclick="logincheck()">등록</button>
-			</div>
+				<div class="insertbtn">
+
+					<button type="button" id="insertbtn" class="btn_1"
+						onclick="logincheck()">등록</button>
+				</div>
 			</sec:authorize>
 			<div class="row section-top-border">
-			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">
+				<div id="data_list_wrapper" class="dataTables_wrapper no-footer"
+					style="width: 100%;">
 
-				<table id="data_list" class="table table-bordered">
-					<thead class="table-head">
-						<tr>
-							<th class="text-center">번호</th>
-							<th class="text-center">제목</th>
-							<th class="text-center">작성자</th>
-							<th class="text-center">등록일</th>
-
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach var="free" items="${frees }">
+					<table id="data_list" class="table table-bordered">
+						<thead class="table-head">
 							<tr>
-
-										<td class="text-center">${free.brd_id }</td>
-
-
-
-								<td>
-									<div class="">
-										<a href="noticeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a>
-									</div>
-								</td>
-								<td>
-									<div class="text-center">${free.user_name }</div>
-								</td>
-								<td>
-									<div class="text-center">
-										<fmt:formatDate value="${free.brd_reg_date }"
-											pattern="yyyy-MM-dd" />
-
-									</div>
-								</td>
+								<th class="text-center">번호</th>
+								<th class="text-center">제목</th>
+								<th class="text-center">작성자</th>
+								<th class="text-center">등록일</th>
 
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach var="free" items="${frees }">
+								<tr>
+
+									<td class="text-center">${free.brd_id }</td>
+
+
+
+									<td>
+										<div class="">
+											<a href="noticeboardSelect?brd_id=${free.brd_id }">${free.brd_ttl }</a>
+										</div>
+									</td>
+									<td>
+										<div class="text-center">${free.user_name }</div>
+									</td>
+									<td>
+										<div class="text-center">
+											<fmt:formatDate value="${free.brd_reg_date }"
+												pattern="yyyy-MM-dd" />
+
+										</div>
+									</td>
+
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-sm-5">
@@ -130,36 +129,37 @@ thead {
 
 						<div class="input-group mb-4">
 
-
+							<input type="hidden" id="ntc_prop" name="ntc_prop" value="1">
 							<div class="form-select" id="default-select" style="width: 25%;">
 								<select name="type">
 									<option value="ttl">제목</option>
 									<option value="nam">작성자</option>
 
-									</select>
-								</div>
-								<input type="text" class="form-control" name="keyword"
-									placeholder='Search Keyword' onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Search Keyword'">
-								<div class="input-group-append">
-									<button class="btn" type="submit" style="padding: 0">
-										<img alt="search" src="resources/main/img/search.png" height="37px" >
-									</button>
-								</div>
+								</select>
+							</div>
+							<input type="text" class="form-control" name="keyword"
+								placeholder='Search Keyword' onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Search Keyword'">
+							<div class="input-group-append">
+								<button class="btn" type="submit" style="padding: 0">
+									<img alt="search" src="resources/main/img/search.png"
+										height="37px">
+								</button>
 							</div>
 						</div>
 					</div>
-				</form>
 			</div>
+			</form>
+		</div>
 		</div>
 
-		
+
 	</section>
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
 		function logincheck() {
-		location.href = "adminNoticeInsertform";
+			location.href = "adminNoticeInsertform";
 		}
 		jQuery(function($) {
 			$("#data_list").DataTable({

@@ -13,40 +13,40 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.user.service.UserVO;
 
 @Controller
-public class HomeController {
-	
+public class HomeController
+{
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	
-	 @Autowired 
-	 ProjectService projectDao;
-	 
-	
+
+	@Autowired
+	ProjectService projectDao;
+
 	@RequestMapping("/home")
-	public String home(Locale locale, Model model,Principal principle,HttpSession session) {
-	
-		
-		  model.addAttribute("mainOfer",projectDao.mainOfrList());
-		  model.addAttribute("mainFnd",projectDao.mainFndList());
-		
-		if(principle !=null)
+	public String home(Locale locale, Model model, Principal principle, HttpSession session, RedirectAttributes redirect)
+	{
+
+		model.addAttribute("mainOfer", projectDao.mainOfrList());
+		model.addAttribute("mainFnd", projectDao.mainFndList());
+
+		if (principle != null)
 		{
-			UserVO usr =
-					(UserVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
-			if(usr.getUser_ath().equals("ice"))
+			UserVO usr = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (usr.getUser_ath().equals("ice"))
 			{
-				System.out.println("동결이 로그인햇다!!!!");
+				System.out.println("동결로그인시 로그아웃처리");
+				return "redirect:/logout";
 			}
-			session.setAttribute("sessionUser",	usr);
+			session.setAttribute("sessionUser", usr);
 		}
-			
+
 		return "home/home";
 	}
-	
+
 }

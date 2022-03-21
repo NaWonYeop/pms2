@@ -103,7 +103,7 @@ a {
 				<input type="password" name="pw1" id="pw1" class="form-control"
 					placeholder="비밀번호 확인"><br>
 					<input type="text" name="user_name" id="user_name" class="form-control"
-					placeholder="이름" required><br> 
+					placeholder="이름" required autocomplete="off"><br> 
 					<div class="row">
 					<select id="user_tel1" name="user_tel1" class="form-control col-3" required="required">
 					<option value="">::선택::</option>

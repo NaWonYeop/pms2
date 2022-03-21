@@ -1,5 +1,7 @@
 package co.test.prj.user.web;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -73,8 +77,7 @@ public class UserController {
 		session.setAttribute("sessionUser", user);
 		if (user != null) {
 			user = userDao.userSelect(user);
-			session.setAttribute("sessionUser", user);
-			return "redirect:/home";
+			return "redirect:/logout";
 		} else {
 			model.addAttribute("loginFail", "1");
 
@@ -83,12 +86,12 @@ public class UserController {
 	}
 
 	// 로그아웃
-	@RequestMapping("logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		
-		return "redirect:/home";
-	}
+	/*
+	 * @RequestMapping("logout") public String logout(HttpSession session) {
+	 * session.invalidate();
+	 * 
+	 * return "redirect:/home"; }
+	 */
 
 	// 아이디 중복체크
 	@PostMapping("IsIdCheck")
@@ -260,7 +263,7 @@ public class UserController {
 	// 개발자 등록
 	@RequestMapping("/insertDev")
 	public String insertDevForm(UserVO vo, HttpSession session, Model model,
-			@RequestParam("cert_name") List<String> list) {
+			@RequestParam("cert_name") List<String> list,Principal principal) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		vo.setUser_ath("developer");
 		vo.setUser_id(user.getUser_id());
@@ -272,6 +275,15 @@ public class UserController {
 			cert.setUser_id(user.getUser_id());
 			userDao.insertDev(cert);
 		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
+		updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_DEVELOPER")); 
+
+		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+
+		SecurityContextHolder.getContext().setAuthentication(newAuth);
 		return "user/insertDev";
 	}
 
@@ -542,7 +554,7 @@ public class UserController {
 		System.out.println(ath);
 		if (ath.equals("ice")) {
 			System.out.println("여기 와야됨!!!!");
-			String job = user.getUser_job_ttl();
+			String job = user.getUser_crr();
 			if (job == null) {
 				ath = "user";
 			} else {

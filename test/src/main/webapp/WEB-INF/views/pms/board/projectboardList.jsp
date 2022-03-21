@@ -125,12 +125,12 @@ thead {
 	</div>
 	<div class="row justify-content-center">
 		<div class="col-sm-5">
-			<form action="boardSearch">
+			<form action="pmsBoardSearch">
 				<div class="form-group">
 
 					<div class="input-group mb-4">
-
-
+						<input type="hidden" id="prj_id" name="prj_id" value="${sessionScope.myPrj.prj_id}">
+						<input type="hidden" id="ntc_prop" name="ntc_prop" value="0">
 						<div class="form-select" id="default-select" style="width: 25%; height: 30%">
 							<select name="type">
 								<option value="ttl">제목</option>
@@ -161,12 +161,8 @@ thead {
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script>
-		function logincheck() {
-	<%UserVO user = (UserVO) session.getAttribute("sessionUser");
-if (user != null) {%>
+	function logincheck() {
 		location.href = "msprojectBoardInsertForm";
-	<%} else%>
-		;
 		}
 		jQuery(function($) {
 			$("#data_list").DataTable({
