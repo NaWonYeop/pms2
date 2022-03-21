@@ -40,20 +40,15 @@
 			$("#allPrgBar").attr("aria-valuenow", result.percent);
 			$("#allPrgBar").html(result.percent+"%");
 			$("#allPrgBar").css("width", result.percent+"%");
-			
-			$("#teamSelectModal").modal('hide')
 			$("#right-sidebar").attr("class", "settings-panel");
 			
-			
-			
-			//var pname = $("#mySelect").find("[value=${myPrj.prj_id}]").text();
 			$("#title").html(" "+prj_name);
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
 		});
 	});
 
-
+	// rside select id = mySelect, button = myBtn, option id = mst
 	$.ajax({
 		url : "myProjectList",
 		type : "GET",
@@ -64,6 +59,10 @@
 					<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
 			`);
 		};
+		if(${sessionScope.myPrj != null}) {
+			var a = $("#mySelect").find("[value=${myPrj.prj_id}]").text();
+			$("#title").html(a);
+		}
 		$("#mySelect").val('${myPrj.getPrj_id()}');
 		$("#title").html($("#mySelect").text());
 	}).fail(function(xhr, status, message) {

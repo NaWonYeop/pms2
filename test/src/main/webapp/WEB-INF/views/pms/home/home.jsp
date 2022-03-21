@@ -106,7 +106,8 @@
 		<!-- team modal end -->
 	</div>
 </div>
-===================${myPrj.getPrj_id()}==========================
+<%-- ===================${myPrj.getPrj_id()}========================== --%>
+===================${sessionScope.myPrj}==========================
 <script>
 	$(function() {
 		$.ajax({
@@ -121,11 +122,14 @@
 				`);
 			};
 			$("#teamSelect").val('${myPrj.getPrj_id()}');
-			var a = $("#mySelect").find("[value=${myPrj.prj_id}]").text()
-			$("#title").html(a);
+			if(${sessionScope.myPrj != null}) {
+				var a = $("#mySelect").find("[value=${myPrj.prj_id}]").text();
+				$("#title").html(a);
+			}
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 리스트 출력 실패");
 		});
+		
 		if(${sessionScope.myPrj == null}) {
 			$('#teamSelectModal').modal('show');
 			
@@ -139,15 +143,16 @@
 				$("#allPrgBar").attr("aria-valuenow", result);
 				$("#allPrgBar").html(result+"%");
 				$("#allPrgBar").css("width", result+"%");
+				$("#teamSelectModal").modal('hide')
 				
-				var pname = $("#teamSelect").find("[value=${myPrj.prj_id}]").text();
 				$("#title").html(" "+pname);
-				$("#teamSelect").val('${myPrj.getPrj_id()}');
 			}).fail(function(xhr, status, message) {
 				alert("프로젝트 리스트 출력 실패");
 			});
 		}
 	});
+	
+	// home select id = teamSelect, button = insertTeam, option id = opt
 	
 	$("#selectModal").on("change", function () { 
 		var prj_id = $(this).find("option:selected").data("prj_id");
@@ -171,7 +176,6 @@
 			$("#allPrgBar").css("width", result.percent+"%");
 			
 			$("#teamSelectModal").modal('hide')
-			$("#right-sidebar").attr("class", "settings-panel");
 			
 			$("#title").html(" "+prj_name);
 		}).fail(function(xhr, status, message) {
