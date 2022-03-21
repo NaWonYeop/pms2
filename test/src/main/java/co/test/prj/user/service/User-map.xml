@@ -41,7 +41,7 @@
 		parameterType="co.test.prj.certificate.service.CertVO">
 		<selectKey keyProperty="cert_id" resultType="int"
 			order="BEFORE">
-			SELECT MAX(cert_id) + 1 FROM certificate
+			SELECT nvl(MAX(cert_id) + 1,0) FROM certificate
 		</selectKey>
 		INSERT INTO CERTIFICATE(CERT_ID,CERT_NAME,USER_ID)
 		VALUES(#{cert_id},#{cert_name}, #{user_id})
