@@ -94,7 +94,7 @@ a {
 			<div class="card-body">
 				<input type="email" name="user_email" id="user_email"
 					class="form-control col-8"
-					style="display: inline-block;" placeholder="아이디" pattern="" required>
+					style="display: inline-block;" placeholder="아이디">
 				<button type="button" class="button button-contactForm btn_1 col-3"
 					id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
 					onclick="nomalIdCheck()" value="NO">Check</button>
@@ -112,15 +112,15 @@ a {
 					<option value="017">017</option>
 					<option value="019">019</option>
 					<option value="010">010</option>
-				</select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-3" id="user_tel2" name="user_tel2" maxlength="4" size="4"
+				</select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-3"  pattern="^[0-9]+$" id="user_tel2" name="user_tel2" maxlength="4" size="4"
 					required="required"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="user_tel3" name="user_tel3"  
-					size="4" maxlength="4" class="form-control col-3" required="required" /></div><br>
+					size="4" maxlength="4" class="form-control col-3"  pattern="^[0-9]+$" required="required" /></div><br>
 					
 					<input type="hidden" id="user_tel" name="user_tel" value="NO">
-			
+					<input type="text" id="ether_id" name="ether_id" placeholder="이더리움아이디" class="form-control"><br>
 					<input
-					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
+					id="btn-Yes" class="btn_1" style="width: 100%;" type="submit"
 					value="회원가입">
 			</div>
 		</form>
@@ -157,9 +157,7 @@ a {
 						else {	
 							alert("사용가능한 이메일 입니다.");
 							$("#idCheck").attr("disabled", true);
-							$("#user_email").attr("readonly", true);
 							$("#idCheck").val("Yes");
-							$("#idCheck").css('opacity', '0.5');
 							$("#user_pwd").focus()
 						}
 					}
@@ -169,6 +167,10 @@ a {
 				alert("ID 를 입력해 주세요");
 				$("#user_email").focus();
 			}
+		}
+		user_email.oninput = function(){
+			$("#idCheck").attr("disabled", false);
+			$("#idCheck").val("NO");
 		}
 		
 		function formCheck() {

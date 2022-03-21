@@ -98,9 +98,14 @@ a {
 					value="${sessionUser.user_name}"><br>
 				<input type="text" name="user_tel" id="user_tel"
 					class="form-control" placeholder="새로운 전화번호" required="required"
-					maxlength="11" value="${sessionUser.user_tel }"><br> <input
+					maxlength="11" value="${sessionUser.user_tel }"><br> 
+					<input type="text" name="ether_id" id="ether_id"
+					class="form-control" required="required"
+					value="${sessionUser.ether_id }"><br> 
+					<input
 					id="btn-Yes" class="btn_1" type="submit" style="width: 100%;"
 					value="회원수정">
+					
 			</div>
 		</form>
 	</div>

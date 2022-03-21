@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#checkWithdraw{
-position: relative;
-top: 100px;
-left: 25%;
+#checkWithdraw {
+	position: relative;
+	top: 100px;
+	left: 25%;
 }
 </style>
 </head>
@@ -35,16 +35,16 @@ left: 25%;
 	<!-- breadcrumb start-->
 
 	<!-- ================ 바디부분 ================= -->
-	 <section class="contact-section section_padding">
-        <div class="container">
+	<section class="contact-section section_padding">
+		<div class="container">
 
 
 
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="contact-title ">내 펀딩 리스트</h2>
-                </div>
-          <c:choose>
+			<div class="row">
+				<div class="col-12">
+					<h2 class="contact-title ">내 펀딩 리스트</h2>
+				</div>
+				<c:choose>
 					<c:when test="${empty funding}">
 						<p style="position: relative; left: 2%;">구매한 펀딩이 없습니다</p>
 					</c:when>
@@ -99,27 +99,28 @@ left: 25%;
 					</c:otherwise>
 				</c:choose>
 
-            </div>
-        </div>
-				<div class="col-lg-6" id="checkWithdraw">
-					<form class="form-contact contact_form" action="myWithdrawa3"
-						onsubmit="return checkbox()" method="post" id="contactForm"
-						novalidate="novalidate">
-						<div class="row justify-content-center">
-							<h4>회원탈퇴에 동의합니다</h4>
-							<div class="confirm-checkbox"
-								style="border: 1px solid black; margin-right: 0px;">
+			</div>
+		</div>
+		<div class="col-lg-6" id="checkWithdraw">
+			<form class="form-contact contact_form" action="myWithdrawa3"
+				onsubmit="return checkbox()" method="post" id="contactForm"
+				novalidate="novalidate">
+				<div class="row justify-content-center">
+					<h4>회원탈퇴에 동의합니다</h4>
+					<div class="confirm-checkbox"
+						style="border: 1px solid black; margin-right: 0px;">
 
-								<input type="checkbox" id="confirm-checkbox"> <label
-									for="confirm-checkbox"></label>
-							</div>
-						</div>
-						<div class="col-sm-12 text-center">
-							<button type="submit"
-								class="button button-contactForm btn_1 w-50">탈퇴</button>
-						</div>
-						</form>
+						<input type="checkbox" id="confirm-checkbox"> <label
+							for="confirm-checkbox"></label>
+					</div>
 				</div>
+				<div class="col-sm-12 text-center">
+					<button type="submit" class="button button-contactForm btn_1 w-50">탈퇴</button>
+				</div>
+				<input type="reset" id="btn-Yes" value="취 소" class="btn_1"
+					style="width: 100%;" onclick="cancel()">
+			</form>
+		</div>
 
 
 	</section>
@@ -130,6 +131,10 @@ left: 25%;
 				return false;
 			} else
 				return true;
+		}
+
+		function cancel() {
+			location.href = "home";
 		}
 	</script>
 </body>

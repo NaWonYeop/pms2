@@ -60,7 +60,7 @@
         
              <input type="hidden" id="user_id" name="user_id" value="${sessionUser.user_id }">
             <input type="hidden" id="prj_id" name="prj_id" value="${myPrj.prj_id }">
-             <input type="hidden" id="brd_ntc_prop" name="brd_ntc_prop" value="0">
+             <input type="hidden" id="brd_ntc_prop" name="brd_ntc_prop" value="1">
              
             </div>
             <div class="form-group mt-3" style="display: inline-block;" >

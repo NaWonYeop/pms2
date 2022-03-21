@@ -48,7 +48,8 @@ body {
 	background-color: #e4932b;
 	border: none;
 }
-#mul{
+
+#mul {
 	background-color: #e4932b;
 	border: none;
 }
@@ -92,30 +93,25 @@ a {
 	width="100%" height="100%" align="center">
 
 	<div class="card align-middle" style="width: 25rem;">
-	
+
 		<div class="card-title" style="margin-top: 30px;"></div>
-		<form action="insertDev" onsubmit="return formCheck()"
-			method="post" enctype="multipart/form-data">
-					<h2 style="text-align: center;">개발자 등록</h2>
+		<form action="insertDev" onsubmit="return formCheck()" method="post"
+			enctype="multipart/form-data">
+			<h2 style="text-align: center;">개발자 등록</h2>
 			<div class="card-body">
 				<span><label>자격증</label><input id="cert_name" type="text"
-					class="form-control"
-					placeholder="내용을 입력하세요" autofocus required></span>
+					class="form-control" placeholder="내용을 입력하세요"></span>
 				<button type="button" onclick="add()" id="addBtn">추가</button>
-				<ul id="certList" >
-					
+				<ul id="certList">
+				<input id="date" name = "cert_name" type="hidden" value = "없음" >
 				</ul>
-				<BR>
-				
-				
-				<label>경력</label><input type="number" class="form-control"
-					id="user_crr" name="user_crr" required="required"><BR> 
-				
-				<input id="btn-Yes" class="btn_1" style="width: 100%;"
-					type="submit" value="등록하기"><BR><br>
-					<input type="reset"
-					id="btn-Yes" value="취 소" class="btn_1" style="width: 100%;"
-					onclick="cancel()">
+				<BR> <label>경력</label><input type="number" class="form-control"
+					id="user_crr" name="user_crr" required="required" min="0"><BR>
+
+				<input id="btn-Yes" class="btn_1" style="width: 100%;" type="submit"
+					value="등록하기"><BR>
+				<br> <input type="reset" id="btn-Yes" value="취 소" class="btn_1"
+					style="width: 100%;" onclick="cancel()">
 			</div>
 		</form>
 	</div>
@@ -134,7 +130,7 @@ a {
 			}
 
 		}
-
+		
 		var close = document.getElementsByClassName("close");
 		for (var i = 0; i < close.length; i++) {
 			close[i].onclick = function() {
@@ -165,7 +161,7 @@ a {
 			}
 
 		}
-	
+		
 		
 	</script>
 
