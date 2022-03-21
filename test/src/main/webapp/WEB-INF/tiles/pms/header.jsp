@@ -15,7 +15,7 @@
 			type="button" data-toggle="minimize">
 			<span class="icon-menu"></span>
 		</button>
-		<div id="title">&nbsp;</div>
+		<div id="title">&nbsp;${sessionScope.myPrj == null ? '프로젝트롤 선택해주세요.' : myPrj.prj_name}</div>
 		<ul class="navbar-nav navbar-nav-right">
 			<li class="nav-item nav-profile dropdown"><a
 				class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"

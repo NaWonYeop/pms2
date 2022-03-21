@@ -1,33 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+.just-padding {
+	padding: 15px;
+}
+
+.list-span {
+	float: right;
+}
+
+.list-span:hover {
+	cursor: pointer;
+	/* transform: scale(2.0); */
+}
+
+.list-group.list-group-root {
+	padding: 0;
+	overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+	margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+	border-radius: 0;
+	border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root>.list-group-item:first-child {
+	border-top-width: 0;
+}
+
+.list-group.list-group-root>.list-group>.list-group-item {
+	padding-left: 30px;
+}
+
+.list-group.list-group-root>.list-group>.list-group>.list-group-item {
+	padding-left: 45px;
+}
+</style>
 <div class="content-wrapper">
 	<!-- 리스트 -->
 	<!-- <div class="list-wrapper px-3"> -->
-	<div class="list-wrapper">
-		<div class="row">
-			<!-- 섹션입력 모달 버튼 -->
-			<button type="button" class="btn btn-primary" data-toggle="modal"
-				data-target="#exampleModalCenter">섹션 입력</button>
-		</div>
-		<ul id="ulForm" class="d-flex flex-column-reverse todo-list">
-			<!-- <li>
-				<div class="form-check">
-					<label class="form-check-label"> <input class="checkbox"
-						type="checkbox"> Resolve all the low priority tickets due
-						today
-					</label>
-				</div> <i class="remove ti-close"></i>
-			</li>
+	<div class="just-padding">
 
-			<li class="completed">
-				<div class="form-check">
-					<label class="form-check-label"> <input class="checkbox"
-						type="checkbox" checked> Project review
-					</label>
-				</div> <i class="remove ti-close"></i>
-			</li> -->
-		</ul>
+		<div class="list-group list-group-root well">
+
+			<a class="list-group-item" data-toggle="modal"
+				data-target="#exampleModalCenter">섹션 입력</a>
+			<div id="list-group" class="list-group">
+
+				<!-- <div class="list-group-item">섹션1</div>
+				<div class="list-group">
+					<div class="list-group-item">Item 1.1.1</div>
+					<div class="list-group-item">Item 1.1.2</div>
+					<div class="list-group-item">Item 1.1.3</div>
+				</div>
+
+				<a href="#" class="list-group-item">섹션2</a>
+				<div class="list-group">
+					<div class="list-group-item">Item 1.1.1</div>
+					<div class="list-group-item">Item 1.1.2</div>
+					<div class="list-group-item">Item 1.1.3</div>
+				</div>
+
+				<a href="#" class="list-group-item">섹션3</a>
+				<div class="list-group">
+					<div class="list-group-item">Item 1.1.1</div>
+					<div class="list-group-item">Item 1.1.2</div>
+					<div class="list-group-item">Item 1.1.3</div>
+				</div> -->
+
+			</div>
+			
+		</div>
 	</div>
+
 	<!-- 섹션Modal창 -->
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -56,7 +105,6 @@
 								class="js-example-basic-single w-100">
 							</select>
 						</div>
-						<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 					</form>
 					<!-- Form End -->
 				</div>
@@ -135,7 +183,6 @@
 						$("#insertTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
 					};
 				}).fail(function(xhr, status, message) {
-					console.log("1");
 					console.log(" status: " + status + " er:" + message);
 				});
 			};
@@ -160,25 +207,17 @@
 			$("#card").empty();
 			for(prg of json) {
 				if(prg.level == 1) {
-					$("#ulForm").append(`
-						
-					<li>
-						<div class="progress">
-							<div id="prgBar\${prg.prg_id}" class="progress-bar" role="progressbar" style="width: 100%"
-							aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-						</div>
-						<div class="form-check">
-							<label class="form-check-label"> <input class="checkbox"
-								type="checkbox">\${prg.prg_content}
-							</label>
-						</div> 
-						<i id="midBtn" data-prg_id="\${prg.prg_id}" class="remove ti-close"></i>
-					</li>`);
+					/* var list = $("#list-group").append(`
+							<div class="list-group-item">섹션이름 : \${prg.prg_content}, 기간 : \${prg.prg_str} ~ \${prg.prg_ed} 
+								<span class="list-span">
+									<i data-prg_id="\${prg.prg_id}" class="ti-plus todo" data-toggle="modal" data-target="#exampleModalCenter"></i>
+									<i id="midUpBtn" class="ti-more" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" type="button" data-toggle="modal" data-target="#updateModal"></i>
+									<i id="midBtn" data-prg_id="\${prg.prg_id}" class="ti-close"></i>
+								</span>
+							</div>
+							`); */
 					
-					
-					
-					
-					
+					/* 삭제시키면 됨 */
 					
 					var li = $(`
 							<div class="col">
@@ -186,23 +225,41 @@
 								<div id="prgBar\${prg.prg_id}" class="progress-bar" role="progressbar" style="width: 0%"
 								aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
 							</div>
-							<li class="list-group-item">\${prg.prg_content}
-							<button data-prg_id="\${prg.prg_id}" type="button" class="btn btn-primary todo" data-toggle="modal"
-								data-target="#exampleModalCenter">할 일 입력</button>
-								<button id="midUpBtn" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" type="button" class="btn btn-info" data-toggle="modal" data-target="#updateModal">수정</button>
-							<button id="midBtn" data-prg_id="\${prg.prg_id}" type="button" class="btn btn-danger" >x</button>
+							
+							<li id="list-group-item" class="list-group-item">\${prg.prg_content}, 기간: \${prg.prg_str} ~ \${prg.prg_ed}
+							<button data-prg_id="\${prg.prg_id}" type="button" class="btn btn-outline-info todo" data-toggle="modal" data-target="#exampleModalCenter">할 일 입력</button>
+							<button id="midUpBtn" type="button" class="btn btn-outline-warning" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-toggle="modal" data-target="#updateModal">수정</button>
+							<button id="midBtn"type="button" class="btn btn-outline-danger"  data-prg_id="\${prg.prg_id}"  >x</button>
 							</li>`);
 					$("#card").append(li);
+					
+					// 삭제ㄴㄴ
 					prgPersent(prg.prg_id);
 				} else if(prg.level == 2) {
+					/* var divList = $(`<div class="list-group"></div>`);
+					var divList2 = $(`
+							<div id="myLi\${prg.prg_id}" class="list-group-item">\${prg.prg_content}
+								<span class="list-span">	
+									<button id="smlChk" type="button" data-prg_id="\${prg.prg_id}" class="btn btn-success 1">완료</button>
+									<button id="smlUpBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" class="btn btn-info 2" data-toggle="modal" data-target="#updateModal">수정</button>
+									<button id="smlBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" class="btn btn-danger 3">x</button>
+								</span>
+							</div>`);
+					divList.append(divList2);
+					list.append(divList); */
+					
+					
+					/* 삭제시키면 됨 */
 					var ul = $(`<ul class="list-group list-group-flush"></ul>`);
-					var li2 = $(`<li id="myLi\${prg.prg_id}" class="list-group-item">\${prg.prg_content}
-							<button id="smlChk" type="button" data-prg_id="\${prg.prg_id}" class="btn btn-success 1">완료</button>
-							<button id="smlUpBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" class="btn btn-info 2" data-toggle="modal" data-target="#updateModal">수정</button>
-							<button id="smlBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" class="btn btn-danger 3">x</button>
+					var li2 = $(`<li id="myLi\${prg.prg_id}" class="list-group-item">\${prg.prg_content}, 기간: \${prg.prg_str} ~ \${prg.prg_ed}
+							<button id="smlChk" type="button" class="btn btn-outline-success" data-prg_id="\${prg.prg_id}">완료</button>
+							<button id="smlUpBtn" type="button" class="btn btn-outline-warning" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" data-toggle="modal" data-target="#updateModal">수정</button>
+							<button id="smlBtn" type="button" class="btn btn-outline-danger" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" >x</button>
 							</li></div>`);
 					ul.append(li2);
 					li.append(ul);
+					
+					/* 삭제ㄴㄴ */
 					if(prg.prg_cmp_prop != 0) {
 						$("#myLi"+prg.prg_id+' button').attr('disabled', 'disabled');
 					}
@@ -291,12 +348,11 @@
 	
 	// 섹션 삭제 -> 해당 섹션의 할 일은 가장빠른 번호의 섹션으로 옮겨짐
 	/* $("#card") */
-	$("#ulForm").on("click", "#midBtn", function(e) {
+	$("#card").on("click", "#midBtn", function(e) {
 		var result = confirm("정말로 삭제하시겠습니까?");
 		if (!result){
 			return;				
 		}
-		debugger
 		var prg_id = e.currentTarget.dataset.prg_id;
 		console.log(prg_id);
 		$.ajax({
@@ -308,7 +364,7 @@
 			dataType: "text"
 		}).done(function (result) {
 			if(result == 'fail') {
-				console.log("삭제할 수 없습니다.");
+				alert("삭제할 수 없습니다.");
 			}
 			list();
 		}).fail(function (xhr, status, msg) {

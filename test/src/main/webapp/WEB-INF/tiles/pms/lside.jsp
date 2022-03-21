@@ -33,8 +33,3 @@
 		</c:if>
 	</ul>
 </nav>
-<script>
-	if(${sessionScope.myPrj == null}) { 
-		return redirect:pms
-	}
-</script>

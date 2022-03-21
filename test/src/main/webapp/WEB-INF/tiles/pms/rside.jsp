@@ -8,10 +8,8 @@
 			<div id="selectDiv" class="form-group">
 				<label>My Project</label> <select id="mySelect"
 					class="js-example-basic-single w-100" size="10">
-					<option selected>프로젝트를 선택하세요</option>
-
+					<option disabled>&lt;프로젝트를 선택하세요&gt;</option>
 				</select>
-				<button id="myBtn" class="btn btn-primary" type="button">선택</button>
 			</div>
 		</div>
 	</div>
@@ -19,7 +17,6 @@
 
 
 <script>
-	
 	$("#selectDiv").on("change", function () { 
 		var prj_id = $(this).find("option:selected").data("prj_id");
 		var master_id = $(this).find("option:selected").data("master_id");
@@ -37,11 +34,11 @@
 			}
 		}).done(function(result) {
 			console.log(result);
+			// rside select id = mySelect, button = myBtn, option id = mst
 			$("#allPrgBar").attr("aria-valuenow", result.percent);
 			$("#allPrgBar").html(result.percent+"%");
 			$("#allPrgBar").css("width", result.percent+"%");
 			$("#right-sidebar").attr("class", "settings-panel");
-			
 			$("#title").html(" "+prj_name);
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
@@ -59,12 +56,6 @@
 					<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
 			`);
 		};
-		if(${sessionScope.myPrj != null}) {
-			var a = $("#mySelect").find("[value=${myPrj.prj_id}]").text();
-			$("#title").html(a);
-		}
-		$("#mySelect").val('${myPrj.getPrj_id()}');
-		$("#title").html($("#mySelect").text());
 	}).fail(function(xhr, status, message) {
 		alert("프로젝트 리스트 출력 실패");
 	});
