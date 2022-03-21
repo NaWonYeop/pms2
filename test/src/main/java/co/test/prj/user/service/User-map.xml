@@ -66,8 +66,8 @@
 		</selectKey>
 		INSERT INTO "user"(USER_ID,USER_EMAIL, USER_PWD,
 		USER_NAME, USER_TEL,
-		user_ath, user_type)
-		VALUES(#{user_id},#{user_email},#{user_pwd},#{user_name},#{user_tel},#{user_ath},#{user_type})
+		user_ath, user_type, ETHER_ID)
+		VALUES(#{user_id},#{user_email},#{user_pwd},#{user_name},#{user_tel},#{user_ath},#{user_type}, #{ether_id})
 	</insert>
 	<!-- 카카오중복체크 -->
 	<select id="isIdCheck" parameterType="String"
@@ -107,6 +107,7 @@
 			<if test="user_job_ttl != null"> user_job_ttl = #{user_job_ttl}, </if>
 			<if test="user_job_cnt != null"> user_job_cnt = #{user_job_cnt}, </if>
 			<if test="user_type != null"> user_type = #{user_type}, </if>
+			<if test="ether_id != null"> ether_id = #{ether_id}, </if>
 		</set>
 		WHERE USER_ID =#{user_id}
 	</update>

@@ -134,9 +134,9 @@
 							<a href="course-details.html" class="btn_4">알림</a>
 							<c:forEach items="${MyApp}" var="app">
 								<c:choose>
-								<c:when test="${fn:contains(app.app_clsfc,'1')}">
+								<c:when test="${fn:contains(app.app_clsfc,'0')}">
 										<div id="div${app.app_id}">
-											<a href="">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에
+											<a href=""></a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에
 											신청하셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
 										</div>
@@ -145,7 +145,7 @@
 									</c:when>
 									<c:otherwise>
 										<div id="div${app.app_id}">
-											<a href="conFirmSelect?app_id=${app.app_id }&prj_id=${app.prj_id}">${app.prj_id}</a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에
+											<a href="conFirmSelect?app_id=${app.app_id }&prj_id=${app.prj_id}">${app.prj_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;에
 											협업제의를 받으셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
 										</div>

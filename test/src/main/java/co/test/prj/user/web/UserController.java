@@ -268,6 +268,9 @@ public class UserController {
 		vo.setUser_ath("developer");
 		vo.setUser_id(user.getUser_id());
 		userDao.userUpdate(vo);
+		if(list.size()> 1) {
+			list.remove(list.size());
+		}
 		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
@@ -275,7 +278,7 @@ public class UserController {
 			cert.setUser_id(user.getUser_id());
 			userDao.insertDev(cert);
 		}
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
@@ -284,6 +287,7 @@ public class UserController {
 		Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
 
 		SecurityContextHolder.getContext().setAuthentication(newAuth);
+
 		return "user/insertDev";
 	}
 
@@ -346,7 +350,7 @@ public class UserController {
 			model.addAttribute("update", "회원수정 성공하였습니다");
 			user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
 			userDao.userUpdate(user);
-			session.invalidate();
+			return "redirect:/logout";
 		} else {
 			model.addAttribute("update", "회원수정 실패하였습니다");
 		}
@@ -399,7 +403,9 @@ public class UserController {
 
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
-
+		if(user.getEther_id()==null) {
+			user.setEther_id("없음");
+		}
 		int n = userDao.userInsert(user);
 		if (n != 0) {
 			re.addAttribute("message", "회원가입 성공하셨습니다");
@@ -450,8 +456,8 @@ public class UserController {
 		UserVO user1 = new UserVO();
 		user1.setUser_id(user.getUser_id());
 		userDao.userDelete(user);
-		session.invalidate();
-		return "user/Withdrawal3";
+		
+		return "redirect:/logout";
 	}
 
 	// 카카오 회원탈퇴
