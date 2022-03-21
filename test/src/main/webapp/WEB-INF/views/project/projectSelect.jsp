@@ -611,7 +611,50 @@ ${project}<br>
 			solidityRewardFnc.methods
 			.buyAry(cId, mAc)
 			.send({from: uEtherId, value: rPay })
-			.then(function(result){console.log(result);});
+			.then(function(result){console.log(result);
+			
+			
+			//데이터 저장시 필요한 데이터
+			var save ={
+				"user_id" : uId,
+				"buy_way" : "coin",
+				"reward_id" : rId,
+				"prj_id" : pId,
+				"buy_count" : rCnt,
+				"buy_muid" : cId
+					
+			}
+				
+			//아작스 호출 여기에서
+			$.ajax({
+						url : 'ajaxCoinBuy', 
+				        type :'POST',
+				        data : JSON.stringify(save,
+				        		['user_id', 'buy_way', 'reward_id', 
+				        			'prj_id', 'buy_count', 'buy_muid']),
+				        contentType:'application/json;charset=utf-8',
+				        dataType: 'json', //서버에서 보내줄 데이터 타입
+				        success: function(res){
+				        			        	
+				          if(res == 1){
+							 console.log("추가성공");	
+							 //pay += 5;
+							 //$('#pay_coupon').html(pay);			           
+				          }else{
+				             console.log("Insert Fail!!!");
+				          } 
+				          
+				          location.reload();
+				        },
+				        error:function(){
+				          console.log("Insert ajax 통신 실패!!!");
+				        }
+					}) //ajax
+			
+			
+
+			
+			});
 
 			
 	/*	
