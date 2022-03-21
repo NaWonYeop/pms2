@@ -1,6 +1,7 @@
 package co.test.prj.project.web;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +30,7 @@ import co.test.prj.reward.service.RewardService;
 import co.test.prj.reward.service.RewardVO;
 import co.test.prj.team.service.TeamService;
 import co.test.prj.team.service.TeamVO;
+import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
 @Controller
@@ -42,6 +47,9 @@ public class ProjectController {
 	
 	@Autowired
 	private TeamService teamDao;
+	
+	@Autowired
+	private UserService userDao;
 	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
@@ -283,6 +291,49 @@ public class ProjectController {
 			reward.setPrj_id(id);
 			
 			model.addAttribute("rewards", rewardDao.rewardInsertSelect(reward));
+			
+			
+			//이더리움 시세 적용하기
+			System.out.println("이더리움 원화 시세 가져오기 시작");
+			String etherWURL = "https://kr.investing.com/crypto/ethereum/eth-krw-converter";
+			String selectW = "#last_last";
+			Document docW = null;
+			
+			try {
+				System.out.println("접속?");
+				docW = Jsoup.connect(etherWURL).get();
+				System.out.println("됨?");
+				
+			} catch (IOException e) {
+				System.out.println("접속?????");
+				e.printStackTrace();
+			}
+			
+			Elements etherGO = docW.select(selectW);
+			System.out.println(etherGO.text());
+			//이더리움 
+			double etherW = Double.parseDouble(etherGO.text().replace(",", ""));
+			
+			
+			System.out.println("1 이더 원화가격 : " + etherW );
+			
+			model.addAttribute("Rether", etherW);
+			
+			//거래 담당자 어카운트
+			
+			int mId = prj.getMaster_id();
+			System.out.println("거래 담당자 아이디 : " + mId );
+			
+			UserVO user = new UserVO();
+			user.setUser_id(mId);
+			
+			String mEAc = userDao.jobSelect(user).getEther_id();
+			System.out.println("거래 담당자 어카운트 : " + mEAc );
+			
+
+			model.addAttribute("masterAcc", mEAc);
+			
+			
 		}
 		
 		
