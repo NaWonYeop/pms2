@@ -12,13 +12,10 @@
 <meta name="author" content="">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+
 <title>로그인 폼</title>
 <style>
-@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+
 
 html {
 	height: 100%;
@@ -88,10 +85,13 @@ a {
 	width="100%" height="100%" align="center">
 
 	<div class="card align-middle" style="width: 25rem;">
+	
 		<div class="card-title" style="margin-top: 30px;"></div>
+		<h2 style="text-align: center;">카카오 회원가입</h2>
 		<form action="register" onsubmit="return formCheck()" method="post">
-
+			
 			<div class="card-body">
+			
 				<input type="text" name="user_email" id="user_email" readonly
 					class="form-control col-8 " title="이메일주소에 @가 없습니다"
 					style="display: inline-block;" placeholder="아이디"
@@ -100,8 +100,9 @@ a {
 				<button type="button" class="button button-contactForm btn_1 col-3"
 					id="idCheck" style="margin-left: 20px; margin-bottom: 20px"
 					onclick="isIdCheck()" value="NO">Check</button>
+					<input type="hidden" id="user_pwd" name="user_pwd" value="asasgdadas123!">
 				<BR>  <input type="text" name="user_name"
-					id="user_name" class="form-control" placeholder="이름" required><br>
+					id="user_name" class="form-control" placeholder="이름" required>
 					<input type="hidden" id="user_type" name="user_type" value="1" >
 				​	<div class="row">
 					<select id="user_tel1" name="user_tel1" class="form-control col-3">
@@ -111,13 +112,14 @@ a {
 					<option value="017">017</option>
 					<option value="019">019</option>
 					<option value="010">010</option>
-				</select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-3" id="user_tel2" name="user_tel2" maxlength="4" size="4"
+				</select>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-3" pattern="^[0-9]+$" id="user_tel2" name="user_tel2" maxlength="4" size="4"
 					/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="user_tel3" name="user_tel3"  
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" pattern="^[0-9]+$" id="user_tel3" name="user_tel3"  
 					size="4" maxlength="4" class="form-control col-3" /></div><br>
 					
-					<input type="hidden" id="user_tel" name="user_tel"> <input
-					id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit"
+					<input type="hidden" id="user_tel" name="user_tel">
+					<input type="text" id="ether_id" name="ether_id" placeholder="이더리움아이디" class="form-control"><br> <input
+					id="btn-Yes" class="btn_1" style="width: 100%;" type="submit"
 					value="회원가입">
 			</div>
 		</form>
@@ -170,13 +172,6 @@ a {
 				return false;
 			}
 
-			if ($("#user_pwd").val() != $("#pw1").val()) {
-				alert("패스워드가 일치하지 않습니다.");
-				$("#user_pwd").val('');
-				$("#pw1").val('');
-				$("#user_pwd").focus();
-				return false;
-			}
 			var check1 = document.getElementById('user_tel1').value;
 			var check2 = document.getElementById('user_tel2').value;
 			var check3 = document.getElementById('user_tel3').value;
