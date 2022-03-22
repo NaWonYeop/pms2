@@ -38,7 +38,7 @@ public class BuyController {
 	@Autowired
 	private RewardService rewardDao;
 	
-	@PostMapping("/ajaxCashBuy")
+	@PostMapping("/ajaxBuy")
 	@ResponseBody
 	private int ajaxCashBuy(@RequestBody BuyVO buy, RewardVO reward) {
 		System.out.println("결제했니?");
