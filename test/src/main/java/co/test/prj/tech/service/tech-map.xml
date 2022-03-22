@@ -12,16 +12,23 @@
 	
 	<select id="jobSelectList" resultType="co.test.prj.user.service.UserVO">
 		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 
-		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U
+		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U ORDER BY USER_ID ASC
 	</select>
+	
+	<!-- 구직페이지 찜 체크 -->
+	<select id="jobMainheartCheck" resultType="co.test.prj.user.service.UserVO">
+		SELECT U.USER_ID, I.USER_ID2, U.USER_NAME
+		FROM "user" U, INTEREST I
+		WHERE U.USER_ID= #{user_id} AND U.USER_ID = I.USER_ID 
+	</select>
+	
 	<!-- 찜해놓은 리스트  -->
-
 	<select id="jobInterList" resultType="co.test.prj.user.service.UserVO" parameterType="int">
 	SELECT U.USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 	STAR WHERE USER_ID=U.USER_ID), 0) AS AVG
 	FROM "user" U 
 	WHERE USER_ID IN(SELECT USER_ID2 AS USER_ID
 	FROM "user" U,INTEREST I
-	WHERE U.USER_ID=#{user_id} AND U.USER_ID=I.USER_ID)
+	WHERE U.USER_ID=#{user_id} AND U.USER_ID=I.USER_ID) ORDER BY USER_ID ASC
 	</select>
 	
 	<select id="techSelect" resultType="co.test.prj.tech.service.TechVO">

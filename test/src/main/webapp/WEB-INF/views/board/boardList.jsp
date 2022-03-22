@@ -78,7 +78,8 @@ thead {
 			</div>
 			
 			<div class="row section-top-border">
-			<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 80%;">
+			<div class="col-12">
+			<div id="data_list_wrapper" class="dataTables_wrapper no-footer">
 
 				<table id="data_list" class="table table-bordered">
 					<thead class="table-head">

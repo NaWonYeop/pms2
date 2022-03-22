@@ -70,21 +70,16 @@ public class TechController {
 		model.addAttribute("jobs", techDao.jobSelectList());
 		model.addAttribute("techs", techDao.techSelectList());
 		model.addAttribute("certs", certDao.certSelectList());
+//		model.addAttribute("jobMainHeartCheck", techDao.jobMainheartCheck(uId));
+		
+		
 		
 
-//		InterestVO vo7 = new InterestVO();
-//		vo7.setUser_id(uId.getUser_id()); //세션아이디
-//			
-//		vo7.setUser_id2(techDao.jobSelectList().get(0).getUser_id2()); // user_id2 이게문제다문제 
-//			
-//		vo7=techDao.heartbtnCheck(vo7);
 //		if(vo7 != null)	{
-//			model.addAttribute("heartCheck", vo7.getUser_id());
+//			model.addAttribute("jobMainHeartCheck", ((UserVO) vo7).getUser_id2());
 //		} else {
-//			model.addAttribute("heartCheck", "no");
+//			model.addAttribute("jobMainHeartCheck", "no");
 //		}
-//		
-
 		
 		return "job/jobMain";
 	}
@@ -234,12 +229,12 @@ public class TechController {
 	//참여 요청 거절
 	@RequestMapping("/requestDecline")
 	@ResponseBody
-	private int requestDecline(AppVO app, HttpSession session) {
-		System.out.println(app);
+	private UserVO requestDecline(AppVO app, HttpSession session) {
 		techDao.ofterDelete(app);
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
+		userDao.jobSelect(uId);
 		
-		return app.getUser_id();
+		return userDao.jobSelect(uId);
 	}
 	
 	//관심 신청
