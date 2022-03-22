@@ -384,7 +384,7 @@ ${project}<br>
                 && !$(e.target).hasClass("current")) {
               $('.modaldal').fadeOut();
               $('.modal__background').fadeOut();
-              $('.main_menu home_menu menu_fixed animated fadeInDown').css("display" ,"block");
+            
           }
       }
       $('html').click(function(e){

@@ -72,7 +72,14 @@
         .prjtitle {
             font-size: xx-large;
         }
-
+		
+		 /* 모달창의 배경을 만든다 */
+		.modal__background{
+		  display:none;
+		  position: fixed;
+		  top:0; left: 0; bottom: 0; right: 0;
+		  background: rgba(0, 0, 0, 0.3);
+		}
         
         /* modal end */
 
@@ -224,7 +231,7 @@
 	                    </c:choose>
 	                    
 	                    <h4 class="title_top">경력 ${jobDetail.user_crr }년</h4>
-	                    
+	                   <div class="modal__background"> 
 	                    <div class="modaldal content">
 	                        <div class="content modalcontent">
 	                            <div class="justify-content-center">
@@ -254,6 +261,7 @@
 	                        		<button type="button" class="btn_4 modalInbtn" onclick="requsetWork()">신청하기</button>
 	                        	</c:otherwise>
 	                        </c:choose>
+	                    </div>
 	                    </div>
 	                    
 	                    <div class="">
@@ -410,6 +418,7 @@
 	                && !$(e.target).hasClass("option") 
 	                && !$(e.target).hasClass("current")) {
                 $('.modaldal').fadeOut();
+                $('.modal__background').fadeOut();
             }
         }
         $('html').click(function(e){
@@ -418,6 +427,7 @@
         });
         $('#callbtn').click(function(e){
             $('.modaldal').fadeIn();
+            $('.modal__background').fadeIn();
         });
         
         function heart() {
