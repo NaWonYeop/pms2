@@ -31,7 +31,9 @@
 <!-- inject:css -->
 <link rel="stylesheet"
 	href="resources/pms/css/vertical-layout-light/style.css">
-<script src="resources/js/jquery-3.2.1.min.js"></script>
+<!-- <script src="resources/js/jquery-3.2.1.min.js"></script> -->
+<!-- plugins:js -->
+<script src="resources/pms/vendors/js/vendor.bundle.base.js"></script>
 </head>
 <body>
 
@@ -60,8 +62,7 @@
 	</div>
 	<!-- container-scroller -->
 
-	<!-- plugins:js -->
-	<script src="resources/pms/vendors/js/vendor.bundle.base.js"></script>
+	
 	<!-- endinject -->
 	<!-- Plugin js for this page -->
 	<script src="resources/pms/vendors/chart.js/Chart.min.js"></script>
@@ -81,6 +82,9 @@
 	<!-- Custom js for this page-->
 	<script src="resources/pms/js/dashboard.js"></script>
 	<script src="resources/pms/js/Chart.roundedBarCharts.js"></script>
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 	<!-- End custom js for this page-->
 
 

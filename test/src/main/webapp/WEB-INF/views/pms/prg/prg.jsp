@@ -116,7 +116,6 @@
 		}).fail(function(xhr, status, msg) {
 			console.log("상태값 :" + status + " Http에러메시지 :" + msg);
 		});
-		
 	});
 
 	// 달력 일정 클릭하면 모달창 뜨는데 그때 섹션의 할일들을 붙여넣는다.

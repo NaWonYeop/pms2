@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	
 <style>
 .just-padding {
 	padding: 15px;
@@ -98,8 +100,8 @@
 							<label for="prg_content">내용</label> <input type="text"
 								class="form-control" id="prg_content" name="prg_content"
 								placeholder="할 일"> <label for="prg_str">시작일</label> <input
-								type="date" class="form-control" id="prg_str" name="prg_str">
-							<label for="prg_ed">종료일</label> <input type="date"
+								type="text" class="form-control" id="prg_str" name="prg_str">
+							<label for="prg_ed">종료일</label> <input type="text"
 								class="form-control" id="prg_ed" name="prg_ed"> <label
 								for="insertTeams">담당</label> <select id="insertTeams"
 								class="js-example-basic-single w-100">
@@ -143,8 +145,8 @@
 								for="prg_content">내용</label> <input type="text"
 								class="form-control" id="prg_content" name="prg_content"
 								placeholder="할 일"> <label for="prg_str">시작일</label> <input
-								type="date" class="form-control" id="prg_str" name="prg_str">
-							<label for="prg_ed">종료일</label> <input type="date"
+								type="text" class="form-control" id="prg_str" name="prg_str">
+							<label for="prg_ed">종료일</label> <input type="text"
 								class="form-control" id="prg_ed" name="prg_ed"> <label
 								for="updateTeams">담당</label> <select id="updateTeams"
 								class="js-example-basic-single w-100">
@@ -163,10 +165,22 @@
 		</div>
 	</div>
 </div>
-
 <script>
 	$(function() {
 		list();
+		$("[name='prg_ed']").datepicker({
+		      dateFormat: 'yy-mm-dd',
+		      minDate: "2022-03-22"
+		});
+		 
+		$("[name='prg_str']").datepicker({
+			  dateFormat: 'yy-mm-dd',
+			  onSelect: function(minDate, obj) {
+				  $("[name='prg_ed']").datepicker("option","minDate", minDate);
+			  }
+		});
+		
+		
 		$('#exampleModalCenter').on('shown.bs.modal', function (e) {
 			$('[name="prg_manager"]').remove();
 			$('#updateTeams').remove();
@@ -193,7 +207,6 @@
 			$("#prg_str").val('');
 			$("#prg_ed").val('');
 		});
-		
 	});
 	
 	function list() {
@@ -207,18 +220,6 @@
 			$("#card").empty();
 			for(prg of json) {
 				if(prg.level == 1) {
-					/* var list = $("#list-group").append(`
-							<div class="list-group-item">섹션이름 : \${prg.prg_content}, 기간 : \${prg.prg_str} ~ \${prg.prg_ed} 
-								<span class="list-span">
-									<i data-prg_id="\${prg.prg_id}" class="ti-plus todo" data-toggle="modal" data-target="#exampleModalCenter"></i>
-									<i id="midUpBtn" class="ti-more" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" type="button" data-toggle="modal" data-target="#updateModal"></i>
-									<i id="midBtn" data-prg_id="\${prg.prg_id}" class="ti-close"></i>
-								</span>
-							</div>
-							`); */
-					
-					/* 삭제시키면 됨 */
-					
 					var li = $(`
 							<div class="col">
 							<div class="progress">
@@ -233,23 +234,10 @@
 							</li>`);
 					$("#card").append(li);
 					
-					// 삭제ㄴㄴ
 					prgPersent(prg.prg_id);
 				} else if(prg.level == 2) {
-					/* var divList = $(`<div class="list-group"></div>`);
-					var divList2 = $(`
-							<div id="myLi\${prg.prg_id}" class="list-group-item">\${prg.prg_content}
-								<span class="list-span">	
-									<button id="smlChk" type="button" data-prg_id="\${prg.prg_id}" class="btn btn-success 1">완료</button>
-									<button id="smlUpBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" data-prg_content="\${prg.prg_content}" data-prg_str="\${prg.prg_str}" data-prg_ed="\${prg.prg_ed}" data-prg_user="\${prg.prg_user}" class="btn btn-info 2" data-toggle="modal" data-target="#updateModal">수정</button>
-									<button id="smlBtn" type="button" data-prg_cmp_prop="\${prg.prg_cmp_prop}" data-prg_id="\${prg.prg_id}" class="btn btn-danger 3">x</button>
-								</span>
-							</div>`);
-					divList.append(divList2);
-					list.append(divList); */
 					
 					
-					/* 삭제시키면 됨 */
 					var ul = $(`<ul class="list-group list-group-flush"></ul>`);
 					var li2 = $(`<li id="myLi\${prg.prg_id}" class="list-group-item">\${prg.prg_content}, 기간: \${prg.prg_str} ~ \${prg.prg_ed}
 							<button id="smlChk" type="button" class="btn btn-outline-success" data-prg_id="\${prg.prg_id}">완료</button>
@@ -259,7 +247,6 @@
 					ul.append(li2);
 					li.append(ul);
 					
-					/* 삭제ㄴㄴ */
 					if(prg.prg_cmp_prop != 0) {
 						$("#myLi"+prg.prg_id+' button').attr('disabled', 'disabled');
 					}
