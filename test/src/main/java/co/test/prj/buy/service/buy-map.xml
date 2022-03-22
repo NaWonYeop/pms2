@@ -7,8 +7,8 @@
 	</select>
 
 	<insert id="buyInsert" parameterType="co.test.prj.buy.service.BuyVO">
-			INSERT INTO BUY(BUY_ID, USER_ID, BUY_WAY, REWARD_ID, PRJ_ID, BUY_COUNT, BUY_MUID)
-			VALUES(#{buy_id},#{user_id},#{buy_way},#{reward_id}, #{prj_id}, #{buy_count}, #{buy_muid})
+			INSERT INTO BUY(BUY_ID, USER_ID, BUY_WAY, REWARD_ID, PRJ_ID, BUY_COUNT, BUY_WON, BUY_WEI, BUY_MUID)
+			VALUES(#{buy_id},#{user_id},#{buy_way},#{reward_id}, #{prj_id}, #{buy_count}, #{buy_won}, #{buy_wei}, #{buy_muid})
 	</insert>
 
 	<select id="buyMaxId" resultType="int">

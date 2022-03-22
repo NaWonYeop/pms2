@@ -31,4 +31,7 @@ public class BuyVO {
 	private int buy_rfnd_prc; //환불금액
 	
 	
+	//추가
+	private int buy_won;
+	private long buy_wei;
 }

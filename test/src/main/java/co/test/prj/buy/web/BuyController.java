@@ -40,9 +40,11 @@ public class BuyController {
 	
 	@PostMapping("/ajaxBuy")
 	@ResponseBody
-	private int ajaxCashBuy(@RequestBody BuyVO buy, RewardVO reward) {
+	private int ajaxBuy(@RequestBody BuyVO buy, RewardVO reward) {
 		System.out.println("결제했니?");
-
+		System.out.println("뭐로 : " +buy.getBuy_way());
+		System.out.println("웨이 얼마 : " +buy.getBuy_wei());
+		System.out.println("현금 얼마 : " +buy.getBuy_won());
 		buy.setBuy_id(buyDao.buyMaxId());
 		buyDao.buyInsert(buy);
 		System.out.println("인서트 됨?");

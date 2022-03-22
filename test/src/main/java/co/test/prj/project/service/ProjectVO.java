@@ -86,4 +86,28 @@ public class ProjectVO
 	private int total_count; //총 신청 인원
 	private int total_sum; //총 신청 리워드
 	
+	//REWARD 내용 추가
+	private int reward_id; //리워드 아이디 ,알아서들어감
+	private int rwd_prc; //금액
+	private String rwd_cnt; //리워드 내용
+	
+	//BUY 내용추가
+	private int buy_id;
+	private String buy_way; //구매방법 cash, coin
+	private String buy_stt; //상태 보관, 전달, 환불
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	private Date buy_date;
+	private int buy_count; //구매수량
+	private String buy_muid; //상점 거래ID ~환불시 필요
+	
+	private int buy_won;
+	private long buy_wei;
+	
+	//환불
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	private Date buy_rfnd_date; //환불날짜 
+	private int buy_rfnd_prc; //환불금액
+	
 }

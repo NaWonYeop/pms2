@@ -185,14 +185,24 @@
 
 	<select id="MyfundingList" parameterType="int"
 		resultType="co.test.prj.project.service.ProjectVO">
-		SELECT P.PRJ_NAME,P.PRJ_ID,C.CTF_ST_NAME
+		SELECT P.PRJ_ID, P.PRJ_NAME, P.MASTER_ID, P.CTF_ID, P.PRJ_GL_PRC, 
+	            R.REWARD_ID, R.RWD_NAME, R.RWD_CNT, R.RWD_PRC, 
+	            B.BUY_ID, B.BUY_WAY, B.BUY_STT, B.BUY_DATE, B.BUY_COUNT, B.BUY_MUID,
+	            B.BUY_WON, B.BUY_WEI
+	            ,c.ctf_usectf_st_course, c.ctf_st_name
+		FROM PROJECT P, BUY B, REWARD R, COMTNFILE C
+		WHERE R.REWARD_ID = B.REWARD_ID
+		AND R.PRJ_ID =P.PRJ_ID
+		AND B.USER_ID = #{user_id}
+	
+	<!-- 	SELECT P.PRJ_NAME,P.PRJ_ID,C.CTF_ST_NAME
 		,C.CTF_USECTF_ST_COURSE,TRUNC(P.PRJ_FND_ED-SYSDATE) AS
 		PRJ_TIME,P.PRJ_FND_ED,P.PRJ_GL_PRC,(SELECT SUM(RWD_PRC*RWD_COT) FROM
 		REWARD R,PROJECT S WHERE R.PRJ_ID=S.PRJ_ID AND S.PRJ_ID=B.PRJ_ID) AS
 		TOTAL
 		FROM BUY B,PROJECT P,COMTNFILE C
 		WHERE B.USER_ID=#{user_id} AND
-		P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID
+		P.PRJ_ID=B.PRJ_ID AND P.CTF_ID=C.CTF_ID -->
 	</select>
 
 	<update id="AppUpdate"

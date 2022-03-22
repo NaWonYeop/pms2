@@ -455,7 +455,7 @@ ${project}<br>
   			
   			console.log("웨이 결제액 : "+ rPay);
   			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
-  			
+  			//debugger;
   			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
   			
   			solidityRewardFnc.methods
@@ -468,24 +468,27 @@ ${project}<br>
   			
   			 	//데이터 저장시 필요한 데이터
   				var save ={
-  					"user_id" : uId,
-  					"buy_way" : "coin",
-  					"reward_id" : rId,
-  					"prj_id" : pId,
-  					"buy_count" : rCnt,
-  					"buy_muid" : cId
-  						
-  				}
-  					
-  				//아작스 호출 여기에서
-  				$.ajax({
-  					url : 'ajaxBuy', 
-  			        type :'POST',
-  			        data : JSON.stringify(save,
-  			        		['user_id', 'buy_way', 'reward_id', 
-  			        			'prj_id', 'buy_count', 'buy_muid']),
-  			        contentType:'application/json;charset=utf-8',
-  			        dataType: 'json', //서버에서 보내줄 데이터 타입
+						"user_id" : uId,
+						"buy_way" : "coin",
+						"reward_id" : rId,
+						"prj_id" : pId,
+						"buy_count" : rCnt,
+						"buy_won" : 0,
+						"buy_wei" : rPay,
+						"buy_muid" : cId
+							
+					}
+					
+					
+				 $.ajax({
+					url : 'ajaxBuy', 
+			        type :'POST',
+			        data : JSON.stringify(save,
+			        		['user_id', 'buy_way', 'reward_id', 
+			        		'prj_id', 'buy_count', 'buy_won',
+			        		'buy_wei', 'buy_muid']),
+			        contentType:'application/json;charset=utf-8',
+			        dataType: 'json', //서버에서 보내줄 데이터 타입
   			        success: function(res){
   			        			        	
   			          if(res == 1){
@@ -696,6 +699,8 @@ ${project}<br>
 						"reward_id" : rId,
 						"prj_id" : pId,
 						"buy_count" : rCnt,
+						"buy_won" : rPay,
+						"buy_wei" : 0,
 						"buy_muid" : rsp.merchant_uid
 							
 					}
@@ -706,7 +711,8 @@ ${project}<br>
 				        type :'POST',
 				        data : JSON.stringify(save,
 				        		['user_id', 'buy_way', 'reward_id', 
-				        			'prj_id', 'buy_count', 'buy_muid']),
+				        		'prj_id', 'buy_count', 'buy_won',
+				        		'buy_wei', 'buy_muid']),
 				        contentType:'application/json;charset=utf-8',
 				        dataType: 'json', //서버에서 보내줄 데이터 타입
 				        success: function(res){

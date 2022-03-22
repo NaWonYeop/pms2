@@ -112,7 +112,7 @@ var abi = [
 
 //var NFTAuctionContract = web3.eth.contract(abi)
 
-var contractAddress = "0xA7A262524d52D6B2A183532118C35cD2C71635d2"; /* our contract address on Ethereum after deploying */
+var contractAddress = "0xe7C1424e0027ae5B001c268ec65B5E9e85aEB03D"; /* our contract address on Ethereum after deploying */
 
 var solidityRewardFnc = new web3.eth.Contract(abi, contractAddress);//rewardFncContract.at(contractAddress)
 // `rewardFnc`는 우리 컨트랙트의 public 함수와 이벤트에 접근할 수 있다.
