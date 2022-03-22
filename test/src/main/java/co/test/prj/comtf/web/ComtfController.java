@@ -32,7 +32,7 @@ public class ComtfController {
 		//Path currentPath = Paths.get(""); 
 		
 		//나중에 경로 realpath 바꿔야함
-		String path = hreq.getServletContext().getRealPath("\\resources\\upload"); 
+		String path = hreq.getServletContext().getRealPath("resources\\upload"); 
 		//String path = "C:\\Users\\admin\\git\\pms2\\test\\src\\main\\webapp\\resources\\upload";
 		String path2 = path.replace("\\", "/");
 		System.out.println("path2 : "+ path2);
