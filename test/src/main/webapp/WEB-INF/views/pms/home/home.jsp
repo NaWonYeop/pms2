@@ -1,3 +1,4 @@
+<%@page import="co.test.prj.team.service.MyPrjVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -42,7 +43,7 @@
 								</h2>
 							</div>
 							<div class="ml-2">
-								<h4 class="location font-weight-normal">Bangalore</h4>
+								<h4 class="location font-weight-normal">Deagu</h4>
 								<h6 class="font-weight-normal">India</h6>
 							</div>
 						</div>
@@ -98,7 +99,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
-						<button id="insertTeam" type="button" class="btn btn-primary">선택</button>
+						<!-- <button id="insertTeam" type="button" class="btn btn-primary">선택</button> -->
 					</div>
 				</div>
 			</div>
@@ -106,6 +107,8 @@
 		<!-- team modal end -->
 	</div>
 </div>
+
+<input id="homeSession" type="hidden" value="${sessionScope.myPrj}">
 <script>
 	$(function() {
 		$.ajax({
@@ -119,6 +122,10 @@
 				<option id="opt\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
 				`);
 			};
+			var homeSession = $("#homeSession").val();
+			if(homeSession == null) {
+				$("#nav").css("display", "none");
+			}
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 리스트 출력 실패");
 		});
@@ -134,7 +141,7 @@
 				console.log(result);
 				$("#allPrgBar").attr("aria-valuenow", result);
 				$("#allPrgBar").html(result+"%");
-				$("#teamSelectModal").modal('hide')
+				$("#teamSelectModal").modal('hide');
 			}).fail(function(xhr, status, message) {
 				alert("프로젝트 리스트 출력 실패");
 			});
@@ -163,9 +170,9 @@
 			$("#allPrgBar").attr("aria-valuenow", result.percent);
 			$("#allPrgBar").html(result.percent+"%");
 			$("#allPrgBar").css("width", result.percent+"%");
-			
 			$("#teamSelectModal").modal('hide');
 			$("#title").html(" "+prj_name);
+			$("#nav").css("display", "block");
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
 		});

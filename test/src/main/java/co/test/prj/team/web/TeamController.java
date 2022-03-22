@@ -79,6 +79,8 @@ public class TeamController {
 		team.setPrj_id(myPrj.getPrj_id());
 
 		List<TeamVO> list = teamDao.teamSelect(team);
+		
+		
 		return new Gson().toJson(list);
 	}
 
@@ -98,9 +100,9 @@ public class TeamController {
 	}
 
 	@RequestMapping("/teamUpdate")
-	public String teamUpdate(HttpSession session, Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-
+	@ResponseBody
+	public String teamUpdate(HttpSession session, TeamVO team) {
+		teamDao.teamUpdate(team);
 		return "";
 	}
 

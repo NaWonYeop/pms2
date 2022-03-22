@@ -14,7 +14,7 @@
 	<select id="teamSelect"
 		resultType="co.test.prj.team.service.TeamVO"
 		parameterType="co.test.prj.team.service.TeamVO">
-		SELECT t.prj_id, u.user_id, u.user_name, t.tm_pos, t.tm_dept,
+		SELECT t.prj_id, u.user_id, u.user_name,  t.master_id, t.tm_pos, t.tm_dept,
 		u.user_email, u.user_tel
 		FROM team t JOIN "user" u
 		ON t.user_id = u.user_id
@@ -32,10 +32,10 @@
 		UPDATE TEAM
 		<set>
 			<if test="tm_pos != null"> TM_POS = #{tm_pos},</if>
-			<if test="tm_pos != null"> TM_SAL = #{tm_sal},</if>
-			<if test="tm_pos != null"> TM_DEPT = #{tm_dept},</if>
+			<if test="tm_sal != null"> TM_SAL = #{tm_sal},</if>
+			<if test="tm_dept != null"> TM_DEPT = #{tm_dept},</if>
 		</set>
-		WHERE user_id = #{user_id} AND prj_id = #{prj_id}
+		WHERE user_id = #{user_id}
 	</update>
 
 	<delete id="teamDelete"
