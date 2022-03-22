@@ -471,7 +471,7 @@ button {
 				},
 				success: function(result) {
 					console.log(result);
-					$('.clist'+result).remove();
+					$('.clist'+uId).remove();
 					toastr.success("거절되었습니다.");
 					
 				}
