@@ -398,7 +398,6 @@ public class UserController {
 	public String clientRegister(UserVO user, Model model, RedirectAttributes re) {
 		System.out.println(user);
 		user.setUser_ath("user");
-
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		user.setUser_pwd(scpwd.encode(user.getUser_pwd()));
 		if(user.getEther_id()==null) {

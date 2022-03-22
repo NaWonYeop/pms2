@@ -117,8 +117,9 @@
 				<div class="col-sm-12 text-center">
 					<button type="submit" class="button button-contactForm btn_1 w-50">탈퇴</button>
 				</div>
-				<input type="reset" id="btn-Yes" value="취 소" class="btn_1"
-					style="width: 100%;" onclick="cancel()">
+				<br>
+				<input type="reset" id="btn-Yes" value="취 소" class="button button-contactForm btn_1 w-50"
+					 onclick="cancel()" style="position: relative; left: 25%;">
 			</form>
 		</div>
 

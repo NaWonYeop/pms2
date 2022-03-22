@@ -4,14 +4,6 @@
 <html>
 <head>
 <style type="text/css">
-@font-face {
-	font-family: 'MinSans-Medium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 
 }
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
@@ -81,9 +73,10 @@ a {
 	<div class="card align-middle" style="width: 25rem;">
 
 		<div class="card-title" style="margin-top: 30px;"></div>
+		<h2 style="text-align: center;">아이디찾기 결과</h2>
 		<div class="card-body">
 			<input type="email" name="user_email" id="user_email"
-				class="form-control" value="${idcheck}" style="text-align: center; font-family: 'MinSans-Medium'; "><BR>
+				class="form-control" value="${idcheck}" style="text-align: center; "><BR>
 		</div>
 	</div>
 	<div class="links">

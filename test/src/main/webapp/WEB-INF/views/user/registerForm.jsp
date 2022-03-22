@@ -12,13 +12,10 @@
 <meta name="author" content="">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+
 <title>로그인 폼</title>
 <style>
-@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+
 
 html {
 	height: 100%;
@@ -30,7 +27,7 @@ body {
 	margin: 0;
 	padding-top: 200px;
 	padding-bottom: 40px;
-	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+
 	background-repeat: no-repeat;
 }
 
@@ -89,6 +86,7 @@ a {
 
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title" style="margin-top: 30px;"></div>
+		<h2 style="text-align: center;">일반 회원가입</h2>
 		<form action="register" onsubmit="return formCheck()" method="post">
 
 			<div class="card-body">
@@ -118,6 +116,7 @@ a {
 					size="4" maxlength="4" class="form-control col-3"  pattern="^[0-9]+$" required="required" /></div><br>
 					
 					<input type="hidden" id="user_tel" name="user_tel" value="NO">
+					<input type="hidden" id="user_type" name="user_type" value="0" >
 					<input type="text" id="ether_id" name="ether_id" placeholder="이더리움아이디" class="form-control"><br>
 					<input
 					id="btn-Yes" class="btn_1" style="width: 100%;" type="submit"

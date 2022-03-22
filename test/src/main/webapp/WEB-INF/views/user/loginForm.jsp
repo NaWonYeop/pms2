@@ -82,6 +82,7 @@ a {
 	<div class="card align-middle" style="width: 25rem;">
 
 		<div class="card-title" style="margin-top: 30px;"></div>
+		<h2 style="text-align: center;">로그인</h2>
 		<form action="login" class="login" method="POST">
 
 			<div class="card-body">
