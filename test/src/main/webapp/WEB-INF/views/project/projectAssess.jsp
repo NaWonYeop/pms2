@@ -34,6 +34,13 @@
 	margin-top: 10%;
 	height: 90%;
 }
+ /* 모달창의 배경을 만든다 */
+		.modal__background{
+		  display:none;
+		  position: fixed;
+		  top:0; left: 0; bottom: 0; right: 0;
+		  background: rgba(0, 0, 0, 0.3);
+		}
 
 .prjtitle {
 	font-size: xx-large;
@@ -135,7 +142,7 @@
 					</div>
 				</div>
 
-
+<div class="modal__background">
 				<c:forEach items="${AssessList }" var="Assess" varStatus="status">
 						<div class="col-sm-6 col-xl-3 list${Assess.user_id }">
 							<div class="single_feature">
@@ -242,7 +249,7 @@
 						</div>
 				</c:forEach>
 
-
+</div>
 
 
 			</div>
@@ -264,6 +271,7 @@
                && !$(e.target).hasClass("current")
                && !$(e.target).hasClass("single_feature_icon")) {
             $('.modaldal').fadeOut();
+            $('.modal__background').fadeOut();
          }
       }
 
@@ -279,6 +287,7 @@
       function modalFadeSelect(info) {
         	 console.log('#' + info.id);
          $('#' + info.id).children('.modaldal').fadeIn();
+         $('.modal__background').fadeIn();
       }
       
       //평가 버튼

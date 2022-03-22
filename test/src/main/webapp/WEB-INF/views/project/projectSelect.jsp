@@ -11,7 +11,7 @@
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
 <script src="resources/js/rewardFnc.js"></script>
 <style>
-        .Tname {
+       .Tname {
             margin-bottom: 60px;
         }
 
@@ -47,7 +47,8 @@
             width: 40%;
             height: 40%;
             border-radius: 30px;
-            background-color: tomato;
+            border: 3px solid #798BF2;
+            background-color: #F5F7FF;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -64,15 +65,20 @@
             margin-top: 50px;
             
         }
+        
+        /* 모달창의 배경을 만든다 */
+		.modal__background{
+		  display:none;
+		  position: fixed;
+		  top:0; left: 0; bottom: 0; right: 0;
+		  background: rgba(0, 0, 0, 0.3);
+		}
+		
         .prjtitle {
             font-size: xx-large;
         }
 
-        .prjlist {
-            width: 300px;
-            text-align: center;
-            
-        }
+        
         /* modal end */
 
         /* rating */
@@ -91,7 +97,7 @@
         padding: 0;
         position: absolute;
         z-index: 1;
-        display: flex;
+        /* display: flex; */
         top: 0;
         left: 0;
         overflow: hidden;
@@ -108,7 +114,7 @@
         }
         /* rating end */
 
-        .callbtn , .heartbtn, .updatebtn {
+        .heartbtn, .updatebtn {
             width: 300px;
             height: 45px;
             border-radius: 30px;
@@ -127,7 +133,18 @@
             text-align: center;
             
         }
+
+        .form-select .nice-select {
+        	width: 100%;
+        	text-align: center;
+        	background-color: #fff;
+        	
+        }
         
+       
+       #dropdown {
+       		text-align: center;
+       }
         
     </style>
 
@@ -328,12 +345,167 @@ ${project}<br>
         		</div>
         	</div>
 		</div>
-	</section>	
-	
+	</section>
+	<div class="modal__background">
+		<div class="modaldal content">
+			<div class="content modalcontent">
+				<div class="justify-content-center">
+					<h2 class="content title" style="text-align: center;">결제금액 단위(wei)</h2>
+					<a class="content wei" id="modalWei"></a>
+				</div>
+			</div>
+			<button type="button" class="btn_4 modalInbtn" onclick="request()">결제</button>
+			<button type="button" class="btn_4 ">취소</button>
+		
+		</div>
+	</div>
 
-	
-	
+
 	<script type="text/javascript">
+	var uId;
+	var uAc;
+	var rId;
+	var rEPrc;
+	var rWPrc;
+	var rCnt;
+	var pId;
+	var rPay;
+	var today;
+	var mId;
+	var mAc;
+	var cId;
+	var uName;
+	var uEmail;
+	var uTel;
+	var rId;
+	var rName;
+	var rPrc;
+	
+	function check(e)
+      {
+         if(!$(e.target).hasClass("content")
+          		&& !$(e.target).hasClass("modalInbtn") //신청하기버튼
+                && !$(e.target).hasClass("rfnd") 
+                && !$(e.target).hasClass("current")) {
+              $('.modaldal').fadeOut();
+              $('.modal__background').fadeOut();
+            
+          }
+      }
+      $('html').click(function(e){
+          console.log(e.target);
+          check(e);
+      });
+      $('.rfnd').click(function(e){
+          $('.modaldal').fadeIn();
+          $('.modal__background').fadeIn();
+          
+          //코인구매
+    			console.log('코인구매 클릭');
+    			
+    			//debugger
+    			uId = document.getElementById('user_id').value;
+    			console.log("구매자 아이디 : "+ uId);
+    			uAc = document.getElementById('ether_id').value;
+    			console.log("구매자 이더리움 어카운트 : "+ uAc);
+
+    			rId = $(".rfnd").prevObject.context.activeElement.id;
+    			console.log("리워드 아이디 : "+ rId);
+    			//var rName = document.getElementById('n'+rId).innerHTML;
+    			//console.log("리워드 이름 : "+ rName);
+    			rEPrc = document.getElementById('e'+rId).value;
+    			console.log("리워드 이더 금액 : "+ rEPrc);
+    			rWPrc = rEPrc * (10**18);
+    			console.log("리워드 웨이 금액 : "+ rWPrc);
+    			rCnt = document.getElementById('c'+rId).value;
+    			if (!document.getElementById('c'+rId).checkValidity()) {
+    				 console.log("기본값 1 넣는곳");
+    				 rCnt = 1;
+    			}
+    			console.log("리워드 구매수 : "+ rCnt);
+    			
+    			pId = document.getElementById('prj_id').value;
+    			console.log("프로젝트 아이디 : "+ pId);
+    			
+    			rPay = parseInt(parseInt(rCnt) * rWPrc);
+    			console.log("웨이 결제액 : "+ rPay);
+    			
+    			today = getToday();
+    			console.log("오늘 년월일 : "+ today);
+    			
+    			mId = document.getElementById('master_id').value;
+    			console.log("담당자 아이디 : "+ mId);
+    			
+    			
+    			mAc = document.getElementById('masterAcc').value;
+    			console.log("담당자 어카운트 : "+ mAc);
+    			
+    			cId = parseInt(mId + today) ;
+    			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
+          
+    			$('#modalWei').html(rPay + " wei");
+          
+   
+      });
+      
+      
+      function request() {
+      	//debugger;
+  			console.log("구매시작");
+  			
+  			console.log("웨이 결제액 : "+ rPay);
+  			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
+  			
+  			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
+  			
+  			solidityRewardFnc.methods
+  			.buyAry(cId, mAc)
+  			.send({from: uAc, value: rPay })
+  			.then(function(result){
+  				
+  				console.log(result);
+  			
+  			
+  			 	//데이터 저장시 필요한 데이터
+  				var save ={
+  					"user_id" : uId,
+  					"buy_way" : "coin",
+  					"reward_id" : rId,
+  					"prj_id" : pId,
+  					"buy_count" : rCnt,
+  					"buy_muid" : cId
+  						
+  				}
+  					
+  				//아작스 호출 여기에서
+  				$.ajax({
+  					url : 'ajaxBuy', 
+  			        type :'POST',
+  			        data : JSON.stringify(save,
+  			        		['user_id', 'buy_way', 'reward_id', 
+  			        			'prj_id', 'buy_count', 'buy_muid']),
+  			        contentType:'application/json;charset=utf-8',
+  			        dataType: 'json', //서버에서 보내줄 데이터 타입
+  			        success: function(res){
+  			        			        	
+  			          if(res == 1){
+  						 console.log("추가성공");	
+  				           
+  			          }else{
+  			             console.log("Insert Fail!!!");
+  			          } 
+  			          
+  			          location.reload();
+  			        },
+  			        error:function(){
+  			          console.log("Insert ajax 통신 실패!!!");
+  			        }
+  				}) //ajax 
+  				
+  	
+  			});
+		}
+      
 	 toastr.options = {
 			  "closeButton": false,
 			  "debug": false,
@@ -447,36 +619,34 @@ ${project}<br>
 			console.log('현금구매 클릭');
 			
 			//debugger
-			var uId = document.getElementById('user_id').value;
+			 uId = document.getElementById('user_id').value;
 			console.log("구매자 아이디 : "+ uId);
-			var uName = document.getElementById('user_name').value;
+			 uName = document.getElementById('user_name').value;
 			console.log("구매자 이름 : "+ uName);
-			var uEmail = document.getElementById('user_email').value;
+			 uEmail = document.getElementById('user_email').value;
 			console.log("구매자 메일 : "+ uEmail);
-			var uTel = document.getElementById('user_tel').value;
+			 uTel = document.getElementById('user_tel').value;
 			console.log("구매자 연락처 : "+ uTel);
 			
-			var rId = $(".wBuy").prevObject.context.activeElement.id;
+			 rId = $(".wBuy").prevObject.context.activeElement.id;
 			console.log("리워드 아이디 : "+ rId);
-			var rName = document.getElementById('n'+rId).innerHTML;
+			 rName = document.getElementById('n'+rId).innerHTML;
 			console.log("리워드 이름 : "+ rName);
-			var rPrc = document.getElementById('p'+rId).innerHTML;
+			 rPrc = document.getElementById('p'+rId).innerHTML;
 			console.log("리워드 금액 : "+ rPrc);
-			var rCnt = document.getElementById('c'+rId).value;
-			console.log("리워드 구매수 : "+ rCnt);
-			
-
-			
-			var pId = document.getElementById('prj_id').value;
-			console.log("프로젝트 아이디 : "+ pId);
-			
+			 rCnt = document.getElementById('c'+rId).value;
 			if (!document.getElementById('c'+rId).checkValidity()) {
 				 console.log("기본값 1 넣는곳");
 				 rCnt = 1;
 			}
+			console.log("리워드 구매수 : "+ rCnt);
 			
-			var rPay = parseInt(rCnt) * parseInt(rPrc);
-			console.log("현금 결제액 : "+ rPay);
+			 pId = document.getElementById('prj_id').value;
+			console.log("프로젝트 아이디 : "+ pId);
+			
+			
+			 rPay = parseInt(rCnt) * parseInt(rPrc);
+			console.log("결제액 : "+ rPay);
 			
 
 			
@@ -532,7 +702,7 @@ ${project}<br>
 					
 					
 					 $.ajax({
-						url : 'ajaxCashBuy', 
+						url : 'ajaxBuy', 
 				        type :'POST',
 				        data : JSON.stringify(save,
 				        		['user_id', 'buy_way', 'reward_id', 
@@ -565,173 +735,7 @@ ${project}<br>
 			});//pay
 		}); //check1 클릭 이벤트
 		 
-		//코인구매
-		$(".rfnd").click(function(e){
-			console.log('코인구매 클릭');
-			
-			//debugger
-			var uId = document.getElementById('user_id').value;
-			console.log("구매자 아이디 : "+ uId);
-			var uEtherId = document.getElementById('ether_id').value;
-			console.log("구매자 이더리움 어카운트 : "+ uEtherId);
-
-			var rId = $(".rfnd").prevObject.context.activeElement.id;
-			console.log("리워드 아이디 : "+ rId);
-			//var rName = document.getElementById('n'+rId).innerHTML;
-			//console.log("리워드 이름 : "+ rName);
-			var rEPrc = document.getElementById('e'+rId).value;
-			console.log("리워드 이더 금액 : "+ rEPrc);
-			var rWPrc = rEPrc * (10**18);
-			console.log("리워드 웨이 금액 : "+ rWPrc);
-			var rCnt = document.getElementById('c'+rId).value;
-			console.log("리워드 구매수 : "+ rCnt);
-			
-			var pId = document.getElementById('prj_id').value;
-			console.log("프로젝트 아이디 : "+ pId);
-			
-			if (!document.getElementById('c'+rId).checkValidity()) {
-				 console.log("기본값 1 넣는곳");
-				 rCnt = 1;
-			}
-			
-			var rPay = parseInt(parseInt(rCnt) * rWPrc);
-			console.log("현금 결제액 : "+ rPay);
-			
-			var today = getToday();
-			console.log("오늘 년월일 : "+ today);
-			
-			var mId = document.getElementById('master_id').value;
-			console.log("담당자 아이디 : "+ mId);
-			
-			
-			var mAc = document.getElementById('masterAcc').value;
-			console.log("담당자 어카운트 : "+ mAc);
-			
-			var cId = parseInt(mId + today) ;
-			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
-			
-			//debugger;
-			console.log("구매시작");
-			
-			solidityRewardFnc.methods
-			.buyAry(cId, mAc)
-			.send({from: uEtherId, value: rPay })
-			.then(function(result){console.log(result);
-			
-			
-			//데이터 저장시 필요한 데이터
-			var save ={
-				"user_id" : uId,
-				"buy_way" : "coin",
-				"reward_id" : rId,
-				"prj_id" : pId,
-				"buy_count" : rCnt,
-				"buy_muid" : cId
-					
-			}
-				
-			//아작스 호출 여기에서
-			$.ajax({
-						url : 'ajaxCoinBuy', 
-				        type :'POST',
-				        data : JSON.stringify(save,
-				        		['user_id', 'buy_way', 'reward_id', 
-				        			'prj_id', 'buy_count', 'buy_muid']),
-				        contentType:'application/json;charset=utf-8',
-				        dataType: 'json', //서버에서 보내줄 데이터 타입
-				        success: function(res){
-				        			        	
-				          if(res == 1){
-							 console.log("추가성공");	
-							 //pay += 5;
-							 //$('#pay_coupon').html(pay);			           
-				          }else{
-				             console.log("Insert Fail!!!");
-				          } 
-				          
-				          location.reload();
-				        },
-				        error:function(){
-				          console.log("Insert ajax 통신 실패!!!");
-				        }
-					}) //ajax
-			
-			
-
-			
-			});
-
-			
-	/*	
-			
-			//결제요청
-			IMP.request_pay({
-				//name과 amout만있어도 결제 진행가능
-				//pg : 'kakao', //pg사 선택 (kakao, kakaopay 둘다 가능)
-				pg: "html5_inicis",
-				pay_method: 'card',
-				merchant_uid : 'merchant_' + new Date().getTime(),
-				name : rName, // 상품명
-				amount : rPay,
-				buyer_email : uEmail,
-				buyer_name : uName,
-				buyer_tel : uTel,  //필수항목
-				//결제완료후 이동할 페이지 kko나 kkopay는 생략 가능
-				//m_redirect_url : 'https://localhost:8080/payments/complete'
-			}, function(rsp){
-				if(rsp.success){//결제 성공시
-					var msg = '결제가 완료되었습니다';
-					
-					
-					//데이터 저장시 필요한 데이터
-					var save ={
-						"user_id" : uId,
-						"buy_way" : "coin",
-						"reward_id" : rId,
-						"prj_id" : pId,
-						"buy_count" : rCnt,
-						"buy_muid" : rsp.merchant_uid
-							
-					}
-					
-					
-					 $.ajax({
-						url : 'ajaxCoinBuy', 
-				        type :'POST',
-				        data : JSON.stringify(save,
-				        		['user_id', 'buy_way', 'reward_id', 
-				        			'prj_id', 'buy_count', 'buy_muid']),
-				        contentType:'application/json;charset=utf-8',
-				        dataType: 'json', //서버에서 보내줄 데이터 타입
-				        success: function(res){
-				        			        	
-				          if(res == 1){
-							 console.log("추가성공");	
-							 //pay += 5;
-							 //$('#pay_coupon').html(pay);			           
-				          }else{
-				             console.log("Insert Fail!!!");
-				          } 
-				          
-				          location.reload();
-				        },
-				        error:function(){
-				          console.log("Insert ajax 통신 실패!!!");
-				        }
-					}) //ajax
-					
-				}
-				else{//결제 실패시
-					var msg = '결제에 실패했습니다';
-					msg += '에러 : ' + rsp.error_msg
-				}
-				console.log(msg);
-			});//pay
-			
-			
-			*/
 		
-		}); //check2 클릭 이벤트
 		
 		//환불은 다른데서 사용할것
 		$("#check2").click(function(e){

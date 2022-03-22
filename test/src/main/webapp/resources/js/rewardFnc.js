@@ -24,11 +24,11 @@ else
 let account;
 web3.eth.getAccounts(function (err, accs) {
     if (err != null) {
-      alert('There was an error fetching your accounts.')
+      console.log('There was an error fetching your accounts.')
       return
     }
     if (accs.length === 0) {
-      alert("Couldn't get any accounts! ")
+      console.log("Couldn't get any accounts! ")
       return
     }
     account = accs[0];
@@ -112,7 +112,7 @@ var abi = [
 
 //var NFTAuctionContract = web3.eth.contract(abi)
 
-var contractAddress = "0x8F5C86575E629df3eAC17188bB2e67aF9bB8B504"; /* our contract address on Ethereum after deploying */
+var contractAddress = "0xA7A262524d52D6B2A183532118C35cD2C71635d2"; /* our contract address on Ethereum after deploying */
 
 var solidityRewardFnc = new web3.eth.Contract(abi, contractAddress);//rewardFncContract.at(contractAddress)
 // `rewardFnc`는 우리 컨트랙트의 public 함수와 이벤트에 접근할 수 있다.
