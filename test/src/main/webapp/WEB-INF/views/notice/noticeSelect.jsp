@@ -14,6 +14,37 @@
 		float: right;
 		margin-right: 10px;
 	}
+	
+	p {
+		font-size: x-large;
+	}
+	
+	.single-comment {
+		margin-top: 1%;
+	}
+	
+	.fa-comments {
+		text-decoration: underline;
+		text-decoration-color: #576EF2;
+		text-decoration-thickness: 5px;
+		margin-bottom: 3%;
+		 
+	}
+	.user {
+		margin-left: 3%;
+		margin-right: 3%;
+		margin-top: 1%;
+		margin-bottom: 1%;
+	}
+	
+	.single-comment:hover {
+		background-color: #F5F7FF;
+		border: 2px solid #576EF2;
+	}
+	
+	.blog-info-link {
+		margin-top: 4.5rem !important;
+	}
 </style>
 </head>
 <body>
@@ -42,14 +73,14 @@
 					<div class="single-post">
 
 						<div class="blog_details">
-							<h2 style="display: inline;">${board.brd_ttl }</h2>
+							<h2 style="display: inline; font-size: xxx-large;">${board.brd_ttl }</h2>
 							<c:if test="${sessionUser.user_id eq board.user_id }">
 							<form action="adminNoticeUpdateform" class="formbtn">
-								<input type="submit" class="btn_4" value="수정"></button>
+								<input type="submit" class="btn_4" value="수정">
 								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							</form>
 							<form action="adminNoticeDelete" class="formbtn">
-								<input type="submit" class="btn_4" value="삭제"></button>
+								<input type="submit" class="btn_4" value="삭제">
 								<input type="hidden" name="brd_id" id="brd_id" value="${board.brd_id }">
 							</form>
 							</c:if>
@@ -59,26 +90,12 @@
 									</li>
 								<li><i class="far fa-comments"></i></li>
 							</ul>
-							<h3>${board.brd_cnt }</h3>
+							
 
 						</div>
 					</div>
 					<div class="navigation-top">
-						<div class="d-sm-flex justify-content-between text-center">
-
-							<div class="col-sm-4 text-center my-2 my-sm-0">
-								<!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-							</div>
-							<ul class="social-icons">
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fab fa-behance"></i></a></li>
-							</ul>
-						</div>
-						<div class="navigation-area">
-							
-						</div>
+						<h2>${board.brd_cnt }</h2>
 					</div>
 				</div>
 
@@ -135,9 +152,9 @@
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
 										<div class="d-flex justify-content-between ">
 											<div class="d-flex align-items-center">
-												<h4 class="idd" value="\${result[i].rpl_id}" name="\${result[i].user_id}">
+												<h6 class="idd" value="\${result[i].rpl_id}" name="\${result[i].user_id}">
 													\${result[i].user_name}
-												</h4>
+												</h6>
 												<p class="date">
 												\${result[i].rpl_date_string}
 												

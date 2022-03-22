@@ -82,7 +82,7 @@ public class TechServiceImpl implements TechService {
 	}
 
 	@Override
-	public List<TechVO> jobSelectList() {
+	public List<UserVO> jobSelectList() {
 		return map.jobSelectList();
 	}
 
@@ -157,6 +157,11 @@ public class TechServiceImpl implements TechService {
 	@Override
 	public AppVO heartafterSelect(AppVO app) {
 		return map.heartafterSelect(app);
+	}
+
+	@Override
+	public List<UserVO> jobMainheartCheck(UserVO user) {
+		return map.jobMainheartCheck(user);
 	}
 
 	

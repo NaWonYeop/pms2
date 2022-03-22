@@ -1,7 +1,13 @@
+<%@page import="co.test.prj.tech.service.TechVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="co.test.prj.tech.service.TechVO"%>
 <%@page import="co.test.prj.user.service.UserVO"%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,7 +135,12 @@
 					</div>
 				</div>
 			</div>
-			
+		</div>
+	</section>
+	
+	
+	<section class="special_cource padding_top">
+		<div class="container">
 			<c:if test="${btnCheck.user_ath != 'user' && btnCheck.user_ath != null}">
 				<div class="insertbtn">
 					<button type="button" id="insertbtn" class="btn_1"
@@ -147,8 +158,8 @@
 									<div class="single_special_cource">
 										<div class="special_cource_text">
 											<p class="introduce">${inter.user_name }| ${inter.user_crr }년</p>
-											<img id="heartbtn${inter.user_id}" class="heartbtn" onclick="heart(${inter.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
-											<img id="heartCancelbtn${inter.user_id}" class="heartCancelbtn" onclick="heartCancel(${inter.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
+											<img id="heartbtn${inter.user_id}" class="heartbtn" name="heartbtn${inter.user_id}" onclick="heart(${inter.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
+											<img id="heartCancelbtn${inter.user_id}" class="heartCancelbtn" name="heartCancelbtn${inter.user_id}" onclick="heartCancel(${inter.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
 	                    					
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${inter.user_id eq tech.user_id2 }">
@@ -214,8 +225,8 @@
 									<div class="single_special_cource">
 										<div class="special_cource_text">
 											<p class="introduce">${job.user_name }| ${job.user_crr }년</p>
-											<img id="heartbtn${job.user_id}" class="heartbtn" onclick="heart(${job.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
-											<img id="heartCancelbtn${job.user_id}" class="heartCancelbtn" onclick="heartCancel(${job.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
+											<img id="heartbtn${job.user_id}" class="heartbtn" name="heartbtn${job.user_id}" onclick="heart(${job.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
+											<img id="heartCancelbtn${job.user_id}" class="heartCancelbtn" name="heartCancelbtn${job.user_id}" onclick="heartCancel(${job.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
 											<c:forEach items="${techs }" var="tech">
 												<c:if test="${job.user_id eq tech.user_id2 }">
 													<span class="btn_4" style="margin-bottom: 1%">${tech.tech_name }</span>
@@ -274,7 +285,6 @@
 <script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
-	
 		function starAvg(avg) {
 			const insertAvg = avg * 20;
 			return insertAvg + 1.5;
@@ -299,30 +309,37 @@
 		
 		<% UserVO user=(UserVO)session.getAttribute("sessionUser");%>
 	    $(document).ready(function(){
-		    <%if(user==null)
+		    <%
+		    List<UserVO> userId2 = (List<UserVO>)request.getAttribute("inters");
+		    List<UserVO> allList =(List<UserVO>)request.getAttribute("jobs");
+		    
+		    if(user==null)
 		    {%>
 		       $('.heartbtn').hide();
 		       $('.heartCancelbtn').hide();
 		    <%}
 		    else
-		    {%>
-		    if("${heartCheck}" != "no") {
-		    	$('.heartbtn').hide();
-		    } else {
-		    	$('.heartCancelbtn').hide();
-		    }
-		    <%}%>
+		    {
+		    	for(int i=0; i<allList.size(); i++)
+		    	{
+		    		%>$('img[name=heartCancelbtn<%=allList.get(i).getUser_id() %>]').hide();	<%
+		    		for(int j=0; j<userId2.size(); j++)
+		    		{
+						if(allList.get(i).getUser_id()==userId2.get(j).getUser_id())
+						{
+							%> $('img[name=heartCancelbtn<%=userId2.get(j).getUser_id() %>]').show();	
+					 		$('img[name=heartbtn<%=userId2.get(j).getUser_id() %>]').hide();  <%
+						}
+							
+		    		}
+		    		
+		    		
+		   		}
+		    } 	%>
 	    })
 	    
 	    function heart(e) {
-        <% 
-        if(user==null)
-        {%>
-           toastr.warning('로그인이 필요합니다.');
-           
-        <%}
-        else
-        {%>
+        
         $.ajax({
     		url: 'heartInsert',
     		type: 'post',
@@ -332,23 +349,15 @@
     		},
     		success: function() {
     			toastr.success('찜하기 성공!');
-    			$('#heartbtn'+e).hide();
-        		$('#heartCancelbtn'+e).show();	
+    			$('img[name=heartbtn'+e+']').hide();
+        		$('img[name=heartCancelbtn'+e+']').show();	
     		}
     	})
     	
-        <%}%>;
   		}
         
         function heartCancel(e) {
-        	<% 
-            if(user==null)
-            {%>
-               toastr.warning('로그인이 필요합니다.');
-               
-            <%}
-            else
-            {%>
+        	
         	$.ajax({
         		url: 'heartCancel',
         		type: 'post',
@@ -358,11 +367,11 @@
         		}
         	}).done(function() {
         		toastr.success('찜하기 취소되었습니다.');
-        		$('#heartbtn'+e).show();
-    			$('#heartCancelbtn'+e).hide();
+        		$('img[name=heartbtn'+e+']').show();
+    			$('img[name=heartCancelbtn'+e+']').hide();
     			
         	})
-        	<%}%>;
+        	
         }
 	</script>
 

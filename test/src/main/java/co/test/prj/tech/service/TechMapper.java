@@ -12,7 +12,10 @@ import co.test.prj.user.service.UserVO;
 public interface TechMapper {
 	List<TechVO> techSelectList();
 	
-	List<TechVO> jobSelectList();
+	List<UserVO> jobSelectList();
+	
+	//구인페이지
+	List<UserVO> jobMainheartCheck(UserVO user);
 
 	//찜목록들
 	List<TechVO> jobInterList(int user_id);

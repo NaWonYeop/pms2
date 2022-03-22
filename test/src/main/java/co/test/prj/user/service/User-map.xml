@@ -121,7 +121,7 @@
 	<!-- 경일 -->
 	<select id="jobSelect"
 		resultType="co.test.prj.user.service.UserVO">
-		SELECT USER_ID FROM "user" WHERE USER_ID = ${user_id}
+		SELECT * FROM "user" U WHERE U.USER_ID = ${user_id}
 	</select>
 	
 	<!-- 프로젝트목록 -->
