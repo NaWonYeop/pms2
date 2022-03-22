@@ -123,7 +123,7 @@
 				`);
 			};
 			var homeSession = $("#homeSession").val();
-			if(homeSession == null) {
+			if(!$("#homeSession").val()) {
 				$("#nav").css("display", "none");
 			}
 		}).fail(function(xhr, status, message) {

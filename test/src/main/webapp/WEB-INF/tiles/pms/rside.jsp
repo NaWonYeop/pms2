@@ -30,8 +30,7 @@
 						<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
 				`);
 			};
-			var rsideSession = $("#rsideSession").val();
-			if(rsideSession == null) {
+			if(!$("#rsideSession").val()) {
 				$("#nav").css("display", "none");
 			}
 		}).fail(function(xhr, status, message) {
