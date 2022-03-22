@@ -9,4 +9,13 @@
 	<delete id="heartDelete" parameterType="co.test.prj.interest.service.InterestVO">
 		DELETE FROM INTEREST WHERE USER_ID = #{user_id} AND USER_ID2 = #{user_id2}
 	</delete>
+	
+	<insert id="projectHeartInsert" parameterType="co.test.prj.interest.service.InterestVO">
+		INSERT INTO INTEREST(USER_ID, PRJ_ID)
+		VALUES(#{user_id}, #{prj_id})
+	</insert>
+	
+	<delete id="projectHeartDelete" parameterType="co.test.prj.interest.service.InterestVO">
+		DELETE FROM INTEREST WHERE USER_ID = #{user_id} AND PRJ_ID = #{prj_id}
+	</delete>
 </mapper>

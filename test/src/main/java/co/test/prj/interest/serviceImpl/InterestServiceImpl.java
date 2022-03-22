@@ -23,6 +23,20 @@ public class InterestServiceImpl implements InterestMapper {
 	public int heartDelete(InterestVO interest) {
 		return map.heartDelete(interest);
 	}
+
+	@Override
+	public int projectHeartInsert(InterestVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.projectHeartInsert(vo);
+	}
+
+	@Override
+	public int projectHeartDelete(InterestVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.projectHeartDelete(vo);
+	}
 	
 	
 	

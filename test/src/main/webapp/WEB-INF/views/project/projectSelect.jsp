@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,13 +194,17 @@ ${project}<br>
 		                           <li><i class="far fa-comments"></i> 모집 기간
 		                            <fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
 									<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
-		                        </ul> 	
+		                        </ul> 
+		                        <sec:authorize access="isAuthenticated()">
 				                    <form id="ajaxAppPrjInsertForm" onsubmit="return false" onclick="ajaxAppPrjInsertForm()">
 										<input type="hidden" name="prj_id" value="${project.prj_id}">
 										<input type="hidden" name="master_id" value="${project.master_id}">
 		                         		<input type="hidden" name="user_id" value="${sessionScope.sessionUser.user_id }">
 										<input type="submit" class="rfnd btn_4" value="참가신청">
 									</form>
+									<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
+	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
+								</sec:authorize>		
 	                        </c:if>
         		 	
 	                        
@@ -756,7 +761,48 @@ ${project}<br>
 				console.log("환불 실패 : 남은 결제권 환불 불가");
 			}
 		}); //check2 클릭
-	
+		function heart() {
+	       
+	        $.ajax({
+	    		url: 'heartProjectInsert',
+	    		type: 'post',
+	    		data: {
+	    			user_id: ${sessionUser.user_id},
+	    			prj_id: ${project.prj_id}
+	    		},
+	    		success: function() {
+	    			$('#heartbtn').hide();
+	        		$('#heartCancelbtn').show();	
+	    		}
+	    	})
+	    		toastr.success('찜하기 성공!');
+	    	
+	      
+	  		}
+	        
+	        function heartCancel() {
+	   
+	  
+	        	$.ajax({
+	        		url: 'heartProjectDelete',
+	        		type: 'post',
+	        		data: {
+	        			user_id: ${sessionUser.user_id},
+	        			prj_id: ${project.prj_id}
+	        		}
+	        	}).done(function() {
+	        		toastr.success('찜하기 취소되었습니다.');
+	        		$('#heartbtn').show();
+	    			$('#heartCancelbtn').hide();
+	    			
+	        	})
+	  
+	        }
+	        if("${heartCheck}" != "no") {
+		    	$('#heartbtn').hide();
+		    } else {
+		    	$('#heartCancelbtn').hide();
+		    }
 	</script>
 	<script src="resources/main/js/jquery.counterup.min.js"></script>
 <script src="resources/main/js/custom.js"></script>

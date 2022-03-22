@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectMapper;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
@@ -88,6 +89,20 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public int projectHitUpdate(ProjectVO project) {
 		return map.projectHitUpdate(project);
+	}
+
+	@Override
+	public List<ProjectVO> projectInterst(ProjectVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.projectInterst(vo);
+	}
+
+	@Override
+	public InterestVO heartProject(InterestVO vo)
+	{
+		// TODO Auto-generated method stub
+		return map.heartProject(vo);
 	}
 
 	

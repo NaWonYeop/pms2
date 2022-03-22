@@ -24,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import co.test.prj.comtf.service.ComtfService;
 import co.test.prj.comtf.service.ComtfVO;
+import co.test.prj.interest.service.InterestService;
+import co.test.prj.interest.service.InterestVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.reward.service.RewardService;
@@ -50,6 +52,9 @@ public class ProjectController {
 	
 	@Autowired
 	private UserService userDao;
+	
+	@Autowired
+	private InterestService interDao;
 	
 	@RequestMapping("/projectInsertForm")
 	public String main() {
@@ -200,7 +205,14 @@ public class ProjectController {
 		//추가자료
 		map.put("apps", projectDao.projectAppList(project));
 		map.put("rwds", projectDao.projectRwdList(project));
-		
+		UserVO vo=(UserVO)session.getAttribute("sessionUser");
+		if(vo!=null)
+		{
+			ProjectVO inter=new ProjectVO();
+			inter.setMaster_id(vo.getUser_id());
+			inter.setType(gettype);
+			map.put("interest", projectDao.projectInterst(inter));
+		}
 		model.addAttribute("result", map);
 		
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
@@ -271,7 +283,8 @@ public class ProjectController {
 			@RequestParam("prj_id") int id, 
 			Model model, 
 			ProjectVO project,
-			RewardVO reward) {
+			RewardVO reward,
+			HttpSession session) {
 		System.out.println("상세페이지");
 		project.setPrj_id(id);
 		
@@ -335,7 +348,19 @@ public class ProjectController {
 			
 			
 		}
-		
+		UserVO vo=(UserVO)session.getAttribute("sessionUser");
+		if(vo!=null)
+		{
+			InterestVO inter=new InterestVO();
+			inter.setPrj_id(id);
+			inter.setUser_id(vo.getUser_id());
+			inter=projectDao.heartProject(inter);
+			
+			if(inter!=null)
+				model.addAttribute("heartCheck","yes");
+			else
+				model.addAttribute("heartCheck","no");
+		}
 		
 		
 		return "project/projectSelect";
@@ -445,11 +470,21 @@ public class ProjectController {
 	
 			return "admin/adminProject";
 		}
+		
 		@RequestMapping("/adminPrjDelete")
 		@ResponseBody
 		public void adminPrjDelete(ProjectVO vo)
 		{
 			projectDao.projectDelete(vo);
 		}
-	
+		@RequestMapping("/heartProjectInsert")
+		@ResponseBody
+		public void heartProjectInsert(InterestVO inter) {
+			interDao.projectHeartInsert(inter);
+		}
+		@RequestMapping("/heartProjectDelete")
+		@ResponseBody
+		public void heartProjectDelete(InterestVO inter) {
+			interDao.projectHeartDelete(inter);
+		}
 }

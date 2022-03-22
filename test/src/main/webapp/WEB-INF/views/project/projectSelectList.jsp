@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
 <style type="text/css">
 .name {
 	font-weight: bold;
@@ -125,7 +126,7 @@ input {
 				</form>
 			</aside>
 		</div>
-	</div>
+
 	<!-- 검색창 끝 -->
 	
 	<section class="blog_area section_padding">
@@ -152,13 +153,20 @@ input {
 						</div>
 					</div>
 				</div>
+				
 				<!-- 찌이이이임 -->
-				<div>
-					<c:if test="${!empty result.projects }">
-						<c:forEach items="${result.projects }" var="project">
+			
+		</div>
+					<c:if test="${!empty result.interest }">
+							<section class="testimonial_part section_padding">
+      							  <div class="container-fluid">
+                 		  			 <div class="textimonial_iner owl-carousel" style="margin-left: 0;">
+						<c:forEach items="${result.interest }" var="project">
 						<%-- ${result}<br>
 						<br>
 						${project}<br> --%>
+						<div class="testimonial_slider">
+							<div class="row">
 							<article class="blog_item">
 								<div class="blog_details">
 									<form class="form-contact contact_form" action="projectSelect"
@@ -172,7 +180,7 @@ input {
 													style="border: 0px; background-color: #576EF2; color: #ffffff;"
 													value="${project.prj_name}">
 												<p style="display: inline-block; float: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회수
-													: ${project.prj_hit}</p>
+													: ${project.prj_hit} </p>
 											</div>
 
 
@@ -237,6 +245,7 @@ input {
 													</c:if>
 													</c:forEach>
 												</div>
+											
 											</c:if>
 
 
@@ -282,19 +291,28 @@ input {
 													</div>
 												</div>
 											</c:if>
+											<img  name="heartbtn${project.prj_id}" id="heartbtn${project.prj_id}" class="heartbtn" onclick="heart(${project.prj_id})" alt="heart"  src="resources/main/img/unheart.png" style="float: right;width: 20%;display: none;">
+											<img   name="heartCancelbtn${project.prj_id}" id="heartCancelbtn${project.prj_id}" class="heartCancelbtn" onclick="heartCancel(${project.prj_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right;width: 20%">
+										
 										</div>
+											
 									</form>
 								</div>
 
-
+							
 							</article>
+							</div>
+							</div>
+							
 						</c:forEach>
-
+						</div>
+						</div>
+						</section>
 					</c:if>
 
-				</div>
+			
 				<!-- 찜끝 -->
-
+	<div class="row">
 				<div id="list">
 					<c:if test="${empty result.projects }">
 						<div class="col-lg-12 form-group">
@@ -429,6 +447,27 @@ input {
 												</div>
 											</div>
 										</c:if>
+										<c:choose>
+											<c:when test="${!empty result.interest }">
+												<c:forEach items="${result.interest }" var="inte">
+											
+													 <c:choose>
+														<c:when test="${inte.prj_id == project.prj_id }">
+															<img name="heartbtn${project.prj_id}" id="heartbtn${project.prj_id}" class="heartbtn" onclick="heart(${project.prj_id})" alt="heart"  src="resources/main/img/unheart.png" style="float: right;width: 20%;display: none;">
+														<img name="heartCancelbtn${project.prj_id}" id="heartCancelbtn${project.prj_id}" class="heartCancelbtn" onclick="heartCancel(${project.prj_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right;width: 20%">
+														</c:when>	
+														<c:otherwise>
+														<img name="heartbtn${project.prj_id}" id="heartbtn${project.prj_id}" class="heartbtn" onclick="heart(${project.prj_id})" alt="heart"  src="resources/main/img/unheart.png" style="float: right;width: 20%">
+														<img name="heartCancelbtn${project.prj_id}" id="heartCancelbtn${project.prj_id}" class="heartCancelbtn" onclick="heartCancel(${project.prj_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right;width: 20%;display: none;">
+														</c:otherwise>
+													</c:choose> 
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<img name="heartbtn${project.prj_id}" id="heartbtn${project.prj_id}" class="heartbtn" onclick="heart(${project.prj_id})" alt="heart"  src="resources/main/img/unheart.png" style="float: right;width: 20%">
+												<img name="heartCancelbtn${project.prj_id}" id="heartCancelbtn${project.prj_id}" class="heartCancelbtn" onclick="heartCancel(${project.prj_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right;width: 20%;display: none;">
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</form>
 							</div>
@@ -456,7 +495,7 @@ input {
 			</div>
 		</div>
 	</section>
-
+</div>
 	<script type="text/javascript">
 	function ajaxMorePage() {
 		
@@ -540,7 +579,43 @@ input {
 		})
 
 	}
-	
+	function heart(e) {
+      
+        $.ajax({
+          url: 'heartProjectInsert',
+          type: 'get',
+          data: {
+             user_id: ${sessionUser.user_id},
+             prj_id: e
+          },
+          success: function() {
+             toastr.success('찜하기 성공!');
+             $('img[name=heartbtn'+e+']').hide();
+              $('img[name=heartCancelbtn'+e+']').show();   
+          },
+          fail: function(err){
+        	
+          }
+       })
+       
+	}
+        
+        function heartCancel(e) {
+           $.ajax({
+              url: 'heartProjectDelete',
+              type: 'get',
+              data: {
+                 user_id: ${sessionUser.user_id},
+                 prj_id: e
+              }
+           }).done(function() {
+              toastr.success('찜하기 취소되었습니다.');
+             $('img[name=heartbtn'+e+']').show();
+             $('img[name=heartCancelbtn'+e+']').hide();
+             
+           })
+           
+        }
 	</script>
 
 <script src="resources/main/js/jquery.counterup.min.js"></script>

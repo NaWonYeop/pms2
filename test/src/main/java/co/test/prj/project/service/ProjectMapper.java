@@ -3,6 +3,7 @@ package co.test.prj.project.service;
 import java.util.List;
 
 import co.test.prj.board.service.BoardVO;
+import co.test.prj.interest.service.InterestVO;
 
 
 public interface ProjectMapper {
@@ -49,5 +50,9 @@ public interface ProjectMapper {
 	
 	//조회수
 	int projectHitUpdate(ProjectVO project);
+	
+	//프로젝트 찜리스트
+	List<ProjectVO> projectInterst(ProjectVO vo);
+	InterestVO heartProject(InterestVO vo);
 
 }

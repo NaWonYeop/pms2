@@ -239,5 +239,21 @@
 		SET prj_hit = prj_hit + 1 
 		WHERE prj_id = #{prj_id}
 	</update>
+	<select id="projectInterst" parameterType="co.test.prj.project.service.ProjectVO" resultType="co.test.prj.project.service.ProjectVO">
+		SELECT P.PRJ_ID,P.PRJ_NAME,P.PRJ_HIT,P.PRJ_FND_PROP,CTF_ST_NAME,PRJ_GL_PRC,PRJ_FND_STR,PRJ_FND_ED,PRJ_OFR_PROP,PRJ_AR,PRJ_CND,PRJ_FRN_PRS,PRJ_BK_PRS,PRJ_DB_PRS,PRJ_SER_PRS,PRJ_OFR_STR,PRJ_OFR_ED
+		FROM PROJECT P LEFT JOIN COMTNFILE C  ON(P.CTF_ID = C.CTF_ID),INTEREST I 
+		WHERE P.PRJ_ID=I.PRJ_ID AND I.USER_ID=#{master_id}
+		<choose>
+			<when test="type != null and type.equals('ofr')">
+				AND PRJ_OFR_PROP LIKE '1'
+			</when>
+			<when test="type != null and type.equals('fnd')">
+				AND PRJ_FND_PROP LIKE '1'
+			</when>
+		</choose>
+	</select>
 	
+	<select id="heartProject" parameterType="co.test.prj.interest.service.InterestVO" resultType="co.test.prj.interest.service.InterestVO">
+		SELECT * FROM INTEREST WHERE USER_ID = #{user_id} AND PRJ_ID = #{prj_id}
+	</select>
 </mapper>

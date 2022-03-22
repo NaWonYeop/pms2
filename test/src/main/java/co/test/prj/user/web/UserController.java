@@ -253,10 +253,8 @@ public class UserController {
 	public String insertdev(HttpSession session) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		user = userDao.userSelect(user);
-		if (user.getUser_job_ttl() != null) {
-			return "redirect:/home";
-			// 토스트 넣어야됨
-		}
+	
+		
 		return "user/insertDevForm";
 	}
 
