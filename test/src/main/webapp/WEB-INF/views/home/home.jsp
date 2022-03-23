@@ -28,6 +28,189 @@
 	}
 	
 	
+
+/*===== Vertical Timeline =====*/
+#conference-timeline {
+  position: relative;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+}
+#conference-timeline .timeline-start,
+#conference-timeline .timeline-end {
+  border-radius: 50px;
+  display: table;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #F27457;
+  padding: 15px 23px;
+  color: #fff;
+  max-width: 5%;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+#conference-timeline .conference-center-line {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -2px;
+  background: #F27457;
+  z-index: -1;
+}
+#conference-timeline .conference-timeline-content {
+  padding-top: 67px;
+  padding-bottom: 67px;
+}
+.timeline-article {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.timeline-article .content-left-container,
+.timeline-article .content-right-container {
+  max-width: 44%;
+  width: 100%;
+}
+.timeline-article .timeline-author {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #242424;
+  text-align: right;
+}
+.timeline-article .content-left,
+.timeline-article .content-right {
+  position: relative;
+  width: auto;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.03);
+  padding: 27px 25px;
+}
+.timeline-article p {
+  margin: 0 0 0 60px;
+  padding: 0;
+  font-weight: 400;
+  color: #242424;
+  font-size: 14px;
+  line-height: 24px;
+  position: relative;
+}
+.timeline-article p span.article-number {
+  position: absolute;
+  font-weight: 300;
+  font-size: 28px;
+  top: 10px;
+  left: -60px;
+  color: #F27457;
+}
+.timeline-article .content-left-container {
+  float: left;
+}
+.timeline-article .content-right-container {
+  float: right;
+}
+.timeline-article .content-left:before,
+.timeline-article .content-right:before{
+  position: absolute;
+  top: 20px;
+  font-size: 23px;
+  font-family: "FontAwesome";
+  color: #fff;
+}
+.timeline-article .content-left:before {
+  content: "\f0da";
+  right: -8px;
+}
+.timeline-article .content-right:before {
+  content: "\f0d9";
+  left: -8px;
+}
+.timeline-article .meta-date {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  margin-left: -31px;
+  color: #fff;
+  border-radius: 100%;
+  background: #F27457;
+}
+.timeline-article .meta-date .date,
+.timeline-article .meta-date .month {
+  display: block;
+  text-align: center;
+  font-weight: 900;
+}
+.timeline-article .meta-date .date {
+  font-size: 30px;
+  line-height: 40px;
+}
+.timeline-article .meta-date .month {
+  font-size: 18px;
+  line-height: 10px;
+}
+/*===== // Vertical Timeline =====*/
+
+/*===== Resonsive Vertical Timeline =====*/
+@media only screen and (max-width: 830px) {
+  #conference-timeline .timeline-start,
+  #conference-timeline .timeline-end {
+    margin: 0;
+  }
+  #conference-timeline .conference-center-line {
+    margin-left: 0;
+    left: 50px;
+  }
+  .timeline-article .meta-date {
+    margin-left: 0;
+    left: 20px;
+  }
+  .timeline-article .content-left-container,
+  .timeline-article .content-right-container {
+    max-width: 100%;
+    width: auto;
+    float: none;
+    margin-left: 110px;
+    min-height: 53px;
+  }
+  .timeline-article .content-left-container {
+    margin-bottom: 20px;
+  }
+  .timeline-article .content-left,
+  .timeline-article .content-right {
+    padding: 10px 25px;
+    min-height: 65px;
+  }
+  .timeline-article .content-left:before {
+    content: "\f0d9";
+    right: auto;
+    left: -8px;
+  }
+  .timeline-article .content-right:before {
+    display: none;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .timeline-article p {
+    margin: 0;
+  }
+  .timeline-article p span.article-number {
+    display: none;
+  }
+  
+}
+/*===== // Resonsive Vertical Timeline =====*/
+	
 </style>
 
 <body>
@@ -92,6 +275,147 @@
          </aside>
       </div>
    </div>
+   <!-- 검색끝 -->
+   
+   <!-- 가이드 시작 -->
+  <div class="container" style="margin-top: 5%;">
+	<div class="row">
+		<div class="col-lg-3" style="">
+			<div class="info" style="float: right; margin-top: 150px;">
+				<h1 style="font-size: 30px; float: right">How to use?</h1>
+				<h1 style="font-size: 60px; float: right; color: #F27457">프로젝트</h1><br>
+				<h1 style="font-size: 80px; float: right">시<br>작<br>하<br>기</h1>
+			</div>
+		</div>
+  		<div class="col-lg-9" style="background-color: #F5F7FF; border-radius: 20px;">
+  <section id="conference-timeline" style="margin-top: 3%; margin-bottom: 3%;">
+    <div class="timeline-start">Start</div>
+    <div class="conference-center-line"></div>
+    <div class="conference-timeline-content">
+      <!--------------------------------- 프로젝트 ----------------------------------->
+      <!-- Article -->
+      <div class="timeline-article">
+
+        <!-- 왼쪽 -->
+        <div class="content-left-container">
+          <div class="content-left" style="background-color: bluesky;">
+            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number" style="line-height: 30px; top: -5px;">프로<br>젝트</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div>
+
+        <!-- 오른쪽 -->
+        <!-- <div class="content-right-container">
+          <div class="content-right" style="background-color: bluesky;">
+            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number" style="line-height: 30px; top: -5px;">프로<br>젝트</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div>  -->
+        
+        <!-- 센터 -->
+        <div class="meta-date">
+          <span class="date" style="font-size: small;">Step</span>
+          <span class="month">1</span>
+        </div>
+      </div>
+      <!-- // Article -->
+      <!--------------------------------- 프로젝트끝 ----------------------------------->
+      
+      <!--------------------------------- 구직 ----------------------------------->
+      <!-- Article -->
+      <div class="timeline-article">
+
+        <!-- 왼쪽 -->
+        <!-- <div class="content-left-container">
+          <div class="content-left" style="background-color: bluesky;">
+            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number">구직</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div> -->
+
+        <!-- 오른쪽 -->
+        <div class="content-right-container">
+          <div class="content-right" style="background-color: bluesky;">
+            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number">구직</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div> 
+        
+        <!-- 센터 -->
+        <div class="meta-date">
+          <span class="date" style="font-size: small;">Step</span>
+          <span class="month">2</span>
+        </div>
+      </div>
+      <!-- // Article -->
+      <!--------------------------------- 구직끝 ----------------------------------->
+      
+      <!--------------------------------- 구인 ----------------------------------->
+      <!-- Article -->
+      <div class="timeline-article">
+
+        <!-- 왼쪽 -->
+        <div class="content-left-container">
+          <div class="content-left" style="background-color: bluesky;">
+            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number">구인</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div> 
+
+        <!-- 오른쪽 -->
+        <!-- <div class="content-right-container">
+          <div class="content-right" style="background-color: bluesky;">
+            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number">구인</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div> -->
+        
+        <!-- 센터 -->
+        <div class="meta-date">
+          <span class="date" style="font-size: small;">Step</span>
+          <span class="month">3</span>
+        </div>
+      </div>
+      <!-- // Article -->
+      <!--------------------------------- 구인끝 ----------------------------------->
+      
+      <!--------------------------------- 펀딩 ----------------------------------->
+      <!-- Article -->
+      <div class="timeline-article">
+
+        <!-- 왼쪽 -->
+       <!--  <div class="content-left-container">
+          <div class="content-left" style="background-color: bluesky;">
+            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number">펀딩</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div> -->
+
+        <!-- 오른쪽 -->
+        <div class="content-right-container">
+          <div class="content-right" style="background-color: bluesky;">
+            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number">펀딩</span></p>
+          </div>
+          <span class="timeline-author">John Doe</span>
+        </div> 
+        
+        <!-- 센터 -->
+        <div class="meta-date">
+          <span class="date" style="font-size: small;">Step</span>
+          <span class="month">4</span>
+        </div>
+      </div>
+      <!-- // Article -->
+      <!--------------------------------- 펀딩끝 ----------------------------------->
+      
+    </div>
+    <div class="timeline-end">End</div>
+  </section>
+  </div>
+  </div>
+  </div>
+   <!-- 가이드 끝 -->
+   
    <section class="blog_area section_padding" style="margin-top: 7%;">
       <div class="container">
          <div class="row">
