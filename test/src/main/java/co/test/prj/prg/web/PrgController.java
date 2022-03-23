@@ -173,7 +173,6 @@ public class PrgController {
 	@ResponseBody
 	public String allCheck(HttpSession session, PrgVO prg) {
 		MyPrjVO myPrj = (MyPrjVO) session.getAttribute("myPrj");
-		prg.setMaster_id(myPrj.getMaster_id());
 		prg.setPrj_id(myPrj.getPrj_id());
 		
 		String percent = prgDao.allCheck(prg);

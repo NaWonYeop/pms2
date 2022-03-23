@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.test.prj.pms.service.PmsMapper">
+
+	<select id="pmsTeamList"
+		resultType="co.test.prj.pms.service.PmsVO"
+		parameterType="co.test.prj.pms.service.PmsVO">
+		SELECT u.user_id, u.user_name, u.user_email, u.user_tel,
+		t.tm_pos,
+		t.tm_dept
+		FROM team t JOIN "user" u
+		ON t.user_id = u.user_id
+		WHERE prj_id = #{prj_id}
+	</select>
+
+	<select id="buyList"
+		resultType="co.test.prj.pms.service.ChartVO"
+		parameterType="co.test.prj.pms.service.ChartVO">
+		SELECT DISTINCT b.*, r.*, p.prj_gl_prc
+		FROM buy b JOIN reward r
+		ON b.prj_id = r.prj_id AND b.reward_id = r.reward_id, project p
+		WHERE b.prj_id = #{prj_id} and b.prj_id = p.prj_id
+		ORDER BY b.buy_date
+	</select>
+</mapper>

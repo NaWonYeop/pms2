@@ -122,7 +122,7 @@
 							<td>\${team.tm_pos}</td>
 							<td id="dept">\${team.tm_dept}</td>
 							<td>\${team.user_email}</td>
-							<td>\${team.user_tel}</td>
+							<td>0\${team.user_tel}</td>
 							<td><button id="deptUpdate" type="button" data-user_id="\${team.user_id}" data-prj_id="\${team.prj_id}" data-tm_pos="\${team.tm_pos}" data-tm_dept="\${team.tm_dept}">부서 수정</button></td>
 						</tr>`);
 				} else {
@@ -132,7 +132,7 @@
 							<td>\${team.tm_pos}</td>
 							<td id="dept">\${team.tm_dept}</td>
 							<td>\${team.user_email}</td>
-							<td>\${team.user_tel}</td>
+							<td>0\${team.user_tel}</td>
 						</tr>`);
 				}
 			};
