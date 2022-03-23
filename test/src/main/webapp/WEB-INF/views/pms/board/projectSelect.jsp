@@ -55,12 +55,7 @@
 							<div class="col-sm-4 text-center my-2 my-sm-0">
 								<!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
 							</div>
-							<ul class="social-icons">
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fab fa-behance"></i></a></li>
-							</ul>
+					
 						</div>
 						<div class="navigation-area">
 							
@@ -114,7 +109,7 @@
 					var date=result[i].rpl_reg_date;
 						
 						$(".comin").append(`
-								<div class="single-comment justify-content-between d-flex">
+								<div class="single-comment justify-content-between d-flex" id="reply\${result[i].rpl_id}">
 								<div class="user justify-content-between d-flex">
 									<div class="desc">
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
@@ -139,7 +134,7 @@
 			}).done(function(){$(".idd[name='${sessionUser.user_id}']").each(function(index,item){
 					console.log(item);
 					console.log($(item).attr('value'));
-					var obj="<a href='rplDelete?id="+$(item).attr('value')+"'>삭제<a>"
+					var obj="<a href='javascript:delrepl("+$(item).attr('value')+")'>삭제<a>"
 					
 					
 					$(item).append(obj)
@@ -147,7 +142,17 @@
 			
 			);//done끝
 		});//ajax끝
-		
+		function delrepl(id)
+		{
+			$('#reply'+id).remove();		
+			$.ajax({
+				url : "rplDelete",
+				type : "GET",
+				data : {
+					id : id
+				}})
+			
+		}
 		
 	</script>
 </body>
