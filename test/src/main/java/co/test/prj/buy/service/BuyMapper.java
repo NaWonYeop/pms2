@@ -9,4 +9,9 @@ public interface BuyMapper {
 	int buyInsert(BuyVO buy);
 	
 	int buyMaxId();
+	
+	int buyMaxCoinCount(int user_id);
+	
+	//리워드 환불
+	int buyRFund(BuyVO buy);
 }

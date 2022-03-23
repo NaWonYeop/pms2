@@ -29,5 +29,15 @@ public class BuyServiceImpl implements BuyService {
 		return map.buyMaxId();
 	}
 
+	@Override
+	public int buyMaxCoinCount(int user_id) {
+		return map.buyMaxCoinCount(user_id);
+	}
+
+	@Override
+	public int buyRFund(BuyVO buy) {
+		return map.buyRFund(buy);
+	}
+
 
 }

@@ -304,7 +304,7 @@ ${project}<br>
 		        			
         		</div>
         		
-        		
+        		<input type="hidden" id="buyMaxCoinCount" name="buyMaxCoinCount" value="${buyMaxCoinCount }">
         		<input type="hidden" id="user_id" name="user_id" value="${sessionScope.sessionUser.user_id }">
         		<input type="hidden" id="user_name" name="user_name" value="${sessionScope.sessionUser.user_name }">
         		<input type="hidden" id="user_email" name="user_email" value="${sessionScope.sessionUser.user_email }">
@@ -380,6 +380,7 @@ ${project}<br>
 	var rId;
 	var rName;
 	var rPrc;
+	var buyMaxCoinCount;
 	
 	function check(e)
       {
@@ -440,7 +441,10 @@ ${project}<br>
     			mAc = document.getElementById('masterAcc').value;
     			console.log("담당자 어카운트 : "+ mAc);
     			
-    			cId = parseInt(mId + today) ;
+    			buyMaxCoinCount = document.getElementById('buyMaxCoinCount').value;
+    			console.log("buyMaxCoinCount : "+ buyMaxCoinCount);
+    			
+    			cId = parseInt(mId + buyMaxCoinCount + today ) ;
     			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
           
     			$('#modalWei').html(rPay + " wei");
@@ -595,9 +599,12 @@ ${project}<br>
 					var dol = result.dol;
 					var etherDol = result.etherDol;
 					var etherWon = result.etherWon;
+					var bmccount = result.buyMaxCoinCount;
 					console.log("현금구입 달러시세 : " + dol);
 					console.log("1이더 달러시세 : " + etherDol);
 					console.log("1이더 원화시세 : " + etherWon);
+					console.log("buyMaxCoinCount : " + bmccount);
+					$("#buyMaxCoinCount").val(bmccount);
 					$("#dol").val(dol);
 					$("#etherDol").val(etherDol);
 					$("#etherWon").val(etherWon);

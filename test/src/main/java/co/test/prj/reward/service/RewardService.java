@@ -14,4 +14,6 @@ public interface RewardService {
 	int rewardCotUpdate(RewardVO reward);
 	
 	int rewardMaxCot(RewardVO reward);
+	
+	int rewardRFund(RewardVO reward);
 }

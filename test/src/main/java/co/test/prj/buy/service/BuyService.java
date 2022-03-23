@@ -9,4 +9,8 @@ public interface BuyService {
 	int buyInsert(BuyVO buy);
 	
 	int buyMaxId();
+	
+	int buyMaxCoinCount(int user_id);
+	
+	int buyRFund(BuyVO buy);
 }

@@ -15,6 +15,22 @@
 		SELECT NVL(MAX(BUY_ID) + 1, 1) AS ID FROM BUY
 	</select>
 
-
+	<select id="buyMaxCoinCount" resultType="int">
+		SELECT NVL(COUNT(BUY_ID)+1,1) AS MAXCOUNT
+		FROM BUY 
+		WHERE USER_ID = #{user_id}
+		AND BUY_WAY = 'coin'
+	</select>
+	
+	<update id="buyRFund" parameterType="co.test.prj.buy.service.BuyVO">
+		UPDATE BUY
+		<set>
+			BUY_STT = #{buy_stt},
+			BUY_RFND_DATE = sysdate,
+			<if test="buy_rfnd_won != null"> BUY_RFND_WON = #{buy_rfnd_won},</if>
+			<if test="buy_rfnd_wei != null"> BUY_RFND_WEI = #{buy_rfnd_wei},</if>
+		</set>
+		WHERE BUY_ID = #{buy_id}
+	</update>
 	
 </mapper>

@@ -17,5 +17,8 @@ public interface RewardMapper {
 	
 	//리워드 구매시 환불 카운트 확인
 	int rewardMaxCot(RewardVO reward);
+	
+	//리워드 환불
+	int rewardRFund(RewardVO reward);
 
 }

@@ -55,4 +55,9 @@ public class RewardServiceImpl implements RewardService {
 		return map.rewardMaxCot(reward);
 	}
 
+	@Override
+	public int rewardRFund(RewardVO reward) {
+		return map.rewardRFund(reward);
+	}
+
 }

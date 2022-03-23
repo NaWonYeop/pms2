@@ -36,5 +36,11 @@
 	<select id="rewardMaxCot" parameterType="co.test.prj.reward.service.RewardVO" resultType="int">
 		SELECT MAX(RWD_COT) AS count FROM REWARD where REWARD_ID = #{reward_id}
 	</select>
+	
+	<update id="rewardRFund" parameterType="co.test.prj.reward.service.RewardVO" >
+		UPDATE reward
+		SET RWD_COT = RWD_COT - #{rwd_cot}
+		WHERE REWARD_ID = #{reward_id}
+	</update>
 
 </mapper>

@@ -108,6 +108,7 @@ public class ProjectVO
 	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date buy_rfnd_date; //환불날짜 
-	private int buy_rfnd_prc; //환불금액
+	private int buy_rfnd_won; //환불금액
+	private long buy_rfnd_wei; //환불금액
 	
 }

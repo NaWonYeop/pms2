@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -28,6 +30,7 @@ import co.test.prj.buy.service.BuyService;
 import co.test.prj.buy.service.BuyVO;
 import co.test.prj.reward.service.RewardService;
 import co.test.prj.reward.service.RewardVO;
+import co.test.prj.user.service.UserVO;
 
 @Controller
 public class BuyController {
@@ -61,6 +64,28 @@ public class BuyController {
 		
 		return result;
 	}
+	
+	@PostMapping("/ajaxRFnd")
+	@ResponseBody
+	private int ajaxRFnd(@RequestBody BuyVO buy, RewardVO reward) {
+		System.out.println("환불했니?");
+		System.out.println("buy_id : "+ buy.getBuy_id());
+		System.out.println("reward_id : "+ buy.getReward_id());
+		
+		//buy 수정
+		buyDao.buyRFund(buy);
+		
+		//reward 수정
+		System.out.println("buy_count : "+ buy.getBuy_count());
+
+		reward.setReward_id(buy.getReward_id());
+		reward.setRwd_cot(buy.getBuy_count());
+		System.out.println("리워드 수정?");
+		int result = rewardDao.rewardRFund(reward);
+		
+		return result;
+	}
+	
 	
 //	//사용용도 변경예정
 //	@RequestMapping("/ajaxCoin")
@@ -108,7 +133,7 @@ public class BuyController {
 	
 	@RequestMapping("/ajaxSise")
 	@ResponseBody
-	private Map<String, Object> ajaxSise(){
+	private Map<String, Object> ajaxSise(HttpSession session){
 		System.out.println("시세시작");
 		Map<String, Object> map = new HashedMap();
 		
@@ -189,7 +214,11 @@ public class BuyController {
 		map.put("dol", cashWD);
 		map.put("etherDol", etherD);
 		map.put("etherWon", etherW);
-			
+		
+		UserVO vo =(UserVO)session.getAttribute("sessionUser");
+		int user_id= vo.getUser_id();
+		System.out.println("user_id : " + user_id);
+		map.put("buyMaxCoinCount", buyDao.buyMaxCoinCount(user_id));
 		return map;
 	}
 	

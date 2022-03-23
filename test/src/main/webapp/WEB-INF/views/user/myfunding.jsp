@@ -113,7 +113,7 @@
 								<ul class="blog-info-link">
 									<li>단가 : ${fun.rwd_prc } </li>
 									<li>구매 수량 : ${fun.buy_count } </li>
-									<li> ${fun.buy_way } </li>
+									<li id="bw${fun.buy_id }">${fun.buy_way }</li>
 								</ul>
 								<ul class="blog-info-link">
 									<li>
@@ -126,13 +126,14 @@
 										</c:if> 
 									</li>
 								</ul>
-								<input type="hidden" id="${fun.buy_id }" value="${fun.buy_id }">
+								<input type="hidden" id="r${fun.buy_id }" value="${fun.reward_id }">
+								<input type="hidden" id="bc${fun.buy_id }" value="${fun.buy_count }">
 								<input type="hidden" id="muID${fun.buy_id }" value="${fun.buy_muid }">
-								
+								<input type="hidden" id="stt${fun.buy_id }" value="${fun.buy_stt }">
 								
 								
 								<div class="col-sm-12 text-center" style="padding-left: 0px;">
-									<button type="button" class="button button-contactForm btn_1"
+									<button type="button" id="${fun.buy_id }" class="rfnd button button-contactForm btn_1"
 										style="width: 100%; font-family: 'MinSans-Medium';">환불</button>
 								</div>
 							</div>
@@ -143,6 +144,213 @@
             </div>
         </div>
     </section>
+    <div class="modal__background">
+		<div class="modaldal content">
+			<div class="content modalcontent">
+				<div class="justify-content-center">
+					<h2 class="content title" style="text-align: center;">환불 확인</h2>
+					<a class="content pay" id="modalPay"></a>
+				</div>
+			</div>
+			<button type="button" class="btn_4 modalInbtn" onclick="request()">환불</button>
+			<button type="button" class="btn_4 ">취소</button>	
+		</div>
+	</div>
+	
+	<input type="hidden" id="ether_id" name="ether_id" value="${sessionScope.sessionUser.ether_id }">
+	
+	<script type="text/javascript">
+	var muId; //cId
+	var uAc;
+	var bId;
+	var bStt;
+	var bWay;
+	var rId;
+	var bPay; //won, wei
+	var bCnt;
+	
+	function check(e)
+    {
+       if(!$(e.target).hasClass("content")
+        		&& !$(e.target).hasClass("modalInbtn") //신청하기버튼
+              && !$(e.target).hasClass("rfnd") 
+              && !$(e.target).hasClass("current")) {
+            $('.modaldal').fadeOut();
+            $('.modal__background').fadeOut();
+          
+        }
+    }
+    $('html').click(function(e){
+        console.log(e.target);
+        check(e);
+    });
+    $('.rfnd').click(function(e){
+    $('.modaldal').fadeIn();
+    $('.modal__background').fadeIn();
+        
+        //환불 클릭
+  			console.log('환불 클릭');
+  			
+       
+        
+  			uAc = document.getElementById('ether_id').value;
+  			console.log("구매자 이더리움 어카운트 : "+ uAc);
+  			bId = $(".rfnd").prevObject.context.activeElement.id;
+  			console.log("구매 아이디 : "+ bId);
+  			muId = document.getElementById('muID'+bId).value;
+  			console.log("구매 코드 : "+ muId);
+  			bStt = document.getElementById('stt'+bId).value;
+  			console.log("구매 상태 : "+ bStt);
+  	  		rId = document.getElementById('r'+bId).value;
+  	  		console.log("리워드 아이디 : "+ rId);
+  	  		bCnt = document.getElementById('bc'+bId).value;
+  	  		console.log("구매 수량 : "+ bCnt);
+  			bWay = document.getElementById('bw'+bId).textContent;
+  	  		console.log("구매 방법 : "+ bWay);
+  	  		
+  	  		if(bWay == 'cash'){
+	  	  		bPay = document.getElementById('pay'+bId).textContent;
+	  	  		console.log("원화 가격 : "+ bPay);
+	  	  		
+	  			$('#modalPay').html(bPay + " won");
+  	  			
+  	  		} else {
+	  	  		bPay = document.getElementById('pay'+bId).textContent;
+	  	  		console.log("웨이 가격 : "+ bPay);
+	  	  		
+	  			$('#modalPay').html(bPay + " wei");
+  	  		}
+  	  		
+
+ 
+    });
+    
+    
+    function request() {
+    	//debugger;
+			console.log("환불시작");
+			
+			if(bWay == 'cash'){
+			//현금 환불시
+			console.log("현금 환불 시");
+			
+			var save ={
+					"buy_id" : bId,
+					"buy_stt" : "환불",
+					"reward_id" : rId,
+					"buy_count" : bCnt,
+					"buy_rfnd_won" : bPay,
+					"buy_rfnd_wei" : 0,
+						
+				}
+			
+				
+			 $.ajax({
+				url : 'ajaxRFnd', 
+		        type :'POST',
+		        data : JSON.stringify(save,
+		        		['buy_id','buy_stt', 'reward_id', 
+		        		'buy_count', 'buy_rfnd_won', 'buy_rfnd_wei']),
+		        contentType:'application/json;charset=utf-8',
+		        dataType: 'json', //서버에서 보내줄 데이터 타입
+		        success: function(res){
+		        			        	
+		          if(res == 1){
+					 console.log("환불");	
+			           
+		          }else{
+		             console.log("환불 Fail!!!");
+		          } 
+		          
+		          location.reload();
+		        },
+		        error:function(){
+		          console.log("환불 ajax 통신 실패!!!");
+		        }
+			}) //ajax  
+			
+			
+			
+			
+			} else {
+			//코인 환불시
+			console.log("코인 환불 시");	
+			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
+			solidityRewardFnc.methods
+			.refund(muId)
+			.send({from: uAc, })
+			.then(function(result){
+				
+				console.log(result);
+			
+			
+				var save ={
+						"buy_id" : bId,
+						"buy_stt" : "환불",
+						"reward_id" : rId,
+						"buy_count" : bCnt,
+						"buy_rfnd_won" : 0,
+						"buy_rfnd_wei" : bPay,
+							
+					}
+				
+					
+				 $.ajax({
+					url : 'ajaxRFnd', 
+			        type :'POST',
+			        data : JSON.stringify(save,
+			        		['buy_id','buy_stt', 'reward_id', 
+			        		'buy_count', 'buy_rfnd_won', 'buy_rfnd_wei']),
+			        contentType:'application/json;charset=utf-8',
+			        dataType: 'json', //서버에서 보내줄 데이터 타입
+			        success: function(res){
+			        			        	
+			          if(res == 1){
+						 console.log("환불");	
+				           
+			          }else{
+			             console.log("환불 Fail!!!");
+			          } 
+			          
+			          location.reload();
+			        },
+			        error:function(){
+			          console.log("환불 ajax 통신 실패!!!");
+			        }
+				}) //ajax  
+				
+	
+			}); 
+			
+			
+			}
+			
+		}
+	
+	 toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-top-center",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "1000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}    
+	
+	
+	
+	
+	
+	</script>
+    
  <script src="resources/main/js/jquery.counterup.min.js"></script>
 <script src="resources/main/js/custom.js"></script>
    
