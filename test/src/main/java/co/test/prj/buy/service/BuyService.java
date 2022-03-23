@@ -13,4 +13,9 @@ public interface BuyService {
 	int buyMaxCoinCount(int user_id);
 	
 	int buyRFund(BuyVO buy);
+	
+	List<BuyVO> buyDataList(int prj_id);
+	int buySumWon(int prj_id);
+	long buySumWei(int prj_id);
+	int buySttChange(BuyVO buy);
 }

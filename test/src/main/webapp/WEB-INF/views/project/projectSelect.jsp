@@ -748,7 +748,7 @@ ${project}<br>
 			});//pay
 		}); //check1 클릭 이벤트
 		 
-		
+/* 		
 		
 		//환불은 다른데서 사용할것
 		$("#check2").click(function(e){
@@ -777,7 +777,7 @@ ${project}<br>
 			} else{
 				console.log("환불 실패 : 남은 결제권 환불 불가");
 			}
-		}); //check2 클릭
+		}); //check2 클릭 */
 		function heart() {
 	       
 	        $.ajax({

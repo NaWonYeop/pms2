@@ -39,5 +39,30 @@ public class BuyServiceImpl implements BuyService {
 		return map.buyRFund(buy);
 	}
 
+	@Override
+	public List<BuyVO> buyDataList(int prj_id) {
+		return map.buyDataList(prj_id);
+	}
+
+	@Override
+	public int buySumWon(int prj_id) {
+		return map.buySumWon(prj_id);
+	}
+	
+	@Override
+	public long buySumWei(int prj_id) {
+		return map.buySumWei(prj_id);
+	}
+	
+	@Override
+	public int buySttChange(BuyVO buy) {
+		return map.buySttChange(buy);
+	}
+
+	
+
+
+	
+
 
 }

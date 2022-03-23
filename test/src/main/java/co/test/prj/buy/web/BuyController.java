@@ -227,7 +227,24 @@ public class BuyController {
 //		model.addAttribute("buys", buyDao.buySelectList());
 //		return "buy/buySelectList";
 //	}
-
 	
+	 @RequestMapping("/ajaxBuyData")
+	 @ResponseBody
+	 private Map<String, Object> ajaxBuyData( @RequestParam("prj_id") int pId){
+			System.out.println("ajaxBuyData시작");
+			System.out.println("prj_id : " + pId);
+
+			Map<String, Object> map = new HashedMap();
+			
+			
+			map.put("buys", buyDao.buyDataList(pId));
+			map.put("sumWon", buyDao.buySumWon(pId));
+			map.put("sumWei", buyDao.buySumWei(pId));
+
+			
+			return map;
+	 }
+	 
+	 
 
 }

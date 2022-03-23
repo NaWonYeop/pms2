@@ -14,4 +14,11 @@ public interface BuyMapper {
 	
 	//리워드 환불
 	int buyRFund(BuyVO buy);
+	
+	//정산용
+	List<BuyVO> buyDataList(int prj_id);
+	int buySumWon(int prj_id);
+	long buySumWei(int prj_id);
+	int buySttChange(BuyVO buy);
+	
 }

@@ -33,4 +33,31 @@
 		WHERE BUY_ID = #{buy_id}
 	</update>
 	
+	<select id="buyDataList" resultType="co.test.prj.buy.service.BuyVO">
+		SELECT * 
+		FROM BUY
+		WHERE PRJ_ID = #{PRJ_ID}
+		AND BUY_STT = '보관'
+	</select>
+	
+	<select id="buySumWon" resultType="int">
+		SELECT SUM(BUY_WON)
+		FROM BUY
+		WHERE PRJ_ID = #{PRJ_ID}
+		AND NOT BUY_STT = '환불'
+	</select>
+	
+	<select id="buySumWei" resultType="long">
+		SELECT SUM(BUY_WEI)
+		FROM BUY
+		WHERE PRJ_ID = #{PRJ_ID}
+		AND NOT BUY_STT = '환불'
+	</select>
+	
+	<update id="buySttChange" parameterType="co.test.prj.buy.service.BuyVO">
+		UPDATE BUY
+		SET BUY_STT = #{buy_stt}
+		WHERE BUY_ID = #{buy_id}
+	</update>
+	
 </mapper>
