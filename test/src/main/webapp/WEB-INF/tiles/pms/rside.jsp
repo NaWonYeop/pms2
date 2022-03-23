@@ -38,37 +38,13 @@
 		});
 	});
 
-	
-
-	<%-- 
-	$.ajax({
-		url : "myProjectList",
-		type : "GET",
-		dataType : "json",
-		async : false
-	}).done(function(json) {
-		for(team of json) {
-			$("#mySelect").append(`
-					<option id="mst\${team.prj_id}" data-master_id="\${team.master_id}" value="\${team.prj_id}"  data-prj_id="\${team.prj_id}" data-prj_name="\${team.prj_name}">\${team.prj_name}</option>
-			`);
-		};
-		var myPrj = <%=(MyPrjVO)session.getAttribute("myPrj")%>
-		if(myPrj == null) {
-			$("#nav").css("display", "none");
-		}
-	}).fail(function(xhr, status, message) {
-		alert("프로젝트 리스트 출력 실패");
-	}); --%>
-	
 	// rside select id = mySelect, button = myBtn, option id = mst
 	
 	$("#selectDiv").on("change", function () { 
 		var prj_id = $(this).find("option:selected").data("prj_id");
 		var master_id = $(this).find("option:selected").data("master_id");
 		var prj_name = $(this).find("option:selected").data("prj_name");
-		console.log(prj_id);
-		console.log(master_id);
-		console.log(prj_name);
+		$("#prj_id").val(prj_id);
 		$.ajax({
 			url : "myPrj",
 			type : "GET",
@@ -86,6 +62,8 @@
 			$("#right-sidebar").attr("class", "settings-panel");
 			$("#title").html(" "+prj_name);
 			$("#nav").css("display", "block");
+			pmsTeamList();
+			writeChart();
 		}).fail(function(xhr, status, message) {
 			alert("프로젝트 선택실패");
 		});
