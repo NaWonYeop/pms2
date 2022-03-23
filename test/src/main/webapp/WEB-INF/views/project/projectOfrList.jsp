@@ -62,6 +62,7 @@ button {
 
 .memberList {
 	border-radius: 10px;
+	margin-bottom: 1.5%;
 }
 </style>
 </head>
@@ -84,7 +85,7 @@ button {
 	</section>
 
 	<section class="special_cource padding_top"
-		style="padding-top: 0; margin-bottom: 10%;">
+		style="padding-top: 0; margin-bottom: 10%; margin-top: 7%;">
 		<div class="container">
 			<h1>${prj_name.prj_name }</h1>
 			<div class="row justify-content-center">

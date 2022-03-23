@@ -39,10 +39,10 @@
 		</div>
 	</section>
 	<br>
-	<div class="container">
+	<div class="container" style="margin-top: 5%; margin-bottom: 15%">
 		<div class="row">
 			<div class="col-12">
-                <h2 class="contact-title">등록하기</h2>
+                <h2 class="contact-title" style="font-size: font-size: 40px !important;">등록하기</h2>
             </div>
             <div class="col-lg-8">
 				<form class="form-contact contact_form" action="projectInsert" onsubmit="return check()" method="post" enctype="multipart/form-data">

@@ -32,7 +32,6 @@ body {
 	width: 100%;
 	height: 100%;
 	margin: 0;
-	padding-top: 200px;
 	padding-bottom: 40px;
 	font-family: 'TmoneyRoundWindRegular';
 	background-repeat: no-repeat;
@@ -95,15 +94,41 @@ a {
 	margin-top: 5%;
 	font-family: 'TmoneyRoundWindExtraBold';
 }
+.breadcrumb_bg {
+    background-color: #576EF2;
+
+}
+
+.align-middle {
+		margin-top: 15%;
+		margin-bottom: 15%;
+	
+}
+    
 </style>
 </head>
-
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2 style="float: right;">DEVELOPER</h2>
+						</div>
+					</div>
+					<div>
+						<h4 style="float: right; color: #fff">개발자 정보 변경</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
 	width="100%" height="100%" align="center">
 
 	<div class="card align-middle" style="width: 25rem;">
 		<div class="card-title">
-			<h2>개발자 정보변경</h2>
+			<h2 style="color: #0c2e60;">정보를 변경하세요.</h2>
 		</div>
 		<form action="devUpdate" onsubmit="return formCheck()"
 			method="post" enctype="multipart/form-data">

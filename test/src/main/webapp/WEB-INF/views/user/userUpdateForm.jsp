@@ -21,15 +21,7 @@ html {
 	height: 100%;
 }
 
-body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding-top: 200px;
-	padding-bottom: 40px;
-	font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-	background-repeat: no-repeat;
-}
+
 
 .card {
 	margin: 0 auto; /* Added */
@@ -78,24 +70,45 @@ a {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
-	width="100%" height="100%" align="center">
+<body>
+	<section class="breadcrumb breadcrumb_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb_iner text-center">
+						<div class="breadcrumb_iner_item">
+							<h2 style="float: right;">MY INFO</h2>
+						</div>
+					</div>
+						<div >
+							<h4 style="float: right; color: #fff">개인 정보 수정</h4>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-	<div class="card align-middle" style="width: 25rem;">
+	<div class="card align-middle" style="margin-top: 15%; margin-bottom: 15%; width: 30%">
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<form action="userUpdate" method="post" onsubmit="return formCheck()">
-			<h4 style="text-align: center;">개인정보 수정</h4>
+			<h2 style="text-align: center;">개인정보 수정</h2>
 			<div class="card-body">
+				<label>비밀번호</label>
 				<input type="password" name="user_pwd" id="user_pwd"
 					class="form-control" placeholder="8자리부터 16자리까지 특수문자 포함시켜주세요" required="required"><br>
+				<label>비밀번호 확인</label>
 				<input type="password" name="pw1" id="pw1" class="form-control"
-					placeholder="비밀번호 확인"><br> <input type="text"
+					placeholder="비밀번호 확인"><br>
+				<label>이름</label>
+				<input type="text"
 					name="user_name" id="user_name" class="form-control"
 					placeholder="이름" required="required"
 					value="${sessionUser.user_name}"><br>
+				<label>전화번호</label>
 				<input type="text" name="user_tel" id="user_tel"
 					class="form-control" placeholder="새로운 전화번호" required="required"
 					maxlength="11" value="${sessionUser.user_tel }"><br> 
+					<label>이더리움 아이디</label>
 					<input type="text" name="ether_id" id="ether_id"
 					class="form-control" required="required"
 					value="${sessionUser.ether_id }"><br> 
