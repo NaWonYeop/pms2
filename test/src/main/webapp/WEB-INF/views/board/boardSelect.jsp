@@ -202,7 +202,6 @@
 				data : {
 					id : id
 				}})
-			console.log('여기까지옴');
 			
 		}
 	</script>

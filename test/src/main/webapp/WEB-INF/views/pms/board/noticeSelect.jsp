@@ -111,7 +111,7 @@
 					var date=result[i].rpl_reg_date;
 						
 						$(".comin").append(`
-								<div class="single-comment justify-content-between d-flex">
+								<div class="single-comment justify-content-between d-flex" id="reply\${result[i].rpl_id}">
 								<div class="user justify-content-between d-flex">
 									<div class="desc">
 										<h2 class="comment comcntin">\${result[i].rpl_cnt}</h2>
@@ -136,7 +136,7 @@
 			}).done(function(){$(".idd[name='${sessionUser.user_id}']").each(function(index,item){
 					console.log(item);
 					console.log($(item).attr('value'));
-					var obj="<a href='rplDelete?id="+$(item).attr('value')+"'>삭제<a>"
+					var obj="<a href='javascript:delrepl("+$(item).attr('value')+")'>삭제<a>"
 					
 					
 					$(item).append(obj)
@@ -144,7 +144,17 @@
 			
 			);//done끝
 		});//ajax끝
-		
+		function delrepl(id)
+		{
+			$('#reply'+id).remove();		
+			$.ajax({
+				url : "rplDelete",
+				type : "GET",
+				data : {
+					id : id
+				}})
+			
+		}
 		
 	</script>
 </body>
