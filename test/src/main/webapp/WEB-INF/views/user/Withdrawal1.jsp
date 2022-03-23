@@ -18,12 +18,12 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>회원탈퇴</h2>
-							<p>
-								Home<span>/</span>Courses
-							</p>
+							<h2 style="float: right;">DELETE MEMBERSHIP</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">회원탈퇴</h4>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -32,12 +32,12 @@
 
 	<!-- ================ 바디부분 ================= -->
 	<section class="contact-section section_padding">
-		<div class="container">
+		<div class="container" style="margin-top: 15%; margin-bottom: 15%">
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
 
-						<h2>회원탈퇴</h2>
+						<h2>비밀번호를 입력하세요.</h2>
 					</div>
 				</div>
 			</div>

@@ -24,12 +24,12 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>마이페이지</h2>
-							<p>
-								Home<span>/</span>Courses
-							</p>
+							<h2 style="float: right;">MY PAGE</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">나의 페이지</h4>
+						</div>
 				</div>
 			</div>
 		</div>

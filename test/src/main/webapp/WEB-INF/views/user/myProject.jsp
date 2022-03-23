@@ -13,7 +13,19 @@
 		font-family: 'TmoneyRoundWindRegular';
 	}
 	
+	.finishbtn {
+		width: 7%; 
+		text-align: center; 
+		color: #F20C36;
+		border-radius: 10px;
+	}
 	
+	.ingbtn {
+		width: 7%;
+		text-align: center; 
+		color: #03A62C;
+		border-radius: 10px;
+	}
 </style>
 </head>
 <body>
@@ -23,19 +35,19 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>구..직 상세</h2>
-							<p>
-								Home<span>/</span>Course Details
-							</p>
+							<h2 style="float: right;">MY PROJECT</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">나의 프로젝트</h4>
+						</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="contact-section section_padding">
+	<section class="contact-section section_padding" style="margin-top: 7%;">
 		<div class="container">
-		<div class="row col-12">
+		<div class="row col-12" style="margin-bottom: 2%;">
 			<div class="col-10" style="display: inline-block;">
 				<h2>내 프로젝트 리스트</h2>
 			</div>
@@ -55,7 +67,7 @@
 							<div class="visit" style="margin-left: 14px;">프로젝트명</div>
 							<div class="country" style="margin-right: 14px;">기간</div>
 							<div class="visit" style="margin-right: 14px; text-align: center; display: grid;">총 참여인원</div>
-							<div class="visit" style="margin-right: 14px; text-align: center; display: grid;">상태</div>
+							<div class="visit" style=" text-align: center; display: grid;">상태</div>
 							<div class="visit" style="margin-right: 14px; text-align: center; display: grid;">구인현황</div>
 							<div class="visit" style="margin-right: 14px; text-align: center; display: grid;">평가</div>
 
@@ -72,16 +84,18 @@
 									<fmt:formatDate value="${myp.prj_ed }" pattern="yyyy/MM/dd" />
 								</div>
 								<div class="visit" style="margin-right: 14px; text-align: center; display: grid;">${myp.count }명</div>
-								<div class="visit" style="margin-right: 14px; text-align: center; display: grid;">
+								
 									<c:choose>
 										<c:when test="${myp.prj_devEd_prop eq 0 }">
-                            		진행중
+										<div class="visit ingbtn" style=" display: grid; ">
+                            			진행중</div>
                             	</c:when>
 										<c:otherwise>
-                            		종료
+										<div class="visit finishbtn" style=" display: grid;">
+                            			종료</div>
                             	</c:otherwise>
 									</c:choose>
-								</div>
+								
 								<div class="visit" style="margin-right: 14px; text-align: center; display: inline;">
 									<button class="button button-contactForm btn_1" onclick="location.href='projectOfrList?prj_id=${myp.prj_id}'">현황</button>
 								</div>
@@ -115,41 +129,43 @@
 			<div class="col-12">
 				<div class="progress-table">
 					<div class="progress-table">
-						<div class="table-head ">
+						<div class="table-head " style="margin-left: 6%">
 							<!-- <div class="serial"></div> -->
-							<div class="visit">프로젝트명</div>
-							<div class="country">기간</div>
-							<div class="visit">총 참여인원</div>
-							<div class="visit">책임자</div>
-							<div class="visit">연락처</div>
-							<div class="visit">상태</div>
-							<div class="visit">평점</div>
+							<div class="visit"  style="width: 13%">프로젝트명</div>
+							<div class="country" style="width: 24%">기간</div>
+							<div class="visit" style="width: 11%; text-align: center; display: block; margin-right: 2%;">총 참여인원</div>
+							<div class="visit" style="width: 17%">책임자</div>
+							<div class="visit" style="width: 15%">연락처</div>
+							<div class="visit" style="width: 7%; text-align: center; display: block;">상태</div>
+							<div class="visit" style="width: 7%; text-align: center; display: block;">평점</div>
 
 						</div>
 						
 						<c:forEach items="${enterProject}" var="enter">
-							<div class="table-row ">
+							<div class="table-row " style="margin-left: 6%">
 								<!-- <div class="serial"></div> -->
-								<div class="visit ">${enter.prj_name }</div>
-								<div class="country">
+								<div class="visit " style="width: 13%">${enter.prj_name }</div>
+								<div class="country" style="width: 24%">
 									<fmt:formatDate value="${enter.prj_str }" pattern="yyyy/MM/dd" />
 									~
 									<fmt:formatDate value="${enter.prj_ed }" pattern="yyyy/MM/dd" />
 								</div>
-								<div class="visit">${enter.count }명</div>
-								<div class="visit">${enter.user_name }</div>
-								<div class="visit">${enter.user_tel }</div>
-								<div class="visit">
+								<div class="visit" style="width: 11%; text-align: center; display: block; margin-right: 2%;">${enter.count }명</div>
+								<div class="visit" style="width: 17%">${enter.user_name }</div>
+								<div class="visit" style="width: 15%">0${enter.user_tel }</div>
+								
 								<c:choose>
 									<c:when test="${enter.prj_devEd_prop eq 0 }">
-                            		진행중
+									<div class="visit ingbtn" style="display: block; width: 7%;">
+                            		진행중</div>
                             		</c:when>
 									<c:otherwise>
-                            		종료
+									<div class="visit finishbtn" style="display: block; width: 7%;">
+                            		종료</div>
                             		</c:otherwise>
 								</c:choose>
-								</div>
-								<div class="visit">4.0</div>
+								
+								<div class="visit" style="width: 7%; text-align: center; display: block;">4.0</div>
 							</div>
 						</c:forEach>
 					</div>

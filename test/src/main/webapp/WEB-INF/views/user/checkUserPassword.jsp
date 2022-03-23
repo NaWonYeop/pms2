@@ -13,11 +13,11 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">비밀번호 확인하기</h2>
+							<h2 style="float: right;">PASSWORD CHECK</h2>
 						</div>
 					</div>
 						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+							<h4 style="float: right; color: #fff">비밀번호 확인</h4>
 						</div>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 
 	<!-- ================ 바디부분 ================= -->
 	<section class="contact-section section_padding">
-		<div class="container">
+		<div class="container" style="margin-top: 15%; margin-bottom: 15%">
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">

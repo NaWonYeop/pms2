@@ -92,7 +92,7 @@
          </aside>
       </div>
    </div>
-   <section class="blog_area section_padding">
+   <section class="blog_area section_padding" style="margin-top: 7%;">
       <div class="container">
          <div class="row">
             <!--project-->

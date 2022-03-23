@@ -60,13 +60,13 @@ input:hover, input:focus {
 
 /* line 18, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 .section_padding {
-  padding: 140px 0px;
+  padding: 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 18, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
   .section_padding {
-    padding: 80px 0px;
+    padding: 0px 0px;
   }
 }
 
@@ -126,7 +126,7 @@ input:hover, input:focus {
 
 /* line 48, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 .padding_top {
-  padding-top: 140px;
+  padding-top: 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -246,7 +246,7 @@ a:focus, .button:focus, button:focus, .btn:focus {
 
 /* line 126, E:/172 Etrain Education/172_Etrain_Education_html/sass/_common.scss */
 .section_tittle {
-  margin-bottom: 110px;
+  margin-bottom: 70px;
 }
 
 @media (max-width: 576px) {
@@ -4696,7 +4696,7 @@ ul {
 /* line 150, E:/172 Etrain Education/172_Etrain_Education_html/sass/_testimonial_part.scss */
 .testimonial_part .testimonial_slider p {
   font-size: 15px;
-  font-style: italic;
+  
 }
 
 /* line 157, E:/172 Etrain Education/172_Etrain_Education_html/sass/_testimonial_part.scss */
@@ -6751,7 +6751,7 @@ h1, h2, h3, h4, h5, h6 {
 /*=================== contact form start ====================*/
 /* line 39, E:/172 Etrain Education/172_Etrain_Education_html/sass/_contact.scss */
 .contact-title {
-  font-size: 27px;
+  font-size: 40px;
   font-weight: 600;
   margin-bottom: 20px;
 }

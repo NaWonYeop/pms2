@@ -38,6 +38,17 @@ thead {
 .table.dataTable.no-footer {
 	border-bottom: 0;
 }
+
+a {
+	background: #fff !important;
+	border: 0 !important;
+}
+
+.paginate_button:hover {
+	background-color: #798BF2 !important;
+	color: #fff !important;
+	border-radius: 7px !important;
+}
 </style>
 </head>
 <body>
@@ -47,11 +58,11 @@ thead {
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">게시판</h2>
+							<h2 style="float: right;">NOTICE</h2>
 						</div>
 					</div>
 					<div>
-						<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+						<h4 style="float: right; color: #fff">공지사항</h4>
 					</div>
 				</div>
 			</div>
@@ -61,7 +72,7 @@ thead {
 
 	<!--::review_part start::-->
 	<section class="special_cource padding_top">
-		<div class="container">
+		<div class="container" style="margin-top: 7%; margin-bottom: 15%;">
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">

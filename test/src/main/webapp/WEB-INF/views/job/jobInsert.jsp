@@ -34,7 +34,7 @@
 			</div>
 		</div>
 	</section>
-	<div class="container">
+	<div class="container" style="margin-top: 5%; margin-bottom: 15%">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="contact-title">${updateLoadCheck eq 'jobMain' ? '등록 및 수정하기' : '수정하기' }</h2>

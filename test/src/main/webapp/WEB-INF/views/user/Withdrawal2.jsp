@@ -7,11 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#checkWithdraw {
-	position: relative;
-	top: 100px;
-	left: 25%;
-}
+
 </style>
 </head>
 <body>
@@ -36,7 +32,7 @@
 
 	<!-- ================ 바디부분 ================= -->
 	<section class="contact-section section_padding">
-		<div class="container">
+		<div class="container" style="margin-top: 5%;">
 
 
 
@@ -101,25 +97,26 @@
 
 			</div>
 		</div>
-		<div class="col-lg-6" id="checkWithdraw">
+		<div class="col-lg-12" id="checkWithdraw">
 			<form class="form-contact contact_form" action="myWithdrawa3"
 				onsubmit="return checkbox()" method="post" id="contactForm"
-				novalidate="novalidate">
-				<div class="row justify-content-center">
+				novalidate="novalidate" style="margin-top: 7%; margin-bottom: 15%;">
+				<div class="row justify-content-center" style="margin-bottom: 2%;">
 					<h4>회원탈퇴에 동의합니다</h4>
 					<div class="confirm-checkbox"
-						style="border: 1px solid black; margin-right: 0px;">
+						style="border: 1px solid black; margin: 10px;">
 
 						<input type="checkbox" id="confirm-checkbox"> <label
 							for="confirm-checkbox"></label>
 					</div>
+					
 				</div>
 				<div class="col-sm-12 text-center">
-					<button type="submit" class="button button-contactForm btn_1 w-50">탈퇴</button>
+					<button type="submit" class="button button-contactForm btn_1 " style="width: 35%; margin-bottom: 1%; border-radius: 10px;">탈퇴</button><br>
+					<input type="reset" id="btn-Yes" value="취 소" class="button button-contactForm btn_1 "
+						 onclick="cancel()" style="background-color: #F27457; background-image: none; width: 35%; border-radius: 10px;">
 				</div>
 				<br>
-				<input type="reset" id="btn-Yes" value="취 소" class="button button-contactForm btn_1 w-50"
-					 onclick="cancel()" style="position: relative; left: 25%;">
 			</form>
 		</div>
 

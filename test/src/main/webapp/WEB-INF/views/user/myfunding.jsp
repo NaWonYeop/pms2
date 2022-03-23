@@ -7,17 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-@font-face {
-	font-family: 'MinSans-Medium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 
 .blog_details {
 	background-color: #F5F7FF;
+}
+
+ul {
+    margin-bottom: 3%;
 }
 
 /* modal css*/
@@ -64,12 +60,12 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2>구..직 상세</h2>
-							<p>
-								Home<span>/</span>Course Details
-							</p>
+							<h2 style="float: right;">MY FUNDING</h2>
 						</div>
 					</div>
+						<div >
+							<h4 style="float: right; color: #fff">나의 펀딩</h4>
+						</div>
 				</div>
 			</div>
 		</div>
@@ -78,7 +74,7 @@
 
     <!-- ================ 바디부분 ================= -->
     <section class="contact-section section_padding">
-        <div class="container">
+        <div class="container" style="margin-top: 7%; margin-bottom: 15%">
 
 
 
@@ -92,7 +88,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${ funding}" var="fun">
-							<div class="blog_details col-4" style="display: inline-block; margin-bottom: 2%; ">
+							<div class="blog_details col-3" style="display: inline-block; margin-bottom: 2%; margin-right: 6%;">
 								<div class="blog_item_img">
 
 									<img class="card-img rounded-0"
@@ -100,22 +96,26 @@
 										alt="사진이 없습니다.">
 
 								</div>
-								<div class="col-lg-12" style="margin-top: 5%;">
-								<a class="d-inline-block" href="projectSelect?prj_id=${fun.prj_id }">
-									<h3 style="font-weight: bold; font-family: 'MinSans-Medium';">${fun.prj_name }</h3>
-
+								<div class="col-lg-12" style="margin-top: 5%; text-align: center;">
+								<a class="d-inline-block" href="projectSelect?prj_id=${fun.prj_id }" style=" margin-bottom: 7%;">
+									<h3 style="word-break: break-all;">${fun.prj_name }</h3>
 								</a> 
-									&nbsp;&nbsp;${fun.rwd_cnt }&nbsp;&nbsp;${fun.buy_stt }
+									<h5 style="text-align: center;">${fun.rwd_name }</h5>
 								</div>
+								
 								<ul class="blog-info-link">
 									<li>구매일 : <fmt:formatDate value="${fun.buy_date }" pattern="yyyy-MM-dd" /></li>
 								</ul>
 								<ul class="blog-info-link">
 									<li>단가 : ${fun.rwd_prc } </li>
-									<li>구매 수량 : ${fun.buy_count } </li>
-									<li id="bw${fun.buy_id }">${fun.buy_way }</li>
 								</ul>
 								<ul class="blog-info-link">
+									<li>구매 수량 : ${fun.buy_count } </li>
+								</ul>
+								<ul class="blog-info-link">
+									<li id="bw${fun.buy_id }">구매 방법 : ${fun.buy_way }</li>
+								</ul>
+								<ul class="blog-info-link" style="margin-bottom: 10%;">
 									<li>
 										결제액 :
 										<c:if test="${fun.buy_won != 0 }">

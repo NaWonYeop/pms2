@@ -76,6 +76,11 @@
 	border: 0;
 }
 
+.insertbtn {
+	margin-bottom: 3%; 
+	margin-top: 3%;
+	text-align: center; 
+}
 
 </style>
 </head>
@@ -90,13 +95,18 @@
 						</div>
 					</div>
 						<div >
-							<h4 style="float: right; color: #fff">구직 리스트</h4>
+							<h4 style="float: right; color: #fff">구직</h4>
 						</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	
+	<c:if test="${btnCheck.user_ath != 'user' && btnCheck.user_ath != null}">
+				<div class="insertbtn">
+					<button type="button" id="insertbtn" class="btn_1"
+						onclick="location.href='jobInsertMove?cmd=jobMain'" style="width: 40%;">등록 및 수정</button>
+				</div>
+			</c:if>
 	<div class="search">
 			<!-- 검색기능 -->
 			<form action="jobsearch" >
@@ -139,14 +149,10 @@
 	</section>
 	
 	
+	
 	<section class="special_cource padding_top">
 		<div class="container">
-			<c:if test="${btnCheck.user_ath != 'user' && btnCheck.user_ath != null}">
-				<div class="insertbtn">
-					<button type="button" id="insertbtn" class="btn_1"
-						onclick="location.href='jobInsertMove?cmd=jobMain'" style="margin-bottom: 2%;">등록 및 수정</button>
-				</div>
-			</c:if>
+			
 			
 			<div class="textimonial_iner">
 				<div class="testimonial_slider">
@@ -156,7 +162,7 @@
 						<c:forEach items="${inters }" var="inter">
 							<div class="col-sm-12 col-lg-12 list">
 									<div class="single_special_cource">
-										<div class="special_cource_text">
+										<div class="special_cource_text" style="border: 2px solid #798BF2; border-radius: 10px;">
 											<p class="introduce">${inter.user_name }| ${inter.user_crr }년</p>
 											<img id="heartbtn${inter.user_id}" class="heartbtn" name="heartbtn${inter.user_id}" onclick="heart(${inter.user_id})" alt="heart" src="resources/main/img/unheart.png" style="float: right">
 											<img id="heartCancelbtn${inter.user_id}" class="heartCancelbtn" name="heartCancelbtn${inter.user_id}" onclick="heartCancel(${inter.user_id})" alt="unheart" src="resources/main/img/heart.png" style="float: right">
@@ -344,7 +350,7 @@
     		url: 'heartInsert',
     		type: 'post',
     		data: {
-    			user_id: ${sessionUser.user_id},
+    			user_id: '${sessionUser.user_id}',
     			user_id2: e
     		},
     		success: function() {
@@ -362,7 +368,7 @@
         		url: 'heartCancel',
         		type: 'post',
         		data: {
-        			user_id: ${sessionUser.user_id},
+        			user_id: '${sessionUser.user_id}',
         			user_id2: e
         		}
         	}).done(function() {

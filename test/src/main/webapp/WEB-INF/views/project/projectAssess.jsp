@@ -77,7 +77,7 @@
 	width: 80%;
 	height: 10%;
 	border-radius: 10px;
-	margin-top: 10%;
+	margin-top: 7%;
 	text-align: center;
 }
 
@@ -132,7 +132,7 @@
 
 	<section class="feature_part"
 		style="padding-top: 0; padding-bottom: 5%;">
-		<div class="container">
+		<div class="container" style="margin-top: 7%; margin-bottom: 15%;">
 			<div class="row">
 
 				<div class="col-sm-6 col-xl-3 align-self-center">
@@ -142,7 +142,7 @@
 					</div>
 				</div>
 
-<div class="modal__background">
+
 				<c:forEach items="${AssessList }" var="Assess" varStatus="status">
 						<div class="col-sm-6 col-xl-3 list${Assess.user_id }">
 							<div class="single_feature">
@@ -237,10 +237,10 @@
 									<p>${Assess.tm_dept }</p>
 									<c:choose>
 										<c:when test="${Assess.str_result eq 1 }">
-											<h3 id="success">평가완료</h3>
+											<h3 id="success" style="color: #03A62C">평가완료</h3>
 										</c:when>
 										<c:otherwise>
-											<h3 id="error${Assess.user_id }">평가 미완료</h3>
+											<h3 id="error${Assess.user_id }" style="color: #F20C36">평가 미완료</h3>
 										</c:otherwise>
 									</c:choose>
 
@@ -249,7 +249,7 @@
 						</div>
 				</c:forEach>
 
-</div>
+<!-- </div> -->
 
 
 			</div>
