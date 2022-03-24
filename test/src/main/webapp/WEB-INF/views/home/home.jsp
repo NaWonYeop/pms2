@@ -615,7 +615,7 @@ button {
       </div>
     </div>
     <div class="circle">
-      <p>STEP 1</p>
+      <p>Step 1</p>
     </div>
     <div class="link"></div>
     <div class="square down blank"></div>
@@ -623,7 +623,7 @@ button {
   <div class="block">
     <div class="square up blank"></div>
     <div class="circle activated">
-      <p>STEP 2</p>
+      <p>Step 2</p>
     </div>
     <div class="link"></div>
     <div class="square down">
@@ -641,7 +641,7 @@ button {
       </div>
     </div>
     <div class="circle">
-      <p>STEP 3</p>
+      <p>Step 3</p>
     </div>
     <div class="link"></div>
     <div class="square down blank"></div>
@@ -649,7 +649,7 @@ button {
   <div class="block">
     <div class="square up blank"></div>
     <div class="circle">
-      <p>STEP 4</p>
+      <p>Step 4</p>
     </div>
     <div class="link"></div>
     <div class="square down">
