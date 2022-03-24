@@ -81,6 +81,14 @@
 		  background: rgba(0, 0, 0, 0.3);
 		}
         
+        .modalbtn {
+        	display: flex;
+        	justify-content: center;
+        }
+        
+        .modalcnt {
+        	margin-top: 40px;
+        }
         /* modal end */
 
         /* rating */
@@ -138,7 +146,7 @@
         
         .modalInbtn {
         	    width: 75%;
-			    height: 15%;
+			    height: 60px;
 			    align-content: center;
 			    margin-top: 15%;
         }
@@ -237,31 +245,35 @@
 	                        <div class="content modalcontent">
 	                            <div class="justify-content-center">
 	                                <h2 class="content prjtitle" style="text-align: center;">진행중인 프로젝트</h2>
-	                                <p class="content prj">프로젝트</p>
-	                                <div class="content form-select" id="dropdown">
-	                                    <select class="content prjlist" id="pId">
-	                                    	<c:choose>
-			                                	<c:when test="${prjList[0].prj_name eq null }">
-			                                    	<option value="">진행중인 프로젝트가 없습니다.</option>
-			                                	</c:when>
-			                                	<c:otherwise>
-			                                    	<c:forEach items="${prjList }" var="prjList">
-				                                        <option value="${prjList.prj_id }">${prjList.prj_name }</option>
-			                                    	</c:forEach>
-			                                    </c:otherwise>
-			                                </c:choose>
-	                                    </select>
+	                                <div class="modalcnt">
+		                                <p class="content prj" style="margin-left: 45px;">프로젝트</p>
+		                                <div class="content form-select" id="dropdown">
+		                                    <select class="content prjlist" id="pId">
+		                                    	<c:choose>
+				                                	<c:when test="${prjList[0].prj_name eq null }">
+				                                    	<option value="">진행중인 프로젝트가 없습니다.</option>
+				                                	</c:when>
+				                                	<c:otherwise>
+				                                    	<c:forEach items="${prjList }" var="prjList">
+					                                        <option value="${prjList.prj_id }">${prjList.prj_name }</option>
+				                                    	</c:forEach>
+				                                    </c:otherwise>
+				                                </c:choose>
+		                                    </select>
+		                                </div>
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <c:choose>
-	                        	<c:when test="${prjList[0].prj_name eq null }">
-	                        		<button type="button" class="btn_4 modalInbtn" onclick="requestFail()">신청하기</button>			
-	                        	</c:when>
-	                        	<c:otherwise>
-	                        		<button type="button" class="btn_4 modalInbtn" onclick="requsetWork()">신청하기</button>
-	                        	</c:otherwise>
-	                        </c:choose>
+	                        <div class="modalbtn">
+		                        <c:choose>
+		                        	<c:when test="${prjList[0].prj_name eq null }">
+		                        		<button type="button" class="btn_4 modalInbtn" onclick="requestFail()">신청하기</button>			
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<button type="button" class="btn_4 modalInbtn" onclick="requsetWork()">신청하기</button>
+		                        	</c:otherwise>
+		                        </c:choose>
+	                        </div>
 	                    </div>
 	                    </div>
 	                    
