@@ -121,19 +121,23 @@
 .timeline-article .content-left:before,
 .timeline-article .content-right:before{
   position: absolute;
-  top: 20px;
+  top: 7px;
   font-size: 23px;
   font-family: "FontAwesome";
   color: #fff;
+  z-index: -1;
 }
+
 .timeline-article .content-left:before {
-  content: "\f0da";
-  right: -8px;
+  content: url("resources/main/img/direction.png");
+  right: -13px;
 }
+
 .timeline-article .content-right:before {
-  content: "\f0d9";
-  left: -8px;
+  content: url("resources/main/img/direction.png");
+  left: -13px;
 }
+
 .timeline-article .meta-date {
   position: absolute;
   top: 0;
@@ -200,6 +204,10 @@
     display: none;
   }
 }
+
+.direction {
+	position: absolute;
+}
 @media only screen and (max-width: 400px) {
   .timeline-article p {
     margin: 0;
@@ -210,7 +218,172 @@
   
 }
 /*===== // Resonsive Vertical Timeline =====*/
-	
+
+/* PMS 가이드 시작 */
+/* General code */
+@import url(https://fonts.googleapis.com/css?family=Barlow+Condensed);
+body {
+  font-family: "Barlow Condensed";
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 16px;
+}
+button {
+  width: 100px;
+  margin: auto;
+}
+.timeline {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+.timeline .circle {
+  width: 77px;
+  height: 35px;
+  border-radius: 30px;
+  background-color: #F27457;
+  margin: 0;
+  padding: 2px;
+  margin-left: -5px;
+  z-index: 2;
+  position: relative;
+}
+.timeline .circle:hover {
+  cursor: pointer;
+}
+.timeline .circle p {
+  text-align: center;
+  margin: auto;
+  line-height: 30px;
+  color: #ffffff;
+}
+.timeline .link {
+  z-index: 0;
+  background-color: #F27457;
+  padding: 0;
+}
+.square {
+  max-width: 250px;
+  min-width: 100px;
+  height: 115px;
+  border-radius: 10px;
+  background-color: #fff;
+  z-index: 2;
+  position: relative;
+}
+.square.blank {
+  visibility: hidden;
+}
+#end {
+  width: 0;
+  height: 0;
+}
+.square h3,
+.square h4 {
+  margin: 0px 0px 0px 15px;
+  text-align: left;
+  font-size: 16px;
+}
+.square h3 {
+  padding-top: 10px;
+}
+.square h4 {
+  font-style: italic;
+  font-weight: normal;
+}
+
+/* Linear timeline from left to right */
+#horizontal-timeline {
+  flex-direction: row;
+  min-width: 1100px;
+}
+.horizontal .link {
+  width: auto;
+  height: 5px;
+  margin-top: -15px;
+  margin-left: 5px;
+}
+.horizontal .square {
+  margin: 30px 0 20px -30px;
+}
+.horizontal .square p {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.square.up::after {
+  margin: 5px 0px 0px 42px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #798BF2;
+}
+
+.square.down::after {
+  margin: -119px 0 15px 42px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #798BF2;
+}
+.horizontal #end {
+  margin: 177px 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #F27457;
+}
+
+/* Linear timeline from top to bottom */
+.vertical .block {
+  display: flex;
+  flex-direction: row;
+}
+#vertical-timeline {
+  flex-direction: column;
+}
+.vertical .link {
+  width: 5px;
+  height: 150px;
+  margin-top: 0;
+  margin-left: -20px;
+}
+.vertical .square {
+  width: 250px;
+  margin: 0px 25px 0px 35px;
+}
+.vertical .square p {
+  padding: 0;
+  margin: 0;
+}
+.vertical #end {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #a8d0f7;
+  margin: auto;
+  margin-left: 311px;
+}
+.square::after {
+  content: " ";
+  display: block;
+  z-index: 0;
+  width: 0px;
+  height: 0px;
+}
+.square.left::after {
+  margin: -70px 11px 0px -15px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid rgb(176, 179, 204);
+}
+.square.right::after {
+  margin: -75px 0px 0px 242px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 20px solid rgb(176, 179, 204);
+}
+/* PMS 가이드 끝 */
 </style>
 
 <body>
@@ -277,17 +450,17 @@
    </div>
    <!-- 검색끝 -->
    
-   <!-- 가이드 시작 -->
+   <!-- 프로젝트 가이드 시작 -->
   <div class="container" style="margin-top: 5%;">
 	<div class="row">
 		<div class="col-lg-3" style="">
-			<div class="info" style="float: right; margin-top: 150px;">
+			<div class="info" style="float: right;">
 				<h1 style="font-size: 30px; float: right">How to use?</h1>
 				<h1 style="font-size: 60px; float: right; color: #F27457">프로젝트</h1><br>
 				<h1 style="font-size: 80px; float: right">시<br>작<br>하<br>기</h1>
 			</div>
 		</div>
-  		<div class="col-lg-9" style="background-color: #F5F7FF; border-radius: 20px;">
+  		<div class="col-lg-9" style="background-color: #F5F7FF; border-radius: 20px; z-index: -1;">
   <section id="conference-timeline" style="margin-top: 3%; margin-bottom: 3%;">
     <div class="timeline-start">Start</div>
     <div class="conference-center-line"></div>
@@ -298,15 +471,15 @@
 
         <!-- 왼쪽 -->
         <div class="content-left-container">
-          <div class="content-left" style="background-color: bluesky;">
-            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number" style="line-height: 30px; top: -5px;">프로<br>젝트</span></p>
+          <div class="content-left" style="background-color: #fff;">
+            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number" style="line-height: 30px; top: -5px; font-weight: bold;">생성</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
         </div>
 
         <!-- 오른쪽 -->
         <!-- <div class="content-right-container">
-          <div class="content-right" style="background-color: bluesky;">
+          <div class="content-right" style="background-color: #fff;">
             <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number" style="line-height: 30px; top: -5px;">프로<br>젝트</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
@@ -319,7 +492,7 @@
         </div>
       </div>
       <!-- // Article -->
-      <!--------------------------------- 프로젝트끝 ----------------------------------->
+      <!--------------------------------- 프로젝트 끝 ----------------------------------->
       
       <!--------------------------------- 구직 ----------------------------------->
       <!-- Article -->
@@ -327,7 +500,7 @@
 
         <!-- 왼쪽 -->
         <!-- <div class="content-left-container">
-          <div class="content-left" style="background-color: bluesky;">
+          <div class="content-left" style="background-color: #fff;">
             <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number">구직</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
@@ -335,8 +508,8 @@
 
         <!-- 오른쪽 -->
         <div class="content-right-container">
-          <div class="content-right" style="background-color: bluesky;">
-            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number">구직</span></p>
+          <div class="content-right" style="background-color: #fff;">
+            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number" style=" font-weight: bold;">구직</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
         </div> 
@@ -356,15 +529,15 @@
 
         <!-- 왼쪽 -->
         <div class="content-left-container">
-          <div class="content-left" style="background-color: bluesky;">
-            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number">구인</span></p>
+          <div class="content-left" style="background-color: #fff;">
+            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number" style=" font-weight: bold;">구인</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
         </div> 
 
         <!-- 오른쪽 -->
         <!-- <div class="content-right-container">
-          <div class="content-right" style="background-color: bluesky;">
+          <div class="content-right" style="background-color: #fff;">
             <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number">구인</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
@@ -385,16 +558,16 @@
 
         <!-- 왼쪽 -->
        <!--  <div class="content-left-container">
-          <div class="content-left" style="background-color: bluesky;">
+          <div class="content-left" style="background-color: #fff;">
             <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number">펀딩</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
         </div> -->
 
         <!-- 오른쪽 -->
-        <div class="content-right-container">
-          <div class="content-right" style="background-color: bluesky;">
-            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number">펀딩</span></p>
+        <div class="content-right-container" style="">
+          <div class="content-right" style="background-color: #fff;">
+            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number" style=" font-weight: bold;">펀딩</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
         </div> 
@@ -414,8 +587,96 @@
   </div>
   </div>
   </div>
-   <!-- 가이드 끝 -->
-   
+  <!--------------------------------- 프로젝트 가이드 끝 ----------------------------------->
+	<!-- <img alt="" src="resources/main/img/myproject.png"> -->
+<!-- breadcrumb start-->
+   <section class="breadcrumb2 breadcrumb_bg2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					
+				</div>
+			</div>
+		</div>
+	</section>
+   <!-- breadcrumb start-->
+   <!--------------------------------- PMS 시작 끝 ----------------------------------->
+   <div class="container" style="margin-top: 5%; background-color: #F5F7FF; border-radius: 10px;">
+	<div class="row" style="margin-top: 25px;">
+		
+      <h1 style="color: #F27457; margin-left: 8%">P</h1><h1>ROJECT</h1>&nbsp;&nbsp;&nbsp;&nbsp;<h1 style="color: #F27457;">M</h1><h1>ANAGEMENT</h1>&nbsp;&nbsp;&nbsp;&nbsp; <h1 style="color: #F27457;">S</h1><h1>UPPORT</h1>
+      </div>
+<div id="horizontal-timeline" class="timeline horizontal reverse">
+  <div class="block">
+    <div class="square up" style="">
+      <div class="area" style="width:250px; height: 105px;">
+	      <h3>팀 선택하기</h3>
+	      <p style="margin-bottom: 5px;">가나다마바사 아자차카 타파하 ABCDEFG HI JKLMN OPQ RSTUVW XYZ 글자수의 맥스는 여기</p>
+      </div>
+    </div>
+    <div class="circle">
+      <p>STEP 1</p>
+    </div>
+    <div class="link"></div>
+    <div class="square down blank"></div>
+  </div>
+  <div class="block">
+    <div class="square up blank"></div>
+    <div class="circle activated">
+      <p>STEP 2</p>
+    </div>
+    <div class="link"></div>
+    <div class="square down">
+      <div class="area" style="width:250px; height: 105px;">
+	      <h3>신청멤버 확인</h3>
+	      <p style="margin-bottom: 5px;">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+  </div>
+  <div class="block">
+    <div class="square up">
+      <div class="area" style="width:250px; height: 105px;">
+      <h3>일정관리</h3>
+      <p style="margin-bottom: 5px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+      </div>
+    </div>
+    <div class="circle">
+      <p>STEP 3</p>
+    </div>
+    <div class="link"></div>
+    <div class="square down blank"></div>
+  </div>
+  <div class="block">
+    <div class="square up blank"></div>
+    <div class="circle">
+      <p>STEP 4</p>
+    </div>
+    <div class="link"></div>
+    <div class="square down">
+      <div class="area" style="width:250px; height: 105px;">
+      <h3>TO DO LIST</h3>
+      <p style="margin-bottom: 5px;">elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="block">
+    <div class="square up">
+      <h3>Main title</h3>
+      <h4>date</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div class="circle">
+      <p>STEP 5</p>
+    </div>
+    <div class="link"></div>
+    <div class="square down blank"></div>
+  </div> -->
+  <div id="end"></div>
+</div>
+</div>
+
+      <!--------------------------------- PMS 가이드 끝 ----------------------------------->
    <section class="blog_area section_padding" style="margin-top: 7%;">
       <div class="container">
          <div class="row">
@@ -432,7 +693,7 @@
                   <article class="blog_item">
 
 
-                     <div class="blog_details">
+                     <div class="blog_details" style="text-align: left;">
                         <a class="d-inline-block" href="projectSelect?prj_id=${ofr.prj_id }"><!-- 여기 주소 -->
                            <h2>${ofr.prj_name }</h2>
                         </a> <br>
@@ -469,7 +730,7 @@
                      
                 
 
-                     <div class="blog_details">
+                     <div class="blog_details" style="text-align: left;">
                           <div class="blog_item_img">
                      	<h3 style="font-weight: bold;">${fnd.prj_name }</h3>
                         <a class="d-inline-block" href="projectSelect?prj_id=${fnd.prj_id }">

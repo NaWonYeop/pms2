@@ -12,7 +12,20 @@
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 <title>Etrain</title>
+<style>
+	.paginate_button:hover {
+	background-color: #798BF2 !important;
+	color: #fff !important;
+	border-radius: 7px !important;
+}
+#show {
+	width: 25px;
+}
 
+#show:hover {
+	width: 40px;
+}
+</style>
 </head>
 
 <body>
@@ -37,7 +50,7 @@
 	<!-- breadcrumb start-->
 
 	<!--::review_part start::-->
-	<section class="special_cource padding_top">
+	<section class="special_cource padding_top" style="margin-bottom: 15%; margin-top: 7%;">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
@@ -48,11 +61,43 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-sm-6 col-lg-12" style="margin-bottom: 5%;">
+					<div class="single_special_cource">
+
+						<div class="special_cource_text" style="padding-right: 30px; padding-left: 30px;">
+							<p class="btn_4" style="margin-bottom: 20px;">알림</p>
+							<c:forEach items="${MyApp}" var="app">
+								<c:choose>
+								<c:when test="${fn:contains(app.app_clsfc,'0')}">
+										<div id="div${app.app_id}" style="margin-bottom: 5px;">
+											<a href=""></a>${app.prj_name}에
+											신청하셨습니다
+											<img id="show" alt="" src="resources/main/img/delete.png" onclick="div(${app.app_id})">
+										</div>
+
+
+									</c:when>
+									<c:otherwise>
+										<div id="div${app.app_id}" style="margin-bottom: 5px;">
+											<a href="conFirmSelect?app_id=${app.app_id }&prj_id=${app.prj_id}">${app.prj_name}</a>에
+											협업제의를 받으셨습니다
+											<img id="show" alt="" src="resources/main/img/delete.png" onclick="div(${app.app_id})">
+										</div>
+
+
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+
+						</div>
+
+					</div>
+				</div>
 				<div class="col-sm-6 col-lg-6">
 
 					<div class="single_special_cource">
 						<div class="special_cource_text">
-							<a class="btn_4" href="myProject">참여중인 프로젝트 리스트</a>
+							<a class="btn_4" href="myProject" style="margin-bottom: 4%;">참여중인 프로젝트 리스트</a>
 
 
 							<table id="mTable" class="table table-bordered">
@@ -92,7 +137,7 @@
 
 					<div class="single_special_cource">
 						<div class="special_cource_text">
-							<a class="btn_4" href="myfunding">펀딩 리스트</a>
+							<a class="btn_4" href="myfunding" style="margin-bottom: 4%;">펀딩 리스트</a>
 							
 							<table id="mTable2" class="table table-bordered">
 								<thead>
@@ -127,38 +172,7 @@
 				</div>
 
 
-				<div class="col-sm-6 col-lg-12">
-					<div class="single_special_cource">
-
-						<div class="special_cource_text">
-							<a href="course-details.html" class="btn_4">알림</a>
-							<c:forEach items="${MyApp}" var="app">
-								<c:choose>
-								<c:when test="${fn:contains(app.app_clsfc,'0')}">
-										<div id="div${app.app_id}">
-											<a href=""></a>&nbsp;&nbsp;&nbsp;&nbsp;${app.prj_name}에
-											신청하셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
-										</div>
-
-
-									</c:when>
-									<c:otherwise>
-										<div id="div${app.app_id}">
-											<a href="conFirmSelect?app_id=${app.app_id }&prj_id=${app.prj_id}">${app.prj_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;에
-											협업제의를 받으셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button" id="show" onclick="div(${app.app_id})">-</button>
-										</div>
-
-
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-
-						</div>
-
-					</div>
-				</div>
+				
 				<!-- 테이블 -->
 			</div>
 

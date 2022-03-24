@@ -39,10 +39,6 @@ thead {
 	border-bottom: 0;
 }
 
-a {
-	background: #fff !important;
-	border: 0 !important;
-}
 
 .paginate_button:hover {
 	background-color: #798BF2 !important;

@@ -79,7 +79,7 @@ a {
 <body>
 
 
-	<div class="card align-middle" style="width: 25rem;">
+	<div class="card align-middle" style="width: 25rem; margin-top: 5%;">
 
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<h2 style="text-align: center;">로그인</h2>
@@ -92,20 +92,20 @@ a {
 				<input type="password" name="user_pwd" id="user_pwd"
 					class="form-control" placeholder="비밀번호" required><br>
 				<input id="btn-Yes" class="btn btn-lg btn-primary btn-block"
-					type="submit" value="로 그 인"> <br>
+					type="submit" value="로 그 인" style="margin-bottom: 10px;"> 
 					 <a
 					href="javascript:void(0)" onclick="kakaoLogin();"
 					class="sign__logo"><img
-					src="resources/images/kakao_login_medium.png" alt=""></a>
+					src="resources/images/kakao.png" alt=""></a>
 			</div>
 			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 		</form>
 
 	</div>
 
-	<div class="links">
-		<a href="forgotId">아이디 찾기</a> | <a href="forgotPassword">비밀번호 찾기</a> |
-		<a href="registerForm">회원가입</a> |
+	<div class="links" style="margin-bottom: 15%">
+		<a href="forgotId" style="font-family: 'TmoneyRoundWindRegular';">아이디 찾기</a> | <a href="forgotPassword" style="font-family: 'TmoneyRoundWindRegular';">비밀번호 찾기</a> |
+		<a href="registerForm" style="font-family: 'TmoneyRoundWindRegular';">회원가입</a> |
 
 	</div>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

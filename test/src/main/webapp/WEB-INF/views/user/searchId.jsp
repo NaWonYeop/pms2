@@ -70,7 +70,7 @@ a {
 <body>
 
 
-	<div class="card align-middle" style="width: 25rem;">
+	<div class="card align-middle" style="width: 25rem; margin-top: 5%;">
 
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<h2 style="text-align: center;">아이디찾기 결과</h2>
@@ -79,8 +79,8 @@ a {
 				class="form-control" value="${idcheck}" style="text-align: center; "><BR>
 		</div>
 	</div>
-	<div class="links">
-		<a href="loginForm">로그인</a> | <a href="forgotPassword">비밀번호 찾기</a> |
+	<div class="links" style="margin-bottom: 15%;">
+		<a href="loginForm" style="font-family: 'TmoneyRoundWindRegular';">로그인</a> | <a href="forgotPassword" style="font-family: 'TmoneyRoundWindRegular';">비밀번호 찾기</a> |
 
 	</div>
 	<script>

@@ -306,8 +306,7 @@ input {
 																						<ul class="blog-info-link">
 																							<li><i class="far fa-user"></i> 신청인원
 																								${app.total_count }/${project.prj_frn_prs + project.prj_bk_prs + project.prj_db_prs + project.prj_ser_prs }명</a></li>
-																							<li><i class="far fa-comments"></i> 신청 기간 <fmt:formatDate
-																									value="${project.prj_ofr_str }"
+																							<li><i class="far fa-comments"></i> 신청 기간 <fmt:formatDate	value="${project.prj_ofr_str }"
 																									pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
 																									value="${project.prj_ofr_ed }"
 																									pattern="yyyy-MM-dd" /></li>
