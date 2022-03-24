@@ -66,6 +66,12 @@ public class BuyServiceImpl implements BuyService {
 	}
 
 
+	@Override
+	public int buyGoSttChange(String buy_muid) {
+		return map.buyGoSttChange(buy_muid);
+	}
+
+
 	
 
 

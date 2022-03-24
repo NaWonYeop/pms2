@@ -21,5 +21,7 @@ public interface BuyMapper {
 	long buySumWei(int prj_id);
 	int buySttChange(BuyVO buy);
 	List<BuyVO> buyMuidList(int prj_id);
+	int buyGoSttChange(String buy_muid);
+	
 	
 }

@@ -72,6 +72,13 @@
 		AND BUY_STT = '보관'
 		)
 		GROUP BY BUY_MUID,BUY_DATE
+		ORDER BY BUY_DATE
 	</select>
+	
+	<update id="buyGoSttChange" parameterType="String">
+		UPDATE BUY
+		SET BUY_STT = '전달'
+		WHERE BUY_MUID = #{buy_muid}
+	</update>
 	
 </mapper>

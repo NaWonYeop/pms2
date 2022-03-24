@@ -250,5 +250,16 @@ public class BuyController {
 	 }
 	 
 	 
+	 @PostMapping("/ajaxMuidUpDate")
+	 @ResponseBody
+	 private int ajaxMuidUpDate(@RequestParam("buy_muid") String buy_muid){
+		 System.out.println("구매코드 : " + buy_muid);
+		 
+		 int result = buyDao.buyGoSttChange(buy_muid);
+	 
+	 
+		 return result;
+     }
+ 
 
 }
