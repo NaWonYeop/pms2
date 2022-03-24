@@ -150,7 +150,7 @@ h5 {
 	
 	<!-- chart -->
 	<div class="container">
-		<div class="row">
+		<div id="chartContainer" class="row">
 			<canvas id="barChart"></canvas>
 			<div id="price" class="row"></div>
 		</div>
@@ -240,9 +240,9 @@ h5 {
 			$('#teamSelectModal').modal('show');
 		} else {
 			var prj_id = $("#prj_id").val();
+			writeChart();
 			pmsTeamList();
 			progress();
-			writeChart();
 		}
 		
 		
@@ -267,6 +267,10 @@ h5 {
 	function writeChart() {
 		//bar
 		$("#price").empty();
+		$("#barChart").remove();
+		var canvas = $('<canvas id="barChart"></canvas>')
+		$("#chartContainer").append(canvas);
+		
 		
 		var barChart = document.getElementById("barChart");
 		var ctxB = barChart.getContext("2d");

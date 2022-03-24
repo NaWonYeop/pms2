@@ -27,7 +27,7 @@ public class AppController {
 	private AppService appDao;
 
 	@RequestMapping("/msapplication")
-	public String application() {
+	public String application(HttpSession session) {
 		return "pms/app/app";
 	}
 

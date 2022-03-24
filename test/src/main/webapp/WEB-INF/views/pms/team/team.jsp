@@ -65,6 +65,7 @@
 		</div>
 	</div>
 </div>
+
 <input id="hiddenMaster" type="hidden" value="${sessionScope.myPrj.master_id}">
 <input id="hiddenUser" type="hidden" value="${sessionScope.sessionUser.user_id}">
 <script>

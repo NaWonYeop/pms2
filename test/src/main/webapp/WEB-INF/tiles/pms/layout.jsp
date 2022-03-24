@@ -73,14 +73,14 @@
 
 	<!-- End plugin js for this page -->
 	<!-- inject:js -->
-	<script src="resources/pms/js/off-canvas.js"></script>
-	<script src="resources/pms/js/hoverable-collapse.js"></script>
-	<script src="resources/pms/js/template.js"></script>
+	<!-- <script src="resources/pms/js/off-canvas.js"></script>
+	<script src="resources/pms/js/hoverable-collapse.js"></script> -->
+	<!-- <script src="resources/pms/js/template.js"></script> -->
 	<script src="resources/pms/js/settings.js"></script>
 	<script src="resources/pms/js/todolist.js"></script>
 	<!-- endinject -->
 	<!-- Custom js for this page-->
-	<script src="resources/pms/js/dashboard.js"></script>
+	<!-- <script src="resources/pms/js/dashboard.js"></script> -->
 	<!-- <script src="resources/pms/js/Chart.roundedBarCharts.js"></script> -->
 	<link rel="stylesheet"
 		href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">

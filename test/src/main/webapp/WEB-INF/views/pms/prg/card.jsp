@@ -147,10 +147,11 @@
 								placeholder="할 일"> <label for="prg_str">시작일</label> <input
 								type="text" class="form-control" id="prg_str" name="prg_str">
 							<label for="prg_ed">종료일</label> <input type="text"
-								class="form-control" id="prg_ed" name="prg_ed"> <label
-								for="updateTeams">담당</label> <select id="updateTeams"
-								class="js-example-basic-single w-100">
-							</select>
+								class="form-control" id="prg_ed" name="prg_ed"> 
+								<label for="updateTeams">담당</label> 
+								<select id="updateTeams" class="js-example-basic-single w-100">
+								
+								</select>
 						</div>
 						<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 					</form>
@@ -194,7 +195,7 @@
 				}).done(function(json) {
 					$("#insertTeams").empty();
 					for(team of json) {
-						$("#insertTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
+						$("#insertTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_name}</option>`);
 					};
 				}).fail(function(xhr, status, message) {
 					console.log(" status: " + status + " er:" + message);
@@ -286,7 +287,7 @@
 	}).done(function(json) {
 		for(team of json) {
 			$("#teams").append(`
-					<option id="team" data-master_id="\${team.master_id}" value="\${team.prj_id}">\${team.prj_id}</option>
+					<option id="team" data-master_id="\${team.master_id}" value="\${team.prj_id}">\${team.prj_name}</option>
 					`);
 		};
 	}).fail(function(xhr, status, message) {
@@ -415,7 +416,7 @@
 			dataType : "json"
 		}).done(function(json) {
 			for(team of json) {
-				$("#updateTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_id}</option>`);
+				$("#updateTeams").append(`<option id="team" value="\${team.user_id}">\${team.user_name}</option>`);
 			};
 		}).fail(function(xhr, status, message) {
 			console.log(" status: " + status + " er:" + message);
