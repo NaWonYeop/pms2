@@ -138,7 +138,7 @@ a {
 			console.log('${loginFail}');
 			if ('${loginFail}' != '') {
 				var message = '${loginFail}';
-				/* alert(message); */
+				 alert("올바른정보를 입력하세요");
 				toastr.options = {
 					"closeButton" : false,
 					"debug" : false,

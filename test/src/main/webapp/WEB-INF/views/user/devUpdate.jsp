@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="refresh" content="2; url=home">
 <title>Insert title here</title>
 </head>
 <body>
