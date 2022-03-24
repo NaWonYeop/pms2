@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.test.prj.project.service.ProjectMapper">
-			
-	<select id="projectSelectList" resultType="co.test.prj.project.service.ProjectVO">
+
+	<select id="projectSelectList"
+		resultType="co.test.prj.project.service.ProjectVO">
 		SELECT * FROM PROJECT
 	</select>
-	
-	<select id="projectSelect" parameterType="co.test.prj.project.service.ProjectVO"
+
+	<select id="projectSelect"
+		parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
-		SELECT PROJECT.PRJ_ID, PROJECT.PRJ_NAME,  PROJECT.PRJ_STR, 
-        PROJECT.PRJ_ED, PROJECT.PRJ_REG_DATE, PROJECT.PRJ_HIT, 
-        PROJECT.PRJ_OFR_PROP, PROJECT.PRJ_FND_PROP, PROJECT.PRJ_DEVED_PROP, 
-        PROJECT.PRJ_CNT, PROJECT.MASTER_ID, PROJECT.CTF_ID, 
-        PROJECT.PRJ_OFR_STR, PROJECT.PRJ_OFR_ED, PROJECT.PRJ_FRN_PRS, 
-        PROJECT.PRJ_BK_PRS, PROJECT.PRJ_DB_PRS, PROJECT.PRJ_SER_PRS, 
-        PROJECT.PRJ_CND, PROJECT.PRJ_AR, PROJECT.PRJ_FND_STR, 
-        PROJECT.PRJ_FND_ED, PROJECT.PRJ_GL_PRC, PROJECT.PRJ_VER, 
-        PROJECT.PRJ_VIEW_PROP, PROJECT.PRJ_VER_DATE, 
-        SUM(REWARD.RWD_PRC * REWARD.RWD_COT) AS TOTAL_SUM
-		FROM PROJECT 
-		LEFT JOIN REWARD 
-		ON PROJECT.PRJ_ID = REWARD.PRJ_ID
+		SELECT PROJECT.PRJ_ID, PROJECT.PRJ_NAME, PROJECT.PRJ_STR,
+		PROJECT.PRJ_ED, PROJECT.PRJ_REG_DATE, PROJECT.PRJ_HIT,
+		PROJECT.PRJ_OFR_PROP, PROJECT.PRJ_FND_PROP, PROJECT.PRJ_DEVED_PROP,
+		PROJECT.PRJ_CNT, PROJECT.MASTER_ID, PROJECT.CTF_ID,
+		PROJECT.PRJ_OFR_STR, PROJECT.PRJ_OFR_ED, PROJECT.PRJ_FRN_PRS,
+		PROJECT.PRJ_BK_PRS, PROJECT.PRJ_DB_PRS, PROJECT.PRJ_SER_PRS,
+		PROJECT.PRJ_CND, PROJECT.PRJ_AR, PROJECT.PRJ_FND_STR,
+		PROJECT.PRJ_FND_ED, PROJECT.PRJ_GL_PRC, PROJECT.PRJ_VER,
+		PROJECT.PRJ_VIEW_PROP, PROJECT.PRJ_VER_DATE,
+		SUM(REWARD.RWD_PRC *
+		REWARD.RWD_COT) AS TOTAL_SUM
+		FROM PROJECT
+		LEFT JOIN REWARD
+		ON
+		PROJECT.PRJ_ID = REWARD.PRJ_ID
 		WHERE PROJECT.PRJ_ID = #{prj_id}
-		GROUP BY PROJECT.PRJ_ID, PROJECT.PRJ_NAME,  PROJECT.PRJ_STR,
-		        PROJECT.PRJ_ED, PROJECT.PRJ_REG_DATE, PROJECT.PRJ_HIT, 
-		        PROJECT.PRJ_OFR_PROP, PROJECT.PRJ_FND_PROP, PROJECT.PRJ_DEVED_PROP, 
-		        PROJECT.PRJ_CNT, PROJECT.MASTER_ID, PROJECT.CTF_ID, 
-		        PROJECT.PRJ_OFR_STR, PROJECT.PRJ_OFR_ED, PROJECT.PRJ_FRN_PRS, 
-		        PROJECT.PRJ_BK_PRS, PROJECT.PRJ_DB_PRS, PROJECT.PRJ_SER_PRS, 
-		        PROJECT.PRJ_CND, PROJECT.PRJ_AR, PROJECT.PRJ_FND_STR, 
-		        PROJECT.PRJ_FND_ED, PROJECT.PRJ_GL_PRC, PROJECT.PRJ_VER, 
-		        PROJECT.PRJ_VIEW_PROP, PROJECT.PRJ_VER_DATE
+		GROUP
+		BY
+		PROJECT.PRJ_ID, PROJECT.PRJ_NAME, PROJECT.PRJ_STR,
+		PROJECT.PRJ_ED,
+		PROJECT.PRJ_REG_DATE, PROJECT.PRJ_HIT,
+		PROJECT.PRJ_OFR_PROP,
+		PROJECT.PRJ_FND_PROP, PROJECT.PRJ_DEVED_PROP,
+		PROJECT.PRJ_CNT,
+		PROJECT.MASTER_ID, PROJECT.CTF_ID,
+		PROJECT.PRJ_OFR_STR,
+		PROJECT.PRJ_OFR_ED, PROJECT.PRJ_FRN_PRS,
+		PROJECT.PRJ_BK_PRS,
+		PROJECT.PRJ_DB_PRS, PROJECT.PRJ_SER_PRS,
+		PROJECT.PRJ_CND,
+		PROJECT.PRJ_AR, PROJECT.PRJ_FND_STR,
+		PROJECT.PRJ_FND_ED,
+		PROJECT.PRJ_GL_PRC, PROJECT.PRJ_VER,
+		PROJECT.PRJ_VIEW_PROP,
+		PROJECT.PRJ_VER_DATE
 		ORDER BY PRJ_ID
 	</select>
-	
-	<select id="projectMaxPId" parameterType="co.test.prj.project.service.ProjectVO" resultType="int">
+
+	<select id="projectMaxPId"
+		parameterType="co.test.prj.project.service.ProjectVO" resultType="int">
 		SELECT NVL(MAX(PRJ_ID) + 1, 1) AS ID FROM PROJECT
 	</select>
 
-	<insert id="projectInsert" parameterType="co.test.prj.project.service.ProjectVO">
-			INSERT INTO PROJECT(PRJ_ID, PRJ_NAME, PRJ_STR, PRJ_ED, PRJ_OFR_PROP, 
-			PRJ_FND_PROP, PRJ_CNT, MASTER_ID, CTF_ID, PRJ_OFR_STR, PRJ_OFR_ED,
-			PRJ_FRN_PRS, PRJ_BK_PRS, PRJ_DB_PRS, PRJ_SER_PRS, PRJ_CND, PRJ_AR,
-			PRJ_FND_STR, PRJ_FND_ED, PRJ_GL_PRC, PRJ_VER)
-			VALUES(#{prj_id}, #{prj_name}, #{prj_str}, #{prj_ed}, #{prj_ofr_prop}, 
-			#{prj_fnd_prop}, #{prj_cnt}, #{master_id}, #{ctf_id}, #{prj_ofr_str}, #{prj_ofr_ed},
-			#{prj_frn_prs}, #{prj_bk_prs}, #{prj_db_prs}, #{prj_ser_prs}, #{prj_cnd}, #{prj_ar},
-			#{prj_fnd_str}, #{prj_fnd_ed}, #{prj_gl_prc}, #{prj_ver})				
+	<insert id="projectInsert"
+		parameterType="co.test.prj.project.service.ProjectVO">
+		INSERT INTO PROJECT(PRJ_ID, PRJ_NAME, PRJ_STR, PRJ_ED,
+		PRJ_OFR_PROP,
+		PRJ_FND_PROP, PRJ_CNT, MASTER_ID, CTF_ID, PRJ_OFR_STR,
+		PRJ_OFR_ED,
+		PRJ_FRN_PRS, PRJ_BK_PRS, PRJ_DB_PRS, PRJ_SER_PRS, PRJ_CND,
+		PRJ_AR,
+		PRJ_FND_STR, PRJ_FND_ED, PRJ_GL_PRC, PRJ_VER)
+		VALUES(#{prj_id},
+		#{prj_name}, #{prj_str}, #{prj_ed}, #{prj_ofr_prop},
+		#{prj_fnd_prop},
+		#{prj_cnt}, #{master_id}, #{ctf_id}, #{prj_ofr_str}, #{prj_ofr_ed},
+		#{prj_frn_prs}, #{prj_bk_prs}, #{prj_db_prs}, #{prj_ser_prs},
+		#{prj_cnd}, #{prj_ar},
+		#{prj_fnd_str}, #{prj_fnd_ed}, #{prj_gl_prc},
+		#{prj_ver})
 	</insert>
-	
-	<update id="projectUpdate" parameterType="co.test.prj.project.service.ProjectVO">
+
+	<update id="projectUpdate"
+		parameterType="co.test.prj.project.service.ProjectVO">
 		UPDATE PROJECT
 		<set>
 			PRJ_VER_DATE = sysdate,
@@ -72,129 +96,63 @@
 			<if test="prj_fnd_str != null"> PRJ_FND_STR = #{prj_fnd_str},</if>
 			<if test="prj_fnd_ed != null"> PRJ_FND_ED = #{prj_fnd_ed},</if>
 			<if test="prj_gl_prc != null"> PRJ_GL_PRC = #{prj_gl_prc},</if>
-			
+
 		</set>
-		
+
 		WHERE prj_id = #{prj_id}
 	</update>
-	
-	<update id="projectView" parameterType="co.test.prj.project.service.ProjectVO">	
+
+	<update id="projectView"
+		parameterType="co.test.prj.project.service.ProjectVO">
 		UPDATE PROJECT
 		SET PRJ_VIEW_PROP = 1
-		WHERE PRJ_ID = #{prj_id}
+		WHERE PRJ_ID =
+		#{prj_id}
 	</update>
-	
-	
-	<delete id="projectDelete" parameterType="co.test.prj.project.service.ProjectVO">
+
+
+	<delete id="projectDelete"
+		parameterType="co.test.prj.project.service.ProjectVO">
 		DELETE FROM PROJECT WHERE PRJ_ID=#{prj_id}
 	</delete>
-	
+
 	<!-- 구직상세 참여프로젝트 >>> 경일 -->
-	<select id="jobJoinList" resultType="co.test.prj.project.service.ProjectVO">
+	<select id="jobJoinList"
+		resultType="co.test.prj.project.service.ProjectVO">
 		SELECT PRJ_NAME FROM PROJECT
-		WHERE master_id = #{master_id} and SYSDATE <![CDATA[<]]> PRJ_OFR_ED
+		WHERE master_id = #{master_id} and SYSDATE <![CDATA[<]]>
+		PRJ_OFR_ED
 	</select>
-	
+
 
 	<!-- 구인현황 리스트 >>> 경일 -->
-	<select id="ofterList" resultType="co.test.prj.user.service.UserVO">
+	<select id="ofterList"
+		resultType="co.test.prj.user.service.UserVO">
 		select u.user_name, u.user_crr, u.user_tel, app_stt
-		from "user" u, application a
-		where u.user_id in (select user_id from application where master_id=0 and prj_id = 0 ) and u.user_id=a.user_id;
+		from
+		"user" u, application a
+		where u.user_id in (select user_id from
+		application where master_id=0 and prj_id = 0 ) and
+		u.user_id=a.user_id;
 	</select>
 
-	
-	<select id="projectSearchPageList" parameterType="co.test.prj.project.service.ProjectVO"
+
+	<select id="projectSearchPageList"
+		parameterType="co.test.prj.project.service.ProjectVO"
 		resultType="co.test.prj.project.service.ProjectVO">
 	<![CDATA[
 		SELECT *
 		FROM ( SELECT ROWNUM RN,
 		            A.*
 		                FROM ( ]]>
-		                			SELECT p.*,c.ctf_usectf_st_course, c.ctf_st_name
-									FROM PROJECT p 
-									LEFT JOIN COMTNFILE c
-									ON(p.ctf_id = c.ctf_id)
-									WHERE PRJ_VIEW_PROP = 0
-									AND PRJ_NAME LIKE '%'||#{keyword}||'%'
-									<choose>
-										<when test="type != null and type.equals('ofr')">
-											AND PRJ_OFR_PROP LIKE '1'
-										</when>
-										<when test="type != null and type.equals('fnd')">
-											AND PRJ_FND_PROP LIKE '1'
-										</when>
-									</choose>
-									ORDER BY PRJ_ID DESC
-		            <![CDATA[ ) 
-		            A )
-		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
-		]]>
-	</select>
-	
-	<select id="projectAppList" parameterType="co.test.prj.project.service.ProjectVO"
-		resultType="co.test.prj.project.service.ProjectVO">
-	<![CDATA[
-		SELECT *
-		FROM ( SELECT ROWNUM RN,
-		            A.*
-		                FROM ( ]]>
-		                			SELECT PROJECT.PRJ_ID , COUNT(APPLICATION.APP_ID) AS TOTAL_COUNT
-									FROM PROJECT 
-									LEFT JOIN APPLICATION 
-									ON PROJECT.PRJ_ID = APPLICATION.PRJ_ID
-									WHERE PROJECT.PRJ_VIEW_PROP = 0
-									AND PRJ_NAME LIKE '%'||#{keyword}||'%'
-									<choose>
-										<when test="type != null and type.equals('ofr')">
-											AND PRJ_OFR_PROP LIKE '1'
-										</when>
-										<when test="type != null and type.equals('fnd')">
-											AND PRJ_FND_PROP LIKE '1'
-										</when>
-									</choose>
-									GROUP BY PROJECT.prj_id
-									ORDER BY PRJ_ID DESC
-		            <![CDATA[ ) 
-		            A )
-		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
-		]]>
-	</select>
-	<select id="projectRwdList" parameterType="co.test.prj.project.service.ProjectVO"
-		resultType="co.test.prj.project.service.ProjectVO">
-	<![CDATA[
-		SELECT *
-		FROM ( SELECT ROWNUM RN,
-		            A.*
-		                FROM ( ]]>
-		                			SELECT PROJECT.PRJ_ID,  SUM(REWARD.RWD_PRC * REWARD.RWD_COT) AS TOTAL_SUM
-									FROM PROJECT 
-									LEFT JOIN REWARD 
-									ON PROJECT.PRJ_ID = REWARD.PRJ_ID
-									WHERE PRJ_VIEW_PROP = 0
-									AND PRJ_NAME LIKE '%'||#{keyword}||'%'
-									<choose>
-										<when test="type != null and type.equals('ofr')">
-											AND PRJ_OFR_PROP LIKE '1'
-										</when>
-										<when test="type != null and type.equals('fnd')">
-											AND PRJ_FND_PROP LIKE '1'
-										</when>
-									</choose>
-									GROUP BY PROJECT.prj_id
-									ORDER BY PRJ_ID DESC
-		            <![CDATA[ ) 
-		            A )
-		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
-		]]>
-	</select>
-	
-	<select id="projectSearchPageCount" parameterType="co.test.prj.project.service.ProjectVO"
-		resultType="int">
-		
-		SELECT COUNT(*) AS TOTAL
-		FROM PROJECT
-		WHERE PRJ_NAME LIKE '%'||#{keyword}||'%'
+		SELECT p.*,c.ctf_usectf_st_course, c.ctf_st_name
+		FROM PROJECT p
+		LEFT
+		JOIN COMTNFILE c
+		ON(p.ctf_id = c.ctf_id)
+		WHERE PRJ_VIEW_PROP = 0
+		AND
+		PRJ_NAME LIKE '%'||#{keyword}||'%'
 		<choose>
 			<when test="type != null and type.equals('ofr')">
 				AND PRJ_OFR_PROP LIKE '1'
@@ -204,45 +162,175 @@
 			</when>
 		</choose>
 		ORDER BY PRJ_ID DESC
-		
+		            <![CDATA[ ) 
+		            A )
+		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+
+	<select id="projectAppList"
+		parameterType="co.test.prj.project.service.ProjectVO"
+		resultType="co.test.prj.project.service.ProjectVO">
+	<![CDATA[
+		SELECT *
+		FROM ( SELECT ROWNUM RN,
+		            A.*
+		                FROM ( ]]>
+		SELECT PROJECT.PRJ_ID , COUNT(APPLICATION.APP_ID) AS TOTAL_COUNT
+		FROM
+		PROJECT
+		LEFT JOIN APPLICATION
+		ON PROJECT.PRJ_ID = APPLICATION.PRJ_ID
+		WHERE PROJECT.PRJ_VIEW_PROP = 0
+		AND PRJ_NAME LIKE '%'||#{keyword}||'%'
+		<choose>
+			<when test="type != null and type.equals('ofr')">
+				AND PRJ_OFR_PROP LIKE '1'
+			</when>
+			<when test="type != null and type.equals('fnd')">
+				AND PRJ_FND_PROP LIKE '1'
+			</when>
+		</choose>
+		GROUP BY PROJECT.prj_id
+		ORDER BY PRJ_ID DESC
+		            <![CDATA[ ) 
+		            A )
+		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	<select id="projectRwdList"
+		parameterType="co.test.prj.project.service.ProjectVO"
+		resultType="co.test.prj.project.service.ProjectVO">
+	<![CDATA[
+		SELECT *
+		FROM ( SELECT ROWNUM RN,
+		            A.*
+		                FROM ( ]]>
+		SELECT PROJECT.PRJ_ID, SUM(REWARD.RWD_PRC * REWARD.RWD_COT) AS
+		TOTAL_SUM
+		FROM PROJECT
+		LEFT JOIN REWARD
+		ON PROJECT.PRJ_ID = REWARD.PRJ_ID
+		WHERE PRJ_VIEW_PROP = 0
+		AND PRJ_NAME LIKE '%'||#{keyword}||'%'
+		<choose>
+			<when test="type != null and type.equals('ofr')">
+				AND PRJ_OFR_PROP LIKE '1'
+			</when>
+			<when test="type != null and type.equals('fnd')">
+				AND PRJ_FND_PROP LIKE '1'
+			</when>
+		</choose>
+		GROUP BY PROJECT.prj_id
+		ORDER BY PRJ_ID DESC
+		            <![CDATA[ ) 
+		            A )
+		WHERE RN > ( #{pageNum} -1 )* #{amount} AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+
+	<select id="projectSearchPageCount"
+		parameterType="co.test.prj.project.service.ProjectVO" resultType="int">
+
+		SELECT COUNT(*) AS TOTAL
+		FROM PROJECT
+		WHERE PRJ_NAME LIKE
+		'%'||#{keyword}||'%'
+		<choose>
+			<when test="type != null and type.equals('ofr')">
+				AND PRJ_OFR_PROP LIKE '1'
+			</when>
+			<when test="type != null and type.equals('fnd')">
+				AND PRJ_FND_PROP LIKE '1'
+			</when>
+		</choose>
+		ORDER BY PRJ_ID DESC
+
 	</select>
 	<!-- 원엽 -->
-	<select id="mainOfrList" resultType="co.test.prj.project.service.ProjectVO">
-	SELECT *
-	FROM 
-	(
-		SELECT P.PRJ_NAME,P.PRJ_ID,COUNT(T.USER_ID) AS TOTAL_TEAM_PRS ,P.PRJ_OFR_STR,P.PRJ_OFR_ED,(P.PRJ_FRN_PRS+P.PRJ_BK_PRS+P.PRJ_DB_PRS+P.PRJ_SER_PRS ) AS TOTAL_PRS,PRJ_AR,PRJ_CND
-		FROM PROJECT P LEFT OUTER JOIN TEAM T ON P.PRJ_ID=T.PRJ_ID
+	<select id="mainOfrList"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT *
+		FROM
+		(
+		SELECT P.PRJ_NAME,P.PRJ_ID,COUNT(T.USER_ID) AS
+		TOTAL_TEAM_PRS
+		,P.PRJ_OFR_STR,P.PRJ_OFR_ED,(P.PRJ_FRN_PRS+P.PRJ_BK_PRS+P.PRJ_DB_PRS+P.PRJ_SER_PRS
+		) AS TOTAL_PRS,PRJ_AR,PRJ_CND
+		FROM PROJECT P LEFT OUTER JOIN TEAM T ON
+		P.PRJ_ID=T.PRJ_ID
 		WHERE P.PRJ_OFR_PROP=1
-		GROUP BY P.PRJ_NAME,P.PRJ_ID,P.PRJ_OFR_STR,P.PRJ_OFR_ED,(P.PRJ_FRN_PRS+P.PRJ_BK_PRS+P.PRJ_DB_PRS+P.PRJ_SER_PRS ),PRJ_AR,PRJ_CND
+		GROUP BY
+		P.PRJ_NAME,P.PRJ_ID,P.PRJ_OFR_STR,P.PRJ_OFR_ED,(P.PRJ_FRN_PRS+P.PRJ_BK_PRS+P.PRJ_DB_PRS+P.PRJ_SER_PRS
+		),PRJ_AR,PRJ_CND
 		ORDER BY PRJ_ID DESC
-	)
-	WHERE ROWNUM <![CDATA[<]]>  7
+		)
+		WHERE ROWNUM <![CDATA[<]]>
+		7
 	</select>
-	
-	<select id="mainFndList" resultType="co.test.prj.project.service.ProjectVO">
-	SELECT *
-	FROM 
-	(
-		SELECT DISTINCT P.PRJ_NAME,P.PRJ_ID,C.CTF_ST_NAME ,C.CTF_USECTF_ST_COURSE,TRUNC(P.PRJ_FND_ED-SYSDATE) AS PRJ_TIME,P.PRJ_FND_ED,P.PRJ_GL_PRC,NVL((SELECT SUM(RWD_PRC*RWD_COT) FROM REWARD R,PROJECT S WHERE R.PRJ_ID=S.PRJ_ID AND S.PRJ_ID=B.PRJ_ID),0) AS TOTAL
-		FROM PROJECT P LEFT OUTER JOIN BUY B ON P.PRJ_ID=B.PRJ_ID, COMTNFILE C
-		WHERE P.PRJ_FND_PROP=1 AND P.CTF_ID=C.CTF_ID
+
+	<select id="mainFndList"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT *
+		FROM
+		(
+		SELECT DISTINCT P.PRJ_NAME,P.PRJ_ID,C.CTF_ST_NAME
+		,C.CTF_USECTF_ST_COURSE,TRUNC(P.PRJ_FND_ED-SYSDATE) AS
+		PRJ_TIME,P.PRJ_FND_ED,P.PRJ_GL_PRC,NVL((SELECT SUM(RWD_PRC*RWD_COT)
+		FROM REWARD R,PROJECT S WHERE R.PRJ_ID=S.PRJ_ID AND
+		S.PRJ_ID=B.PRJ_ID),0) AS TOTAL
+		FROM PROJECT P LEFT OUTER JOIN BUY B ON
+		P.PRJ_ID=B.PRJ_ID, COMTNFILE C
+		WHERE P.PRJ_FND_PROP=1 AND
+		P.CTF_ID=C.CTF_ID
 		ORDER BY PRJ_ID DESC
-	)
-	WHERE ROWNUM  <![CDATA[<]]> 4
-	
-	
+		)
+		WHERE ROWNUM  <![CDATA[<]]>
+		4
+
+
 	</select>
-	
-	
+	<select id="projectAllAppList"
+		parameterType="co.test.prj.project.service.ProjectVO"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT PROJECT.PRJ_ID , COUNT(APPLICATION.APP_ID) AS
+		TOTAL_COUNT
+		FROM PROJECT
+		LEFT JOIN APPLICATION
+		ON PROJECT.PRJ_ID =
+		APPLICATION.PRJ_ID
+		WHERE PROJECT.PRJ_VIEW_PROP = 0
+		GROUP BY
+		PROJECT.prj_id
+		ORDER BY PRJ_ID DESC
+	</select>
+
+	<select id="projectAllRwdList"
+		parameterType="co.test.prj.project.service.ProjectVO"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT PROJECT.PRJ_ID, SUM(REWARD.RWD_PRC * REWARD.RWD_COT) AS TOTAL_SUM
+		FROM PROJECT
+		LEFT JOIN REWARD
+		ON PROJECT.PRJ_ID = REWARD.PRJ_ID
+		WHERE PRJ_VIEW_PROP = 0
+		GROUP BY PROJECT.prj_id
+		ORDER BY PRJ_ID DESC
+	</select>
+	<!-- 원엽 끝 -->
+
 	<update id="projectHitUpdate" parameterType="int">
 		UPDATE project
-		SET prj_hit = prj_hit + 1 
+		SET
+		prj_hit = prj_hit + 1
 		WHERE prj_id = #{prj_id}
 	</update>
-	<select id="projectInterst" parameterType="co.test.prj.project.service.ProjectVO" resultType="co.test.prj.project.service.ProjectVO">
-		SELECT P.PRJ_ID,P.PRJ_NAME,P.PRJ_HIT,P.PRJ_FND_PROP,CTF_ST_NAME,PRJ_GL_PRC,PRJ_FND_STR,PRJ_FND_ED,PRJ_OFR_PROP,PRJ_AR,PRJ_CND,PRJ_FRN_PRS,PRJ_BK_PRS,PRJ_DB_PRS,PRJ_SER_PRS,PRJ_OFR_STR,PRJ_OFR_ED
-		FROM PROJECT P LEFT JOIN COMTNFILE C  ON(P.CTF_ID = C.CTF_ID),INTEREST I 
+	<select id="projectInterst"
+		parameterType="co.test.prj.project.service.ProjectVO"
+		resultType="co.test.prj.project.service.ProjectVO">
+		SELECT
+		P.PRJ_ID,P.PRJ_NAME,P.PRJ_HIT,P.PRJ_FND_PROP,CTF_ST_NAME,PRJ_GL_PRC,PRJ_FND_STR,PRJ_FND_ED,PRJ_OFR_PROP,PRJ_AR,PRJ_CND,PRJ_FRN_PRS,PRJ_BK_PRS,PRJ_DB_PRS,PRJ_SER_PRS,PRJ_OFR_STR,PRJ_OFR_ED
+		FROM PROJECT P LEFT JOIN COMTNFILE C ON(P.CTF_ID = C.CTF_ID),INTEREST
+		I
 		WHERE P.PRJ_ID=I.PRJ_ID AND I.USER_ID=#{master_id}
 		<choose>
 			<when test="type != null and type.equals('ofr')">
@@ -253,36 +341,67 @@
 			</when>
 		</choose>
 	</select>
-	
-	<select id="heartProject" parameterType="co.test.prj.interest.service.InterestVO" resultType="co.test.prj.interest.service.InterestVO">
-		SELECT * FROM INTEREST WHERE USER_ID = #{user_id} AND PRJ_ID = #{prj_id}
+
+	<select id="heartProject"
+		parameterType="co.test.prj.interest.service.InterestVO"
+		resultType="co.test.prj.interest.service.InterestVO">
+		SELECT * FROM INTEREST WHERE USER_ID = #{user_id} AND
+		PRJ_ID = #{prj_id}
 	</select>
-	
-	<select id="adminProjectSelectList" resultType="co.test.prj.project.service.ProjectVO">
-		select 
-		project.prj_id, project.PRJ_NAME, project.PRJ_STR, project.PRJ_ED
-		, project.PRJ_REG_DATE, project.PRJ_HIT, project.PRJ_OFR_PROP, project.PRJ_FND_PROP
-		, project.PRJ_DEVED_PROP, project.PRJ_CNT, project.MASTER_ID, project.CTF_ID
-		, project.PRJ_OFR_STR, project.PRJ_OFR_ED, project.PRJ_FRN_PRS, project.PRJ_BK_PRS
-		, project.PRJ_DB_PRS, project.PRJ_SER_PRS, project.PRJ_CND, project.PRJ_AR
-		, project.PRJ_FND_STR, project.PRJ_FND_ED, project.PRJ_GL_PRC, project.PRJ_VER
-		, project.PRJ_VIEW_PROP, project.PRJ_VER_DATE
-		,(select  count(buy_stt)
-		from buy
-		where buy_stt = '보관'
+
+	<select id="adminProjectSelectList"
+		resultType="co.test.prj.project.service.ProjectVO">
+		select
+		project.prj_id, project.PRJ_NAME, project.PRJ_STR,
+		project.PRJ_ED
+		,
+		project.PRJ_REG_DATE, project.PRJ_HIT,
+		project.PRJ_OFR_PROP,
+		project.PRJ_FND_PROP
+		, project.PRJ_DEVED_PROP,
+		project.PRJ_CNT,
+		project.MASTER_ID, project.CTF_ID
+		,
+		project.PRJ_OFR_STR,
+		project.PRJ_OFR_ED, project.PRJ_FRN_PRS,
+		project.PRJ_BK_PRS
+		,
+		project.PRJ_DB_PRS, project.PRJ_SER_PRS,
+		project.PRJ_CND,
+		project.PRJ_AR
+		, project.PRJ_FND_STR,
+		project.PRJ_FND_ED,
+		project.PRJ_GL_PRC, project.PRJ_VER
+		,
+		project.PRJ_VIEW_PROP,
+		project.PRJ_VER_DATE
+		,(select count(buy_stt)
+		from
+		buy
+		where buy_stt =
+		'보관'
 		AND project.prj_id = buy.prj_id
 		) as admincount
 		from project
-		left outer join buy
+		left
+		outer join buy
 		on project.prj_id = buy.prj_id
-		group by 
+		group by
 		project.prj_id, project.PRJ_NAME, project.PRJ_STR, project.PRJ_ED
-		, project.PRJ_REG_DATE, project.PRJ_HIT, project.PRJ_OFR_PROP, project.PRJ_FND_PROP
-		, project.PRJ_DEVED_PROP, project.PRJ_CNT, project.MASTER_ID, project.CTF_ID
-		, project.PRJ_OFR_STR, project.PRJ_OFR_ED, project.PRJ_FRN_PRS, project.PRJ_BK_PRS
-		, project.PRJ_DB_PRS, project.PRJ_SER_PRS, project.PRJ_CND, project.PRJ_AR
-		, project.PRJ_FND_STR, project.PRJ_FND_ED, project.PRJ_GL_PRC, project.PRJ_VER
-		, project.PRJ_VIEW_PROP, project.PRJ_VER_DATE
+		,
+		project.PRJ_REG_DATE, project.PRJ_HIT, project.PRJ_OFR_PROP,
+		project.PRJ_FND_PROP
+		, project.PRJ_DEVED_PROP, project.PRJ_CNT,
+		project.MASTER_ID, project.CTF_ID
+		, project.PRJ_OFR_STR,
+		project.PRJ_OFR_ED, project.PRJ_FRN_PRS, project.PRJ_BK_PRS
+		,
+		project.PRJ_DB_PRS, project.PRJ_SER_PRS, project.PRJ_CND,
+		project.PRJ_AR
+		, project.PRJ_FND_STR, project.PRJ_FND_ED,
+		project.PRJ_GL_PRC, project.PRJ_VER
+		, project.PRJ_VIEW_PROP,
+		project.PRJ_VER_DATE
 		order by admincount desc
 	</select>
 </mapper>

@@ -231,7 +231,7 @@ input {
 
 																								<div class="col-12">
 																									<img class="card-img rounded-0"
-																										src="./resources/upload/images/${project.ctf_st_name }"
+																										src="images/${project.ctf_st_name }"
 																										alt="사진이 없습니다.">
 																								</div>
 
@@ -447,7 +447,7 @@ input {
 
 																<div class="col-12">
 																	<img class="card-img rounded-0"
-																		src="./resources/upload/images/${project.ctf_st_name }"
+																		src="images/${project.ctf_st_name }"
 																		alt="사진이 없습니다.">
 																</div>
 

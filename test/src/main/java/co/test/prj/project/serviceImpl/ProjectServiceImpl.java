@@ -110,6 +110,18 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.adminProjectSelectList();
 	}
 
+	@Override
+	public List<ProjectVO> projectAllAppList(ProjectVO project) {
+		// TODO Auto-generated method stub
+		return map.projectAllAppList(project);
+	}
+
+	@Override
+	public List<ProjectVO> projectAllRwdList(ProjectVO project) {
+		// TODO Auto-generated method stub
+		return map.projectAllRwdList(project);
+	}
+
 	
 	
 

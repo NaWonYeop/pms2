@@ -35,7 +35,10 @@ public interface ProjectService {
 	List<ProjectVO> mainOfrList();
 	//메인페이지 뿌려줄 펀딩리스트
 	List<ProjectVO> mainFndList();
-	
+	//모든 리스트 신청인
+	List<ProjectVO> projectAllAppList(ProjectVO project);
+	//모든 리스트 리워드
+	List<ProjectVO> projectAllRwdList(ProjectVO project);
 	
 	List<ProjectVO> projectAppList(ProjectVO project);
 	
