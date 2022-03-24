@@ -34,9 +34,6 @@ public class TeamController {
 
 	@RequestMapping("/msteam")
 	public String team(HttpSession session) {
-		UserVO sessionUser = (UserVO) session.getAttribute("sessionUser");
-		MyPrjVO prj = (MyPrjVO) session.getAttribute("myPrj");
-
 		return "pms/team/team";
 	}
 

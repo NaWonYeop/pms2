@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 
 <div class="main-panel">
 	<div class="content-wrapper">
@@ -33,6 +32,9 @@
 		</div>
 	</div>
 </div>
+
+<input id="hiddenAppMaster" type="hidden" value="${sessionScope.myPrj.master_id}">
+<input id="hiddenAppUser" type="hidden" value="${sessionScope.sessionUser.user_id}">
 <script>
 	$(function () {
 		getList();
@@ -48,27 +50,42 @@
 			if(json.length == 0) {
 				$(".table-responsive").append(`<div style="text-align: center;">신청한 유저가 없습니다.</div>`);
 			}
+			var hiddenAppMaster = $("#hiddenAppMaster").val();
+			var hiddenAppUser = $("#hiddenAppUser").val();
 			for (app of json) {
-				$("#myTbody").append(`
-				<tr id="myTr\${app.app_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
-					<td>\${app.app_id}</td>
-					<td>\${app.user_name}</td>
-					<td>\${app.user_email}</td>
-					<td>\${app.user_tel}</td>
-					<td>\${app.app_clsfc == "0" ? "구인" : "구직"}</td>
-					<td>
-						<div class="btn-group">
-							<button id="btn\${app.app_id}" type="button"
-								class="btn btn-outline-secondary btn-sm dropdown-toggle"
-								data-toggle="dropdown">\${app.app_stt}</button>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ing" onclick="appUpdate(this)" >ing</a> 
-								<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ok" onclick="appUpdate(this)" >ok</a>
-								<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="no" onclick="appUpdate(this)" >no</a>
-							</div>
-						</div>
-					</td>
-				</tr>`);
+				if(hiddenAppMaster == hiddenAppUser) {
+					$("#myTbody").append(`
+							<tr id="myTr\${app.app_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
+								<td>\${app.app_id}</td>
+								<td>\${app.user_name}</td>
+								<td>\${app.user_email}</td>
+								<td>\${app.user_tel}</td>
+								<td>\${app.app_clsfc == "0" ? "구인" : "구직"}</td>
+								<td>
+									<div class="btn-group">
+										<button id="btn\${app.app_id}" type="button"
+											class="btn btn-outline-secondary btn-sm dropdown-toggle"
+											data-toggle="dropdown">\${app.app_stt}</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ing" onclick="appUpdate(this)" >ing</a> 
+											<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="ok" onclick="appUpdate(this)" >ok</a>
+											<a class="dropdown-item" data-user_id="\${app.user_id}" data-prj_id="\${app.prj_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-app_stt="no" onclick="appUpdate(this)" >no</a>
+										</div>
+									</div>
+								</td>
+							</tr>`);
+				} else {
+					$("#myTbody").append(`
+							<tr id="myTr\${app.app_id}" data-app_id="\${app.app_id}" data-master_id="\${app.master_id}" data-prj_id="\${app.prj_id}">
+								<td>\${app.app_id}</td>
+								<td>\${app.user_name}</td>
+								<td>\${app.user_email}</td>
+								<td>\${app.user_tel}</td>
+								<td>\${app.app_clsfc == "0" ? "구인" : "구직"}</td>
+								<td>권한없음</td>
+							</tr>`);
+				}
+				
 				chaingeClass();
 			};
 		}).fail(function (xhr, status, message) {
