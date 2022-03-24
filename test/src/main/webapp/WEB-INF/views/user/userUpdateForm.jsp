@@ -110,7 +110,7 @@ a {
 					maxlength="11" value="${sessionUser.user_tel }"><br> 
 					<label>이더리움 아이디</label>
 					<input type="text" name="ether_id" id="ether_id"
-					class="form-control" required="required"
+					class="form-control" 
 					value="${sessionUser.ether_id }"><br> 
 					<input
 					id="btn-Yes" class="btn_1" type="submit" style="width: 100%;"

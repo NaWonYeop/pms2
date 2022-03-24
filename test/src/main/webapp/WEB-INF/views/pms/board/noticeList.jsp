@@ -50,7 +50,7 @@ thead {
 						<div class="col-xl-5">
 							<div class="section_tittle text-center">
 
-								<h2>자유 게시판</h2>
+								<h2>공지</h2>
 							</div>
 						</div>
 					</div>
