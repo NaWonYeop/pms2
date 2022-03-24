@@ -10,7 +10,7 @@ public interface BuyMapper {
 	
 	int buyMaxId();
 	
-	int buyMaxCoinCount(int user_id);
+	int buyMaxCoinCount(BuyVO buy);
 	
 	//리워드 환불
 	int buyRFund(BuyVO buy);
@@ -20,5 +20,6 @@ public interface BuyMapper {
 	int buySumWon(int prj_id);
 	long buySumWei(int prj_id);
 	int buySttChange(BuyVO buy);
+	List<BuyVO> buyMuidList(int prj_id);
 	
 }

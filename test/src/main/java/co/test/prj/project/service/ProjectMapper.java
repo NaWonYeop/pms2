@@ -54,5 +54,8 @@ public interface ProjectMapper {
 	//프로젝트 찜리스트
 	List<ProjectVO> projectInterst(ProjectVO vo);
 	InterestVO heartProject(InterestVO vo);
+	
+	//어드민 프로젝트 리스트
+	List<ProjectVO> adminProjectSelectList();
 
 }

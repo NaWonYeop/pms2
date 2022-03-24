@@ -466,7 +466,7 @@ public class ProjectController {
 		@RequestMapping("/adminProject")
 		public String adminProject(Model model) {
 			
-			model.addAttribute("Project",projectDao.projectSelectList());
+			model.addAttribute("Project",projectDao.adminProjectSelectList());
 	
 			return "admin/adminProject";
 		}

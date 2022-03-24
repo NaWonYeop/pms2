@@ -36,4 +36,7 @@ public class BuyVO {
 	private int buy_won;
 	private long buy_wei;
 	private int maxcount;
+	private int master_id;
+	private int sumwon;
+	private long sumwei;
 }

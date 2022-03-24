@@ -10,7 +10,7 @@ public interface BuyService {
 	
 	int buyMaxId();
 	
-	int buyMaxCoinCount(int user_id);
+	int buyMaxCoinCount(BuyVO buy);
 	
 	int buyRFund(BuyVO buy);
 	
@@ -18,4 +18,5 @@ public interface BuyService {
 	int buySumWon(int prj_id);
 	long buySumWei(int prj_id);
 	int buySttChange(BuyVO buy);
+	List<BuyVO> buyMuidList(int prj_id);
 }

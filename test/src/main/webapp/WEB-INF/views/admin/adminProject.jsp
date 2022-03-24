@@ -81,7 +81,6 @@
 					<tr>
 						<th><div class="visit">프로젝트명</div></th>
 						<th><div class="country">기간</div></th>
-						<th><div class="visit">총 참여인원</div></th>
 						<th><div class="visit">상태</div></th>
 						<th><div class="visit">정산</div></th>
 						<th><div class="visit">삭제</div></th>
@@ -99,7 +98,6 @@
 									<fmt:formatDate value="${myp.prj_ed }" pattern="yyyy/MM/dd" />
 								</div>
 							</td>
-							<td><div class="visit">${myp.count }명</div></td>
 							<td>
 							<div class="visit">
 									<c:choose>
@@ -112,8 +110,18 @@
 									</c:choose>
 								</div></td>
 							<td><div class="visit">
-									<button class="money button button-contactForm btn_1"
-										id="${myp.prj_id}">정산</button>
+							<c:if test="${myp.admincount != 0}">
+								<button class="money button button-contactForm btn_1"
+											id="${myp.prj_id}">정산</button>
+							</c:if>
+							
+							<c:if test="${myp.admincount == 0}">
+								<button class="nono button button-contactForm " style="background-color: gray;"
+											id="${myp.prj_id}">없음</button>
+							</c:if>
+									
+										
+										
 								</div></td>
 							<td><div class="visit">
 									<button class="button button-contactForm btn_1"
@@ -168,6 +176,8 @@
               && !$(e.target).hasClass("current")) {
             $('.modaldal').fadeOut();
             $('.modal__background').fadeOut();
+            $('#modaltotalwon').html();
+	     	$('#modaltotalwei').html();
           
         }
     }
@@ -193,7 +203,15 @@
 			     	console.log(res);
 			     	$('#modaltotalwon').html(res.sumWon + " 원");
 			     	$('#modaltotalwei').html(res.sumWei + " wei");
-	
+					 for(muid of res.muids){
+						 console.log(muid);
+						 for(a in muid){
+							 
+							 //console.log(a);
+							// console.log(buy.a);
+						 }
+						
+					 }
 			          //location.reload();
 			        },
 			        error:function(){
@@ -325,20 +343,18 @@
 	
 	
 	
+    $('.nono').click(function(e){
+    	toastr.error("정산할 건이 없습니다.");
+    })
 	
-	
-	
-	
-	
-	
-	
+
 	
 	toastr.options = {
 			  "closeButton": false,
 			  "debug": false,
 			  "newestOnTop": false,
 			  "progressBar": true,
-			  "positionClass": "toast-top-right",
+			  "positionClass": "toast-top-center",
 			  "preventDuplicates": false,
 			  "onclick": null,
 			  "showDuration": "100",
@@ -349,7 +365,8 @@
 			  "hideEasing": "linear",
 			  "showMethod": "fadeIn",
 			  "hideMethod": "fadeOut"
-			}    
+			}  
+    
 		function delproject(id) {
 			$.ajax({
         		url: 'adminPrjDelete',

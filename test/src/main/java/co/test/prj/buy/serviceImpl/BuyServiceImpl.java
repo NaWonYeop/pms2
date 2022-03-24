@@ -30,9 +30,10 @@ public class BuyServiceImpl implements BuyService {
 	}
 
 	@Override
-	public int buyMaxCoinCount(int user_id) {
-		return map.buyMaxCoinCount(user_id);
+	public int buyMaxCoinCount(BuyVO buy) {
+		return map.buyMaxCoinCount(buy);
 	}
+
 
 	@Override
 	public int buyRFund(BuyVO buy) {
@@ -58,6 +59,12 @@ public class BuyServiceImpl implements BuyService {
 	public int buySttChange(BuyVO buy) {
 		return map.buySttChange(buy);
 	}
+
+	@Override
+	public List<BuyVO> buyMuidList(int prj_id) {
+		return map.buyMuidList(prj_id);
+	}
+
 
 	
 
