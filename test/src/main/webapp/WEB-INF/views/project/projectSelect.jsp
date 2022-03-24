@@ -173,7 +173,7 @@ ${project}<br>
         <div class="container">
         	<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
         	<div class="col-12 Tname">
-	            <h4 class="title_top" style="font-size: 50px;">${project.prj_name}</h4>
+	            <h4 class="title_top" style="font-size: 50px; margin-bottom: 40px;">${project.prj_name}</h4>
 	            조회수 : ${project.prj_hit}<br>
 				등록일 : <fmt:formatDate value="${project.prj_reg_date }" pattern="yyyy-MM-dd" /><br>
 				담당자 아이디 : ${project.master_id}<br>

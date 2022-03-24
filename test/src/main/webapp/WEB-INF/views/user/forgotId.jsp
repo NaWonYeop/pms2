@@ -51,9 +51,7 @@
   		font-size: 16px;
 	}
  
-    .card-title{
-        margin-left: 30px;
-    }
+    
 
 
     a{ 
@@ -73,7 +71,7 @@
    
   <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 
-	<div class="card align-middle" style="width:25rem;">
+	<div class="card align-middle" style="width:25rem; margin-top: 5%; margin-bottom: 15%;">
 		<div class="card-title" style="margin-top:30px;">
 		<h2 style="text-align: center;">아이디 찾기</h2>
             
@@ -89,7 +87,7 @@
       
 		</div>
         <div class="links">
-            <a href=forgotPassword>비밀번호 찾기</a> | <a href="loginForm">로그인</a> | <a href="registerForm">회원가입</a>
+            <a href=forgotPassword style="font-family: 'TmoneyRoundWindRegular';">비밀번호 찾기</a> | <a href="loginForm" style="font-family: 'TmoneyRoundWindRegular';">로그인</a> | <a href="registerForm" style="font-family: 'TmoneyRoundWindRegular';">회원가입</a>
         </div>
 	</div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

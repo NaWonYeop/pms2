@@ -136,12 +136,12 @@
 			
 	
 	<section class="special_cource padding_top">
-		<div class="container">
+		<div class="container" style="margin-top: 5%;">
 			<div class="row justify-content-center">
 				<div class="col-xl-5">
 					<div class="section_tittle text-center">
 						<p>JOB</p>
-						<h2>구직 리스트</h2>
+						<h2>찜 리스트</h2>
 					</div>
 				</div>
 			</div>
@@ -213,8 +213,21 @@
 								</div>
 						
 						</c:forEach>
-					--------------찜끝
 					</c:if>
+					
+					<section class="special_cource padding_top">
+						<div class="container" style="margin-top: 5%;">
+							<div class="row justify-content-center">
+								<div class="col-xl-5">
+									<div class="section_tittle text-center">
+										<p>JOB</p>
+										<h2>구직 리스트</h2>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					
 				</div>
 					<div class="row">
 					<div id="data_list_wrapper" class="dataTables_wrapper no-footer" style="width: 100%;">

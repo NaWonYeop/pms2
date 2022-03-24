@@ -2167,11 +2167,6 @@ ul {
   padding: 0rem !important;
 }
 
-/* line 12, E:/172 Etrain Education/172_Etrain_Education_html/sass/_menu.scss */
-.main_menu .navbar {
-  padding: 20px 0px;
-}
-
 /* line 15, E:/172 Etrain Education/172_Etrain_Education_html/sass/_menu.scss */
 .main_menu .navbar-toggler {
   position: relative;
@@ -6886,10 +6881,23 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 50%;
 }
 
+.breadcrumb_bg2 {
+  background-image: url("../img/pms.png");
+  background-color: #798BF2;
+  background-position: 10% 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 /* line 5, E:/172 Etrain Education/172_Etrain_Education_html/sass/_breadcrumb.scss */
 .breadcrumb {
   position: relative;
   text-align: center;
+}
+
+.breadcrumb2 {
+	height: 442px;
+	margin-top: 5%;
 }
 
 /* line 10, E:/172 Etrain Education/172_Etrain_Education_html/sass/_breadcrumb.scss */

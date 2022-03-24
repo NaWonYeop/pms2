@@ -84,7 +84,7 @@ a {
 <body cellpadding="0" cellspacing="0" marginleft="0" margintop="0"
 	width="100%" height="100%" align="center">
 
-	<div class="card align-middle" style="width: 25rem;">
+	<div class="card align-middle" style="width: 25rem; margin-top: 5%; margin-bottom: 15%;">
 		<div class="card-title" style="margin-top: 30px;"></div>
 		<h2 style="text-align: center;">일반 회원가입</h2>
 		<form action="register" onsubmit="return formCheck()" method="post">

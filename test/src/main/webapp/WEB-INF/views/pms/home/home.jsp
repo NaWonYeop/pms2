@@ -3,8 +3,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+@font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TmoneyRoundWindRegular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
-	font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 	font-size: 14px;
 }
 
@@ -125,7 +138,7 @@ h5 {
 			<div class="col-md-12 grid-margin">
 				<div class="row">
 					<div class="col-12 col-xl-8 mb-4 mb-xl-0">
-						<h3 class="font-weight-bold">전체 진행율</h3>
+						<h3 class="font-weight-bold" style="font-family: 'TmoneyRoundWindExtraBold';">전체 진행율</h3>
 						<!-- <h6 class="font-weight-normal mb-0">
 						All systems are running smoothly! You have <span
 							class="text-primary">3 unread alerts!</span>
@@ -295,7 +308,7 @@ h5 {
 				}
 				totalPrice = json[0].rwd_goal;
 				
-				$("#price").append(`<h4 style="text-align: center;">총 펀딩금액 : \${totalPrice} / 현재 펀딩금액 : \${total}</h4`);
+				$("#price").append(`<h4 style="text-align: center; font-family: 'TmoneyRoundWindExtraBold';">총 펀딩금액 : \${totalPrice} / 현재 펀딩금액 : \${total}</h4`);
 				
 				var ctxB = document.getElementById("barChart").getContext("2d");
 				var myBarChart = new Chart(ctxB, {
