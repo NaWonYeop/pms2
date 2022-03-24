@@ -154,7 +154,15 @@ public class TechController {
 		
 		return "redirect:/jobSelectList";
 	}
-	
+	@RequestMapping("/jobDeleteMove")
+	public String jobDeleteMove(HttpSession session)
+	{
+		UserVO vo =(UserVO)session.getAttribute("sessionUser");
+		vo.setUser_job_ttl("");
+		vo.setUser_job_cnt("");
+		userDao.userUpdate(vo);
+		return "redirect:/jobSelectList";
+	}
 	//구인 신청하기
 	@RequestMapping("/requestWork")
 	@ResponseBody

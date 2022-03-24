@@ -7,7 +7,7 @@
 	
 	<!-- 등록 및 수정 버튼 권한 체크 -->
 	<select id="insertUpdatebtnCheck" resultType="co.test.prj.user.service.UserVO">
-		SELECT USER_ATH FROM "user" WHERE USER_ID = #{user_id}
+		SELECT USER_ATH,USER_JOB_TTL FROM "user" WHERE USER_ID = #{user_id}
 	</select>
 	
 	<select id="jobSelectList" resultType="co.test.prj.user.service.UserVO">

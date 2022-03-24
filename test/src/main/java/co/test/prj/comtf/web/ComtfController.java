@@ -52,7 +52,7 @@ public class ComtfController {
 		uploadFile.transferTo(new File(uploadDir + uploadId));
 		System.out.println("uploadFile : "+uploadFile);
 		//경로~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		paramMap.put("url", uploadDir+uploadId);
+		paramMap.put("url", "/images/"+uploadId);
 		//paramMap.put("url", "/upload/images/" + uploadId);
 		return paramMap;
 	}

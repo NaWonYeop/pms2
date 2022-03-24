@@ -158,14 +158,33 @@
 									<c:when test="${enter.prj_devEd_prop eq 0 }">
 									<div class="visit ingbtn" style="display: block; width: 7%;">
                             		진행중</div>
+                            		<div class="visit" style="width: 7%; text-align: center; display: block;">진행중</div>
                             		</c:when>
+                            		
 									<c:otherwise>
 									<div class="visit finishbtn" style="display: block; width: 7%;">
                             		종료</div>
+                            		<c:choose>
+                            			<c:when test="${enter.master_id eq sessionUser.user_id }">
+                            				<div class="visit" style="width: 7%; text-align: center; display: block;">기획자</div>
+                            			</c:when>
+                            			<c:otherwise>
+                            				<div class="visit" style="width: 7%; text-align: center; display: block;">
+                            					<c:choose>
+                            						<c:when test="${enter.str_avg < 1 }">
+                            							미평가
+                            						</c:when>
+                            						<c:otherwise>
+                            							${enter.str_avg }
+                            						</c:otherwise>
+                            					</c:choose>
+                            				</div>
+                            			</c:otherwise>
+                            		</c:choose>
                             		</c:otherwise>
 								</c:choose>
 								
-								<div class="visit" style="width: 7%; text-align: center; display: block;">4.0</div>
+								
 							</div>
 						</c:forEach>
 					</div>

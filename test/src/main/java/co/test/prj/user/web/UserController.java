@@ -267,7 +267,7 @@ public class UserController {
 		vo.setUser_id(user.getUser_id());
 		userDao.userUpdate(vo);
 		if(list.size()> 1) {
-			list.remove(list.size());
+			list.remove(list.size()-1);
 		}
 		for (String temp : list) {
 			System.out.println(temp);
@@ -376,6 +376,9 @@ public class UserController {
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
 		userDao.deleteDev(del);
+		if(list.size()> 1) {
+			list.remove(list.size()-1);
+		}
 		for (String temp : list) {
 			System.out.println(temp);
 			CertVO cert = new CertVO();
@@ -494,6 +497,8 @@ public class UserController {
 	public String myProject(HttpSession session, Model model) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		int id = user.getUser_id();
+		ProjectVO ve=new ProjectVO();
+		
 		model.addAttribute("enterProject", userDao.MyJoinProject(id));
 		model.addAttribute("Myproject", userDao.MyInsertProject(id));
 

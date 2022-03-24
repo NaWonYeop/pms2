@@ -144,6 +144,7 @@ a {
 				<button type="button" onclick="add()" id="addBtn" class="btn_4" >추가</button>
 				
 				<ul id="certList" style="margin-top: 3%">
+				<input id="date" name = "cert_name" type="hidden" value = "없음" >
 				<c:forEach items="${MyCert}" var="certifi">
 				<li>
 					${certifi.cert_name}<span class="close">x</span>

@@ -103,7 +103,7 @@ public class ProjectVO
 	
 	private int buy_won;
 	private long buy_wei;
-	
+	private double str_avg;//별점 평균
 	//환불
 	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때

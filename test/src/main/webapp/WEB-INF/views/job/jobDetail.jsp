@@ -220,6 +220,7 @@
 	                    <c:choose>
 	                    	<c:when test="${sessionUser.user_id eq jobDetail.user_id }">
 	                    		<button type="button" id="updatebtn" class="btn_4" style="background-color: #F27457;" onclick="location.href='jobInsertMove?cmd=jobDetail'">수정하기</button>
+	                    		<button type="button" id="updatebtn" class="btn_4" style="background-color: #F27457;" onclick="location.href='jobDeleteMove'">삭제하기</button>
 	                    	</c:when>
 	                    	<c:otherwise>
 			                    	<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>

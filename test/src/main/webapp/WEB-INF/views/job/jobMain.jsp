@@ -102,10 +102,23 @@
 		</div>
 	</section>
 	<c:if test="${btnCheck.user_ath != 'user' && btnCheck.user_ath != null}">
+		<c:choose>
+		<c:when test="${btnCheck.user_job_ttl eq null }">
 				<div class="insertbtn">
 					<button type="button" id="insertbtn" class="btn_1"
 						onclick="location.href='jobInsertMove?cmd=jobMain'" style="width: 40%;">등록 및 수정</button>
 				</div>
+		</c:when>
+		<c:otherwise>
+				<div class="insertbtn">
+					<button type="button" id="insertbtn" class="btn_1"
+						onclick="location.href='jobInsertMove?cmd=jobMain'" style="width: 20%;">마이 페이지</button>
+						<button type="button" id="insertbtn" class="btn_1"
+						onclick="location.href='jobDetail?user_id=${sessionUser.user_id}'" style="width: 20%;">등록 및 수정</button>
+				</div>
+				
+		</c:otherwise>
+		</c:choose>
 			</c:if>
 	<div class="search">
 			<!-- 검색기능 -->
