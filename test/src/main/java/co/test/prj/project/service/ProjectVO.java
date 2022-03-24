@@ -111,4 +111,7 @@ public class ProjectVO
 	private int buy_rfnd_won; //환불금액
 	private long buy_rfnd_wei; //환불금액
 	
+	//admin 추가 
+	private int admincount;
+	
 }

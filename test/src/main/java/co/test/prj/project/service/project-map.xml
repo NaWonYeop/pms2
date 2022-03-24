@@ -257,4 +257,32 @@
 	<select id="heartProject" parameterType="co.test.prj.interest.service.InterestVO" resultType="co.test.prj.interest.service.InterestVO">
 		SELECT * FROM INTEREST WHERE USER_ID = #{user_id} AND PRJ_ID = #{prj_id}
 	</select>
+	
+	<select id="adminProjectSelectList" resultType="co.test.prj.project.service.ProjectVO">
+		select 
+		project.prj_id, project.PRJ_NAME, project.PRJ_STR, project.PRJ_ED
+		, project.PRJ_REG_DATE, project.PRJ_HIT, project.PRJ_OFR_PROP, project.PRJ_FND_PROP
+		, project.PRJ_DEVED_PROP, project.PRJ_CNT, project.MASTER_ID, project.CTF_ID
+		, project.PRJ_OFR_STR, project.PRJ_OFR_ED, project.PRJ_FRN_PRS, project.PRJ_BK_PRS
+		, project.PRJ_DB_PRS, project.PRJ_SER_PRS, project.PRJ_CND, project.PRJ_AR
+		, project.PRJ_FND_STR, project.PRJ_FND_ED, project.PRJ_GL_PRC, project.PRJ_VER
+		, project.PRJ_VIEW_PROP, project.PRJ_VER_DATE
+		,(select  count(buy_stt)
+		from buy
+		where buy_stt = '보관'
+		AND project.prj_id = buy.prj_id
+		) as admincount
+		from project
+		left outer join buy
+		on project.prj_id = buy.prj_id
+		group by 
+		project.prj_id, project.PRJ_NAME, project.PRJ_STR, project.PRJ_ED
+		, project.PRJ_REG_DATE, project.PRJ_HIT, project.PRJ_OFR_PROP, project.PRJ_FND_PROP
+		, project.PRJ_DEVED_PROP, project.PRJ_CNT, project.MASTER_ID, project.CTF_ID
+		, project.PRJ_OFR_STR, project.PRJ_OFR_ED, project.PRJ_FRN_PRS, project.PRJ_BK_PRS
+		, project.PRJ_DB_PRS, project.PRJ_SER_PRS, project.PRJ_CND, project.PRJ_AR
+		, project.PRJ_FND_STR, project.PRJ_FND_ED, project.PRJ_GL_PRC, project.PRJ_VER
+		, project.PRJ_VIEW_PROP, project.PRJ_VER_DATE
+		order by admincount desc
+	</select>
 </mapper>

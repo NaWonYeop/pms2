@@ -46,4 +46,6 @@ public interface ProjectService {
 	List<ProjectVO> projectInterst(ProjectVO vo);
 	
 	InterestVO heartProject(InterestVO vo);
+	
+	List<ProjectVO> adminProjectSelectList();
 }

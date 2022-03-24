@@ -105,6 +105,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return map.heartProject(vo);
 	}
 
+	@Override
+	public List<ProjectVO> adminProjectSelectList() {
+		return map.adminProjectSelectList();
+	}
+
 	
 	
 

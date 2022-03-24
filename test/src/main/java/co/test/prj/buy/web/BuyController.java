@@ -133,7 +133,7 @@ public class BuyController {
 	
 	@RequestMapping("/ajaxSise")
 	@ResponseBody
-	private Map<String, Object> ajaxSise(HttpSession session){
+	private Map<String, Object> ajaxSise(HttpSession session,@RequestParam("user_id") int user_id,@RequestParam("master_id") int master_id, BuyVO buy ){
 		System.out.println("시세시작");
 		Map<String, Object> map = new HashedMap();
 		
@@ -215,10 +215,13 @@ public class BuyController {
 		map.put("etherDol", etherD);
 		map.put("etherWon", etherW);
 		
-		UserVO vo =(UserVO)session.getAttribute("sessionUser");
-		int user_id= vo.getUser_id();
+		//UserVO vo =(UserVO)session.getAttribute("sessionUser");
+		//int user_id= vo.getUser_id();
 		System.out.println("user_id : " + user_id);
-		map.put("buyMaxCoinCount", buyDao.buyMaxCoinCount(user_id));
+		System.out.println("master_id : " + master_id);
+		buy.setUser_id(user_id);
+		buy.setMaster_id(master_id);
+		map.put("buyMaxCoinCount", buyDao.buyMaxCoinCount(buy));
 		return map;
 	}
 	
@@ -231,18 +234,19 @@ public class BuyController {
 	 @RequestMapping("/ajaxBuyData")
 	 @ResponseBody
 	 private Map<String, Object> ajaxBuyData( @RequestParam("prj_id") int pId){
-			System.out.println("ajaxBuyData시작");
-			System.out.println("prj_id : " + pId);
+		System.out.println("ajaxBuyData시작");
+		System.out.println("prj_id : " + pId);
 
-			Map<String, Object> map = new HashedMap();
-			
-			
-			map.put("buys", buyDao.buyDataList(pId));
-			map.put("sumWon", buyDao.buySumWon(pId));
-			map.put("sumWei", buyDao.buySumWei(pId));
+		Map<String, Object> map = new HashedMap();
+		
+		
+		map.put("buys", buyDao.buyDataList(pId));
+		map.put("sumWon", buyDao.buySumWon(pId));
+		map.put("sumWei", buyDao.buySumWei(pId));
+		map.put("muids", buyDao.buyMuidList(pId));
 
-			
-			return map;
+		
+		return map;
 	 }
 	 
 	 

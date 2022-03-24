@@ -15,10 +15,14 @@
 		SELECT NVL(MAX(BUY_ID) + 1, 1) AS ID FROM BUY
 	</select>
 
-	<select id="buyMaxCoinCount" resultType="int">
-		SELECT NVL(COUNT(BUY_ID)+1,1) AS MAXCOUNT
+	<select id="buyMaxCoinCount" resultType="int" parameterType="co.test.prj.buy.service.BuyVO">
+        SELECT NVL(COUNT(BUY_ID)+1,1) AS MAXCOUNT
 		FROM BUY 
+        JOIN REWARD
+        ON BUY.REWARD_ID =  REWARD.REWARD_ID
 		WHERE USER_ID = #{user_id}
+        AND MASTER_ID = #{master_id}
+        AND BUY.BUY_DATE BETWEEN (SYSDATE - (INTERVAL '1' DAY)) AND (SYSDATE + (INTERVAL '1' DAY))
 		AND BUY_WAY = 'coin'
 	</select>
 	
@@ -41,14 +45,14 @@
 	</select>
 	
 	<select id="buySumWon" resultType="int">
-		SELECT SUM(BUY_WON)
+		SELECT NVL(SUM(BUY_WON),0)
 		FROM BUY
 		WHERE PRJ_ID = #{PRJ_ID}
 		AND NOT BUY_STT = '환불'
 	</select>
 	
 	<select id="buySumWei" resultType="long">
-		SELECT SUM(BUY_WEI)
+		SELECT NVL(SUM(BUY_WEI),0)
 		FROM BUY
 		WHERE PRJ_ID = #{PRJ_ID}
 		AND NOT BUY_STT = '환불'
@@ -59,5 +63,15 @@
 		SET BUY_STT = #{buy_stt}
 		WHERE BUY_ID = #{buy_id}
 	</update>
+	
+	<select id="buyMuidList" resultType="co.test.prj.buy.service.BuyVO" parameterType="int">
+		SELECT BUY_DATE, BUY_MUID ,SUM(BUY_WON) AS SUMWON ,SUM(BUY_WEI) AS SUMWEI
+		FROM( SELECT*
+		FROM BUY
+		WHERE PRJ_ID = #{PRJ_ID}
+		AND BUY_STT = '보관'
+		)
+		GROUP BY BUY_MUID,BUY_DATE
+	</select>
 	
 </mapper>

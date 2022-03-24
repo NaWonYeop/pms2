@@ -100,6 +100,8 @@ ul {
 								<a class="d-inline-block" href="projectSelect?prj_id=${fun.prj_id }" style=" margin-bottom: 7%;">
 									<h3 style="word-break: break-all;">${fun.prj_name }</h3>
 								</a> 
+							
+									
 									<h5 style="text-align: center;">${fun.rwd_name }</h5>
 								</div>
 								
@@ -113,7 +115,8 @@ ul {
 									<li>구매 수량 : ${fun.buy_count } </li>
 								</ul>
 								<ul class="blog-info-link">
-									<li id="bw${fun.buy_id }">구매 방법 : ${fun.buy_way }</li>
+									<li>구매 방법 : ${fun.buy_way }</li>
+									
 								</ul>
 								<ul class="blog-info-link" style="margin-bottom: 10%;">
 									<li>
@@ -126,6 +129,7 @@ ul {
 										</c:if> 
 									</li>
 								</ul>
+								<input type="hidden" id="bw${fun.buy_id }" value="${fun.buy_way }">
 								<input type="hidden" id="r${fun.buy_id }" value="${fun.reward_id }">
 								<input type="hidden" id="bc${fun.buy_id }" value="${fun.buy_count }">
 								<input type="hidden" id="muID${fun.buy_id }" value="${fun.buy_muid }">
@@ -133,8 +137,14 @@ ul {
 								
 								
 								<div class="col-sm-12 text-center" style="padding-left: 0px;">
-									<button type="button" id="${fun.buy_id }" class="rfnd button button-contactForm btn_1"
-										style="width: 100%; font-family: 'MinSans-Medium';">환불</button>
+									<c:if test="${fun.buy_stt !='환불'}">
+										<button type="button" id="${fun.buy_id }" class="rfnd button button-contactForm btn_1"
+											style="width: 100%; font-family: 'MinSans-Medium';">환불</button>
+									</c:if>
+									<c:if test="${fun.buy_stt =='환불'}">
+										<button type="button"  class="nono button button-contactForm "
+											style="width: 100%; font-family: 'MinSans-Medium'; background-color: gray !important; ">환불 완료</button>
+									</c:if>
 								</div>
 							</div>
 						</c:forEach>
@@ -177,6 +187,7 @@ ul {
               && !$(e.target).hasClass("current")) {
             $('.modaldal').fadeOut();
             $('.modal__background').fadeOut();
+            $('#modalPay').html();
           
         }
     }
@@ -205,14 +216,14 @@ ul {
   	  		console.log("리워드 아이디 : "+ rId);
   	  		bCnt = document.getElementById('bc'+bId).value;
   	  		console.log("구매 수량 : "+ bCnt);
-  			bWay = document.getElementById('bw'+bId).textContent;
+  			bWay = document.getElementById('bw'+bId).value;
   	  		console.log("구매 방법 : "+ bWay);
   	  		
   	  		if(bWay == 'cash'){
 	  	  		bPay = document.getElementById('pay'+bId).textContent;
 	  	  		console.log("원화 가격 : "+ bPay);
 	  	  		
-	  			$('#modalPay').html(bPay + " won");
+	  			$('#modalPay').html(bPay + " 원");
   	  			
   	  		} else {
 	  	  		bPay = document.getElementById('pay'+bId).textContent;
@@ -225,7 +236,9 @@ ul {
  
     });
     
-    
+    $('.nono').click(function(e){
+    	toastr.error("이미 환불한건 입니다.");
+    })
     function request() {
     	//debugger;
 			console.log("환불시작");
