@@ -33,10 +33,18 @@ public class ComtfController {
 		
 		//나중에 경로 realpath 바꿔야함
 		String path = hreq.getServletContext().getRealPath("resources\\upload"); 
+		String path3 = hreq.getServletContext().getRealPath(""); 
+		path3=path3.replace("\\", "/");
+		String[] path4=path3.split("/");
+		String path5="";
+		for(int i=0;i<path4.length-1;i++)
+		{
+			path5+=path4[i]+"/";
+		}
 		//String path = "C:\\Users\\admin\\git\\pms2\\test\\src\\main\\webapp\\resources\\upload";
 		String path2 = path.replace("\\", "/");
-		System.out.println("path2 : "+ path2);
-		String uploadDir = path2 + "/images/";
+		System.out.println("path5 : "+ path5);
+		String uploadDir = path5 + "images/";
 		System.out.println("uploadDir : "+ uploadDir);
 		String uploadId = UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(uploadFile.getOriginalFilename());
 		System.out.println("uploadId : "+uploadId);
@@ -44,7 +52,7 @@ public class ComtfController {
 		uploadFile.transferTo(new File(uploadDir + uploadId));
 		System.out.println("uploadFile : "+uploadFile);
 		//경로~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-		paramMap.put("url", "./resources/upload/images/"+uploadId);
+		paramMap.put("url", uploadDir+uploadId);
 		//paramMap.put("url", "/upload/images/" + uploadId);
 		return paramMap;
 	}
