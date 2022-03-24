@@ -49,6 +49,8 @@
 </style>
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
+<script src="resources/js/rewardFnc.js"></script>
 </head>
 <body>
 	<section class="breadcrumb breadcrumb_bg">
@@ -90,7 +92,7 @@
 				<tbody>
 					<c:forEach items="${Project }" var="myp">
 						<tr  id="${myp.prj_id}">
-							<td><div class="visit ">${myp.prj_name }</div></td>
+							<td><div class="visit ">${myp.prj_name }/${myp.prj_id}/${myp.admincount }</div></td>
 							<td>
 								<div class="country">
 									<fmt:formatDate value="${myp.prj_str }" pattern="yyyy/MM/dd" />
@@ -146,12 +148,16 @@
 					<h2 class="content title" style="text-align: center;">정산</h2>
 					
 					<a class="content title">누적 금액</a>
-					<p><a class="content " id="modaltotalwon"></a>
+					<p class="content"><a class="content " id="modaltotalwon"></a>
 					<a class="content " id="modaltotalwei"></a></p>
+					<p class="content prj">리스트</p>
+                      <div class="content form-select" id="dropdown">
+                         <select class="content prjlist" id="ddown">
+						  	<option value="">-- Select --</option>
+						 </select>
+						 <input type="hidden" id="thismuid" value="">
+                      </div>
 					
-					<a class="content title">오늘 정산 금액</a>
-					<p><a class="content " id="modaltodaywon"></a>원
-					<a class="content " id="modaltodaywei"></a>wei</p>
 					
 				</div>
 			</div>
@@ -161,31 +167,54 @@
 		</div>
 	</div>
 	
+   
+  
 	
 	
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
+	
+	 
+	
 	var pId;
 	
 	function check(e)
     {
        if(!$(e.target).hasClass("content")
         		&& !$(e.target).hasClass("modalInbtn") //신청하기버튼
-              && !$(e.target).hasClass("money") 
+              && !$(e.target).hasClass("money")
+              && !$(e.target).hasClass("prjlist") 
               && !$(e.target).hasClass("current")) {
             $('.modaldal').fadeOut();
             $('.modal__background').fadeOut();
-            $('#modaltotalwon').html();
-	     	$('#modaltotalwei').html();
+            $('#modaltotalwon').html('');
+	     	$('#modaltotalwei').html('');
+	     	$('.current').html('-- Select --');
+	    	$('#thismuid').val('');
+	    	$(".list").empty();
           
         }
     }
     $('html').click(function(e){
-        console.log(e.target);
+        //console.log(e.target);
         check(e);
     });
+    
+   
+ 
+    function jebal() {
+    	console.log("이야~~~~~~");
+    	//debugger;
+    	//console.log(e);
+    	//current   this.muid.buy_muid
+    	
+    	$('.current').html(event.path[0].textContent);
+    	$('#thismuid').val(event.path[0].attributes[3].nodeValue);
+    	
+	}
     $('.money').click(function(e){
+    	console.log("정산");
         $('.modaldal').fadeIn();
         $('.modal__background').fadeIn();
         
@@ -200,143 +229,117 @@
 	    			prj_id: pId
 	    		},
 	    		 success: function(res){
-			     	console.log(res);
+	    			 console.log("ajax");
+			     	//console.log(res);
 			     	$('#modaltotalwon').html(res.sumWon + " 원");
 			     	$('#modaltotalwei').html(res.sumWei + " wei");
-					 for(muid of res.muids){
-						 console.log(muid);
-						 for(a in muid){
-							 
-							 //console.log(a);
-							// console.log(buy.a);
-						 }
-						
+					var ccount = 1; 
+			     	for(muid of res.muids){
+						 //console.log(muid.buy_date);
+						 //console.log(muid.buy_muid);
+						 //console.log(muid.sumwei);
+						 //console.log(muid.sumwon);
+						 
+	 					$(".list").append(`
+	 		 					
+	 							<li data-value onclick="jebal()" class="lilist content" value="\${muid.buy_muid }">\${ccount++} 건 | 거래코드 \${muid.buy_muid }| \${muid.sumwon} 원 | \${muid.sumwei} wei</li>
+	 					`);
+	 					
 					 }
-			          //location.reload();
+					 
 			        },
 			        error:function(){
 			          console.log("ajax 통신 실패!!!");
 			        }
 				}) //ajax 
 		
-		
-		
-		
-		
-		
-		
-        
-        
-       /*  //코인구매
-  			console.log('코인구매 클릭');
-  			
-  			//debugger
-  			uId = document.getElementById('user_id').value;
-  			console.log("구매자 아이디 : "+ uId);
-  			uAc = document.getElementById('ether_id').value;
-  			console.log("구매자 이더리움 어카운트 : "+ uAc);
-
-  			rId = $(".money").prevObject.context.activeElement.id;
-  			console.log("리워드 아이디 : "+ rId);
-  			//var rName = document.getElementById('n'+rId).innerHTML;
-  			//console.log("리워드 이름 : "+ rName);
-  			rEPrc = document.getElementById('e'+rId).value;
-  			console.log("리워드 이더 금액 : "+ rEPrc);
-  			rWPrc = rEPrc * (10**18);
-  			console.log("리워드 웨이 금액 : "+ rWPrc);
-  			rCnt = document.getElementById('c'+rId).value;
-  			if (!document.getElementById('c'+rId).checkValidity()) {
-  				 console.log("기본값 1 넣는곳");
-  				 rCnt = 1;
-  			}
-  			console.log("리워드 구매수 : "+ rCnt);
-  			
-  			pId = document.getElementById('prj_id').value;
-  			console.log("프로젝트 아이디 : "+ pId);
-  			
-  			rPay = parseInt(parseInt(rCnt) * rWPrc);
-  			console.log("웨이 결제액 : "+ rPay);
-  			
-  			today = getToday();
-  			console.log("오늘 년월일 : "+ today);
-  			
-  			mId = document.getElementById('master_id').value;
-  			console.log("담당자 아이디 : "+ mId);
-  			
-  			
-  			mAc = document.getElementById('masterAcc').value;
-  			console.log("담당자 어카운트 : "+ mAc);
-  			
-  			buyMaxCoinCount = document.getElementById('buyMaxCoinCount').value;
-  			console.log("buyMaxCoinCount : "+ buyMaxCoinCount);
-  			
-  			cId = parseInt(mId + buyMaxCoinCount + today ) ;
-  			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
-        
-  			$('#modalWei').html(rPay + " wei"); */
-        
- 
     });
     
     
     function request() {
     	//debugger;
 			console.log("구매시작");
+			var code = document.getElementById("thismuid").value; 
+			console.log(code);
 			
-			/* console.log("웨이 결제액 : "+ rPay);
-			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
-			//debugger;
-			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
-			
-			solidityRewardFnc.methods
-			.buyAry(cId, mAc)
-			.send({from: uAc, value: rPay })
-			.then(function(result){
+			if(code > 0 ){
+				console.log("if~~~ 코인");
 				
-				console.log(result);
-			
-			
-			 	//데이터 저장시 필요한 데이터
-				var save ={
-						"user_id" : uId,
-						"buy_way" : "coin",
-						"reward_id" : rId,
-						"prj_id" : pId,
-						"buy_count" : rCnt,
-						"buy_won" : 0,
-						"buy_wei" : rPay,
-						"buy_muid" : cId
-							
-					}
-					
-					
-				 $.ajax({
-					url : 'ajaxBuy', 
-			        type :'POST',
-			        data : JSON.stringify(save,
-			        		['user_id', 'buy_way', 'reward_id', 
-			        		'prj_id', 'buy_count', 'buy_won',
-			        		'buy_wei', 'buy_muid']),
-			        contentType:'application/json;charset=utf-8',
-			        dataType: 'json', //서버에서 보내줄 데이터 타입
-			        success: function(res){
-			        			        	
-			          if(res == 1){
-						 console.log("추가성공");	
+				//코인 환불시
+				$.ajax({
+	    		url: 'ajaxMuidUpDate',
+	    		type: 'post',
+	    		data: {
+	    			buy_muid : code
+	    		},
+	    		 success: function(res){
+	    			 console.log("ajax");
+			     	
+	    			 if(res == 1){
+						 console.log("정산");	
 				           
 			          }else{
-			             console.log("Insert Fail!!!");
+			             console.log("정산 Fail!!!");
 			          } 
 			          
 			          location.reload();
+	    			 
+					 
 			        },
 			        error:function(){
-			          console.log("Insert ajax 통신 실패!!!");
+			          console.log("ajax 통신 실패!!!");
 			        }
-				}) //ajax 
+				}) //ajax  
+			
+			
+				//블록체인 접속 시작////////////확인할것//////////////////////////////////////////////////////////
+			/* 	solidityRewardFnc.methods
+				.EndAry(code)
+				.send({ })
+				.then(function(result){
+					
 				
-	
-			}); */
+				});  */
+				
+				
+			} else {
+				console.log("else~~~ 현금");
+				
+				
+				
+				
+				$.ajax({
+		    		url: 'ajaxMuidUpDate',
+		    		type: 'post',
+		    		data: {
+		    			'buy_muid' : code
+		    		},
+		    		 success: function(res){
+		    			 console.log("ajax");
+				     	
+					     	
+		    			 if(res == 1){
+							 console.log("정산");	
+					           
+				          }else{
+				             console.log("정산 Fail!!!");
+				          } 
+				          
+				          location.reload();
+						 
+				        },
+				        error:function(){
+				          console.log("ajax 통신 실패!!!");
+				        }
+					}) //ajax 
+				
+				
+				
+				
+				
+			}
+			
+		
 		}
 	
 	
