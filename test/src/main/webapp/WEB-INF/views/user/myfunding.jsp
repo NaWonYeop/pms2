@@ -291,7 +291,7 @@ ul {
 			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
 			solidityRewardFnc.methods
 			.refund(muId)
-			.send({from: uAc, })
+			.send({from: account, })
 			.then(function(result){
 				
 				console.log(result);

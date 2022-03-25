@@ -464,7 +464,7 @@ ${project}<br>
   			
   			solidityRewardFnc.methods
   			.buyAry(cId, mAc)
-  			.send({from: uAc, value: rPay })
+  			.send({from: account, value: rPay })
   			.then(function(result){
   				
   				console.log(result);
