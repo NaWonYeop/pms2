@@ -14,6 +14,15 @@
 
 <title>Insert title here</title>
 	<style>
+		.ingPrj {
+			margin-left: 5%;
+			margin-right: 5%;
+		}
+		.certlist {
+			background-color: #fff;
+		    color: black;
+		    border: 1px solid #798BF2;
+		}
 		
         .Tname {
             margin-bottom: 60px;
@@ -84,10 +93,17 @@
         .modalbtn {
         	display: flex;
         	justify-content: center;
+        	margin-top: 8%;
         }
         
         .modalcnt {
         	margin-top: 40px;
+        }
+        
+        .list {
+        	overflow-y: scroll !important;
+         	white-space: nowrap;
+       		height: 100px;
         }
         /* modal end */
 
@@ -146,9 +162,7 @@
         
         .modalInbtn {
         	    width: 75%;
-			    height: 60px;
 			    align-content: center;
-			    margin-top: 15%;
         }
         
         .form-select .nice-select {
@@ -158,6 +172,9 @@
         	
         }
         
+        .section_padding {
+        	margin-bottom: 15%;
+        }
       
        
        #dropdown {
@@ -194,7 +211,7 @@
 	                <h4 class="title_top" style="font-size: 50px;">개발자 ${jobDetail.user_name }</h4>
 	            </div>
 	            	<c:forEach items="${certDetail }" var="certList">
-				        <span class="btn_4">${certList.cert_name }</span>
+				        <span class="btn_4 certlist">${certList.cert_name }</span>
 			        </c:forEach>
 	            <div class="row" style="margin-top: 5%;">
 	                <div class="col-lg-8 course_details_left">
@@ -212,11 +229,13 @@
 							<div class="joinPrj">
 	                        <c:forEach items="${prjDetail }" var="prjList">
 		                        <div class="content"  style="background-color: #F5F7FF; margin-bottom: 3%; border-radius: 10px;">
-		                            <div class="prjtitle">${prjList.prj_name }</div>
-		                            <span class="btn_4">${prjList.tm_pos }</span>
-		                            <span class="btn_4">${prjList.tm_dept }</span><br>
-		                            
-		                            <fmt:formatDate value="${prjList.prj_str }" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${prjList.prj_ed }" pattern="yyyy-MM-dd" />
+		                            <div class="ingPrj">
+			                            <div class="prjtitle">${prjList.prj_name }</div>
+			                            <span class="btn_4">${prjList.tm_pos }</span>
+			                            <span class="btn_4">${prjList.tm_dept }</span><br>
+			                            
+			                            <fmt:formatDate value="${prjList.prj_str }" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${prjList.prj_ed }" pattern="yyyy-MM-dd" />
+		                            </div>
 		                        </div>
 	                        </c:forEach>
 	                        </div>
@@ -287,7 +306,7 @@
 	                    <h4 class="title_top">평점</h4>
 	                    <div class="">
 	                        <div class="review-top row pt-40">
-	                            <div class="col-lg-12">
+	                            <div class="col-lg-12" style="z-index: -1;">
 	
 	                                <div class="d-flex flex-row reviews justify-content-between">
 	                                    <span>평점</span>
