@@ -735,7 +735,7 @@ button {
                      	<h3 style="font-weight: bold;">${fnd.prj_name }</h3>
                         <a class="d-inline-block" href="projectSelect?prj_id=${fnd.prj_id }">
                         <img class="card-img rounded-0"
-                           src="images/${fnd.ctf_st_name }" alt="">
+                           src="../images/${fnd.ctf_st_name }" alt="">
 						</a>
                      </div>
                          
