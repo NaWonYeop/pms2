@@ -33,10 +33,7 @@
         <div class="col-12">
                  <div class="col-12">
          			<h2 class="contact-title col-9" style="display: inline-block; text-align: center; position: relative; left: 10%;">게시판 수정</h2>
-          			<c:if test="${sessionUser.user_ath eq  'master'}">
-          			<h4 class="col-2" style="display: inline-block;">공지여부<input type="checkbox" id="confirm-checkbox"> <label
-            for="confirm-checkbox"></label></h4>
-          			</c:if>
+          			
           			
         </div>
         </div>
