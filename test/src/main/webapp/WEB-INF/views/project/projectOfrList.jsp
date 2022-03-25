@@ -236,7 +236,7 @@ button {
 						<c:if test="${ofterList.app_stt == 'ing' }">
 							<div class="col-sm-12 col-lg-12 clist${ofterList.user_id }">
 								<div class="single_special_cource">
-									<div class="special_cource_text" style="border: 0;">
+									<div class="special_cource_text" style="border: 0; margin-bottom: 1%;">
 										<div class="col-12 author_info"
 											style="border-top: 0; margin-top: 0; padding-top: 0;">
 											<div class="col-8">
@@ -309,7 +309,7 @@ button {
 					<c:forEach items="${interest }" var="interest">
 						<div class="col-sm-12 col-lg-12 hList${interest.user_id }">
 							<div class="single_special_cource">
-								<div class="special_cource_text" style="border: 0;">
+								<div class="special_cource_text" style="border: 0; margin-bottom: 1%;">
 									<div class="col-12 author_info"
 										style="border-top: 0; margin-top: 0; padding-top: 0;">
 										<div class="col-8">
