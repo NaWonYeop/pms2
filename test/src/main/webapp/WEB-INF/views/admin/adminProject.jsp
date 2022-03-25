@@ -175,7 +175,7 @@
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
 	
-	 
+
 	
 	var pId;
 	
@@ -265,41 +265,42 @@
 			if(code > 0 ){
 				console.log("if~~~ 코인");
 				
-				//코인 환불시
-				$.ajax({
-	    		url: 'ajaxMuidUpDate',
-	    		type: 'post',
-	    		data: {
-	    			buy_muid : code
-	    		},
-	    		 success: function(res){
-	    			 console.log("ajax");
-			     	
-	    			 if(res == 1){
-						 console.log("정산");	
-				           
-			          }else{
-			             console.log("정산 Fail!!!");
-			          } 
-			          
-			          location.reload();
-	    			 
-					 
-			        },
-			        error:function(){
-			          console.log("ajax 통신 실패!!!");
-			        }
-				}) //ajax  
-			
+				//코인 정산시
+			//var account =  ${sessionScope.sessionUser.ether_id };
+			//console.log(account);
 			
 				//블록체인 접속 시작////////////확인할것//////////////////////////////////////////////////////////
-			/* 	solidityRewardFnc.methods
+			solidityRewardFnc.methods
 				.EndAry(code)
-				.send({ })
+				.send({from:account ,  })
 				.then(function(result){
 					
-				
-				});  */
+					
+					$.ajax({
+		    		url: 'ajaxMuidUpDate',
+		    		type: 'post',
+		    		data: {
+		    			buy_muid : code
+		    		},
+		    		 success: function(res){
+		    			 console.log("ajax");
+				     	
+		    			 if(res == 1){
+							 console.log("정산");	
+					           
+				          }else{
+				             console.log("정산 Fail!!!");
+				          } 
+				          
+				          location.reload();
+		    			 
+						 
+				        },
+				        error:function(){
+				          console.log("ajax 통신 실패!!!");
+				        }
+					}) //ajax  
+				});
 				
 				
 			} else {

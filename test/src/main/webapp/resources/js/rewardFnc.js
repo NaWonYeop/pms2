@@ -2,8 +2,8 @@
 console.log('starting...');
 
 //web3 = new Web3(window.ethereum); //메타마스크
-web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:8545')); // 메타마스크 연결
-//web3 = new Web3(window.web3.currentProvider);
+//web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:8545')); // 메타마스크 연결
+web3 = new Web3(window.web3.currentProvider);
 
 // if (typeof web3 !== 'undefined') {
 //         // Mist/MetaMask의 프로바이더 사용
@@ -112,7 +112,7 @@ var abi = [
 
 //var NFTAuctionContract = web3.eth.contract(abi)
 
-var contractAddress = "0xA7A262524d52D6B2A183532118C35cD2C71635d2"; /* our contract address on Ethereum after deploying */
+var contractAddress = "0x11F317c2e22817D080F489947C3b26f268a207c4"; /* our contract address on Ethereum after deploying */
 
 var solidityRewardFnc = new web3.eth.Contract(abi, contractAddress);//rewardFncContract.at(contractAddress)
 // `rewardFnc`는 우리 컨트랙트의 public 함수와 이벤트에 접근할 수 있다.
