@@ -9,47 +9,63 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.loader {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99;
+	text-align: center;
+	z-index: 3;
+}
+
 .table-row {
 	font-family: 'TmoneyRoundWindRegular';
 }
 
 /* modal css*/
 .modaldal { 
-    display:none;
-    width: 40%;
-    height: 40%;
-    border-radius: 30px;
-    border: 3px solid #798BF2;
-    background-color: #F5F7FF;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    z-index: 3;
-}
-
+            display:none;
+            width: 40%;
+            height: 20%;
+            border-radius: 30px;
+            border: 3px solid #798BF2;
+            background-color: #F5F7FF;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
 
 .modalcontent {
-    margin-top: 50px;
-    
+	margin-top: 50px;
 }
 
 /* 모달창의 배경을 만든다 */
-.modal__background{
-  display:none;
-  position: fixed;
-  top:0; left: 0; bottom: 0; right: 0;
-  background: rgba(0, 0, 0, 0.3);
+.modal__background {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 2
 }
-
 </style>
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
+<script
+	src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
 <script src="resources/js/rewardFnc.js"></script>
 </head>
 <body>
@@ -86,13 +102,13 @@
 						<th><div class="visit">상태</div></th>
 						<th><div class="visit">정산</div></th>
 						<th><div class="visit">삭제</div></th>
-						
+
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${Project }" var="myp">
-						<tr  id="${myp.prj_id}">
-							<td><div class="visit ">${myp.prj_name }/${myp.prj_id}/${myp.admincount }</div></td>
+						<tr id="${myp.prj_id}">
+							<td><div class="visit ">${myp.prj_name }</div></td>
 							<td>
 								<div class="country">
 									<fmt:formatDate value="${myp.prj_str }" pattern="yyyy/MM/dd" />
@@ -101,29 +117,30 @@
 								</div>
 							</td>
 							<td>
-							<div class="visit">
+								<div class="visit">
 									<c:choose>
 										<c:when test="${myp.prj_devEd_prop eq 0 }">
                             		진행중
                             	</c:when>
-										<c:otherwise>
+										<c:otherwise>		
                             		종료
                             	</c:otherwise>
 									</c:choose>
-								</div></td>
+								</div>
+							</td>
 							<td><div class="visit">
-							<c:if test="${myp.admincount != 0}">
-								<button class="money button button-contactForm btn_1"
+									<c:if test="${myp.admincount != 0}">
+										<button class="money button button-contactForm btn_1"
 											id="${myp.prj_id}">정산</button>
-							</c:if>
-							
-							<c:if test="${myp.admincount == 0}">
-								<button class="nono button button-contactForm " style="background-color: gray;"
-											id="${myp.prj_id}">없음</button>
-							</c:if>
-									
-										
-										
+									</c:if>
+
+									<c:if test="${myp.admincount == 0}">
+										<button class="nono button button-contactForm "
+											style="background-color: gray;" id="${myp.prj_id}">없음</button>
+									</c:if>
+
+
+
 								</div></td>
 							<td><div class="visit">
 									<button class="button button-contactForm btn_1"
@@ -137,40 +154,49 @@
 
 
 	</section>
-	
-	
-	
-	
+
+
+
+
 	<div class="modal__background">
 		<div class="modaldal content">
 			<div class="content modalcontent">
 				<div class="justify-content-center">
 					<h2 class="content title" style="text-align: center;">정산</h2>
-					
-					<a class="content title">누적 금액</a>
-					<p class="content"><a class="content " id="modaltotalwon"></a>
-					<a class="content " id="modaltotalwei"></a></p>
-					<p class="content prj">리스트</p>
-                      <div class="content form-select" id="dropdown">
-                         <select class="content prjlist" id="ddown">
-						  	<option value="">-- Select --</option>
-						 </select>
-						 <input type="hidden" id="thismuid" value="">
-                      </div>
-					
-					
+
+					<a class="content title" style="margin-left: 10px">누적 금액</a>
+					<div class="content" style="text-align: right; margin-right: 20px;">
+					<p class="content" >
+						<a class="content " id="modaltotalwon"></a> <a class="content "
+							id="modaltotalwei"></a>
+					</p>
+					</div>
+					<p class="content prj" style="margin-left: 10px">리스트</p>
+					<div class="content form-select" id="dropdown">
+						<select class="content prjlist" id="ddown"
+							style="overflow: scroll;">
+							<option value="">-- Select --</option>
+						</select> <input type="hidden" id="thismuid" value="">
+					</div>
+
+
 				</div>
 			</div>
+			<div style="position: relative; text-align: center;">
 			<button type="button" class="btn_4 modalInbtn" onclick="request()">송금</button>
+			&nbsp;
 			<button type="button" class="btn_4 ">취소</button>
-		
+			</div>
 		</div>
 	</div>
-	
-   
-  
-	
-	
+
+
+	<div class="loader" style="display: none;">
+		<img src='resources/images/ethloading.gif'
+			style='display: block; position: absolute; top: 40%; left: 40%; z-index: 100;' />"
+	</div>
+
+
 	<script
 		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript">
@@ -190,9 +216,10 @@
             $('.modal__background').fadeOut();
             $('#modaltotalwon').html('');
 	     	$('#modaltotalwei').html('');
-	     	$('.current').html('-- Select --');
+	     	$('#dropdown > div > span').html('-- Select --');
 	    	$('#thismuid').val('');
 	    	$(".list").empty();
+	    	
           
         }
     }
@@ -209,7 +236,7 @@
     	//console.log(e);
     	//current   this.muid.buy_muid
     	
-    	$('.current').html(event.path[0].textContent);
+    	$('#dropdown > div > span').html(event.path[0].textContent);
     	$('#thismuid').val(event.path[0].attributes[3].nodeValue);
     	
 	}
@@ -242,26 +269,29 @@
 						 
 	 					$(".list").append(`
 	 		 					
-	 							<li data-value onclick="jebal()" class="lilist content" value="\${muid.buy_muid }">\${ccount++} 건 | 거래코드 \${muid.buy_muid }| \${muid.sumwon} 원 | \${muid.sumwei} wei</li>
+	 							<li data-value onclick="jebal()" class="lilist content" value="\${muid.buy_muid }"
+	 								style="margin-left: 10px">\${ccount++} 건 | 거래코드 \${muid.buy_muid }| \${muid.sumwon} 원 | \${muid.sumwei} wei</li>
 	 					`);
 	 					
 					 }
+			     	$(".list").css("overflow-y","scroll");
+			     	$(".list").css("height","300px");
 					 
 			        },
 			        error:function(){
 			          console.log("ajax 통신 실패!!!");
 			        }
 				}) //ajax 
-		
+	
     });
     
     
     function request() {
     	//debugger;
-			console.log("구매시작");
+			console.log("송금시작");
 			var code = document.getElementById("thismuid").value; 
 			console.log(code);
-			
+		
 			if(code > 0 ){
 				console.log("if~~~ 코인");
 				
@@ -269,6 +299,8 @@
 			//var account =  ${sessionScope.sessionUser.ether_id };
 			//console.log(account);
 			
+			//로딩창 킴
+			$("div.loader").css("display","block");
 				//블록체인 접속 시작////////////확인할것//////////////////////////////////////////////////////////
 			solidityRewardFnc.methods
 				.EndAry(code)
@@ -340,7 +372,7 @@
 				
 			}
 			
-		
+
 		}
 	
 	
@@ -349,8 +381,11 @@
 	
     $('.nono').click(function(e){
     	toastr.error("정산할 건이 없습니다.");
+    	
     })
 	
+
+    
 
 	
 	toastr.options = {

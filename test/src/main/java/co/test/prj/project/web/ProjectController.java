@@ -118,6 +118,20 @@ public class ProjectController {
 		} else {
 			System.out.println("사진없냐?");
 		}
+		//구인 유무 ~> 기본값 수정
+		if (project.getPrj_ofr_prop() == 1) {
+			if("".equals(project.getPrj_cnd())) {
+				String val = "조건x";
+				project.setPrj_cnd(val);
+			}
+			if("".equals(project.getPrj_ar())) {
+				String val = "전국";
+				project.setPrj_cnd(val);
+			}
+	
+		}
+		
+		
 		
 		//프로젝트 등록
 		projectDao.projectInsert(project);
