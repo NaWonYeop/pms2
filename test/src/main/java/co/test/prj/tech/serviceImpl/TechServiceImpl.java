@@ -164,6 +164,18 @@ public class TechServiceImpl implements TechService {
 		return map.jobMainheartCheck(user);
 	}
 
+	@Override
+	public int insertTech(TechVO tech) {
+		// TODO Auto-generated method stub
+		return map.insertTech(tech);
+	}
+
+	@Override
+	public int deleteTech(TechVO tech) {
+		// TODO Auto-generated method stub
+		return map.deleteTech(tech);
+	}
+
 	
 	
 	

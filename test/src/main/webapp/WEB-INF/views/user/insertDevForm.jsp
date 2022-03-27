@@ -98,10 +98,19 @@ a {
 			<div class="card-body">
 				<span><label>자격증</label><input id="cert_name" type="text"
 					class="form-control" placeholder="내용을 입력하세요"></span>
-				<button type="button" onclick="add()" id="addBtn">추가</button>
+				<button type="button" onclick="add()" id="addBtn" class="btn_4" style="	width: 100%;	margin-top: 3%;">추가</button>
 				<ul id="certList">
 				<input id="date" name = "cert_name" type="hidden" value = "없음" >
 				</ul>
+				
+				<span><label>기술</label><input id="tech_name" type="text"
+					class="form-control" placeholder="내용을 입력하세요"></span>
+				<button type="button" onclick="addtech()" id="addBtn2" class="btn_4" style="	width: 100%;
+	margin-top: 3%;">추가</button>
+				<ul id="techList">
+				<input id="date" name = "tech_name" type="hidden" value = "없음" >
+				</ul>
+				
 				<BR> <label>경력</label><input type="number" class="form-control"
 					id="user_crr" name="user_crr" required="required" min="0"><BR>
 
@@ -144,6 +153,28 @@ a {
 			document.getElementsByClassName("card-body")[0].insertBefore(i,addBtn);
 			li.innerHTML = cert_name.value
 			certList.append(li)
+			console.log("add");
+			var span = document.createElement("span");
+			var txt = document.createTextNode("\u00D7");
+			span.className = "close";
+			span.appendChild(txt);
+			li.appendChild(span);
+			for (i = 0; i < close.length; i++) {
+				close[i].onclick = function() {
+					var div = this.parentElement;
+					div.remove();
+				}
+			}
+
+		}
+		function addtech() {
+			console.log(cert_name.value);
+			var i = document.createElement("span");
+			var li = document.createElement("li");
+			i.innerHTML = `<input id="date" name = "tech_name" type="hidden" value = "\${tech_name.value}" >`
+			document.getElementsByClassName("card-body")[0].insertBefore(i,addBtn2);
+			li.innerHTML = tech_name.value
+			techList.append(li)
 			console.log("add");
 			var span = document.createElement("span");
 			var txt = document.createTextNode("\u00D7");

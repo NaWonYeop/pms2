@@ -37,7 +37,11 @@ thead {
 .table.dataTable.no-footer {
 	border-bottom: 0;
 }
-
+.paginate_button:hover {
+	background-color: #798BF2 !important;
+	color: #fff !important;
+	border-radius: 7px !important;
+}
 
 </style>
 </head>

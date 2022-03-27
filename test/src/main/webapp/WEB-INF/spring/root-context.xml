@@ -23,6 +23,7 @@
 
       <form-login username-parameter="user_email"
               password-parameter="user_pwd" login-processing-url="/login" 
+              authentication-failure-url="/loginerror"
               login-page="/loginForm" default-target-url="/home"
               always-use-default-target="true" />
 	

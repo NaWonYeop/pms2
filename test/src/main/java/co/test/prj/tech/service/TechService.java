@@ -83,4 +83,9 @@ public interface TechService {
 	
 	//등록 및 수정 버튼 체크
 	UserVO insertUpdatebtnCheck(UserVO user);
+	
+	//기술 등록
+	int insertTech(TechVO tech);
+	//기술 삭제
+	int deleteTech(TechVO tech);
 }

@@ -166,4 +166,13 @@
 	<select id="ttlCheck" resultType="co.test.prj.user.service.UserVO">
 		SELECT USER_ID, USER_JOB_TTL, USER_JOB_CNT FROM "user" WHERE USER_ID = #{user_id}
 	</select>
+	
+	<insert id="insertTech" parameterType="co.test.prj.tech.service.TechVO">
+		INSERT INTO TECH(USER_ID2,TECH_NAME)
+		VALUES(#{user_id2},#{tech_name})
+	</insert>
+		
+	<delete id="deleteTech" parameterType="co.test.prj.tech.service.TechVO">
+		DELETE FROM TECH WHERE USER_ID2 = #{user_id2}
+	</delete>
 </mapper>

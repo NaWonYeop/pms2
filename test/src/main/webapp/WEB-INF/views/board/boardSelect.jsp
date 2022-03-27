@@ -14,6 +14,36 @@
 		float: right;
 		margin-right: 10px;
 	}
+	p {
+		font-size: x-large;
+	}
+	
+	.single-comment {
+		margin-top: 1%;
+	}
+	
+	.fa-comments {
+		text-decoration: underline;
+		text-decoration-color: #576EF2;
+		text-decoration-thickness: 5px;
+		margin-bottom: 3%;
+		 
+	}
+	.user {
+		margin-left: 3%;
+		margin-right: 3%;
+		margin-top: 1%;
+		margin-bottom: 1%;
+	}
+	
+	.single-comment:hover {
+		background-color: #F5F7FF;
+		border: 2px solid #576EF2;
+	}
+	
+	.blog-info-link {
+		margin-top: 4.5rem !important;
+	}
 </style>
 </head>
 <body>

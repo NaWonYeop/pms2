@@ -158,6 +158,7 @@ public class TechController {
 	public String jobDeleteMove(HttpSession session)
 	{
 		UserVO vo =(UserVO)session.getAttribute("sessionUser");
+		vo.setUser_ath("developer");
 		vo.setUser_job_ttl("");
 		vo.setUser_job_cnt("");
 		userDao.userUpdate(vo);

@@ -309,7 +309,12 @@
 			const insertAvg = avg * 20;
 			return insertAvg + 1.5;
 		}
+		<c:forEach items="${jobs}" var="sss">
+			console.log(${sss.user_id});
+     	</c:forEach> 
 		
+			
+
 		jQuery(function($) {
 			$("#data_list").DataTable({
 				lengthChange : false,
