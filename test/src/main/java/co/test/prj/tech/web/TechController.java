@@ -62,8 +62,7 @@ public class TechController {
 	@RequestMapping("/jobSelectList")
 	public String techSelectList(Model model, HttpSession session) {
 		UserVO uId = (UserVO)session.getAttribute("sessionUser");
-		if(uId!=null)
-		{
+		if(uId != null) {
 			model.addAttribute("inters",techDao.jobInterList(uId.getUser_id()));
 		}
 		model.addAttribute("btnCheck", techDao.insertUpdatebtnCheck(uId));
