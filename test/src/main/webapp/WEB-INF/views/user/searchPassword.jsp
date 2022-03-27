@@ -8,24 +8,21 @@
 </style>
 </head>
 <body>
-	<section class="contact-section section_padding">
-		<div class="container">
-			<div class="row justify-content-center">
-
-				<div class="col-lg-5">
-					<form class="form-contact contact_form" action="home" method="post"
-						id="contactForm" novalidate="novalidate">
-						<div class="row justify-content-center">
-							<h4>해당 이메일로 임시비밀번호가 발송되었습니다</h4>
-						</div>
-						<div class="col-sm-12 text-center">
-							<button type="submit"
-								class="button button-contactForm btn_1 w-50">확인</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+	<section class="breadcrumb breadcrumb_bg">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <div class="breadcrumb_iner text-center">
+                  <div class="breadcrumb_iner_item">
+                   <h4>해당 이메일로 임시비밀번호가 발송되었습니다</h4>
+                  </div>
+               </div>
+                  <div >
+                    <a href="home" class="button button-contactForm btn_1 w-50" style="text-decoration: none;">확인</a>
+                  </div>
+            </div>
+         </div>
+      </div>
+   </section>
 </body>
 </html>
