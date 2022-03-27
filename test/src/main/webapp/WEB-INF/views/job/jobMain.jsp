@@ -33,7 +33,6 @@
 	/* Will override color (regardless of order) */
 	-webkit-text-stroke-color: #2b2a29;
 }
-
 .star-ratings-fill {
 	color: #fff58c;
 	padding: 0;
@@ -45,30 +44,25 @@
 	overflow: hidden;
 	-webkit-text-fill-color: gold;
 }
-
 .star-ratings-base {
 	z-index: 0;
 	padding: 0;
 }
-
 .rating {
 	display: inline-block;
 	float: right;
 	margin-right: 10px;
 }
-
 .insertbtn {
 	margin-top: 4%;
     margin-bottom: 3%;
     display: flex;
     justify-content: space-around;
 }
-
 .search {
 	width: 50%;
     margin-left: 25%;
 }
-
 .testimonial_part .owl-dots {
 	margin-left: 0;
 	padding-top: 25px;
@@ -410,7 +404,6 @@
 	    $(document).ready(function(){
 		    <%List<UserVO> userId2 = (List<UserVO>) request.getAttribute("inters");
 			List<UserVO> allList = (List<UserVO>) request.getAttribute("jobs");
-
 			if (user == null) {%>
 		       $('.heartbtn').hide();
 		       $('.heartCancelbtn').hide();
@@ -421,9 +414,7 @@
 					if (allList.get(i).getUser_id() == userId2.get(j).getUser_id()) {%> 
 					$('img[name=heartCancelbtn<%=userId2.get(j).getUser_id()%>]').show();	
 					 		$('img[name=heartbtn<%=userId2.get(j).getUser_id()%>]').hide();  <%}
-
 				}
-
 				}
 			}%>
 	    })

@@ -1,5 +1,7 @@
 package co.test.prj.user.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +41,10 @@ import co.test.prj.certificate.service.CertVO;
 import co.test.prj.project.service.ProjectService;
 import co.test.prj.project.service.ProjectVO;
 import co.test.prj.security.cunstomUser;
-import co.test.prj.team.service.MyPrjVO;
 import co.test.prj.team.service.TeamService;
 import co.test.prj.team.service.TeamVO;
+import co.test.prj.tech.service.TechService;
+import co.test.prj.tech.service.TechVO;
 import co.test.prj.user.service.UserService;
 import co.test.prj.user.service.UserVO;
 
@@ -63,12 +67,22 @@ public class UserController {
 	
 	@Autowired 
 	private TeamService teamDao;
+	
+	@Autowired
+	private TechService techDao;
 	// 로그인폼
 	@RequestMapping("/loginForm")
-	public String loginForm() {
+	public String loginForm(Model model,String fail) {
+		if(fail != null)
+		{
+			model.addAttribute("loginFail","1");
+		}
 		return "user/loginForm";
 	}
-
+	@RequestMapping("/loginerror")
+	public String loginerror() {
+		return "user/loginerror";
+	}
 	// 로그인
 	@PostMapping("/login")
 	public String login(UserVO user, HttpSession session, HttpServletRequest request, Model model) {
@@ -79,8 +93,8 @@ public class UserController {
 			user = userDao.userSelect(user);
 			return "redirect:/logout";
 		} else {
-			model.addAttribute("loginFail", "1");
-
+			
+			
 			return "user/loginForm";
 		}
 	}
@@ -261,10 +275,11 @@ public class UserController {
 	// 개발자 등록
 	@RequestMapping("/insertDev")
 	public String insertDevForm(UserVO vo, HttpSession session, Model model,
-			@RequestParam("cert_name") List<String> list,Principal principal) {
+			@RequestParam("cert_name") List<String> list,@RequestParam("tech_name") List<String> list2,Principal principal) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		vo.setUser_ath("developer");
 		vo.setUser_id(user.getUser_id());
+		session.setAttribute("sessionUser", user);
 		userDao.userUpdate(vo);
 		if(list.size()> 1) {
 			list.remove(list.size()-1);
@@ -276,7 +291,17 @@ public class UserController {
 			cert.setUser_id(user.getUser_id());
 			userDao.insertDev(cert);
 		}
-
+		System.out.println(list2);
+		if(list2.size()> 1) {
+			list2.remove(list2.size()-1);
+		}
+		for (String temp : list2) {
+			System.out.println(temp);
+			TechVO tech= new TechVO();
+			tech.setUser_id2(user.getUser_id());
+			tech.setTech_name(temp);
+			techDao.insertTech(tech);
+		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
@@ -360,24 +385,32 @@ public class UserController {
 	public String devUpdateForm(HttpSession session, Model model) {
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		CertVO cert = new CertVO();
+		TechVO tech = new TechVO();
 		cert.setUser_id(user.getUser_id());
+		tech.setUser_id2(user.getUser_id());
 		List<CertVO> certifi = certDao.certSelect(cert);
 		model.addAttribute("MyCert", certifi);
+		List<TechVO> tech2=techDao.techSelect(tech);
+		model.addAttribute("MyTech", tech2);
 		return "user/devUpdateForm";
 	}
 
 	// 개발자 정보 업데이트 결과창
 	@PostMapping("/devUpdate")
-	public String devUpdate(UserVO vo,HttpSession session, Model model, @RequestParam("cert_name") List<String> list) {
+	public String devUpdate(UserVO vo,HttpSession session, Model model, @RequestParam("cert_name") List<String> list,@RequestParam("tech_name") List<String> list2) {
 		
 		UserVO user = (UserVO) session.getAttribute("sessionUser");
 		vo.setUser_id(user.getUser_id());
 		userDao.userUpdate(vo);
 		CertVO del = new CertVO();
 		del.setUser_id(user.getUser_id());
+		TechVO delT= new TechVO();
+		delT.setUser_id2(user.getUser_id());
 		userDao.deleteDev(del);
+		techDao.deleteTech(delT);
+		System.out.println(list);
 		if(list.size()> 1) {
-			list.remove(list.size()-1);
+			list.remove("없음");
 		}
 		for (String temp : list) {
 			System.out.println(temp);
@@ -386,7 +419,16 @@ public class UserController {
 			cert.setCert_name(temp);
 			userDao.insertDev(cert);
 		}
-
+		if(list2.size()> 1) {
+			list2.remove("없음");
+		}
+		for (String temp : list2) {
+			System.out.println(temp);
+			TechVO tech= new TechVO();
+			tech.setUser_id2(user.getUser_id());
+			tech.setTech_name(temp);
+			techDao.insertTech(tech);
+		}
 		return "user/devUpdate";
 	}
 

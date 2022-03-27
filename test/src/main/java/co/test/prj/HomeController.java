@@ -1,9 +1,12 @@
 package co.test.prj;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.Enumeration;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -28,7 +31,7 @@ public class HomeController
 	ProjectService projectDao;
 
 	@RequestMapping("/home")
-	public String home(Locale locale, Model model, Principal principle, HttpSession session, RedirectAttributes redirect)
+	public String home(Locale locale, Model model, Principal principle, HttpSession session, RedirectAttributes redirect,HttpServletResponse response) throws IOException
 	{
 
 		model.addAttribute("mainOfer", projectDao.mainOfrList());
@@ -41,7 +44,10 @@ public class HomeController
 			if (usr.getUser_ath().equals("ice"))
 			{
 				System.out.println("동결로그인시 로그아웃처리");
-				return "redirect:/logout";
+				PrintWriter out=response.getWriter();
+				out.println("<script>alert('사용이 불가능한 계정입니다. 관리자에게 문의해주세요.');</script>");
+				out.flush();
+				return "home/logout";
 			}
 			session.setAttribute("sessionUser", usr);
 		}
