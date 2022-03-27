@@ -535,7 +535,7 @@
   			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
   			
   			solidityRewardFnc.methods
-  			.buyAry(cId, account)
+  			.buyAry(cId, mAc)
   			.send({from: account, value: rPay })
   			.then(function(result){
   				
