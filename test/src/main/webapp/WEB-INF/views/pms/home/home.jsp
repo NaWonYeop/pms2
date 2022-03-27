@@ -48,15 +48,15 @@ h5 {
 }
 
 .card-img-top {
-	display: block;
-	width: 100%;
-	height: auto;
+	margin-bottom: 0px!important;
+	height: 120px;
 }
 
 .card-title {
 	font-size: 1.28571429em;
 	font-weight: 700;
 	line-height: 1.2857em;
+	
 }
 
 .card-text {
@@ -374,15 +374,30 @@ h5 {
 				prj_id : prj_id,
 			}
 		}).done(function(json) {
+	
 			$("#row").empty();
 			for (pms of json) {
+				<c:set var="tos" value="pms.tm_pos"/>
+				var str=''
+				if(${tos} =='Master')
+				{
+					str='<div class="card-img-top" style="background-color:#F28705;"><img style="object-fit: contain;width: 50%;height: 100%;display: inline-block;"class="card-img-top" src="resources/images/master.png"><h2 style="font-weight:bold;width: 50%;margin: 0;display:inline-block;">Master</h2></div>'
+				}
+				else if(${tos} =='Manager')
+				{
+					str='<div class="card-img-top" style="background-color:#22A2F2;"><img style="object-fit: contain;width: 50%;height: 100%;display: inline-block;"class="card-img-top" src="resources/images/manager.png"><h3 style="font-weight:bold;width: 50%;margin: 0;display:inline-block;">Manager</h3></div>'
+				}
+				else
+				{
+					str='<div class="card-img-top" style="background-color:#F2CB05;"><img style="object-fit: contain;width: 50%;height: 100%;display: inline-block;"class="card-img-top" src="resources/images/employee.png"><h3 style="font-weight:bold;width: 50%;margin: 0;display:inline-block;">Employee</h3></div>'
+				}
+
+				
 				$("#row").append(`
 						<div class="col-sm-6 col-md-4 col-lg-3 mt-4">
-								<div class="card">
-									<img class="card-img-top"
-									src="https://picsum.photos/200/150/?random">
-									
-									<div class="card-block">
+								<div class="card">`+
+								str
+								+`<div class="card-block">
 										<h4 class="card-title">\${pms.user_name}</h4>
 										<div class="meta">
 											<a href="#">\${pms.tm_pos}</a>
