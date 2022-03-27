@@ -13,6 +13,7 @@
 
     .button {
         margin-right: 2%;
+        
     }
 </style>
 </head>
@@ -23,11 +24,11 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">리워드 등록하기</h2>
+							<h2 style="float: right;">REWARD</h2>
 						</div>
 					</div>
 						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+							<h4 style="float: right; color: #fff">리워드</h4>
 						</div>
 				</div>
 			</div>
@@ -99,14 +100,14 @@
 									<c:if test="${reward.rwd_cot == 0 }">
 										<form action="rewardDelete">
 										<input type="hidden" id="reward_id" name="reward_id" value="${reward.reward_id }">
-										<input class="button" type="submit" value="-">
+										<input class="button " style="background-color: #F27457" type="submit" value="삭제">
 										</form>
 									</c:if>
 								</li>
 								<br>
 							</c:forEach>
 						</ul>
-						<button class="button" type="button" onClick="location.href='projectSelect?prj_id=${sessionScope.sessionPId}'">완료</button><br>
+						<button class="button" type="button" onClick="location.href='projectSelect?prj_id=${sessionScope.sessionPId}'">PRJ상세</button><br>
 					</div>
 				</div>
 				

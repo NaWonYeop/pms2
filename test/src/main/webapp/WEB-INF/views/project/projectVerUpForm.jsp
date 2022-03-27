@@ -30,11 +30,11 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">프로젝트 수정하기</h2>
+							<h2 style="float: right;">PROJECT UPDATE</h2>
 						</div>
 					</div>
 						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+							<h4 style="float: right; color: #fff">프로젝트 수정</h4>
 						</div>
 				</div>
 			</div>
