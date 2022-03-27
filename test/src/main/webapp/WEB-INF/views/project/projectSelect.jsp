@@ -11,6 +11,20 @@
 <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
 <script src="resources/js/rewardFnc.js"></script>
 <style>
+	.loader {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: fixed;
+		display: block;
+		background: rgba(0, 0, 0, 0.3);
+		z-index: 99;
+		text-align: center;
+		z-index: 3;
+	}
+
        .Tname {
             margin-bottom: 60px;
         }
@@ -45,7 +59,7 @@
         .modaldal { 
             display:none;
             width: 40%;
-            height: 40%;
+            height: 20%;
             border-radius: 30px;
             border: 3px solid #798BF2;
             background-color: #F5F7FF;
@@ -65,6 +79,9 @@
             margin-top: 50px;
             
         }
+        .prjtitle {
+            font-size: xx-large;
+        }
         
         /* 모달창의 배경을 만든다 */
 		.modal__background{
@@ -72,6 +89,7 @@
 		  position: fixed;
 		  top:0; left: 0; bottom: 0; right: 0;
 		  background: rgba(0, 0, 0, 0.3);
+		  z-index: 2
 		}
 		
         .prjtitle {
@@ -167,64 +185,75 @@
 			</div>
 		</div>
 	</section>
-${project}<br>
- ${sessionScope } 
+<%-- ${project}<br>
+ ${sessionScope }  --%>
  	<section class="course_details_area section_padding">
         <div class="container">
         	<input type="hidden" id="prj_id" name="prj_id" value="${project.prj_id}">
         	<div class="col-12 Tname">
-	            <h4 class="title_top" style="font-size: 50px; margin-bottom: 40px;">${project.prj_name}</h4>
-	            조회수 : ${project.prj_hit}<br>
-				등록일 : <fmt:formatDate value="${project.prj_reg_date }" pattern="yyyy-MM-dd" /><br>
-				담당자 아이디 : ${project.master_id}<br>
-				시작일 ~ 마감일 : 
-				<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
-				<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /><br>
+			   <h4 class="title_top" style="font-size: 50px; margin-bottom: 40px;">${project.prj_name}</h4>
+        		<div class="row">
+        			<div class="col-8">
+			            조회수 : ${project.prj_hit}<br>
+						등록일 : <fmt:formatDate value="${project.prj_reg_date }" pattern="yyyy-MM-dd" /><br>
+						담당자 아이디 : ${project.master_id}<br>
+						시작일 ~ 마감일 : 
+						<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" /> ~ 
+						<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" /><br>
+        			</div>
+			            <c:if test="${project.prj_fnd_prop == 1}">
+        				<div class="col-4">
+						<!-- 펀딩 있을시 -->
+			         	<div id="sise">
+			         	현금구입 달러시세 : 가져오는중<br>
+			         	1이더 달러시세 : 가져오는중<br>
+			         	1이더 원화시세 : 가져오는중<br>
+			         	</div>
+			         	<input type="hidden" id="dol">
+			         	<input type="hidden" id="etherDol">
+			       	  	<input type="hidden" id="etherWon">
+	        			</div>
+		        		</c:if>
+        		</div>
 	        </div>
-	            <c:if test="${project.prj_fnd_prop == 1}">
-				<!-- 펀딩 있을시 -->
-	         	<div id="sise">
-	         	현금구입 달러시세 : 가져오는중<br>
-	         	1이더 달러시세 : 가져오는중<br>
-	         	1이더 원화시세 : 가져오는중<br>
-	         	</div>
-	         	<input type="hidden" id="dol">
-	         	<input type="hidden" id="etherDol">
-	         	<input type="hidden" id="etherWon">
-        		</c:if>
+        		<c:if test="${project.prj_ofr_prop == 1}">
+	             <h3 style="font-weight: bold;">구인</h3>
+        		<div class="row">
+        			<div class="col-8">
+	                   <!-- 구인 있을시 -->
+	                       <p class="btn_4">${project.prj_ar}</p>
+	                    <p class="btn_4">${project.prj_cnd}</p>
+						<br>
+						
+	                        <ul class="blog-info-link">
+	                          <li><i class="far fa-user"></i> 프론트 ${ofr.total_team_prs }/ ${project.prj_frn_prs }명</a></li>
+	                          <li><i class="far fa-user"></i> 백 ${ofr.total_team_prs }/ ${project.prj_bk_prs }명</a></li>
+	                          <li><i class="far fa-user"></i> DB ${ofr.total_team_prs }/ ${project.prj_db_prs }명</a></li>
+	                          <li><i class="far fa-user"></i> 서버 ${ofr.total_team_prs }/ ${project.prj_ser_prs }명</a></li>
+	                          <li><i class="far fa-comments"></i> 모집 기간
+	                           <fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
+							<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
+	                       </ul> 
+                     </div>
+                    <div class="col-4">
+                       <sec:authorize access="isAuthenticated()">
+						<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
+                  		<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
+	                    <form style="display: inline-block;" id="ajaxAppPrjInsertForm" onsubmit="return false" onclick="ajaxAppPrjInsertForm()">
+							<input type="hidden" name="prj_id" value="${project.prj_id}">
+							<input type="hidden" name="master_id" value="${project.master_id}">
+                        		<input type="hidden" name="user_id" value="${sessionScope.sessionUser.user_id }">
+							<input type="submit" class=" btn_4" style="background-color: #F27457; display: inline-block;" value="참가신청">
+						</form>
+					  </sec:authorize>	
+					</div>
+				</div>  
+				<br>	
+				<br>
+	            </c:if>
         	<div class="row">
         		<div class="col-lg-8 course_details_left">
         		 	<div class="content_wrapper">
-        		 	
-        		 			<c:if test="${project.prj_ofr_prop == 1}">
-		                    <!-- 구인 있을시 -->
-		                        <h3 style="font-weight: bold;">구인</h3>
-		                        <p class="btn_4">${project.prj_ar}</p>
-			                    <p class="btn_4">${project.prj_cnd}</p>
-								<br>
-								
-		                         <ul class="blog-info-link">
-		                           <li><i class="far fa-user"></i> 프론트 ${ofr.total_team_prs }/ ${project.prj_frn_prs }명</a></li>
-		                           <li><i class="far fa-user"></i> 백 ${ofr.total_team_prs }/ ${project.prj_bk_prs }명</a></li>
-		                           <li><i class="far fa-user"></i> DB ${ofr.total_team_prs }/ ${project.prj_db_prs }명</a></li>
-		                           <li><i class="far fa-user"></i> 서버 ${ofr.total_team_prs }/ ${project.prj_ser_prs }명</a></li>
-		                           <li><i class="far fa-comments"></i> 모집 기간
-		                            <fmt:formatDate value="${project.prj_ofr_str }" pattern="yyyy-MM-dd" /> ~ 
-									<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" /></li>
-		                        </ul> 
-		                        <sec:authorize access="isAuthenticated()">
-				                    <form id="ajaxAppPrjInsertForm" onsubmit="return false" onclick="ajaxAppPrjInsertForm()">
-										<input type="hidden" name="prj_id" value="${project.prj_id}">
-										<input type="hidden" name="master_id" value="${project.master_id}">
-		                         		<input type="hidden" name="user_id" value="${sessionScope.sessionUser.user_id }">
-										<input type="submit" class=" btn_4" value="참가신청">
-									</form>
-									<button type="button" id="heartbtn" class="btn_4"  style="background-color: #F27457;" onclick="heart()">찜하기</button>
-	                    			<button type="button" id="heartCancelbtn" class="btn_4"  style="background-color: #F27457;" onclick="heartCancel()">찜취소</button>
-								</sec:authorize>		
-	                        </c:if>
-        		 	
-	                        
 	                         <c:if test="${project.prj_fnd_prop == 1}">
 							<!-- 펀딩 있을시 -->
 							<h3 style="font-weight: bold;">펀딩</h3>
@@ -283,19 +312,21 @@ ${project}<br>
         			</c:if>
         			<c:if test="${sessionScope.sessionUser.user_id == project.master_id }">
 			
-						<form action="projectVerUpForm">
-							<input type="hidden" name="prj_id" value="${project.prj_id}">
-							<input type="submit" class="rfnd btn_4" value="수정">
-						</form>
-					
-						<form action="rewardInsertForm">
+						<form style="display: inline-block;" action="rewardInsertForm">
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="hidden" name="master_id" value="${project.master_id}">
 							<input type="hidden" id="go" name="go" value="selectPage">
 							<input type="submit" class="rfnd btn_4" value="리워드 관리">
 						</form>
+						
+						
+						<form style="display: inline-block;" action="projectVerUpForm">
+							<input type="hidden" name="prj_id" value="${project.prj_id}">
+							<input type="submit" class="rfnd btn_4" value="수정">
+						</form>
+					
 							
-						<form action="projectViewDel">
+						<form style="display: inline-block;" action="projectViewDel">
 							<input type="hidden" name="prj_id" value="${project.prj_id}">
 							<input type="submit" class="rfnd btn_4" value="삭제">
 						</form>
@@ -328,9 +359,9 @@ ${project}<br>
 									ETHER<h2>${ String.format("%.6f",(reward.rwd_prc / Rether))}</h2>
 									<input type="hidden" id="e${reward.reward_id }" value="${reward.rwd_prc / Rether}">
 									내용 : ${reward.rwd_cnt}<br>
-									구입수량 : ${reward.rwd_cot}<br>
-									판매수량 : ${reward.rwd_goal}<br>
-									(나중에 삭제할것)판매 여부 : ${reward.rwd_stt}<br>
+								
+									판매수량 : ${reward.rwd_goal-reward.rwd_cot}<br>
+									<%-- 판매 여부 : ${reward.rwd_stt}<br> --%>
 									<input type="number" id="c${reward.reward_id }" name="buy_count" required placeholder="구매수량(기본:1개)">
 									<div class ="btns">
 									<!-- 버튼들은 클래스 바꾸면 안되요 -->
@@ -351,15 +382,28 @@ ${project}<br>
 			<div class="content modalcontent">
 				<div class="justify-content-center">
 					<h2 class="content title" style="text-align: center;">결제금액 단위(wei)</h2>
-					<a class="content wei" id="modalWei"></a>
+					<br>
+					<br>
+					<div class="content" style="text-align: right; margin-right: 20px;">
+						<a class="content wei" id="modalWei"></a>
+					</div>
 				</div>
 			</div>
+			<br>
+			
+			<div style="position: relative; text-align: center;">
 			<button type="button" class="btn_4 modalInbtn" onclick="request()">결제</button>
+			&nbsp;
 			<button type="button" class="btn_4 ">취소</button>
+			</div>
 		
 		</div>
 	</div>
 
+	<div class="loader" style="display: none;">
+	<img src='resources/images/ethloading.gif'
+		style='display: block; position: absolute; top: 40%; left: 40%; z-index: 100;' />"
+	</div>
 
 	<script type="text/javascript">
 	var uId;
@@ -460,6 +504,12 @@ ${project}<br>
   			console.log("웨이 결제액 : "+ rPay);
   			console.log(typeof cId+ "고유 거래 코드 : "+ cId);
   			//debugger;
+  			
+  			
+  			//로딩창 킴
+			$("div.loader").css("display","block");
+  			
+  			
   			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
   			
   			solidityRewardFnc.methods

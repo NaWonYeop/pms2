@@ -8,6 +8,20 @@
 <meta charset="UTF-8">
 <style type="text/css">
 
+.loader {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 99;
+	text-align: center;
+	z-index: 3;
+}
+
 .blog_details {
 	background-color: #F5F7FF;
 }
@@ -18,22 +32,22 @@ ul {
 
 /* modal css*/
 .modaldal { 
-    display:none;
-    width: 40%;
-    height: 40%;
-    border-radius: 30px;
-    border: 3px solid #798BF2;
-    background-color: #F5F7FF;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    z-index: 3;
-}
+        display:none;
+        width: 40%;
+        height: 20%;
+        border-radius: 30px;
+        border: 3px solid #798BF2;
+        background-color: #F5F7FF;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        z-index: 3;
+    }
 
 
 .modalcontent {
@@ -159,16 +173,30 @@ ul {
 			<div class="content modalcontent">
 				<div class="justify-content-center">
 					<h2 class="content title" style="text-align: center;">환불 확인</h2>
+					<br>
+					<br>
+					<div class="content" style="text-align: right; margin-right: 20px;">
 					<a class="content pay" id="modalPay"></a>
+					</div>
 				</div>
 			</div>
+			<br>
+			<br>
+			<div style="position: relative; text-align: center;">
+		
 			<button type="button" class="btn_4 modalInbtn" onclick="request()">환불</button>
+			&nbsp;
 			<button type="button" class="btn_4 ">취소</button>	
+			</div>
 		</div>
 	</div>
 	
 	<input type="hidden" id="ether_id" name="ether_id" value="${sessionScope.sessionUser.ether_id }">
 	
+	<div class="loader" style="display: none;">
+		<img src='resources/images/ethloading.gif'
+			style='display: block; position: absolute; top: 40%; left: 40%; z-index: 100;' />"
+	</div>
 	<script type="text/javascript">
 	var muId; //cId
 	var uAc;
@@ -288,6 +316,10 @@ ul {
 			} else {
 			//코인 환불시
 			console.log("코인 환불 시");	
+			
+			//로딩창 킴
+			$("div.loader").css("display","block");
+			
 			//블록체인 접속 시작//////////////////////////////////////////////////////////////////////
 			solidityRewardFnc.methods
 			.refund(muId)

@@ -71,11 +71,19 @@
 						<div class="col-12">
 							<div class="form-group">
 								<p>펀딩여부
-									<input type="checkbox" id="prj_fnd_prop" name="prj_fnd_prop" value="${project.prj_fnd_prop }">
+									<input type="checkbox" id="prj_fnd_prop" name="prj_fnd_prop" value="${project.prj_fnd_prop }" 
+									<c:if test="${project.prj_fnd_prop  == 1 }">
+									checked="checked"
+									</c:if>
+									>
 								</p>
 							</div>
 						</div>
-						<div class="col-12" id="fnd_dis" style="display: none;">
+						<div class="col-12" id="fnd_dis" style="display: 
+						<c:if test="${project.prj_fnd_prop  == 0 }">
+						none
+						</c:if>
+						;">
 							<div class="form-group">
 								<p>메인사진</p>
 								<input class="button" type="file" id="mul" name="mul">
@@ -100,11 +108,19 @@
 						<div class="col-12">
 							<div class="form-group">
 								<p>구인여부
-									<input type="checkbox" id="prj_ofr_prop" name="prj_ofr_prop"  value="${project.prj_ofr_prop }">
+									<input type="checkbox" id="prj_ofr_prop" name="prj_ofr_prop"  value="${project.prj_ofr_prop }"
+									<c:if test="${project.prj_ofr_prop  == 1 }">
+									checked="checked"
+									</c:if>
+									>
 								</p>
 							</div>
 						</div>
-						<div class="col-12" id="ofr_dis" style="display: none;">
+						<div class="col-12" id="ofr_dis" style="display: 
+						<c:if test="${project.prj_ofr_prop  == 0 }">
+						none
+						</c:if>
+						;">
 							<div class="form-group">
 								<p>구인 시작일 ~ 마감일</p>
 								<input id="prj_ofr_str" name="prj_ofr_str" 
@@ -114,21 +130,23 @@
 								value="<fmt:formatDate value="${project.prj_ofr_ed }" pattern="yyyy-MM-dd" />" 
 								type="date"><br>
 							</div>
-							<div class="form-group">
-								<p>프론트</p>
-								<p><input type="number" id="prj_frn_prs" name="prj_frn_prs" value="${project.prj_frn_prs }" class="inNum" placeholder="필요인원"> 명</p>
-							</div>
-							<div class="form-group">
-								<p>백</p>
-								<p><input type="number" id="prj_bk_prs" name="prj_bk_prs" value="${project.prj_bk_prs }" class="inNum" placeholder="필요인원"> 명</p>
-							</div>
-							<div class="form-group">
-								<p>DB</p>
-								<p><input type="number" id="prj_db_prs" name="prj_db_prs" value="${project.prj_db_prs }" class="inNum" placeholder="필요인원"> 명</p>
-							</div>
-							<div class="form-group">
-								<p>서버</p>
-								<p><input type="number" id="prj_ser_prs" name="prj_ser_prs" value="${project.prj_ser_prs }" class="inNum" placeholder="필요인원"> 명</p>
+							<div class="row">
+								<div class="col-4 form-group">
+									<p>프론트</p>
+									<p><input type="number" id="prj_frn_prs" name="prj_frn_prs" value="${project.prj_frn_prs }" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
+								<div class="col-6 form-group">
+									<p>백</p>
+									<p><input type="number" id="prj_bk_prs" name="prj_bk_prs" value="${project.prj_bk_prs }" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
+								<div class="col-4 form-group">
+									<p>DB</p>
+									<p><input type="number" id="prj_db_prs" name="prj_db_prs" value="${project.prj_db_prs }" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
+								<div class="col-6 form-group">
+									<p>서버</p>
+									<p><input type="number" id="prj_ser_prs" name="prj_ser_prs" value="${project.prj_ser_prs }" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
 							</div>
 							<div class="form-group">
 								<p>지역</p>

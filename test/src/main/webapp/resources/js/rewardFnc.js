@@ -5,15 +5,15 @@ console.log('starting...');
 //web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:8545')); // 메타마스크 연결
 web3 = new Web3(window.web3.currentProvider);
 
-// if (typeof web3 !== 'undefined') {
-//         // Mist/MetaMask의 프로바이더 사용
-//         web3 = new Web3(window.web3.currentProvider);
-//         //alert('web3가 연결되었습니다.');
-//     } else {
-//         // 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
-//         // 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
-//         web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
-// }
+if (typeof web3 !== 'undefined') {
+        // Mist/MetaMask의 프로바이더 사용
+        web3 = new Web3(window.web3.currentProvider);
+        //alert('web3가 연결되었습니다.');
+    } else {
+        // 사용자가 Metamask를 설치하지 않은 경우에 대해 처리
+        // 사용자들에게 Metamask를 설치하라는 등의 메세지를 보여줄 것
+         web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+ }
 
 if (web3)
    console.log('connected');

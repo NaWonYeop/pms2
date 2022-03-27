@@ -97,21 +97,23 @@
 								<p>구인 시작일 ~ 마감일</p>
 								<input id="prj_ofr_str" name="prj_ofr_str" type="date"> ~ <input id="prj_ofr_ed" name="prj_ofr_ed" type="date"><br>
 							</div>
-							<div class="form-group">
-								<p>프론트</p>
-								<p><input type="number" id="prj_frn_prs" name="prj_frn_prs" class="inNum" placeholder="필요인원"> 명</p>
-							</div>
-							<div class="form-group">
-								<p>백</p>
-								<p><input type="number" id="prj_bk_prs" name="prj_bk_prs" class="inNum" placeholder="필요인원"> 명</p>
-							</div>
-							<div class="form-group">
-								<p>DB</p>
-								<p><input type="number" id="prj_db_prs" name="prj_db_prs" class="inNum" placeholder="필요인원"> 명</p>
-							</div>
-							<div class="form-group">
-								<p>서버</p>
-								<p><input type="number" id="prj_ser_prs" name="prj_ser_prs" class="inNum" placeholder="필요인원"> 명</p>
+							<div class="row">
+								<div class="col-4 form-group">
+									<p>프론트</p>
+									<p><input type="number" id="prj_frn_prs" name="prj_frn_prs" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
+								<div class="col-6 form-group">
+									<p>백</p>
+									<p><input type="number" id="prj_bk_prs" name="prj_bk_prs" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
+								<div class="col-4 form-group">
+									<p>DB</p>
+									<p><input type="number" id="prj_db_prs" name="prj_db_prs" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
+								<div class="col-6 form-group">
+									<p>서버</p>
+									<p><input type="number" id="prj_ser_prs" name="prj_ser_prs" class="inNum" placeholder="필요인원"> 명</p>
+								</div>
 							</div>
 							<div class="form-group">
 								<p>지역</p>
@@ -165,6 +167,8 @@
         </div>
 	</div>       
 	<script type="text/javascript">
+	
+	
 		
 		$(document).ready(function(){
 		    $("#prj_fnd_prop").change(function(){

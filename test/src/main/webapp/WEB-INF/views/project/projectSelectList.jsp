@@ -278,7 +278,6 @@ input {
 																								</h3>
 																							</li>
 																						</ul>
-																						<p>(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원</p>
 																						<br>
 
 																					</c:if>
@@ -306,7 +305,8 @@ input {
 																						<ul class="blog-info-link">
 																							<li><i class="far fa-user"></i> 신청인원
 																								${app.total_count }/${project.prj_frn_prs + project.prj_bk_prs + project.prj_db_prs + project.prj_ser_prs }명</a></li>
-																							<li><i class="far fa-comments"></i> 신청 기간 <fmt:formatDate	value="${project.prj_ofr_str }"
+																							<li><i class="far fa-comments"></i> 신청 기간 <fmt:formatDate
+																									value="${project.prj_ofr_str }"
 																									pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
 																									value="${project.prj_ofr_ed }"
 																									pattern="yyyy-MM-dd" /></li>
@@ -487,7 +487,6 @@ input {
 																</h3>
 															</li>
 														</ul>
-														<p>(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원</p>
 														<br>
 
 													</c:if>
@@ -532,27 +531,48 @@ input {
 
 
 				<div id="more">
-					더보기
 					<form id="morePage" onsubmit="return false"
-						onclick="ajaxMorePage()" style="display: inline-block;">
-						<input type="submit" value="더보기"> <input type="hidden"
-							name="pageNum" id="moreKey" value="2"> <input
+						onclick="ajaxMorePage()" style="width: 100% !important">
+						<input type="submit" value="더보기" class="btn_4" style="width: 100% !important"> <input type="hidden"
+							name="pageNum" id="moreKey" value="2"><input
 							type="hidden" name="type" value="${result.type}"> <input
 							type="hidden" name="keyword" value="${result.keyword}"> <input
 							type="hidden" name="amount" value="${result.amount}">
 					</form>
 				</div>
-
+				
 
 			</div>
 		</div>
+		<br>
+		<br>
 	</section>
+	<br>
+	<br>
 	</div>
 	<script type="text/javascript">
+	toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": true,
+			  "positionClass": "toast-top-center",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "1000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+	
 	function ajaxMorePage() {
 		
 		console.log('여기 옴?');
-		
+	
 		$.ajax({
 			type : 'GET',
 			url : "ajaxMorePage",
@@ -567,49 +587,107 @@ input {
 					var ofr='';
 					var fnd='';
 					if(a.prj_ofr_prop == 1){
-						ofr = "============구인============<br>"
-							 +"구인 시작일 ~ 구인 마감일 :" 
-							 + a.prj_ofr_str +" ~ "+ a.prj_ofr_ed+ "<br>"	
-							 +"프론트 : "+ a.prj_frn_prs +"<br>"
-							 +"백 : "+ a.prj_bk_prs + "<br>"
-							 +"DB : "+ a.prj_db_prs + "<br>"
-							 +"서버 : "+ a.prj_ser_prs + "<br>"
-							 +"조건 : "+ a.prj_cnd + "<br>"
-							 +"지역 : "+ a.prj_ar + "<br>"
-							 +"============구인============<br>";
+						ofr = '<div class="col-lg-6">'
+						+'<div class="blog_item_img">'
+	                    +'<h3 style="font-weight: bold;">구인</h3></div>'
+	                	+'<p class="btn_4">'+a.prj_ar+'</p>'
+	                	+'<p class="btn_4">'+a.prj_cnd+'</p>'
+
+	                	+'<ul class="blog-info-link">'
+	                	+'<li><i class="far fa-user"></i> 신청인원'
+	                    + 0 +'/'+(a.prj_frn_prs + a.prj_bk_prs + a.prj_db_prs + a.prj_ser_prs) 
+	                    +'명</a></li>'
+	                    +' <li><i class="far fa-comments"></i> 신청 기간 '
+	                    + a.prj_ofr_str +' ~ ' +a.prj_ofr_ed 
+	                    +'</li></ul></div>';
 					}
+					
+					////////////////////인원 받아야함 ${app.total_count }
+					
+				
+					/////////rwd.total_sum
+					
 					if(a.prj_fnd_prop == 1){
-						fnd = "============펀딩============<br>"
-							 +"<img src='./resources/upload/images/"+ a.ctf_st_name +"'><br>"
-							 +"펀딩사진 들고올 아이디 : "+ a.ctf_id +"<br>"
-							 +"펀딩 시작일 ~ 펀딩 마감일 :" 
-							 + a.prj_fnd_str +" ~ "+ a.prj_fnd_ed+ "<br>"	
-							 +"목표금액 : "+ a.prj_gl_prc + "<br>"
-							 +"============펀딩============<br>";
+						fnd = '<div class="col-lg-6"><div class="blog_item_img"><h3 style="font-weight: bold;">펀딩</h3>'
+				        +'<div class="col-12"><div class="col-12"><img class="card-img rounded-0" src="../images/'
+				        +a.ctf_st_name +'" alt="사진이 없습니다."></div></div></div><a class="d-inline-block" href="single-blog.html"></a>'
+				        +'<h3 class="right">'+0/((a.prj_gl_prc*1000)*100)+'%</h3><div class="col-12"><div class="col-10">'
+				        +'<div class="progress"><div class="progress-bar color-3" role="progressbar" style="width:'
+				        +0/((a.prj_gl_prc*1000)*100 ) + '%;background-color: #f09359"'
+				        +'aria-valuenow="80" aria-valuemin="0"aria-valuemax="100"></div></div></div></div><br>'
+				        +'<ul class="blog-info-link"><li><i class="far fa-comments"></i> 현재 펀딩금액</li><li><i class="far fa-comments"></i> 펀딩 기간'
+				        + a.prj_fnd_str + ' ~ ' + a.prj_fnd_ed +'</li><li><h3 stlye="font-weight: bold;"><div class="single_member_counter">'
+				        +'<span class="counter" style="font-size: 25px;"> '+ (0/10)+'</span>원'
+				        +'</div></h3> </li></ul>';
 					}
+					
+					
+					
+					/* 
+					
+					
+					
+					
+					*/
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					$("#list").append(`
 							
-							<div class="card">
-							<form action="projectSelect" method="get">
-							<input type="hidden" name="prj_id" id="prj_id" value="\${a.prj_id}">
-							<input type="submit" value="\${a.prj_name}"><br>
-							(나중에 지울것)번호 : \${a.prj_id}<br>
-							조회수 : \${a.prj_hit}<br>
-							이름 : \${a.prj_name}<br>
-							등록일 : \${a.prj_reg_date}<br>
-							담당자 아이디 : \${a.master_id}<br>
-							시작일 ~ 마감일 : \${a.prj_str} ~ \${a.prj_ed}<br>
-							(나중에 삭제)구인 여부 : \${a.prj_ofr_prop}<br>
-							\${ofr}		
 							
-							(나중에 삭제)펀딩 여부 : \${a.prj_fnd_prop}<br>
-							\${fnd}		
-					
-							개발마감 여부 : ${project.prj_devEd_prop}<br>
-							버전 : ${project.prj_ver}<br>
-							뷰 여부 : ${project.prj_view_prop}<br>
-							</form>
-							</div>
+							<article class="blog_item">
+						    <div class="blog_details">
+						        <form class="form-contact contact_form" action="projectSelect" method="get">
+						            <div class="row">
+
+						                <input type="hidden" name="prj_id" id="prj_id" value="\${a.prj_id}">
+						                <div class="col-12" style="margin-bottom: 40px;">
+						                    <div class="row">
+						                        <div class="col-lg-9">
+						                            <input type="submit" class="d-inline-block h2"
+						                                style="border: 0px; background-color: #576EF2; color: #ffffff;"
+						                                value="\${a.prj_name}">
+						                        </div>
+						                        <div class="col-lg-3">
+						                            <div class="col-12">
+						                                <p style="display: inline-block; float: right; margin-bottom: 0; position: absolute;">
+						                                    조회수
+						                                    : \${a.prj_hit}</p>
+						                              <!-- 좋아요 넣는곳 이거 어떻게 해야되지??????? -->
+						                              <img name="heartbtn11" id="heartbtn11" class="heartbtn" onclick="heart(11)" alt="heart" src="resources/main/img/unheart.png" style="float: right; width: 50%">
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+
+
+						                <!-- 펀딩 있을시 -->
+						                \${fnd}	
+
+
+
+						            </div>
+
+
+
+
+						            <!-- 구인 있을시 -->
+						            \${ofr}	
+
+						    </div>
+						</article>
+						
+						
+						
+						
 							
 					`);
 					
@@ -620,7 +698,8 @@ input {
 				console.log("더보기 값 변경?");
 				if(result.projects.length == 0){
 					console.log("더볼게없음")
-					$("#more").remove()
+					//$("#more").remove(); 
+					toastr.error('해당되는 자료가 없습니다.');
 					//나중에 경고창으로 올리기 버튼 삭제는 하지말것
 				}
 				
@@ -637,7 +716,7 @@ input {
           url: 'heartProjectInsert',
           type: 'get',
           data: {
-             user_id: ${sessionUser.user_id},
+             user_id: '${sessionUser.user_id}',
              prj_id: e
           },
           success: function() {
@@ -657,7 +736,7 @@ input {
               url: 'heartProjectDelete',
               type: 'get',
               data: {
-                 user_id: ${sessionUser.user_id},
+                 user_id: '${sessionUser.user_id}',
                  prj_id: e
               }
            }).done(function() {
