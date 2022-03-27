@@ -54,7 +54,7 @@
 	margin-right: 10px;
 }
 .insertbtn {
-	margin-top: 4%;
+	margin-top: 2%;
     margin-bottom: 3%;
     display: flex;
     justify-content: space-around;
@@ -109,7 +109,7 @@
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-	<div class="search">
+	<div class="search" style="margin-top: 2%;">
 		<!-- 검색기능 -->
 		<br><br>
 		<form action="jobsearch">
@@ -138,21 +138,21 @@
 		</form>
 	</div>
 
-
-	<section class="testimonial_part">
-		<div class="container-fluid">
-
-			<div class="row justify-content-center" style="margin-top: 5%;">
-				<div class="col-xl-5">
-					<div class="section_tittle text-center">
-						<p>JOB</p>
-						<h2>찜 리스트</h2>
+	<c:if test="${!empty inters}">
+		<section class="testimonial_part">
+			<div class="container-fluid">
+	
+				<div class="row justify-content-center" style="margin-top: 5%;">
+					<div class="col-xl-5">
+						<div class="section_tittle text-center">
+							<p>JOB</p>
+							<h2>찜 리스트</h2>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			<!-- -------------------------------------찜 start----------------------------------------- -->
-			<c:if test="${!empty inters}">
+	
+				<!-- -------------------------------------찜 start----------------------------------------- -->
+				
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12">
@@ -225,9 +225,10 @@
 						</div>
 					</div>
 				</div>
-			</c:if>
-		</div>
-	</section>
+				
+			</div>
+		</section>
+	</c:if>
 	<!-- -------------------------------------찜 end----------------------------------------- -->
 	
 	<!-- ----------------------------------------구직list start-------------------------------------- -->
@@ -243,7 +244,7 @@
 				</div>
 			</div>
 			<div style="text-align: center; margin-bottom: 3%;">
-		        Page: {{currentPage}}  Total: {{pageSize}}
+		        <!-- Page: {{currentPage}}  Total: {{pageSize}} -->
 			</div>
 		        <ion-list>
 		            <ion-item ng-repeat="jobs in jobs | limitTo:pageSize">
@@ -307,7 +308,7 @@
 						<%-- </c:if> --%>
 		            </ion-item>
 		        </ion-list>
-		        <button ng-click="loadNextPage()" class="btn_4">
+		        <button ng-click="loadNextPage()" class="btn_1" style="margin-left: 47%">
 		            더보기
 		        </button>
 		        
