@@ -111,6 +111,7 @@
 	</c:if>
 	<div class="search">
 		<!-- 검색기능 -->
+		<br><br>
 		<form action="jobsearch">
 			<div class="form-group">
 				<div class="input-group mb-3">
