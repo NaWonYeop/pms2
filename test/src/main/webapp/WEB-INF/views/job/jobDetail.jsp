@@ -161,7 +161,7 @@
         }
         
         .modalInbtn {
-        	    width: 75%;
+        	    width: 65%;
 			    align-content: center;
         }
         

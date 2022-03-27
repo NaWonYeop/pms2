@@ -120,7 +120,6 @@ button {
 														</a> <input type="hidden" id="uId"
 															value="${memberList.user_id }">
 													</h5>
-													<h5>${memberList.tm_dept }</h5>
 
 												</div>
 
