@@ -150,8 +150,8 @@
 									<c:choose>
 										<c:when test="${empty MyFunding}">
 											<tr>
-												<td></td>
 												<td>구매한 펀딩이 없습니다</td>
+												<td></td>
 											</tr>
 										</c:when>
 										<c:otherwise>
