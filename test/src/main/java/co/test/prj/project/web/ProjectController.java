@@ -430,8 +430,15 @@ public class ProjectController {
 			System.out.println("저장파일명 : " + savThuName);
 	
 			String path = hreq.getServletContext().getRealPath("\\resources\\upload"); 
-			String path2 = path.replace("\\", "/");
-			String uploadDir = path2 + "/images/";  //저장경로 CTF_USECTF_ST_COURSE
+			String path3 = hreq.getServletContext().getRealPath(""); 
+			path3=path3.replace("\\", "/");
+			String[] path4=path3.split("/");
+			String path5="";
+			for(int i=0;i<path4.length-1;i++)
+			{
+				path5+=path4[i]+"/";
+			}
+			String uploadDir = path5 + "images/";  //저장경로 CTF_USECTF_ST_COURSE
 			System.out.println("경로 : "+ uploadDir);
 			
 			project.setCtf_id(fNum);
