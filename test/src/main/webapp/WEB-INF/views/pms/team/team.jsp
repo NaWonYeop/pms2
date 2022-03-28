@@ -45,7 +45,6 @@
 				<form>
 					<input type="hidden"> <label>Position <select
 						id="position">
-							<option>Master</option>
 							<option>Manager</option>
 							<option>Employee</option>
 					</select>

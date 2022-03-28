@@ -59,7 +59,7 @@
 								<td>\${app.app_id}</td>
 								<td>\${app.user_name}</td>
 								<td>\${app.user_email}</td>
-								<td>\${app.user_tel}</td>
+								<td>0\${app.user_tel}</td>
 								<td>\${app.app_clsfc == "0" ? "구인" : "구직"}</td>
 								<td>
 									<div class="btn-group">
@@ -80,7 +80,7 @@
 								<td>\${app.app_id}</td>
 								<td>\${app.user_name}</td>
 								<td>\${app.user_email}</td>
-								<td>\${app.user_tel}</td>
+								<td>0\${app.user_tel}</td>
 								<td>\${app.app_clsfc == "0" ? "구인" : "구직"}</td>
 								<td>권한없음</td>
 							</tr>`);
