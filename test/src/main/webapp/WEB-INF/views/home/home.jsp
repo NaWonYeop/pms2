@@ -398,11 +398,11 @@ button {
 				<div class="col-lg-12">
 					<div class="breadcrumb_iner text-center">
 						<div class="breadcrumb_iner_item">
-							<h2 style="float: right;">I AM ONEYEOP</h2>
+							<h2 style="float: right;">프로젝트 진행의 모든것,</h2>
 						</div>
 					</div>
 						<div >
-							<h4 style="float: right; color: #fff">KEROKERORI~</h4>
+							<h4 style="float: right; color: #fff">JOBFUP</h4>
 						</div>
 				</div>
 			</div>
