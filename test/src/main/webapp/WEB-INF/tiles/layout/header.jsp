@@ -8,8 +8,8 @@
 			<div class="col-lg-12">
 				<nav class="navbar navbar-expand-lg navbar-light">
 					<a class="navbar-brand" href="home"> <img
-						src="resources/main/img/logo.png" alt="logo">
-					</a>
+	                  src="resources/main/img/logo.png" alt="logo" style="width: 100px;height: 100px">
+	               </a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarSupportedContent"
 						aria-controls="navbarSupportedContent" aria-expanded="false"
