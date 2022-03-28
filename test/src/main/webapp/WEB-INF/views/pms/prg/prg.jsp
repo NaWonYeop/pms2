@@ -155,7 +155,7 @@
 									`);
 						}
 					} else {
-						$("#infoBody").append(`<h4>값이없음</h4>`);
+						$("#infoBody").append(`<h4>일정 없음</h4>`);
 					}
 					
 					
