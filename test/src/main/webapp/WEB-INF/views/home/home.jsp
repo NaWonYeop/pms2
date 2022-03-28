@@ -472,7 +472,7 @@ button {
         <!-- 왼쪽 -->
         <div class="content-left-container">
           <div class="content-left" style="background-color: #fff;">
-            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number" style="line-height: 30px; top: -5px; font-weight: bold;">생성</span></p>
+            <p>프로젝트 생성 시 구인,펀딩 여부를 선택하세요 <span class="article-number" style="line-height: 30px; top: -5px; font-weight: bold;">생성</span></p>
           </div>
           <span class="timeline-author">John Doe</span>
         </div>
@@ -509,9 +509,9 @@ button {
         <!-- 오른쪽 -->
         <div class="content-right-container">
           <div class="content-right" style="background-color: #fff;">
-            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number" style=" font-weight: bold;">구직</span></p>
+            <p>프리랜서 개발자님들의 완성도 높은 프로필은 프로젝트 완성률을 높히는데 도움이 됩니다<span class="article-number" style=" font-weight: bold;">구직</span></p>
           </div>
-          <span class="timeline-author">John Doe</span>
+         
         </div> 
         
         <!-- 센터 -->
@@ -530,9 +530,9 @@ button {
         <!-- 왼쪽 -->
         <div class="content-left-container">
           <div class="content-left" style="background-color: #fff;">
-            <p>구직에 대해 설명을 적을까 방법을 적을까 고민이네<span class="article-number" style=" font-weight: bold;">구인</span></p>
+            <p>자신의 프로젝트에 맞는 다양한 프리랜서 개발자들을 모집하세요! <span class="article-number" style=" font-weight: bold;">구인</span></p>
           </div>
-          <span class="timeline-author">John Doe</span>
+          
         </div> 
 
         <!-- 오른쪽 -->
@@ -567,9 +567,9 @@ button {
         <!-- 오른쪽 -->
         <div class="content-right-container" style="">
           <div class="content-right" style="background-color: #fff;">
-            <p>When I orbited the Earth in a spaceship, I saw for the first time how beautiful our planet is. <span class="article-number" style=" font-weight: bold;">펀딩</span></p>
+            <p>다양하고 기발한 아이디어들을 가지고있는 기획자들을 위해 펀딩하고 리워드 받으세요! <span class="article-number" style=" font-weight: bold;">펀딩</span></p>
           </div>
-          <span class="timeline-author">John Doe</span>
+         
         </div> 
         
         <!-- 센터 -->
@@ -611,7 +611,7 @@ button {
     <div class="square up" style="">
       <div class="area" style="width:250px; height: 105px;">
 	      <h3>팀 선택하기</h3>
-	      <p style="margin-bottom: 5px;">가나다마바사 아자차카 타파하 ABCDEFG HI JKLMN OPQ RSTUVW XYZ 글자수의 맥스는 여기</p>
+	      <p style="margin-bottom: 5px;">자신에게 맞는 프로젝트와 팀원을 선택하세요</p>
       </div>
     </div>
     <div class="circle">
@@ -629,7 +629,7 @@ button {
     <div class="square down">
       <div class="area" style="width:250px; height: 105px;">
 	      <h3>신청멤버 확인</h3>
-	      <p style="margin-bottom: 5px;">sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+	      <p style="margin-bottom: 5px;">프로젝트 기획자는 마이페이지에서 신청멤버들을 확인할수있고 협업제의를 할수있습니다</p>
       </div>
     </div>
   </div>
@@ -637,7 +637,7 @@ button {
     <div class="square up">
       <div class="area" style="width:250px; height: 105px;">
       <h3>일정관리</h3>
-      <p style="margin-bottom: 5px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+      <p style="margin-bottom: 5px;">일정관리는 PMS에서!</p>
       </div>
     </div>
     <div class="circle">
@@ -653,9 +653,9 @@ button {
     </div>
     <div class="link"></div>
     <div class="square down">
-      <div class="area" style="width:250px; height: 105px;">
+      <div class="area" style="width:250pㄴx; height: 105px;">
       <h3>TO DO LIST</h3>
-      <p style="margin-bottom: 5px;">elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <p style="margin-bottom: 5px;">매일매일 목표를 설정하고 팀원들과 소통하세요!</p>
       </div>
     </div>
   </div>
