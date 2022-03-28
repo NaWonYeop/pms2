@@ -106,7 +106,7 @@ ul {
 								<div class="blog_item_img">
 
 									<img class="card-img rounded-0"
-										src="../images/${project.ctf_st_name }"
+										src="../images/${fun.ctf_st_name }"
 										alt="사진이 없습니다.">
 
 								</div>
