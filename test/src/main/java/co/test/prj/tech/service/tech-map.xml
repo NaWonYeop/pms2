@@ -12,7 +12,7 @@
 	
 	<select id="jobSelectList" resultType="co.test.prj.user.service.UserVO">
 		SELECT USER_ID, USER_NAME, USER_CRR, USER_JOB_TTL, USER_JOB_CNT, NVL((SELECT AVG(STR_AVG) FROM 
-		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U ORDER BY USER_ID ASC
+		STAR WHERE USER_ID=U.USER_ID), 0) AS AVG FROM "user" U WHERE USER_JOB_TTL IS NOT NULL ORDER BY USER_ID ASC
 	</select>
 	
 	<!-- 구직페이지 찜 체크 -->
