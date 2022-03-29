@@ -196,7 +196,7 @@
 						조회수 : ${project.prj_hit}<br> 등록일 :
 						<fmt:formatDate value="${project.prj_reg_date }"
 							pattern="yyyy-MM-dd" />
-						<br>  시작일 ~ 마감일 :
+						<br> 시작일 ~ 마감일 :
 						<fmt:formatDate value="${project.prj_str }" pattern="yyyy-MM-dd" />
 						~
 						<fmt:formatDate value="${project.prj_ed }" pattern="yyyy-MM-dd" />
@@ -301,7 +301,6 @@
 									</h3>
 								</li>
 							</ul>	
-							(나중에 삭제)목표금액 : ${project.prj_gl_prc}만원<br>
 
 						</c:if>
 
